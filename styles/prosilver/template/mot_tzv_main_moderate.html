@@ -1,0 +1,59 @@
+{% INCLUDE 'overall_header.html' %}
+
+<div class="panel bg3">
+	<div class="inner">
+		<div id="tourziel">
+			<h2>{{ lang('MOT_TZV_TOURZIEL_MODERATE') }}</h2>
+			<p>{{ MOT_TZV_TOURZIEL_NUMBER }}</p>
+
+			{% if MOT_TZV_COUNTRY_ENABLE %}
+				{% INCLUDE '@mot_tzv/mot_tzv_main_flag_view.html' %}
+			{% endif %}
+
+			<div class="tzv-nav-links">
+				<div class="buttons">
+					{% if MOT_TZV_INDEX_AUTH %}
+						<a href="{{ MOT_TZV_INDEX_LINK }}" class="button icon-button reply-icon" title="{{ lang('MOT_TZV_MAIN_INDEX') }}">{{ lang('MOT_TZV_MAIN_INDEX') }}</a>
+					{% endif %}
+					{% if MOT_TZV_CREATE_AUTH %}
+						<a href="{{ MOT_TZV_CREATE_LINK }}" class="button icon-button reply-icon" title="{{ lang('MOT_TZV_MAIN_ADD') }}">{{ lang('MOT_TZV_MAIN_ADD') }}</a>
+					{% endif %}
+					{% if MOT_TZV_LIST_AUTH %}
+						<a href="{{ MOT_TZV_SEARCH_LINK }}" class="button icon-button reply-icon" title="{{ lang('MOT_TZV_MAIN_SEARCH') }}">{{ lang('MOT_TZV_MAIN_SEARCH') }}</a>
+					{% endif %}
+					{% if MOT_TZV_SUPPORT_ENABLE %}
+						<a href="{{ MOT_TZV_SUPPORT }}" class="button icon-button reply-icon" title="{{ lang('MOT_TZV_MAIN_SUPPORT') }}">{{ lang('MOT_TZV_SUPPORT_FORUM') }}</a>
+					{% endif %}
+				</div>
+			</div>
+
+			<div style="width: 100%;">
+				<div id="cp-main" class="panel-container">
+					<div class="panel">
+						<h3>{{ lang('MOT_TZV_LAST_5_EVENTS') }}</h3>
+						<p>
+							{% if S_HAS_EVENTS %}
+							<table class="table1 zebra-list responsive">
+								<thead>
+									<th class="name">{{ lang('NAME') }}</th>
+									<th class="name">{{ lang('USERNAME') }}</th>
+									<th class="name">{{ lang('MOT_TZV_VIEW_EVENT_EDIT') }}</th>
+									<th class="name">{{ lang('TIME') }}</th>
+								</thead>
+								<tbody>
+									{{ MOT_TZV_LAST_5_EVENTS }}
+								</tbody>
+							</table>
+							{% else %}
+								{{ lang('MOT_TZV_NO_EVENTS') }}
+							{% endif %}
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% INCLUDE '@mot_tzv/mot_tzv_main_footer.html' %}
+{% INCLUDE 'overall_footer.html' %}

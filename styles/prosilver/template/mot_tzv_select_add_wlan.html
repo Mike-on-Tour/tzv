@@ -1,0 +1,5 @@
+<select name="mot_tzv_wlan">
+	{% for wlan in wlan %}
+		<option value="{{ wlan.WLAN_ID }}" {% if MOT_TZV_SELECT_WLAN_ID == wlan.WLAN_ID %} selected {% endif %}>{{ wlan.WLAN_NAME }}</option>
+	{% endfor %}
+</select>

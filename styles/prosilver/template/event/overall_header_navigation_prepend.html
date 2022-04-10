@@ -1,0 +1,5 @@
+{% if MOT_TZV_ENABLE %}
+    {% if (MOT_TZV_ADMIN and U_ACP) or not MOT_TZV_ADMIN %}
+		<li class="leftside" data-last-responsive="true"><a href="{{ U_MOT_TOURZIEL }}" role="menuitem"><i class="icon fas fa-list-alt" aria-hidden="true"></i><span>{{ lang('MOT_TZV_TOURZIEL') }}</span></a></li> 
+    {% endif %}
+{% endif %}

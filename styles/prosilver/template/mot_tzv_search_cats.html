@@ -1,0 +1,13 @@
+<form id="postform" method="post" action="{{ U_FORM_ACTION }}" enctype="multipart/form-data">    
+	<table>
+		<tr>
+			<td width="130px">
+				<p>{{ lang('MOT_TZV_SEARCH_SELECT') }}{{ lang('COLON') }}</p>
+			</td>
+			<td>
+				{% include '@mot_tzv/mot_tzv_select_add_category.html' %}
+				<input class="button icon-button reply-icon" type="submit" name="submit" value="{{ lang('MOT_TZV_BUTTON_SUCHEN') }}">
+			</td>
+		</tr>
+	</table>
+</form>	

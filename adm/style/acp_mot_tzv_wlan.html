@@ -1,0 +1,98 @@
+{% INCLUDE 'overall_header.html' %}
+
+<h2>{{ lang('ACP_MOT_TZV_TOURZIEL') }} - {{ lang('ACP_MOT_TZV_WLAN') }}</h2>
+{% if S_ADD_WLAN %}
+
+	<a href="{U_BACK}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_BACK}</a>
+
+	{% if S_EDIT_WLAN %}
+		<h2>{{ lang('ACP_MOT_TZV_WLAN_EDIT') }}</h2>
+	{% else %}
+		<h2>{{ lang('ACP_MOT_TZV_WLAN_ADD') }}</h2>
+	{% endif %}
+
+	{% if S_ERROR %}
+		<div class="errorbox">
+			<h3>{{ lang('WARNING') }}</h3>
+			<p>{{ ERROR_MSG }}</p>
+		</div>
+	{% endif %}
+
+	<form id="acp_add_wlan" method="post" action="{{ U_ACTION }}">
+		<fieldset>
+
+			<dl>
+				<dt><label for="wlan_name">{{ lang('ACP_MOT_TZV_WLAN_NAME') }}:</label><br><span>{{ lang('ACP_MOT_TZV_WLAN_NAME_EXPL') }}</span></dt>
+				<dd><input name="wlan_name" type="text" id="wlan_name" value="{{ WLAN_NAME }}" maxlength="255" /></dd>
+			</dl>
+
+			<p class="submit-buttons">
+				<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}" />
+			</p>
+			{{ S_FORM_TOKEN }}
+		</fieldset>
+	</form>
+
+{% elseif S_WLAN %}
+
+	<h2>{{ lang('ACP_MOT_TZV_WLANS') }}</h2>
+
+	<div class="errorbox"> 
+		{{ lang('ACP_MOT_TZV_DELETE') }}
+	</div>
+
+	<form id="acp_wlan" method="post" action="{{ U_ACTION }}">
+		<fieldset class="quick">
+			<input class="button2" name="add" type="submit" value="{{ lang('ACP_MOT_TZV_WLAN_ADD') }}" />
+		</fieldset>
+
+		{% if pagination %}
+			<div class="pagination top-pagination">
+				{% include 'pagination.html' %}
+			</div>
+		{% endif %}
+
+		<table class="table1 zebra-table fixed-width-table">
+			<thead>
+				<tr>
+					<th>{{ lang('ACP_MOT_TZV_WLAN_NAME') }}</th>
+					<th style="text-align: center;">{{ lang('ACP_MOT_TZV_COUNTRY_COUNT') }}</th>
+					<th style="text-align: center;">{{ lang('OPTIONS') }}</th>
+				</tr>
+			</thead>
+			<tbody>
+
+			{% for wlan in wlan %}
+				<tr>
+					<td>{{ wlan.WLAN_NAME }}</td>
+					<td style="text-align: center;">{{ wlan.WLAN_COUNT }}</td>
+					<td style="text-align: right; white-space: nowrap;">
+						<center>
+						&nbsp;<a href="{{ wlan.U_EDIT }}">{{ ICON_EDIT }}</a> <a href="{{ wlan.U_DELETE }}">{{ ICON_DELETE }}</a>
+						</center>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="3" style="text-align: center;">{{ lang('ACP_MOT_TZV_NO_ENTRIES') }}</td>
+				</tr>
+			{% endfor %}
+
+			</tbody>
+		</table>
+
+		{% if pagination %}
+			<div class="pagination">
+				{% include 'pagination.html' %}
+			</div>
+		{% endif %}
+
+		<fieldset class="quick">
+			<input class="button2" name="add" type="submit" value="{{ lang('ACP_MOT_TZV_WLAN_ADD') }}" />
+			{{ S_FORM_TOKEN }}
+		</fieldset>
+
+	</form>
+{% endif %}
+
+{% INCLUDE 'overall_footer.html' %}

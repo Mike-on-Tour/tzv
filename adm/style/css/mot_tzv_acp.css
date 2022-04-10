@@ -1,0 +1,30 @@
+/*
+* @package phpBB Extension [Adressverwaltung - Tourziele]
+* @copyright (c) 2014-2021 waldkatze - http://www.polarbiker-oberlausitz.de/mod_demo/
+* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+*
+* [TZV-ACP-CSS]
+*
+*/
+.errorbox {
+	border-radius: 8px;
+}
+
+.successbox {
+	border-radius: 8px;
+}
+
+fieldset {
+	border-radius: 1em;
+	box-shadow: 0.15em 0.2em 0 0 #899599;
+}
+
+fieldset.align {
+	clear: both;
+	text-align: right;
+}
+
+.rtl fieldset.align {
+	clear: both;
+	text-align: left;
+}

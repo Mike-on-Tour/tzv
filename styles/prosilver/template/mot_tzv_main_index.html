@@ -1,0 +1,75 @@
+{% if MOT_TZV_ENABLE %}
+    {% if (MOT_TZV_ADMIN and U_ACP) or not MOT_TZV_ADMIN %}
+
+		{% INCLUDE 'overall_header.html' %}
+
+		<div class="forabg">
+			<div class="inner">
+				<ul class="topiclist">
+					<li class="header">
+						<dl>
+							<dt>{{ lang('MOT_TZV_TOURZIEL') }}</dt>
+							<dd></dd>
+						</dl>
+					</li>
+				</ul>
+
+				<ul class="topiclist forums" style="padding: 5px">
+					<li>
+						<div id="tourziel">
+							<h2 >{{ lang('MOT_TZV_TOURZIEL_MAIN') }}</h2>
+							<p>{{ MOT_TZV_TOURZIEL_NUMBER }}</p>
+
+							{% if MOT_TZV_COUNTRY_ENABLE %}
+								{% INCLUDE '@mot_tzv/mot_tzv_main_flag_view.html' %}
+							{% endif %}
+
+							{% if MOT_TZV_MAIN_IMAGE %}
+								<span class="responsive-hide"><strong>
+									<div class="main1"></div>
+									<div class="main2"></div>
+									<div class="main3"></div>
+									<br>
+								</strong></span>
+							{% endif %}
+
+							{% if ACP_MOT_TZV_MAININFO %}
+								<p>&raquo;<br>{{ lang('MOT_TZV_MAINNEWS_INFO') }}</p>
+							{% endif %}
+
+							{% if MOT_TZV_SHOW_GOOGLE %}
+								<div style="text-align:left;">
+									<a href="http://www.google.com/permissions/geoguidelines.html" target="visu" class="postlink">{{ lang('MOT_TZV_NUTZUNG_MAPS') }}</a><br><br>
+								</div>
+							{% endif %}
+									
+							<div class="tzv-nav-links">
+								<div class="buttons">
+									{% if MOT_TZV_CREATE_AUTH %}
+										<a href="{{ MOT_TZV_CREATE_LINK }}" class="button icon-button reply-icon" title="{{ lang('MOT_TZV_MAIN_ADD') }}">{{ lang('MOT_TZV_MAIN_ADD') }}</a>
+									{% endif %}
+									{% if MOT_TZV_LIST_AUTH %}
+										<a href="{{ MOT_TZV_LIST_LINK }}" class="button icon-button reply-icon" title="{{ lang('MOT_TZV_MAIN_VIEW') }}">{{ lang('MOT_TZV_MAIN_VIEW') }}</a>
+										<a href="{{ MOT_TZV_SEARCH_LINK }}" class="button icon-button reply-icon" title="{{ lang('MOT_TZV_MAIN_SEARCH') }}">{{ lang('MOT_TZV_MAIN_SEARCH') }}</a>
+									{% endif %}
+									{% if MOT_TZV_SUPPORT_ENABLE %}
+										<a href="{{ MOT_TZV_TZV_SUPPORT }}" class="button icon-button reply-icon" title="{{ lang('MOT_TZV_MAIN_SUPPORT') }}">{{ lang('MOT_TZV_SUPPORT_FORUM') }}</a>
+									{% endif %}
+									{% if MOT_TZV_MODERATE_LINK %}
+										<div class="post-buttons" style="float: right;">
+											<a href="{{ MOT_TZV_MODERATE_LINK }}" class="button icon-button reply-icon" title="{{ lang('MOT_TZV_TOURZIEL_MODERATE') }}">{{ lang('MOT_TZV_TOURZIEL_MODERATE') }}</a> 
+										</div>
+									{% endif %}
+								</div>
+							</div>
+						</div>	
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		{% INCLUDE '@mot_tzv/mot_tzv_main_footer.html' %} 
+		{% INCLUDE 'overall_footer.html' %}
+
+    {% endif %}
+{% endif %}

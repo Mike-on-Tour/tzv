@@ -1,0 +1,7 @@
+parameters:
+    mot.tzv.tables.tourziel: '%core.table_prefix%mot_tourziel'
+    mot.tzv.tables.tourziel_country: '%core.table_prefix%mot_tourziel_country'
+    mot.tzv.tables.tourziel_region: '%core.table_prefix%mot_tourziel_region'
+    mot.tzv.tables.tourziel_cats: '%core.table_prefix%mot_tourziel_cats'
+    mot.tzv.tables.tourziel_wlan: '%core.table_prefix%mot_tourziel_wlan'
+

@@ -1,0 +1,7 @@
+{% if MOT_TZV_ENABLE %}
+    {% if (MOT_TZV_ADMIN and U_ACP) or not MOT_TZV_ADMIN %}
+        {% if MOT_TZV_STATS_ENABLE %}
+            {{ lang('MOT_TZV_TOURZIEL_TOTAL') }}{{ lang('COLON') }} <b>{{ MOT_TZV_COUNT_TOURZIEL }}</b> 
+        {% endif %}
+    {% endif %}
+{% endif %}
