@@ -3,8 +3,8 @@
 	"type": "phpbb-extension",
 	"description": "Extension für Bikerforum. Datenbank für schöne Tourziele, Unterkünfte, Sehenwürdigkeiten, usw.",
 	"homepage": "https://www.mike-on-tour.com",
-	"version": "0.2.0",
-	"time": "2022-04-10 12:11:57",
+	"version": "0.2.1",
+	"time": "2022-04-19 12:11:57",
 	"license": "GPL-2.0-only",
 	"authors": [
         {

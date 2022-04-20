@@ -19,14 +19,14 @@ if (empty($lang) || !is_array($lang))
 }
 
 $lang = array_merge($lang, [
-	'ACL_MOT_CAT_TOURZIEL'		=> 'Tourziele',
+	'ACL_MOT_CAT_TOURZIEL'		=> 'Tour destinations',
 
-	'ACL_U_MOT_TZV_MAINVIEW'	=> 'Kann Tourziele Startseite sehen',
-	'ACL_U_MOT_TZV_VIEW'		=> 'Kann Tourziele sehen',
-	'ACL_U_MOT_TZV_ADD'		    => 'Kann Tourziele eintragen',
-	'ACL_U_MOT_TZV_EDIT_OWN'	=> 'Kann eigene Tourziele ändern',
-	'ACL_U_MOT_TZV_DELETE_OWN'	=> 'Kann eigene Tourziele löschen',
+	'ACL_U_MOT_TZV_MAINVIEW'	=> 'Can see the index page of Tour destinations',
+	'ACL_U_MOT_TZV_VIEW'		=> 'Can see tour destinations',
+	'ACL_U_MOT_TZV_ADD'		    => 'Can create tour destinations',
+	'ACL_U_MOT_TZV_EDIT_OWN'	=> 'Can edit own tour destinations',
+	'ACL_U_MOT_TZV_DELETE_OWN'	=> 'Can delete own tour destinations',
 
-	'ACL_M_MOT_TZV_EDIT'		=> 'Kann jedes Tourziele ändern',
-	'ACL_M_MOT_TZV_DELETE'		=> 'Kann jedes Tourziele löschen',
+	'ACL_M_MOT_TZV_EDIT'		=> 'Can edit tour destinations',
+	'ACL_M_MOT_TZV_DELETE'		=> 'Can delete tour destinations',
 ]);

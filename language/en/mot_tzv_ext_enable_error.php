@@ -18,7 +18,7 @@ if (empty($lang) || !is_array($lang))
 }
 
 $lang = array_merge($lang, [
-	'MOT_TZV_TOURZIEL'						=> 'Tourziel',
-	'MOT_TZV_ERROR_EXTENSION_NOT_ENABLE'	=> 'Die Erweiterung „%1$s“ kann nicht aktiviert werden. Prüfe die Voraussetzungen, die für die Erweiterung notwendig sind.',
-	'MOT_TZV_ERROR_MESSAGE_PHPBB_VERSION'	=> 'Minimum ist phpBB %2$s aber kleiner als %3$s',
+	'MOT_TZV_TOURZIEL'						=> 'Tour destinations',
+	'MOT_TZV_ERROR_EXTENSION_NOT_ENABLE'	=> 'The extension „%1$s“ can not be enabled. Please check whether the necessary requirements for this extension are satisfied.',
+	'MOT_TZV_ERROR_MESSAGE_PHPBB_VERSION'	=> 'Minimum version of phpBB required is %2$s but less than %3$s',
 ]);

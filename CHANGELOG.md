@@ -4,6 +4,31 @@ All changes to `Adressverwaltung Tourziele` will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.2.1] - 2022-04-19
+
+### Added
+-	A config variable holding the URL for the flags
+-	A new column to the TOURZIEL_TABLE to hold the username of a deleted user for displaying the Tourziel
+
+### Changed
+-	The link in the forum lists display of the newest Tourziel from the Tourziel list to this Tourziel's detail view in `event/mot_tzv_listener.php`
+-	The link to the country flags from an internal directory to `https://flagcdn.com/16x12/`
+
+
+### Fixed
+-	Wrong link to former Tourziel list in `event/mot_tzv_listener.php` which resulted in a "page not found" error
+-	Three wrong links to the Tourziel index generated with `gemerate_board_url` which resulted in a "page not found" error
+-	A wrong location of the support link and its enabler definition in `event/mot_tzv_listener.php` which led to it being not dislayed if there were no new
+	Tourziele
+-	Added missing `sql_freeresult` in `functions/mot_tzv_events.php` in `function get_events()`
+-	Missing coordinates in search result list
+
+### Removed
+-	A superfluous include in the `__construct()` function of `functions/mot_tzv_events.php`
+-	The `images` directory with its subdirectory `flag` and all the 242 country flags contained there in order to save 251KB of storage space
+-	The `transfer.php` file
+
+
 ## [0.2.0] - 2022-04-10
 
 ### Added

@@ -110,6 +110,8 @@ class mot_tzv_main
 		$this->tzv_moderate_route = $this->helper->route('mot_tzv_moderate');
 		$this->tzv_search_route = $this->helper->route('mot_tzv_search');
 		$this->tzv_support_route = $this->path_helper->get_web_root_path() . $this->config['mot_tzv_support']; // Support Link
+
+		$this->tzv_flags_url = $this->config['mot_tzv_flags_url'];
 	}
 
 
@@ -209,7 +211,7 @@ class mot_tzv_main
 
 			meta_refresh(15, $this->tzv_list_route); // nach 15 Sek. zu Tourziel-Liste
 
-			$message =  $this->language->lang('MOT_TZV_EVENT_ADD_SUCCESSFUL') . '<br><br><a href="' . $this->helper->route('mot_tzv_event', ['id' => $new_id]) . '">'. $this->language->lang('MOT_TZV_VIEW_EVENT') . '</a><br><a href="' . generate_board_url() . '/app.php/tzv">'. $this->language->lang('MOT_TZV_RETURN_TOURZIEL') . '</a>';
+			$message =  $this->language->lang('MOT_TZV_EVENT_ADD_SUCCESSFUL') . '<br><br><a href="' . $this->helper->route('mot_tzv_event', ['id' => $new_id]) . '">'. $this->language->lang('MOT_TZV_VIEW_EVENT') . '</a><br><a href="' . $this->tzv_index_route . '">'. $this->language->lang('MOT_TZV_RETURN_TOURZIEL') . '</a>';
 			trigger_error($message);
 		}
 
@@ -271,7 +273,7 @@ class mot_tzv_main
 	{
 		$event = $this->events->get_events($id);
 
-		$flag = $this->path_helper->get_web_root_path() . 'ext/mot/tzv/images/flag/' . $event['country_image'];
+		$flag = $this->tzv_flags_url . $event['country_image'];
 
 		$content = '<br><table>';
 		$content .= '<tr><td>' . $this->language->lang('MOT_TZV_LISTEN_NAME') . ':</td>' . '<td> &nbsp;&nbsp;<b>' . $event['name'] . '</b></td></tr>';
@@ -321,12 +323,22 @@ class mot_tzv_main
 		}
 
 		// Get user data of the user who created this Tourziel
-		$sql = 'SELECT *
-				FROM ' . USERS_TABLE . '
-				WHERE user_id = ' . (int) $event['user_id'];
-		$result = $this->db->sql_query($sql);
-		$member = $this->db->sql_fetchrow($result);
-		$this->db->sql_freeresult($result);
+		if ($event['user_id'] > 1)
+		{
+			$sql = 'SELECT *
+					FROM ' . USERS_TABLE . '
+					WHERE user_id = ' . (int) $event['user_id'];
+			$result = $this->db->sql_query($sql);
+			$member = $this->db->sql_fetchrow($result);
+			$this->db->sql_freeresult($result);
+			$username = get_username_string('full', $member['user_id'], $member['username'], $member['user_colour']);
+			$user_avatar = phpbb_get_user_avatar($member);
+		}
+		else
+		{
+			$username = $event['creator_username'];
+			$user_avatar = '';
+		}
 
 		// Get country info to display flags
 		$this->events->get_country_info();
@@ -354,11 +366,11 @@ class mot_tzv_main
 
 			'MOT_TZV_EVENT_NAME'		=> $event['name'],
 			'MOT_TZV_EVENT_CONTENT'		=> $content,
-			'EVENT_MAPS_LAT'			=> $event['maps_lat'],
-			'EVENT_MAPS_LON'			=> $event['maps_lon'],
+			'MOT_TZV_EVENT_MAPS_LAT'	=> $event['maps_lat'],
+			'MOT_TZV_EVENT_MAPS_LON'	=> $event['maps_lon'],
 
-			'MOT_TZV_EVENT_AVATAR'		=> phpbb_get_user_avatar($member),
-			'MOT_TZV_EVENT_POSTER'		=> get_username_string('full', $member['user_id'], $member['username'], $member['user_colour']),
+			'MOT_TZV_EVENT_AVATAR'		=> $user_avatar,
+			'MOT_TZV_EVENT_POSTER'		=> $username,
 
 			'S_MODERATOR'				=> $moderator,
 		]);
@@ -383,14 +395,22 @@ class mot_tzv_main
 		$last_5 = "";
 		foreach ($events as $row)
 		{
-			$sql = 'SELECT user_id, username, user_colour, user_dateformat
-					FROM ' . USERS_TABLE . '
-					WHERE user_id = ' . (int) $row['user_id'];
-			$result = $this->db->sql_query($sql);
-			$member = $this->db->sql_fetchrow($result);
-			$this->db->sql_freeresult($result);
+			if ($row['user_id'] > 1)
+			{
+				$sql = 'SELECT user_id, username, user_colour, user_dateformat
+						FROM ' . USERS_TABLE . '
+						WHERE user_id = ' . (int) $row['user_id'];
+				$result = $this->db->sql_query($sql);
+				$member = $this->db->sql_fetchrow($result);
+				$this->db->sql_freeresult($result);
+				$username = get_username_string("full", $member['user_id'], $member['username'], $member['user_colour']);
+			}
+			else
+			{
+				$username = $row['creator_username'];
+			}
 
-			$last_5 .= '<tr><td>' . $row['name'] . '</td><td>' . get_username_string("full", $member['user_id'], $member['username'], $member['user_colour']) . '</td><td><a href="' . $this->helper->route('mot_tzv_event', ['id' =>  $row['id']]) . '">' . $this->language->lang('MOT_TZV_VIEW_EVENT') . '</a></td><td>' . date($member['user_dateformat'], $row['post_time']) . '</td></tr>';
+			$last_5 .= '<tr><td>' . $row['name'] . '</td><td>' . $username . '</td><td><a href="' . $this->helper->route('mot_tzv_event', ['id' =>  $row['id']]) . '">' . $this->language->lang('MOT_TZV_VIEW_EVENT') . '</a></td><td>' . date($this->user->data['user_dateformat'], $row['post_time']) . '</td></tr>';
 		}
 
 		// Get country info to display flags
@@ -440,12 +460,10 @@ class mot_tzv_main
 					trigger_error($this->language->lang('NOT_AUTHORISED'));
 				}
 
-				$event = $this->events->get_events($id);
-
 				if (confirm_box(true))
 				{
 					$this->events->delete_event($id);
-					$message = $this->language->lang('MOT_TZV_EVENT_DELETE_SUCCESSFUL') . '<br><br><a href="' . generate_board_url() . '/app.php/tzv">'. $this->language->lang('MOT_TZV_RETURN_TOURZIEL') . '</a>';
+					$message = $this->language->lang('MOT_TZV_EVENT_DELETE_SUCCESSFUL') . '<br><br><a href="' . $this->tzv_index_route . '">'. $this->language->lang('MOT_TZV_RETURN_TOURZIEL') . '</a>';
 					trigger_error($message);
 				}
 				else
@@ -514,7 +532,7 @@ class mot_tzv_main
 
 					meta_refresh(15, $this->tzv_list_route); // nach 15 Sek. zu Tourziel-Liste
 
-					$message =  $this->language->lang('MOT_TZV_EVENT_EDIT_SUCCESSFUL') . '<br><br><a href="' . $this->helper->route('mot_tzv_event', ['id' =>  $event['id']]) . '">'. $this->language->lang('MOT_TZV_RETURN_EVENT') . '</a><br><a href="' . generate_board_url() . '/app.php/tzv">'. $this->language->lang('MOT_TZV_RETURN_TOURZIEL') . '</a>';
+					$message =  $this->language->lang('MOT_TZV_EVENT_EDIT_SUCCESSFUL') . '<br><br><a href="' . $this->helper->route('mot_tzv_event', ['id' =>  $event['id']]) . '">'. $this->language->lang('MOT_TZV_RETURN_EVENT') . '</a><br><a href="' . $this->tzv_index_route . '">'. $this->language->lang('MOT_TZV_RETURN_TOURZIEL') . '</a>';
 					trigger_error($message);
 				}
 
@@ -615,45 +633,26 @@ class mot_tzv_main
 			$start = $this->request->variable('start', 0);
 			$limit = (int) $this->config['mot_tzv_rows_per_page'];
 
-			// Get newest entry id
-			$sql = "SELECT MAX(id) AS 'max_id' FROM " . $this->tourziel_table;
-			$result = $this->db->sql_query($sql);
-			$max_id = $this->db->sql_fetchrowset($result);		// $max_id = [0 => ['max_id' => int]]
-			$this->db->sql_freeresult($result);
-
 			// get the last Tourziel
-			$sql = 'SELECT tz.*,
-					u.user_id, u.username, u.user_colour, u.user_avatar, u.user_avatar_type, u.user_avatar_width, u.user_avatar_height,
-					ct.country_id, ct.country_name, ct.country_image,
-					rt.region_id, rt.region_name,
-					kt.cat_id, kt.cat_name,
-					wt.wlan_id, wt.wlan_name
+			$newest_tz = $this->events->get_events(0, 1, true);
 
-					FROM ' . $this->tourziel_table . ' tz
-					JOIN ' . USERS_TABLE . ' u
-					ON u.user_id = tz.user_id
-					JOIN ' . $this->tourziel_country_table . ' ct
-					ON tz.country = ct.country_id
-					JOIN ' . $this->tourziel_region_table . ' rt
-					ON tz.region = rt.region_id
-					JOIN ' . $this->tourziel_cats_table . ' kt
-					ON tz.category = kt.cat_id
-					JOIN ' . $this->tourziel_wlan_table . ' wt
-					ON tz.wlan = wt.wlan_id
-					WHERE tz.id = ' . (int) $max_id[0]['max_id'];  // höchste ID
-			$result = $this->db->sql_query($sql);
-			$newest_tz = $this->db->sql_fetchrow($result);
-			$this->db->sql_freeresult($result);
-
-			// Get necessary data for phpbb_get_user_avatar()
-			$user_row = [
-				'user_id'				=> $newest_tz['user_id'],
-				'username'				=> $newest_tz['username'],
-				'user_avatar'			=> $newest_tz['user_avatar'],
-				'user_avatar_type'		=> $newest_tz['user_avatar_type'],
-				'user_avatar_width'		=> $newest_tz['user_avatar_width'],
-				'user_avatar_height'	=> $newest_tz['user_avatar_height'],
-			];
+			$newest_tz = $newest_tz[0];
+			if ($newest_tz['user_id'] > 1)		// if user_id == 1 the original user who created this Tourziel was deleted
+			{
+				$sql = 'SELECT user_id, username, user_colour, user_avatar, user_avatar_type, user_avatar_width, user_avatar_height
+						FROM ' . USERS_TABLE . '
+						WHERE user_id = ' . (int) $newest_tz['user_id'];
+				$result = $this->db->sql_query($sql);
+				$user = $this->db->sql_fetchrow($result);
+				$this->db->sql_freeresult($result);
+				$username = get_username_string('full', $user['user_id'], $user['username'], $user['user_colour']);
+				$user_avatar = phpbb_get_user_avatar($user);
+			}
+			else
+			{
+				$username = $newest_tz['creator_username'];
+				$user_avatar = '';
+			}
 
 			$this->template->assign_vars([
 				'NEWEST_LISTEN_ID'			=> $newest_tz['id'],
@@ -672,25 +671,22 @@ class mot_tzv_main
 
 				'NEWEST_POST_DATE'			=> (!empty($newest_tz['post_time'])) ? $this->user->format_date($newest_tz['post_time']) : '-',
 
-				'NEWEST_POSTER_AUTHOR'		=> get_username_string('full', $newest_tz['user_id'], $newest_tz['username'], $newest_tz['user_colour']),
-				'NEWEST_POSTER_AVATAR'		=> phpbb_get_user_avatar($user_row),
+				'NEWEST_POSTER_AUTHOR'		=> $username,
+				'NEWEST_POSTER_AVATAR'		=> $user_avatar,
 
 				'NEWEST_COUNTRY_ID'			=> $newest_tz['country_id'],
 				'NEWEST_COUNTRY_NAME'		=> $newest_tz['country_name'],
-				'NEWEST_COUNTRY_IMG'		=> $this->path_helper->get_web_root_path() . 'ext/mot/tzv/images/flag/' . $newest_tz['country_image'],
+				'NEWEST_COUNTRY_IMG'		=> $this->tzv_flags_url . $newest_tz['country_image'],
 			]);
 
 			// Load all Tourziele for pagination
 			$sql = 'SELECT tz.*,
-					u.user_id, u.username, u.user_colour, u.user_avatar, u.user_avatar_type, u.user_avatar_width, u.user_avatar_height,
 					ct.country_id, ct.country_name, ct.country_image,
 					rt.region_id, rt.region_name,
 					kt.cat_id, kt.cat_name,
 					wt.wlan_id, wt.wlan_name
 
 					FROM ' . $this->tourziel_table . ' tz
-					JOIN ' . USERS_TABLE . ' u
-					ON u.user_id = tz.user_id
 					JOIN ' . $this->tourziel_country_table . ' ct
 					ON tz.country = ct.country_id
 					JOIN ' . $this->tourziel_region_table . ' rt
@@ -699,19 +695,26 @@ class mot_tzv_main
 					ON tz.category = kt.cat_id
 					JOIN ' . $this->tourziel_wlan_table . ' wt
 					ON tz.wlan = wt.wlan_id
-					ORDER BY tz.id ASC';  // höchste ID
+					ORDER BY tz.id ASC';
 			$result = $this->db->sql_query_limit($sql, $limit, $start);
 			while ($row = $this->db->sql_fetchrow($result))
 			{
-				// Get necessary data for phpbb_get_user_avatar()
-				$user_row = [
-					'user_id'				=> $row['user_id'],
-					'username'				=> $row['username'],
-					'user_avatar'			=> $row['user_avatar'],
-					'user_avatar_type'		=> $row['user_avatar_type'],
-					'user_avatar_width'		=> $row['user_avatar_width'],
-					'user_avatar_height'	=> $row['user_avatar_height'],
-				];
+				if ($row['user_id'] > 1)
+				{
+					$sql = 'SELECT user_id, username, user_colour, user_avatar, user_avatar_type, user_avatar_width, user_avatar_height
+							FROM ' . USERS_TABLE . '
+							WHERE user_id = ' . (int) $row['user_id'];
+					$user_result = $this->db->sql_query($sql);
+					$user = $this->db->sql_fetchrow($user_result);
+					$this->db->sql_freeresult($user_result);
+					$username = get_username_string('full', $user['user_id'], $user['username'], $user['user_colour']);
+					$user_avatar = phpbb_get_user_avatar($user);
+				}
+				else
+				{
+					$username = $row['creator_username'];
+					$user_avatar = '';
+				}
 
 				$this->template->assign_block_vars('tzlist', [
 					'LISTEN_ID'		    => $row['id'],
@@ -730,12 +733,12 @@ class mot_tzv_main
 					'POST_DATE'			=> (!empty($row['post_time'])) ? $this->user->format_date($row['post_time']) : '-',
 
 					'USER_ID'		    => $row['user_id'],
-					'POSTER_AUTHOR'     => get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
-					'POSTER_AVATAR'     => phpbb_get_user_avatar($user_row),
+					'POSTER_AUTHOR'     => $username,
+					'POSTER_AVATAR'     => $user_avatar,
 
 					'COUNTRY_ID'        => $row['country_id'],
 					'COUNTRY_NAME'      => $row['country_name'],
-					'COUNTRY_IMG'       => $this->path_helper->get_web_root_path() . 'ext/mot/tzv/images/flag/' . $row['country_image'],
+					'COUNTRY_IMG'       => $this->tzv_flags_url . $row['country_image'],
 				]);
 			}
 			$this->db->sql_freeresult($result);
@@ -813,15 +816,12 @@ class mot_tzv_main
 			$this->db->sql_freeresult($result);
 
 			$sql = 'SELECT tz.*,
-					u.user_id, u.username, u.user_colour, u.user_avatar, u.user_avatar_type, u.user_avatar_width, u.user_avatar_height,
 					ct.country_id, ct.country_name, ct.country_image,
 					rt.region_id, rt.region_name,
 					kt.cat_id, kt.cat_name,
 					wt.wlan_id, wt.wlan_name
 
 					FROM ' . $this->tourziel_table . ' tz
-					JOIN ' . USERS_TABLE . ' u
-					ON u.user_id = tz.user_id
 					JOIN ' . $this->tourziel_country_table . ' ct
 					ON tz.country = ct.country_id
 					JOIN ' . $this->tourziel_region_table . ' rt
@@ -843,14 +843,22 @@ class mot_tzv_main
 
 			while ($row = $this->db->sql_fetchrow($result))
 			{
-				$user_row = [
-					'user_id'				=> $row['user_id'],
-					'username'				=> $row['username'],
-					'user_avatar'			=> $row['user_avatar'],
-					'user_avatar_type'		=> $row['user_avatar_type'],
-					'user_avatar_width'		=> $row['user_avatar_width'],
-					'user_avatar_height'	=> $row['user_avatar_height'],
-				];
+				if ($row['user_id'] > 1)
+				{
+					$sql = 'SELECT user_id, username, user_colour, user_avatar, user_avatar_type, user_avatar_width, user_avatar_height
+							FROM ' . USERS_TABLE . '
+							WHERE user_id = ' . (int) $row['user_id'];
+					$user_result = $this->db->sql_query($sql);
+					$user = $this->db->sql_fetchrow($user_result);
+					$this->db->sql_freeresult($user_result);
+					$username = get_username_string('full', $user['user_id'], $user['username'], $user['user_colour']);
+					$user_avatar = phpbb_get_user_avatar($user);
+				}
+				else
+				{
+					$username = $row['creator_username'];
+					$user_avatar = '';
+				}
 
 				$this->template->assign_block_vars('tzlist', [
 					'LISTEN_ID'		    => $row['id'],
@@ -863,16 +871,18 @@ class mot_tzv_main
 					'LISTEN_TELEFON'	=> $row['telephone'],
 					'LISTEN_EMAIL'	    => $row['email'],
 					'LISTEN_HOMEPAGE'	=> $row['homepage'],
+					'LISTEN_MAP_LAT'	=> $row['maps_lat'],
+					'LISTEN_MAP_LON'	=> $row['maps_lon'],
 					'LISTEN_WLAN'   	=> $row['wlan_name'],
 					'POST_DATE'			=> (!empty($row['post_time'])) ? $this->user->format_date($row['post_time']) : '-',
 
 					'USER_ID'		    => $row['user_id'],
-					'POSTER_AUTHOR'     => get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
-					'POSTER_AVATAR'     => phpbb_get_user_avatar($user_row),
+					'POSTER_AUTHOR'     => $username,
+					'POSTER_AVATAR'     => $user_avatar,
 
 					'COUNTRY_ID'        => $row['country_id'],
 					'COUNTRY_NAME'      => $row['country_name'],
-					'COUNTRY_IMG'       => $this->path_helper->get_web_root_path() . 'ext/mot/tzv/images/flag/' . $row['country_image'],
+					'COUNTRY_IMG'       => $this->tzv_flags_url . $row['country_image'],
 				]);
 			}
 			$this->db->sql_freeresult($result);

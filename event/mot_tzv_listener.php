@@ -35,18 +35,15 @@ class mot_tzv_listener implements EventSubscriberInterface
 	/** @var \phpbb\user */
 	protected $user;
 
+	/** @var \mot\tzv\functions\mot_tzv_events */
+	protected $mot_tzv_events;
+
 	/** @var string mot.tzv.tables.tourziel */
 	protected $mot_tzv_tourziel_table;
 
-	/** @var string mot.tzv.tables.tourziel */
-	protected $mot_tzv_tourziel_country_table;
-
-	/** @var string mot.tzv.tables.tourziel */
-	protected $mot_tzv_tourziel_region_table;
-
 	public function __construct(\phpbb\auth\auth $auth, \phpbb\config\config $config, \phpbb\db\driver\driver_interface $db,
 								\phpbb\extension\manager $phpbb_extension_manager, \phpbb\controller\helper $helper, \phpbb\template\template $template,
-								\phpbb\user $user, $mot_tzv_tourziel_table, $mot_tzv_tourziel_country_table, $mot_tzv_tourziel_region_table)
+								\phpbb\user $user, \mot\tzv\functions\mot_tzv_events $mot_tzv_events, $mot_tzv_tourziel_table)
 	{
 		$this->auth = $auth;
 		$this->config = $config;
@@ -55,12 +52,13 @@ class mot_tzv_listener implements EventSubscriberInterface
 		$this->helper = $helper;
 		$this->template = $template;
 		$this->user = $user;
+		$this->events = $mot_tzv_events;
 		// TZV Tabellen
 		$this->tourziel_table = $mot_tzv_tourziel_table;
-		$this->tourziel_country_table = $mot_tzv_tourziel_country_table;
-		$this->tourziel_region_table = $mot_tzv_tourziel_region_table;
 
 		$this->ext_path = $this->phpbb_extension_manager->get_extension_path('mot/tzv', true);
+
+		$this->tzv_flags_url = $this->config['mot_tzv_flags_url'];
 	}
 
 	public static function getSubscribedEvents()
@@ -70,6 +68,7 @@ class mot_tzv_listener implements EventSubscriberInterface
 			'core.user_setup'			=> 'load_language_on_setup',
 			'core.page_header'			=> 'add_page_header_link',
 			'core.page_header_after'	=> 'tourziel_count',
+			'core.delete_user_before'	=> 'check_for_deleted_tourziel_creator',
 		];
 	}
 
@@ -104,47 +103,46 @@ class mot_tzv_listener implements EventSubscriberInterface
 	{
 		if ($this->auth->acl_get('u_mot_tzv_mainview'))
 		{
-			$sql = 'SELECT tz.id, tz.name, tz.country, tz.region, tz.post_time, tz.user_id,
-					u.user_id, u.username, u.user_colour,
-					ct.country_id, ct.country_name, ct.country_image,
-					rt.region_id, rt.region_name
+			$row = $this->events->get_events(0, 1, true);
 
-					FROM ' . $this->tourziel_table . ' tz
-					JOIN ' . USERS_TABLE . ' u
-					ON u.user_id = tz.user_id
-					JOIN ' . $this->tourziel_country_table . ' ct
-					ON tz.country = ct.country_id
-					JOIN ' . $this->tourziel_region_table . ' rt
-					ON tz.region = rt.region_id
-					ORDER BY tz.id ASC';
-			$result = $this->db->sql_query($sql);
-			$tourziele = $this->db->sql_fetchrowset($result);
-			$this->db->sql_freeresult($result);
-
-			$total_tz = count($tourziele);
-
-			if ($total_tz > 0)
+			if (!empty($row))
 			{
-				$row = $tourziele[$total_tz - 1];
+				$row = $row[0];
+				if ($row['user_id'] > 1)		// if user_id == 1 the original user who created this Tourziel was deleted
+				{
+					$sql = 'SELECT user_id, username, user_colour
+							FROM ' . USERS_TABLE . '
+							WHERE user_id = ' . (int) $row['user_id'];
+					$result = $this->db->sql_query($sql);
+					$user = $this->db->sql_fetchrow($result);
+					$this->db->sql_freeresult($result);
+					$username = get_username_string('full', $user['user_id'], $user['username'], $user['user_colour']);
+				}
+				else
+				{
+					$username = $row['creator_username'];
+				}
+
 				$this->template->assign_vars([
 					'MOT_TZV_NEWS_ADD_ENABLE'	=> $this->config['mot_tzv_news_add_enable'],
-					'MOT_TZV_SUPPORT_ENABLE'	=> $this->config['mot_tzv_support_enable'],
-					'MOT_TZV_SUPPORT'			=> $this->config['mot_tzv_support'],
 
-					'U_MOT_TZV_NEW_EVENT'		=> generate_board_url() . "/app.php/tzv/tzvlist",
+					'U_MOT_TZV_NEW_EVENT'		=> $this->helper->route('mot_tzv_event', ['id' => $row['id']]),
 					'MOT_TZV_NEW_EVENT'			=> $row['name'],
 					'MOT_TZV_NEW_LAND'			=> $row['country_name'],
 					'MOT_TZV_NEW_REGION'		=> $row['region_name'],
 					'MOT_TZV_NEW_TIME'			=> (!empty($row['post_time'])) ? $this->user->format_date($row['post_time']) : '-',
 
-					'MOT_TZV_NEWS_AUTHOR'		=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
+					'MOT_TZV_NEWS_AUTHOR'		=> $username,
 
 					'COUNTRY_NAME'				=> $row['country_name'],
-					'COUNTRY_IMG'				=> $this->ext_path . 'images/flag/' . $row['country_image'],
+					'COUNTRY_IMG'				=> $this->tzv_flags_url . $row['country_image'],
 				]);
 			}
+
 			$this->template->assign_vars([
-				'U_MOT_TOURZIEL' 			=> $this->helper->route('mot_tzv_index'),
+				'U_MOT_TOURZIEL' 			=> $this->helper->route('mot_tzv_index'),		// Link for navbar
+				'MOT_TZV_SUPPORT_ENABLE'	=> $this->config['mot_tzv_support_enable'],		// General variable
+				'MOT_TZV_SUPPORT'			=> $this->config['mot_tzv_support'],
 
 				'MOT_TZV_ENABLE'			=> $this->config['mot_tzv_enable'],
 				'MOT_TZV_ADMIN'				=> $this->config['mot_tzv_admin'],
@@ -157,18 +155,39 @@ class mot_tzv_listener implements EventSubscriberInterface
 	{
 		if ($this->auth->acl_get('u_mot_tzv_mainview'))
 		{
-			$sql = 'SELECT COUNT(*) AS count
-					FROM ' . $this->tourziel_table . '
-					ORDER BY name';
-			$result = $this->db->sql_query($sql);
-			$count  = (int) $this->db->sql_fetchfield('count');
-			$this->db->sql_freeresult($result);
-
 			$this->template->assign_vars([
 				'MOT_TZV_STATS_ENABLE'		=> $this->config['mot_tzv_stats_enable'],
-				'MOT_TZV_COUNT_TOURZIEL'	=> $count,
+				'MOT_TZV_COUNT_TOURZIEL'	=> $this->events->get_total_count_tourziele(),
 			]);
 		}
 	}
 
+	/**
+	* Check whether a user to be deleted (no matter from where and by whomsoever) is creator of a Tourziel and change the entries in the TOURZIEL_TABLE accordingly (user_id => 1 and Creator_username => username)
+	*
+	* @param array	$event	containing:
+	*	@var string		mode				Mode of posts deletion (retain|delete)
+	*	@var array		user_ids			ID(s) of the user(s) bound to be deleted
+	*	@var bool		retain_username		True if username should be retained, false otherwise
+	*	@var array		user_rows			Array containing data of the user(s) bound to be deleted (since 3.2.4-RC1)
+	*
+	*/
+	public function check_for_deleted_tourziel_creator($event)
+	{
+		$user_rows = $event['user_rows'];
+		foreach ($user_rows as $row)
+		{
+			if ($row['user_id'] != 1)		// just to make sure that nobody tries to delete the guest user
+			{
+				$sql_array = [
+					'user_id'			=> 1,
+					'creator_username'	=> $row['username'],
+				];
+				$sql = 'UPDATE ' . $this->tourziel_table . '
+						SET ' . $this->db->sql_build_array('UPDATE', $sql_array) . '
+						WHERE user_id = ' . (int) $row['user_id'];
+				$this->db->sql_query($sql);
+			}
+		}
+	}
 }
