@@ -75,10 +75,7 @@ class mot_tzv_events
 		$this->tourziel_cats_table = $mot_tzv_tourziel_cats_table;
 		$this->tourziel_wlan_table = $mot_tzv_tourziel_wlan_table;
 
-		if (!function_exists('generate_text_for_storage'))
-		{
-			include $this->root_path . 'includes/functions_content.' . $this->php_ext;
-		}
+		$this->tzv_flags_url = $this->config['mot_tzv_flags_url'];
 	}
 
 
@@ -86,28 +83,37 @@ class mot_tzv_events
 	* Loads the content of the TOURZIEL_TABLE
 	*
 	* @params	int	$id			If given, the id of a single table row to load, if not given or == 0 all entries will be loaded
-	*		bool	$limit		Unknown
-	*		bool	$descending	Unknown
-	*		bool	$edit			Unknown
+	*		bool	$limit		Number of Tourziele to return
+	*		bool	$descending	Order of searching the database, default is ASC
+	*		bool	$edit			If a single Tourziel is selected, should it be edited?
 	*
 	* @return	array		Either a single row or an array of arrays containing every row from the table
 	*
 	*/
-//	public function get_events($limit = false, $descending = false, $id = 0, $edit = false)
 	public function get_events($id = 0, $limit = false, $descending = false, $edit = false)
 	{
 		$events = [];
+		$sql = 'SELECT tz.*,
+				ct.country_id, ct.country_name, ct.country_image,
+				rt.region_id, rt.region_name,
+				kt.cat_id, kt.cat_name,
+				wt.wlan_id, wt.wlan_name
+
+				FROM ' . $this->tourziel_table . ' tz
+				JOIN ' . $this->tourziel_country_table . ' ct
+				ON tz.country = ct.country_id
+				JOIN ' . $this->tourziel_region_table . ' rt
+				ON tz.region = rt.region_id
+				JOIN ' . $this->tourziel_cats_table . ' kt
+				ON tz.category = kt.cat_id
+				JOIN ' . $this->tourziel_wlan_table . ' wt
+				ON tz.wlan = wt.wlan_id ';
+
 		if ($id == 0)
 		{
 			if ($limit == false)
 			{
-				$sql_array = [
-					'SELECT'	=> '*',
-					'FROM'		=> [$this->tourziel_table => 'c'],
-					'ORDER_BY'	=> 'post_time',
-				];
-
-				$sql = $this->db->sql_build_query('SELECT', $sql_array);
+				$sql .= 'ORDER_BY post_time';
 				$result = $this->db->sql_query($sql);
 
 				while ($row = $this->db->sql_fetchrow($result))
@@ -119,22 +125,13 @@ class mot_tzv_events
 			{
 				if ($descending == true)
 				{
-					$sql_array = [
-						'SELECT'	=> '*',
-						'FROM'		=> [$this->tourziel_table => 'c'],
-						'ORDER_BY'	=> 'post_time DESC',
-					];
+					$sql .= 'ORDER BY post_time DESC';
 				}
 				else
 				{
-					$sql_array = [
-						'SELECT'	=> '*',
-						'FROM'		=> [$this->tourziel_table => 'c'],
-						'ORDER_BY'	=> 'post_time ASC',
-					];
+					$sql .= 'ORDER BY post_time ASC';
 				}
 
-				$sql = $this->db->sql_build_query('SELECT', $sql_array);
 				$result = $this->db->sql_query_limit($sql, $limit);
 
 				while ($row = $this->db->sql_fetchrow($result))
@@ -142,26 +139,12 @@ class mot_tzv_events
 					$events[] = $row;
 				}
 			}
+			$this->db->sql_freeresult($result);
 			return $events;
 		}
 		else
 		{
-			$sql = 'SELECT tz.*,
-					ct.country_id, ct.country_name, ct.country_image,
-					rt.region_id, rt.region_name,
-					kt.cat_id, kt.cat_name,
-					wt.wlan_id, wt.wlan_name
-
-					FROM ' . $this->tourziel_table . ' tz
-					JOIN ' . $this->tourziel_country_table . ' ct
-					ON tz.country = ct.country_id
-					JOIN ' . $this->tourziel_region_table . ' rt
-					ON tz.region = rt.region_id
-					JOIN ' . $this->tourziel_cats_table . ' kt
-					ON tz.category = kt.cat_id
-					JOIN ' . $this->tourziel_wlan_table . ' wt
-					ON tz.wlan = wt.wlan_id
-					WHERE tz.id = ' . (int) $id;
+			$sql .= 'WHERE tz.id = ' . (int) $id;
 
 			$result = $this->db->sql_query($sql);
 			$event = $this->db->sql_fetchrow($result);
@@ -175,6 +158,7 @@ class mot_tzv_events
 				$event['message'] = generate_text_for_display($event['message'], $event['bbcode_uid'], $event['bbcode_bitfield'], $event['bbcode_options'],
 				$event['enable_magic_url'], $event['enable_smilies'], $event['enable_bbcode']);
 			}
+			$this->db->sql_freeresult($result);
 			return $event;
 		}
 	}
@@ -280,7 +264,7 @@ class mot_tzv_events
 		{
 			$this->template->assign_block_vars('country_info', [
 				'COUNTRY_NAME' => $row['country_name'],
-				'COUNTRY_IMG'  => $this->path_helper->get_web_root_path() . 'ext/mot/tzv/images/flag/' . $row['country_image'],
+				'COUNTRY_IMG'  => $this->tzv_flags_url . $row['country_image'],
 				'COUNTRY_ID'   => $row['country_id'],
 			]);
 		}

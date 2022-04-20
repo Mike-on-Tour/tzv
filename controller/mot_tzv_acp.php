@@ -80,6 +80,8 @@ class mot_tzv_acp
 		$this->md_manager = $this->phpbb_extension_manager->create_extension_metadata_manager('mot/tzv');
 		$this->tzv_version = $this->md_manager->get_metadata('version');
 		$this->ext_path = $this->phpbb_extension_manager->get_extension_path('mot/tzv', true);
+
+		$this->tzv_flags_url = $this->config['mot_tzv_flags_url'];
 	}
 
 	/*-------------------------------------
@@ -330,7 +332,7 @@ class mot_tzv_acp
 		{
 			$this->template->assign_block_vars('country', [
 				'COUNTRY_NAME'	=> $row['country_name'],
-				'COUNTRY_IMG'	=> $this->ext_path . 'images/flag/' . $row['country_image'],
+				'COUNTRY_IMG'	=> $this->tzv_flags_url . $row['country_image'],
 				'COUNTRY_ID'	=> $row['country_id'],
 				'COUNTRY_COUNT'	=> array_key_exists($row['country_id'], $country_count) ? $country_count[$row['country_id']] : '-',
 				'U_EDIT'		=> $this->u_action . "&amp;id={$row['country_id']}&amp;action=edit",

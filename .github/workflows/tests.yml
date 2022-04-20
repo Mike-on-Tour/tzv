@@ -25,9 +25,10 @@ jobs:
         strategy:
             matrix:
                 include:
-                    - php: '7.1'
-                      db: "none"
-                      NOTESTS: 1
+                    - php: '7.2'
+                    - php: '7.3'
+                    - php: '7.4'
+                    - php: '8.0'
 
         name: PHP ${{ matrix.php }} - ${{ matrix.db }}
 
