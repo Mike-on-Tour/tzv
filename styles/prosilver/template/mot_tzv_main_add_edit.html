@@ -8,7 +8,7 @@
 			{% INCLUDEJS './assets/javascript/editor.js' %}
 			{% set INCLUDED_MOT_TZV_JS = true %}
 		{% endif %}
- 
+
 		<div class="forabg">
 			<div class="inner">
 				<ul class="topiclist">
@@ -37,6 +37,7 @@
 										<a href="{{ MOT_TZV_INDEX_LINK }}" class="button icon-button reply-icon" title="{{ lang('MOT_TZV_MAIN_INDEX') }}">{{ lang('MOT_TZV_MAIN_INDEX') }}</a>
 									{% endif %}
 									{% if MOT_TZV_LIST_AUTH %}
+										<a href="{{ MOT_TZV_MAP_LINK }}" class="button icon-button reply-icon" title="{{ lang('MOT_TZV_MAIN_MAP') }}">{{ lang('MOT_TZV_MAIN_MAP') }}</a>
 										<a href="{{ MOT_TZV_LIST_LINK }}" class="button icon-button reply-icon" title="{{ lang('MOT_TZV_MAIN_VIEW') }}">{{ lang('MOT_TZV_MAIN_VIEW') }}</a>
 										<a href="{{ MOT_TZV_SEARCH_LINK }}" class="button icon-button reply-icon" title="{{ lang('MOT_TZV_MAIN_SEARCH') }}">{{ lang('MOT_TZV_MAIN_SEARCH') }}</a>
 									{% endif %}
@@ -51,203 +52,7 @@
 								</div>
 							</div>
 
-							<h2 >
-							{% if MOT_TZV_CREATE_TZ %}
-								{{ lang('MOT_TZV_MAIN_ADD') }}
-							{% else %}
-								{{ lang('MOT_TZV_MAIN_EDIT') }}
-							{% endif %}
-							</h2>
-
-							<form id="mot_tzv_add_form" method="post" action="{{ S_CREATE_ACTION }}" enctype="multipart/form-data">
-								<div class="panel" id="postingbox">
-									<fieldset class="fields1">
-
-										<div class="rules">
-											{% if MOT_TZV_CREATE_TZ %}
-												{{ lang('MOT_TZV_HWTEXT_ADD') }}
-											{% else %}
-												{{ lang('MOT_TZV_HWTEXT_EDIT') }}
-											{% endif %}
-										</div>
-
-										{% if MOT_TZV_COORD_MANDATORY %}
-											<div class="rules">
-												{{ lang('MOT_TZV_HWTEXT_GPS') }}
-											</div>
-										{% endif %}
-
-										<table style="width: 95%">
-											<tr>
-												<td width="90%"> 
-													<table>
-														<tr>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-														</tr>
-														<tr>
-															<td>{{ lang('MOT_TZV_LISTEN_NAME') }}</td>
-															<td>&nbsp; <input type="text" id="mot_tzv_name" name="mot_tzv_name" size="45" value="{{ MOT_TZV_POST_NAME }}" class="inputbox autowidth" />   </td>
-														</tr>
-														<tr>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-														</tr>
-														<tr>
-															<td>{{ lang('MOT_TZV_LISTEN_LAND') }}</td>
-															<td>&nbsp; {% INCLUDE '@mot_tzv/mot_tzv_select_add_country.html' %}
-																{% if MOT_TZV_CREATE_TZ %}	
-																	{{ lang('MOT_TZV_AUSWAHL') }}
-																{% else %}
-																	{{ lang('MOT_TZV_EDIT_AUSWAHL') }}
-																{% endif %}
-															</td>
-														</tr>
-														<tr>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-														</tr>
-														<tr>
-															<td>{{ lang('MOT_TZV_LISTEN_REGION') }}</td>
-															<td>&nbsp; {% INCLUDE '@mot_tzv/mot_tzv_select_add_region.html' %}
-																{% if MOT_TZV_CREATE_TZ %}	
-																	{{ lang('MOT_TZV_AUSWAHL') }}
-																{% else %}
-																	{{ lang('MOT_TZV_EDIT_AUSWAHL') }}
-																{% endif %}
-															</td>
-														</tr>
-														<tr>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-														</tr>
-														<tr>
-															<td>{{ lang('MOT_TZV_LISTEN_CATEGORY') }}</td>
-															<td>&nbsp; {% INCLUDE '@mot_tzv/mot_tzv_select_add_category.html' %}
-																{% if MOT_TZV_CREATE_TZ %}	
-																	{{ lang('MOT_TZV_AUSWAHL') }}
-																{% else %}
-																	{{ lang('MOT_TZV_EDIT_AUSWAHL') }}
-																{% endif %}
-															</td>
-														</tr>
-														<tr>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-														</tr>
-														<tr>
-															<td>{{ lang('MOT_TZV_LISTEN_PLZ') }}</td>
-															<td>&nbsp; <input type="text" id="mot_tzv_postalcode" name="mot_tzv_postalcode" size="10" value="{{ MOT_TZV_POST_PLZ }}" class="inputbox autowidth" /></td>
-														</tr>
-														<tr>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-														</tr>
-														<tr>
-															<td>{{ lang('MOT_TZV_LISTEN_ORT') }}</td>
-															<td>&nbsp; <input type="text" id="mot_tzv_city" name="mot_tzv_city" size="45" value="{{ MOT_TZV_POST_ORT }}" class="inputbox autowidth" /></td>
-														</tr>
-														<tr>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-														</tr>
-														<tr>
-															<td>{{ lang('MOT_TZV_LISTEN_STRASSE') }}</td>
-															<td>&nbsp; <input type="text" id="mot_tzv_street" name="mot_tzv_street" size="45" value="{{ MOT_TZV_POST_STREET }}" class="inputbox autowidth" /></td>
-														</tr>
-														<tr>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-														</tr>
-														<tr>
-															<td>{{ lang('MOT_TZV_LISTEN_TELEFON') }}</td>
-															<td>&nbsp; <input type="text" id="mot_tzv_telephone" name="mot_tzv_telephone" size="45" value="{{ MOT_TZV_POST_TELEPHONE }}" class="inputbox autowidth" /></td>
-														</tr>
-														<tr>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-														</tr>
-														<tr>
-															<td>{{ lang('MOT_TZV_LISTEN_EMAIL') }}</td>
-															<td>&nbsp; <input type="text" id="mot_tzv_email" name="mot_tzv_email" size="45" value="{{ MOT_TZV_POST_EMAIL }}" class="inputbox autowidth" /></td>
-														</tr>
-														<tr>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-														</tr>
-														<tr>
-															<td>{{ lang('MOT_TZV_LISTEN_HOMEPAGE') }}</td>
-															<td>
-																&nbsp; <input type="text" id="mot_tzv_homepage" name="mot_tzv_homepage" size="45" value="{{ MOT_TZV_POST_HOMEPAGE }}" class="inputbox autowidth" />
-																{{ lang('MOT_TZV_LISTEN_HOMEPAGE_HINT') }}
-															</td>
-														</tr>
-														<tr>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-														</tr>
-														<tr>
-															<td>{{ lang('MOT_TZV_LISTEN_MAPS_LAT') }}</td>
-															<td>&nbsp; <input type="text" id="mot_tzv_maps_lat" name="mot_tzv_maps_lat" size="15" value="{{ MOT_TZV_POST_MAPS_LAT }}" class="inputbox autowidth" /></td>
-														</tr>
-														<tr>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-														</tr>
-														<tr>
-															<td>{{ lang('MOT_TZV_LISTEN_MAPS_LON') }}</td>
-															<td>&nbsp; <input type="text" id="mot_tzv_maps_lon" name="mot_tzv_maps_lon" size="15" value="{{ MOT_TZV_POST_MAPS_LON }}" class="inputbox autowidth" /></td>
-														</tr>
-														<tr>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-														</tr>
-														<tr>
-															<td>{{ lang('MOT_TZV_LISTEN_WLAN') }}</td>
-															<td>&nbsp; {% INCLUDE '@mot_tzv/mot_tzv_select_add_wlan.html' %}
-																{% if MOT_TZV_CREATE_TZ %}	
-																	{{ lang('MOT_TZV_AUSWAHL') }}
-																{% else %}
-																	{{ lang('MOT_TZV_EDIT_AUSWAHL') }}
-																{% endif %}
-															</td>
-														</tr>
-													</table>
-												</td>
-											</tr>
-										</table>
-
-										<br><br>
-
-										{% INCLUDE 'posting_buttons.html' %}
-
-										<div class="smiliebox">
-											{% if loops.smiley|length %}
-												<strong>{{ lang('SMILIES') }}</strong><br>
-												{% for smiley in smiley %}
-													<a href="#" onclick="insert_text('{{ smiley.A_SMILEY_CODE }}', true); return false;"><img src="{{ smiley.SMILEY_IMG }}" width="{{ smiley.SMILEY_WIDTH }}" height="{{ smiley.SMILEY_HEIGHT }}" alt="{{ smiley.SMILEY_CODE }}" title="{{ smiley.SMILEY_DESC }}" /></a>
-												{% endfor %}
-											{% endif %}
-										</div>
-
-										{{ lang('MOT_TZV_MESSAGE_INFO') }}
-										<div id="message-box">
-											<textarea name="mot_tzv_message" id="mot_tzv_message" rows="10" cols="20" onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);" class="inputbox">{{ MOT_TZV_MESSAGE }}</textarea>
-										</div>
-									</fieldset>
-
-									<div class="rules">
-										{{ lang('MOT_TZV_HWTEXT_SEND') }}
-									</div>
-
-									<fieldset class="submit-buttons">
-										{{ S_HIDDEN_FIELDS }}
-										<input type="submit" accesskey="s" name="submit" value="{{ lang('SUBMIT') }}" class="button1" />
-									</fieldset>
-
-									{{ S_FORM_TOKEN }}
-								</div>
-							</form>
+							{% INCLUDE '@mot_tzv/mot_tzv_add_edit_form.html' %}
 						</div>
 					</li>
 				</ul>

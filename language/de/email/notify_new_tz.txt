@@ -1,0 +1,14 @@
+Subject: Neues Tourziel auf "{SITENAME}"
+
+Hallo {USERNAME},
+
+du bekommst diese eMail, weil es auf "{SITENAME}" ein neues Tourziel gibt:
+Das Mitglied "{CREATOR}" hat ein neues Tourziel mit dem Namen "{TZ_NAME}" erstellt.
+
+Wenn du dieses Tourziel ansehen möchtest, dann klicke auf diesen Link:
+
+{U_DETAILVIEW}
+
+Wenn du zukünftig diese Benachrichtigungs-Mail nicht mehr erhalten möchtest, kannst du dies in den Benachrichtigungseinstellungen in deinem Benutzerprofil einstellen.
+
+{EMAIL_SIG}

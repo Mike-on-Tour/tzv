@@ -2,7 +2,8 @@
 /**
 *
 * @package phpBB Extension [Adressverwaltung - Tourziele]
-* @copyright (c) 2014-2021 waldkatze - http://www.polarbiker-oberlausitz.de/mod_demo/
+* @copyright (c) 2014-2021 waldkatze
+* @copyright (c) 2022 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 * @language file [deutsch / Du]
@@ -21,145 +22,168 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, [
 
 	// Titel
-	'MOT_TZV_TOURZIEL'					=> 'Tourziele',
-	'MOT_TZV_TOURZIEL_MAIN'				=> 'Motorrad &bull;&nbsp;Tourziele Datenbank',
+	'MOT_TZV_TOURZIEL'					=> 'Tour destinations',
+	'MOT_TZV_TOURZIEL_MAIN'				=> 'Motorcycle &bull;&nbsp;Tour destinations database',
 
 	// Forum Index
-	'MOT_TZV_NEW_EVENT'					=> 'Neuester Tourziel Eintrag',
-	'MOT_TZV_NEW_FLAG'					=> 'Flagge',
-	'MOT_TZV_NEW_LAND'					=> 'Land',
+	'MOT_TZV_NEW_EVENT'					=> 'Latest Tour destination item',
+	'MOT_TZV_NEW_FLAG'					=> 'Flag',
+	'MOT_TZV_NEW_LAND'					=> 'Country',
 	'MOT_TZV_NEW_REGION'				=> 'Region',
-	'MOT_TZV_NEW_TIME'					=> 'Eingetragen am',
-	'MOT_TZV_NEW_AUTHOR'				=> 'Eintrag von',
-	'MOT_TZV_NO_NEW_EVENT'				=> 'Kein Eintrag gefunden.',
-	'MOT_TZV_TOURZIEL_TOTAL'			=> '&bull;&nbsp;Eingetragene Tourziele insgesamt',
+	'MOT_TZV_NEW_TIME'					=> 'Created on',
+	'MOT_TZV_NEW_AUTHOR'				=> 'Created by',
+	'MOT_TZV_NO_NEW_EVENT'				=> 'No item found.',
+	'MOT_TZV_TOURZIEL_TOTAL'			=> '&bull;&nbsp;Total number of tour destinations',
 
 	// [Buttons - Links / Titel Texte]
-	'MOT_TZV_MAIN_INDEX'				=> 'Tourziel Home',
-	'MOT_TZV_MAIN_ADD'					=> 'Neuer Eintrag',
-	'MOT_TZV_MAIN_VIEW'					=> 'Tourziel Liste',
-	'MOT_TZV_MAIN_VIEW_NEW'				=> 'Neuester Eintrag',
-	'MOT_TZV_MAIN_MAPS'					=> 'Tourziel Karte',	// aktuell unbenutzt
-	'MOT_TZV_MAIN_SEARCH'				=> 'Tourziel Suche',
-	'MOT_TZV_MAIN_SUPPORT'				=> 'Tourziel Support',
-	'MOT_TZV_SUPPORT_FORUM'				=> 'Support Forum',
+	'MOT_TZV_MAIN_INDEX'				=> 'Tour destination index',
+	'MOT_TZV_MAIN_ADD'					=> 'New item',
+	'MOT_TZV_MAIN_VIEW'					=> 'Tour destination list',
+	'MOT_TZV_MAIN_VIEW_NEW'				=> 'Latest item',
+	'MOT_TZV_MAIN_MAP'					=> 'Tour destination map',
+	'MOT_TZV_MAIN_SEARCH'				=> 'Tour destination search',
+	'MOT_TZV_MAIN_SUPPORT'				=> 'Tour destination support',
+	'MOT_TZV_SUPPORT_FORUM'				=> 'Support forum',
 
-	'MOT_TZV_RETURN_TOURZIEL'			=> 'Zurück zum Index',
+	'MOT_TZV_RETURN_TOURZIEL'			=> 'Back to index',
 
 	// PAGINATION
 	'MOT_TZV_POSTS_COUNT'				=> [
-		0	=> 'kein Eintrag',
-		1	=> '%d Eintrag',
-		2	=> '%d Einträge',
+		0	=> 'no items',
+		1	=> '%d item',
+		2	=> '%d items',
 	],
 
 	// [Detailansicht]
-	'MOT_TZV_TOURZIEL_DETAIL'			=> 'Detailansicht',
-	'MOT_TZV_TOURZIEL_DETAIL_CLICK'		=> 'Klicke hier für Detailansicht',
-	'MOT_TZV_TOURZIEL_USER_TIPP'		=> 'Hinweis zum Tourziel',
-	'MOT_TZV_TOURZIEL_PLZ_ORT'			=> 'Ort',
-	'MOT_TZV_TOURZIEL_STRASSE_NR'		=> 'Straße',
+	'MOT_TZV_TOURZIEL_DETAIL'			=> 'Detailed view',
+	'MOT_TZV_TOURZIEL_DETAIL_CLICK'		=> 'Click for detailed view',
+	'MOT_TZV_TOURZIEL_USER_TIPP'		=> 'Item description',
+	'MOT_TZV_TOURZIEL_PLZ_ORT'			=> 'Postal code / City',
+	'MOT_TZV_TOURZIEL_STRASSE_NR'		=> 'Street address',
 	'MOT_TZV_TOURZIEL_GPS_DAT'			=> 'GPS',
-	'MOT_TZV_DATE_ADD_EDIT'				=> '<br><b>Eingetragen am</b>',
-	'MOT_TZV_OPENSTREETMAP_INFO'		=> 'Klick unten auf <strong>Größere Karte anzeigen</strong>.<br><br>',
-	'MOT_TZV_KURVIGER_INFO'				=> 'Übergabe der GPS-Daten an den Motorradtourenplaner https://kurviger.de',
-	'MOT_TZV_KURVIGER_ADD'				=> 'Datenübergabe',
+	'MOT_TZV_DATE_ADD_EDIT'				=> '<br><b>Created on</b>',
+	'MOT_TZV_OPENSTREETMAP_INFO'		=> 'Click on <strong>View larger map</strong> underneath the map.<br><br>',
+	'MOT_TZV_KURVIGER_INFO'				=> 'Hand GPS data over to route planner https://kurviger.de',
+	'MOT_TZV_KURVIGER_ADD'				=> 'Data transfer',
 
 	// [Moderator-Funktion]
-	'MOT_TZV_TOURZIEL_MODERATE'			=> 'Tourziel Moderator',
-	'MOT_TZV_LAST_5_EVENTS'				=> 'Neueste 5 Einträge',
-	'MOT_TZV_NO_EVENTS'					=> 'Kein Eintrag gefunden',
+	'MOT_TZV_TOURZIEL_MODERATE'			=> 'Tour destination moderator',
+	'MOT_TZV_LAST_5_EVENTS'				=> '5 latest items',
+	'MOT_TZV_NO_EVENTS'					=> 'No items found',
 
 	// [Index]
 	'MOT_TZV_COUNT_TOTAL_DEST'			=> [
-		0	=> 'Es ist <strong>kein</strong> Tourziel in der Datenbank.',
-		1	=> 'Insgesamt <strong>%1$d</strong> Tourziel in der Datenbank.',
-		2	=> 'Insgesamt <strong>%1$d</strong> Tourziele in der Datenbank.',
+		0	=> 'Currently <strong>no</strong> items are listed in the database.',
+		1	=> 'Currently <strong>%1$d</strong> item is listed in the database.',
+		2	=> 'Currently <strong>%1$d</strong> items are listed in the database.',
 	],
-	'MOT_TZV_COUNTRY_EINTRAG'			=> 'Eingetragene Länder',
-	'MOT_TZV_MAINNEWS_INFO'				=> '&bull;&nbsp;&nbsp;Erweiterung komplett überarbeitet.<br>
-											&bull;&nbsp;&nbsp;Datenausgabe auch mit Karte.<br>
-											&bull;&nbsp;&nbsp;Routenplanung zum Tourziel.<br>
-											&bull;&nbsp;&nbsp;Ansicht mit GOOGLE-Streetview.<br>',
-	'MOT_TZV_NUTZUNG_MAPS'				=> 'Nutzungsbedingungen Google Maps',
+	'MOT_TZV_COUNTRY_EINTRAG'			=> 'Registered countries',
+	'MOT_TZV_MAINNEWS_INFO'				=> '&bull;&nbsp;&nbsp;Display all tour destinations on a general map.<br>
+											&bull;&nbsp;&nbsp;A new UCP tab to list all tour destinations of the respective user.<br>
+											&bull;&nbsp;&nbsp;Choice of a detailed or more general (table) display of items within the Tour destination list and the search result.<br>
+											&bull;&nbsp;&nbsp;Notification of moderators in case of newly created, edited or deleted items.<br>
+											&bull;&nbsp;&nbsp;Corrected the display of the OSM detail map.<br>',
+	'MOT_TZV_NUTZUNG_MAPS'				=> 'Google Maps Terms of Use',
+
+	// Map
+	'MOT_TZV_STREET_DESC'				=> 'Street map',
+	'MOT_TZV_TOPO_DESC'					=> 'Topographical map',
+	'MOT_TZV_SAT_DESC'					=> 'Satellite image',
+	'MOT_TZV_MAP_LEGEND_TEXT'			=> 'Toggle mousewheel zoom by clicking on the map.<br>
+											<i>Click on a marker to show the detailed view in a new browser tab.</i>',
+	'MOT_TZV_MARKER_COUNT'				=> [
+		0	=> 'Of the existing items none are shown on the map.',
+		1	=> 'Of the existing items %1$d item is shown on the map.',
+		2	=> 'Of the existing items %1$d items are shown on the map.',
+	],
+	'MOT_TZV_MAP_LANG'					=> 'en',	// set according to this language
+	'MOT_TZV_OSM_LARGER_MAP'			=> 'View larger map',
 
 	// [Eintragen / Ändern]
-	'MOT_TZV_HWTEXT_ADD'				=> '&bull;&nbsp;&nbsp;Mit der Suchfunktion kannst du vor neuen Eintrag prüfen, ob das Ziel schon in der Datenbank vorhanden ist.<br>
-											&bull;&nbsp;&nbsp;Deine Eingaben <b>müssen nicht vollständig sein.</b> Du kannst <b>deine Eingaben</b> jederzeit ändern oder ergänzen.<br>
-											&bull;&nbsp;&nbsp;<b>Tourziel / PLZ  / Ort / Text zum Tourziel</b> sind <b>immer Pflichtfelder !</b>',
+	'MOT_TZV_HWTEXT_ADD'				=> '&bull;&nbsp;&nbsp;Please use the search function to check whether an identical item is already in the database.<br>
+											&bull;&nbsp;&nbsp;You do not need <b>to complete</b> this form. You can come back later in order to complete or edit your input.<br>
+											&bull;&nbsp;&nbsp;But: <b>Item name / Postal code  / City / Item description</b> are <b>mandatory</b> in any case!',
 
-	'MOT_TZV_HWTEXT_EDIT'				=> '&bull;&nbsp;&nbsp; <b>Hinweis Daten ändern.</b><br>
-											&bull;&nbsp;&nbsp; Bei Daten ändern <b>müssen ggf. auch die Select-Boxen neu</b> ausgewählt werden !<br>
-											&bull;&nbsp;&nbsp;<b>Tourziel / PLZ  / Ort / Text zum Tourziel</b> sind <b>immer Pflichtfelder !</b>',
+	'MOT_TZV_HWTEXT_EDIT'				=> '&bull;&nbsp;&nbsp; <b>Please note:</b><br>
+											&bull;&nbsp;&nbsp; While editing <b>you might want to make another choice</b> from the select boxes!<br>
+											&bull;&nbsp;&nbsp;<b>Item name / Postal code  / City / Item description</b> are <b>mandatory</b> in any case!',
 
-	'MOT_TZV_HWTEXT_GPS'				=> 'Kartenfunktionen sind aktiviert, <strong>Koordinaten zum Tourziel sind ebenfalls Pflichtfelder !</strong><br>
-											&bull;&nbsp;&nbsp; GPS-Daten immer mit <b>Punkt</b>, nicht mit <b>Komma</b> eintragen ! <br>
-											&bull;&nbsp;&nbsp; Beispiel richtig: <b>51.055257</b> | Beispiel falsch: <b>51,055257</b><br>
-											&bull;&nbsp;&nbsp; Die Karte kann nur mit korrekten GPS-Daten angezeigt werden.',
+	'MOT_TZV_HWTEXT_GPS'				=> 'Map functions are enabled, <strong>input of coordinates is mandatory!</strong><br>
+											&bull;&nbsp;&nbsp; Please enter coordinates with a <b>decimal point</b>, not with a <b>comma</b>! <br>
+											&bull;&nbsp;&nbsp; Correct: <b>51.055257</b> | Incorrect: <b>51,055257</b><br>
+											&bull;&nbsp;&nbsp; The item can only be displayed on the map if correct coordinates are entered.',
 
-	'MOT_TZV_HWTEXT_SEND'				=> '&bull;&nbsp;&nbsp; <b>Prüfe vor Absenden noch einmal alle Eingaben.</b>',
-	'MOT_TZV_TOURZIEL_INVALID'			=> 'Ein Tourziel-Eintrag mit diesem Namen existiert bereits! Alle Eingaben wurden verworfen!',
+	'MOT_TZV_HWTEXT_SEND'				=> '&bull;&nbsp;&nbsp; <b>Please check your input before submitting.</b>',
+	'MOT_TZV_TOURZIEL_INVALID'			=> 'An item with this name already exists! Your input was rejected!',
 
 	// Select-Boxen
-	'MOT_TZV_AUSWAHL'					=> 'Bitte auswählen',
-	'MOT_TZV_EDIT_AUSWAHL'				=> 'Bei Ändern ggf. neu auswählen !',
+	'MOT_TZV_AUSWAHL'					=> 'Please choose',
+	'MOT_TZV_EDIT_AUSWAHL'				=> 'Please choose if necessary!',
 
 	// Error eintragen / ändern
-	'MOT_TZV_ERROR'						=> 'Fehler!',
-	'MOT_TZV_ERROR_NAME'				=> 'Kein Tourziel-Name eingetragen!',
-	'MOT_TZV_ERROR_POSTALCODEZ'			=> 'Keine PLZ eingetragen!',
-	'MOT_TZV_ERROR_CITY'				=> 'Kein Ort eingetragen!',
-	'MOT_TZV_ERROR_LAT'					=> 'Breitengrad darf nicht leer oder Null sein!',
-	'MOT_TZV_ERROR_LON'					=> 'Längengrad darf nicht leer oder Null sein!',
-	'MOT_TZV_ERROR_MESSAGE'				=> 'Kein Text zum Tourziel eingetragen!',
+	'MOT_TZV_ERROR'						=> 'Error!',
+	'MOT_TZV_ERROR_NAME'				=> 'You must enter a name for this item!',
+	'MOT_TZV_ERROR_POSTALCODEZ'			=> 'You must enter a postal code for this item!',
+	'MOT_TZV_ERROR_CITY'				=> 'You must enter a city for this item!',
+	'MOT_TZV_ERROR_LAT'					=> 'Latitude must not be empty or zero!',
+	'MOT_TZV_ERROR_LON'					=> 'Longitude must not be empty or zero!',
+	'MOT_TZV_ERROR_MESSAGE'				=> 'You must enter a description for this item!',
 
-	'MOT_TZV_MAIN_EDIT'					=> 'Eintrag ändern',
+	'MOT_TZV_MAIN_EDIT'					=> 'Edit item',
 	'MOT_TZV_LISTEN_ID'					=> '<b>ID</b>',
-	'MOT_TZV_LISTEN_NAME'				=> 'Tourziel',
-	'MOT_TZV_LISTEN_LAND'				=> 'Land',
-	'MOT_TZV_LISTEN_CATEGORY'			=> 'Kategorie',
-	'MOT_TZV_LISTEN_WLAN'				=> 'WLAN',
+	'MOT_TZV_LISTEN_NAME'				=> 'Item name',
+	'MOT_TZV_LISTEN_LAND'				=> 'Country',
 	'MOT_TZV_LISTEN_REGION'				=> 'Region',
-	'MOT_TZV_LISTEN_PLZ'				=> 'PLZ',
-	'MOT_TZV_LISTEN_ORT'				=> 'Ort',
-	'MOT_TZV_LISTEN_STRASSE'			=> 'Straße / Nr',
-	'MOT_TZV_LISTEN_TELEFON'			=> 'Telefon',
-	'MOT_TZV_LISTEN_EMAIL'				=> 'E-Mail',
+	'MOT_TZV_LISTEN_CATEGORY'			=> 'Category',
+	'MOT_TZV_LISTEN_WLAN'				=> 'WLAN',
+	'MOT_TZV_LISTEN_PLZ'				=> 'Postal code',
+	'MOT_TZV_LISTEN_ORT'				=> 'City',
+	'MOT_TZV_LISTEN_STRASSE'			=> 'Street address',
+	'MOT_TZV_LISTEN_TELEFON'			=> 'Telephone',
+	'MOT_TZV_LISTEN_EMAIL'				=> 'E-mail',
 	'MOT_TZV_LISTEN_HOMEPAGE'			=> 'Homepage',
-	'MOT_TZV_LISTEN_HOMEPAGE_HINT'		=> 'Bitte komplette Internet-Adresse eintragen (z.B.: http(s)://www.seite.de)',
+	'MOT_TZV_LISTEN_HOMEPAGE_HINT'		=> 'Please enter the entire URL (e.g.: http(s)://www.website.com)',
 	'MOT_TZV_LISTEN_GPS'				=> 'GPS',
-	'MOT_TZV_LISTEN_MAPS_LAT'			=> 'GPS Breitengrad',
-	'MOT_TZV_LISTEN_MAPS_LON'			=> 'GPS Längengrad',
-	'MOT_TZV_LISTEN_USER'				=> 'Eintrag von',
-	'MOT_TZV_MESSAGE_INFO'				=> '<br><b>Text zum Tourziel</b>',
+	'MOT_TZV_LISTEN_MAPS_LAT'			=> 'GPS Latitude',
+	'MOT_TZV_LISTEN_MAPS_LON'			=> 'GPS Longitude',
+	'MOT_TZV_LISTEN_USER'				=> 'Created by',
+	'MOT_TZV_MESSAGE_INFO'				=> '<br><b>Item description</b>',
 
 	// Messages
-	'MOT_TZV_EVENT_ADD_SUCCESSFUL'		=> 'Neues Tourziel erfolgreich eingetragen.',
-	'MOT_TZV_EVENT_EDIT_SUCCESSFUL'		=> 'Tourziel erfolgreich geändert.',
-	'MOT_TZV_EVENT_DELETE_SUCCESSFUL'	=> 'Tourziel erfolgreich gelöscht.',
-	'MOT_TZV_EVENT_NOT_DELETED'			=> 'Tourziel nicht gelöscht.',
+	'MOT_TZV_EVENT_ADD_SUCCESSFUL'		=> 'Successfully stored the new item in the database.',
+	'MOT_TZV_EVENT_EDIT_SUCCESSFUL'		=> 'Successfully edited the item.',
+	'MOT_TZV_EVENT_DELETE_SUCCESSFUL'	=> 'Successfully deleted the item.',
+	'MOT_TZV_EVENT_NOT_DELETED'			=> 'Item was not deleted.',
 
-	'MOT_TZV_RETURN_EVENT'				=> 'Zurück zum Tourziel',
-	'MOT_TZV_VIEW_EVENT'				=> 'Zur Detailanzeige',
-	'MOT_TZV_VIEW_EVENT_EDIT'			=> 'Ereignis anzeigen / bearbeiten',
-	'MOT_TZV_EVENT_DELETE_CONFIRM'		=> 'Möchtest du den Eintrag mit dem Namen <strong>%s</strong> wirklich löschen ?',
+	'MOT_TZV_RETURN_EVENT'				=> 'Back to this item',
+	'MOT_TZV_VIEW_EVENT'				=> 'To the detailed view',
+	'MOT_TZV_DETAIL_VIEW_LINK'			=> 'Please click on the item name for a detailed view',
+	'MOT_TZV_VIEW_EVENT_EDIT'			=> 'Display / edit item',
+	'MOT_TZV_EVENT_DELETE_CONFIRM'		=> 'Do you really want to delete the item named <strong>%s</strong>?',
 
 	// [Suchfunktion]
-	'MOT_TZV_SEARCH_SELECT'				=> 'Suche nach',
-	'MOT_TZV_SEARCH_AUSWAHL'			=> 'Wähle ein Feld aus und klicke Button Suchen.',
-	'MOT_TZV_SEARCH_TEXT'				=> 'Suchbegriff, PLZ oder Ort eingeben. Klick Button Suchen.',
-	'MOT_TZV_SEARCH_TOURZIEL'			=> 'Suche nach Tourziel',
-	'MOT_TZV_SEARCH_PLZ'				=> 'Suche nach PLZ',
-	'MOT_TZV_SEARCH_ORT'				=> 'Suche nach Ort',
-	'MOT_TZV_BUTTON_SUCHEN'				=> 'Suchen',
-	'MOT_TZV_SEARCH_FOUND'				=> '<b>Anzahl Einträge gefunden</b>',
+	'MOT_TZV_SEARCH_COUNTRY'			=> 'Search for country',
+	'MOT_TZV_SEARCH_REGION'				=> 'Search for region',
+	'MOT_TZV_SEARCH_CATEGORY'			=> 'Search for category',
+	'MOT_TZV_SEARCH_AUSWAHL'			=> 'Choose from a select box and click on the respective `Search` button.',
+	'MOT_TZV_SEARCH_TEXT'				=> 'Enter your search term into the respective field and click on the `Search` button.',
+	'MOT_TZV_SEARCH_TOURZIEL'			=> 'Search for item name',
+	'MOT_TZV_SEARCH_PLZ'				=> 'Search for postal code',
+	'MOT_TZV_SEARCH_ORT'				=> 'Search for city',
+	'MOT_TZV_BUTTON_SUCHEN'				=> 'Search',
+	'MOT_TZV_SEARCH_FOUND'				=> '<b>Number of found items</b>',
 
 	// Meldungen Berechtigung
-	'MOT_TZV_TOURZIEL_NO_ADD'			=> 'Du bist nicht berechtigt Tourziele einzutragen !',
-	'MOT_TZV_TOURZIEL_NO_EDIT'			=> 'Du bist nicht berechtigt Tourziele zu ändern !',
-	'MOT_TZV_TOURZIEL_NO_VIEW'			=> 'Du bist nicht berechtigt Tourziele zu sehen !',
-	'MOT_TZV_NO_ENTRIES'				=> 'Keine Einträge',
+	'MOT_TZV_TOURZIEL_NO_ADD'			=> 'You do not have the permission to create a new tour destination!',
+	'MOT_TZV_TOURZIEL_NO_EDIT'			=> 'You do not have the permission to edit a tour destination!',
+	'MOT_TZV_TOURZIEL_NO_VIEW'			=> 'You do not have the permission to view Tour destinations!',
+	'MOT_TZV_NO_ENTRIES'				=> 'No items found',
+
+	// Notifications
+	'MOT_TZV_NOTIFY_NEW_TZ'				=> '<strong>New tour destination</strong><br>The user „%2$s“ created a new POI named „<strong>%1$s</strong>“.',
+	'MOT_TZV_NOTIFY_TZ_EDITED'			=> '<strong>Edited tour destionation</strong><br>The user „%2$s“ has edited the tour destination named „<strong>%1$s</strong>“.',
+	'MOT_TZV_NOTIFY_TZ_DELETED'			=> '<strong>Deleted tour destination</strong><br>The user „%2$s“ deleted the tour destination named „<strong>%1$s</strong>“.',
 
 	// TZV-FOOTER
-	'MOT_TZV_FOOTER'					=> 'phpBB Extension <b>Tourzielverwaltung</b> &copy; <a href="https://www.mike-on-tour.com" target="_blank" rel="noopener">Mike-on-Tour</a> ',
+	'MOT_TZV_FOOTER'					=> 'phpBB Extension <b>Tour destinations</b> &copy; <a href="https://www.mike-on-tour.com" target="_blank" rel="noopener">Mike-on-Tour</a> ',
 ]);

@@ -101,6 +101,11 @@ class mot_tzv_acp
 			$this->config->set('mot_tzv_enable', $this->request->variable('tzv_enable', 0));						// Tourziele ein/aus
 			$this->config->set('mot_tzv_admin', $this->request->variable('tzv_admin', 0));							// Tourziele Testmodus Administrator
 
+			$this->config->set('mot_tzv_map_lat', $this->request->variable('mot_tzv_map_lat', ''));					// Breitengrad des Zentrums Übersichtskarte
+			$this->config->set('mot_tzv_map_lon', $this->request->variable('mot_tzv_map_lon', ''));					//Längengrad des Zentrums Übersichtskarte
+			$this->config->set('mot_tzv_map_zoom', $this->request->variable('mot_tzv_map_zoom', 0));				// Zoom der Übersichtskarte
+			$this->config->set('mot_tzv_map_enable_clusters', $this->request->variable('mot_tzv_map_enable_clusters', 0));
+
 			$this->config->set('mot_tzv_maps_enable', $this->request->variable('tzv_maps_enable', 0));				// Karte in Detailansicht ein/aus
 			$this->config->set('mot_tzv_googlemap_enable', $this->request->variable('tzv_googlemap_enable', 0));	// Karte Googlemap
 			$this->config->set('mot_tzv_ostreetmap_enable', $this->request->variable('tzv_ostreetmap_enable', 0));	// Karte Openstreetmap
@@ -116,6 +121,8 @@ class mot_tzv_acp
 			$this->config->set('mot_tzv_maininfo_enable', $this->request->variable('tzv_maininfo', 0));				// Anzeige Versionsneuigkeiten im TZV-Index
 			$this->config->set('mot_tzv_support_enable', $this->request->variable('tzv_support_enable', ''));		// Link Support anzeigen
 			$this->config->set('mot_tzv_support', $this->request->variable('tzv_support', ''));						// Link Support
+			$this->config->set('mot_tzv_latest_tz_view', $this->request->variable('tzv_latest_tz_view', 0));
+			$this->config->set('mot_tzv_list_tz_view', $this->request->variable('tzv_list_tz_view', 0));
 
 			$this->config->set('mot_tzv_acp_rows_per_page', $this->request->variable('tzv_rows_acp', 0));
 			$this->config->set('mot_tzv_rows_per_page', $this->request->variable('tzv_rows_front', 0));
@@ -127,6 +134,11 @@ class mot_tzv_acp
 			'ACP_MOT_TZV_VERSION'			=> $this->language->lang('ACP_MOT_TZV_VERSION', $this->tzv_version),
 			'ACP_MOT_TZV_ENABLE'			=> $this->config['mot_tzv_enable'],
 			'ACP_MOT_TZV_ADMIN'				=> $this->config['mot_tzv_admin'],
+
+			'ACP_MOT_TZV_LAT'				=> $this->config['mot_tzv_map_lat'],
+			'ACP_MOT_TZV_LON'				=> $this->config['mot_tzv_map_lon'],
+			'ACP_MOT_TZV_ZOOM'				=> $this->config['mot_tzv_map_zoom'],
+			'ACP_MOT_TZV_MAP_CLUSTERS'		=> $this->config['mot_tzv_map_enable_clusters'],
 
 			'ACP_MOT_TZV_MAPS_ENABLE'		=> $this->config['mot_tzv_maps_enable'],
 			'ACP_MOT_TZV_GOOGLEMAP_ENABLE'	=> $this->config['mot_tzv_googlemap_enable'],
@@ -143,6 +155,8 @@ class mot_tzv_acp
 			'ACP_MOT_TZV_MAININFO'			=> $this->config['mot_tzv_maininfo_enable'],
 			'ACP_MOT_TZV_SUPPORT_ENABLE'	=> $this->config['mot_tzv_support_enable'],
 			'ACP_MOT_TZV_SUPPORT'			=> $this->config['mot_tzv_support'],
+			'ACP_MOT_TZV_LATEST_TZ_VIEW'	=> $this->config['mot_tzv_latest_tz_view'],
+			'ACP_MOT_TZV_LIST_TZ_VIEW'		=> $this->config['mot_tzv_list_tz_view'],
 
 			'ACP_MOT_TZV_ROWS_ACP'			=> $this->config['mot_tzv_acp_rows_per_page'],
 			'ACP_MOT_TZV_ROWS_FRONT'		=> $this->config['mot_tzv_rows_per_page'],

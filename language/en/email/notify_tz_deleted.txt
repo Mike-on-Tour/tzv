@@ -1,0 +1,10 @@
+Subject: Deleted tour destination on "{SITENAME}"
+
+Hello {USERNAME},
+
+you are receiving this e-mail because a tour destination was deleted on "{SITENAME}" and you wanted to be notified in this case.
+The user "{CREATOR}" deleted the tour destination named "{TZ_NAME}".
+
+If you do not want to get notifications about deleted tour destinations in the future you can change this in the notification options of the User Control Panel.
+
+{EMAIL_SIG}

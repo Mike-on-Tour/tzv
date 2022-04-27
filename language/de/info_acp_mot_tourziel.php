@@ -31,8 +31,9 @@ $lang = array_merge($lang, [
 
 	// Einstellungen Berechtigung
 	'ACP_MOT_TZV_PERMISSION_EXPL'	=> 'Tourziele Berechtigungen',
-	'ACP_MOT_TZV_PERMISSION'		=> 'Berechtigungen für registrierte Benutzer werden bei Installation voreingestellt.<br>',
-	'ACP_MOT_TZV_PERMISSION_GROUP'	=> 'Die Berechtigungen kannst du an deine Wünsche anpassen.<br> <b>ACP / BERECHTIGUNGEN / Gruppenrechte / Tourziele.</b>',
+	'ACP_MOT_TZV_PERMISSION'		=> 'Berechtigungen für die Benutzerrollen <strong>Volle Funktionalität</strong> und <strong>Standard-Funktionaität</strong>
+										werden bei Installation voreingestellt.<br>',
+	'ACP_MOT_TZV_PERMISSION_GROUP'	=> 'Die Berechtigungen kannst du an deine Wünsche anpassen.<br> <b>ACP / BERECHTIGUNGEN / Benutzer-Rollen / Tourziele.</b>',
 
 	// ACP Einstellungen
 	'ACP_MOT_TZV_ENABLE_EXPLAIN'	=> 'Tourziele Hauptschalter',
@@ -44,17 +45,27 @@ $lang = array_merge($lang, [
 	'ACP_MOT_TZV_ADMIN_MESSAGE'		=> 'Administrator-Modus aktiv. Nur Administratoren können Tourziele sehen !',
 
 	// Kartenfunktionen
-	'ACP_MOT_TZV_GOOGLE_FUNCTIONS'	=> 'Karte Einstellungen',
-	'ACP_MOT_TZV_MAPS_ENABLE'		=> 'Kartenfunktion',
+	'ACP_MOT_TZV_MAPSETTING_TITLE'	=> 'Einstellungen für die Übersichtskarte',
+	'ACP_MOT_TZV_MAPSETTING_TEXT'	=> 'Einstellungen für das Kartenzentrum und die Vergrößerung beim Start.',
+	'ACP_MOT_TZV_LAT'				=> 'Geogr. Breite des Kartenzentrums',
+	'ACP_MOT_TZV_LAT_EXP'			=> 'Werte zwischen 90.0° (Nordpol) und -90.0° (Südpol)',
+	'ACP_MOT_TZV_LON'				=> 'Geogr. Länge des Kartenzentrums',
+	'ACP_MOT_TZV_LON_EXP'			=> 'Werte zwischen 180.0° (Osten) und -180.0° (Westen)',
+	'ACP_MOT_TZV_ZOOM'				=> 'Zoom-Faktor der Karte beim Aufruf',
+	'ACP_MOT_TZV_MAP_CLUSTERS'		=> 'Marker bündeln',
+	'ACP_MOT_TZV_MAP_CLUSTERS_EXP'	=> 'Wenn du diese Einstellung aktivierst, werden die Marker zur Darstellung auf der Karte gebündelt.
+										Damit kann eine Überfrachtung der Karte mit Markern verhindert werden.',
+
+	'ACP_MOT_TZV_GOOGLE_FUNCTIONS'	=> 'Einstellungen für Karten der Detailanzeige',
+	'ACP_MOT_TZV_MAPS_ENABLE'		=> 'Detailansicht Karte anzeigen',
 	'ACP_MOT_TZV_MAPS_ENABLE_EXPL'	=> 'Schaltet alle Kartenfunktionen ein / aus',
 	'ACP_MOT_TZV_MAPS_EXPLAIN'		=> 'Detailansicht Karte muss aktiviert sein',
-	'ACP_MOT_TZV_GOOGLEMAP_ENABLE'	=> 'Karte Googlemap',
-	'ACP_MOT_TZV_OSMMAP_ENABLE'		=> 'Karte Openstreetmap',
+	'ACP_MOT_TZV_GOOGLEMAP_ENABLE'	=> 'Karte Google Maps anzeigen',
+	'ACP_MOT_TZV_OSMMAP_ENABLE'		=> 'Karte OpeStreetMap anzeigen',
 	'ACP_MOT_TZV_KURVIGER_ENABLE'	=> 'GPS-Datenübergabe an www.kurviger.de',
 	'ACP_MOT_TZV_KURVIGER_EXPL'		=> 'Übergibt eingetragene GPS-Daten direkt an Motorradroutenplaner',
 	'ACP_MOT_TZV_MSG_GOOGLE_ON'		=> 'Kartenfunktion ist eingeschaltet',
 	'ACP_MOT_TZV_MSG_GOOGLE_OFF'	=> 'Kartenfunktionen ist ausgeschaltet',
-	'ACP_MOT_TZV_MAPS_ENABLE'		=> 'Detailansicht Karte anzeigen',
 	'ACP_MOT_TZV_MAPS_WIDTH'		=> 'Detailkarte Karte Breite (Pixel)',
 	'ACP_MOT_TZV_MAPS_HEIGHT'		=> 'Detailkarte Karte Höhe (Pixel)',
 	'ACP_MOT_TZV_MAPS_ZOOM'			=> 'Detailkarte Karten Zoom',
@@ -66,16 +77,18 @@ $lang = array_merge($lang, [
 	'ACP_MOT_TZV_COUNTRY_ENABLE'	=> 'Länder / Flaggen im Tourziele-Index anzeigen',
 	'ACP_MOT_TZV_MAIN_IMAGE'		=> 'Bilder im Tourziele-Index anzeigen',
 	'ACP_MOT_TZV_MAININFO'			=> 'Neue Features dieser Version anzeigen',
-	'ACP_MOT_TZV_SUPPORT_ENABLE'	=> 'Tourziele Supportlink anzeigen ',
+	'ACP_MOT_TZV_SUPPORT_ENABLE'	=> 'Tourziele Supportlink anzeigen',
 	'ACP_MOT_TZV_SUPPORT_EXPL'		=> 'Siehe Hinweis Info / Support / Update',
-	'ACP_MOT_TZV_SUPPORT_LINK'		=> 'Pfad zum Supportlink ',
+	'ACP_MOT_TZV_SUPPORT_LINK'		=> 'Pfad zum Supportlink',
+	'ACP_MOT_TZV_LATEST_TZ_VIEW'	=> 'Anzeige des neuesten Tourziels in der Tourziel Liste',
+	'ACP_MOT_TZV_LIST_TZ_VIEW'		=> 'Anzeige der Tourziele in Tourziel Liste und Suche',
+	'ACP_MOT_TZV_LIST_TZ_DETAIL'	=> 'detailliert',
+	'ACP_MOT_TZV_LIST_TZ_SHORT'		=> 'als Tabelle',
 
 	// Pagination-Einstellungen
-	'ACP_MOT_TZV_PAGINATION'		=> 'Einstellungen für Pagination',
+	'ACP_MOT_TZV_PAGINATION'		=> 'Einstellungen für Paginierung',
 	'ACP_MOT_TZV_ROWS_ACP'			=> 'Anzahl Zeilen pro Tabellenseite im Adm.-Bereich',
-	'ACP_MOT_TZV_ROWS_ACP_EXPL'		=> 'Einstellungen für Pagination',
-	'ACP_MOT_TZV_ROWS_FRONT'		=> 'Einstellungen für Pagination im Front-End',
-	'ACP_MOT_TZV_ROWS_FRONT_EXPL'	=> 'Einstellungen für Pagination',
+	'ACP_MOT_TZV_ROWS_FRONT'		=> 'Anzahl Zeilen pro Tabellenseite im Front-End',
 
 	// ACP-Meldungen
 	'ACP_MOT_TZV_CONFIG_SAVED'		=> 'Tourziele Einstellungen aktualisiert',
@@ -88,7 +101,8 @@ $lang = array_merge($lang, [
 	'ACP_MOT_TZV_NO_ENTRIES'		=> 'Keine Einträge',
 
 	// ACP COUNTRY
-	'ACP_MOT_TZV_DELETE'			=> '<b>Lösche hier keine Einträge wenn schon Tourziele mit diesen Daten eingetragen sind.<br> Das kann zu Fehlern in der Anzeige führen.<br> Tourziel wird dann nicht in der Liste angezeigt !</b>',
+	'ACP_MOT_TZV_DELETE'			=> '<b>Lösche hier keine Einträge wenn schon Tourziele mit diesen Daten eingetragen sind.<br>
+										Das kann zu Fehlern in der Anzeige führen.<br>Tourziel wird dann nicht in der Liste angezeigt!</b>',
 	'ACP_MOT_TZV_COUNTRIES'			=> 'Eingetragene Länder',
 	'ACP_MOT_TZV_COUNTRY_NAME'		=> 'Land',
 	'ACP_MOT_TZV_COUNTRY_IMG'		=> 'Flagge',

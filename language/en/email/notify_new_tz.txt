@@ -1,0 +1,12 @@
+Subject: New tour destination on "{SITENAME}"
+
+Hello {USERNAME},
+
+you are receiving this e-mail because there is a recently created tour destination on "{SITENAME}" and you wanted to be notified in this case.
+The user "{CREATOR}" created a new POI named "{TZ_NAME}"; if you want to have a look at it please click the following link:
+
+{U_DETAILVIEW}
+
+If you do not want to get notifications about newly created tour destinations in the future you can change this in the notification options of the User Control Panel.
+
+{EMAIL_SIG}

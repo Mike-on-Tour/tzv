@@ -1,18 +1,19 @@
-{% INCLUDECSS 'css/mot_tzv_acp.css' %}
 {% INCLUDE 'overall_header.html' %}
+{% INCLUDECSS '@mot_tzv/css/mot_tzv_acp.css' %}
+{% INCLUDEJS '@mot_tzv/mot_tzv_acp.js' %}
 
     <fieldset>
-		<h2>{{ lang('ACP_MOT_TZV_TOURZIEL') }} - {{ lang('ACP_MOT_TZV_SETTINGS') }}</h2> 
+		<h2>{{ lang('ACP_MOT_TZV_TOURZIEL') }} - {{ lang('ACP_MOT_TZV_SETTINGS') }}</h2>
 		{{ ACP_MOT_TZV_VERSION }}<br><br>
 		{{ lang('ACP_MOT_TZV_HELP') }}
 	</fieldset>
-	
+
 	<fieldset>
 		<legend>{{ lang('ACP_MOT_TZV_PERMISSION_EXPL') }}</legend>
 		{{ lang('ACP_MOT_TZV_PERMISSION') }}<br>
 		{{ lang('ACP_MOT_TZV_PERMISSION_GROUP') }}
     </fieldset>
-	
+
 	<form id="acp_tzv_settings" method="post" action="{{ U_ACTION }}">
 
 		<fieldset>
@@ -42,6 +43,32 @@
 				</dd>
 			</dl>
 		</fieldset>
+
+		<div><p>&nbsp;</p></div>
+
+		<fieldset>
+			<legend>{{ lang('ACP_MOT_TZV_MAPSETTING_TITLE') }}</legend>
+			<p>{{ lang('ACP_MOT_TZV_MAPSETTING_TEXT') }}</p>
+			<dl>
+				<dt><label for="mot_tzv_map_lat">{{ lang('ACP_MOT_TZV_LAT') }}{{ lang('COLON') }}</label><p>{{ lang('ACP_MOT_TZV_LAT_EXP') }}</p></dt>
+				<dd><input id="mot_tzv_map_lat" type="text" size="10" maxlength="10" name="mot_tzv_map_lat" value="{{ ACP_MOT_TZV_LAT }}" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="mot_tzv_map_lon">{{ lang('ACP_MOT_TZV_LON') }}{{ lang('COLON') }}</label><p>{{ lang('ACP_MOT_TZV_LON_EXP') }}</p></dt>
+				<dd><input id="mot_tzv_map_lon" type="text" size="10" maxlength="11" name="mot_tzv_map_lon" value="{{ ACP_MOT_TZV_LON }}" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="mot_tzv_map_zoom">{{ lang('ACP_MOT_TZV_ZOOM') }}{{ lang('COLON') }}</label></dt>
+				<dd><input id="mot_tzv_map_zoom" type="number" min="2" max="10" name="mot_tzv_map_zoom" value="{{ ACP_MOT_TZV_ZOOM }}" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="mot_tzv_map_enable_clusters">{{ lang('ACP_MOT_TZV_MAP_CLUSTERS') }}{{ lang('COLON') }}</label><p>{{ lang('ACP_MOT_TZV_MAP_CLUSTERS_EXP') }}</p></dt>
+				<dd><label><input type="radio" class="radio" name="mot_tzv_map_enable_clusters" value="1"{% if ACP_MOT_TZV_MAP_CLUSTERS %} id="mot_tzv_map_enable_clusters" checked="checked"{%  endif %} /> {{ lang('YES') }}</label>
+					<label><input type="radio" class="radio" name="mot_tzv_map_enable_clusters" value="0"{% if not ACP_MOT_TZV_MAP_CLUSTERS %} id="mot_tzv_map_enable_clusters" checked="checked"{%  endif %} /> {{ lang('NO') }}</label>
+			</dl>
+		</fieldset>
+
+		<div><p>&nbsp;</p></div>
 
 		<fieldset>
 			<legend>{{ lang('ACP_MOT_TZV_GOOGLE_FUNCTIONS') }}</legend>
@@ -109,7 +136,7 @@
 					<label><input type="radio" class="radio" name="tzv_stats_enable" value="0"{% if not ACP_MOT_TZV_STATS_ENABLE %} id="tzv_stats_enable" checked="checked"{% endif %} /> {{ lang('NO') }}</label>
 				</dd>
 			</dl>
-			
+
 			<dl>
 				<dt><label for="tzv_news_add_enable">{{ lang('ACP_MOT_TZV_NEWS_ADD_ENABLE') }}{{ lang('COLON') }}</label><br></dt>
 				<dd>
@@ -117,7 +144,7 @@
 					<label><input type="radio" class="radio" name="tzv_news_add_enable" value="0"{% if not ACP_MOT_TZV_NEWS_ADD_ENABLE %} id="tzv_news_add_enable" checked="checked"{% endif %} /> {{ lang('NO') }}</label>
 				</dd>
 			</dl>
-			
+
 			<dl>
 				<dt><label for="tzv_country_enable">{{ lang('ACP_MOT_TZV_COUNTRY_ENABLE') }}{{ lang('COLON') }}</label><br></dt>
 				<dd>
@@ -125,7 +152,7 @@
 					<label><input type="radio" class="radio" name="tzv_country_enable" value="0"{% if not ACP_MOT_TZV_COUNTRY_ENABLE %} id="tzv_country_enable" checked="checked"{% endif %} /> {{ lang('NO') }}</label>
 				</dd>
 			</dl>
-			
+
 			<dl>
 				<dt><label for="tzv_main_image">{{ lang('ACP_MOT_TZV_MAIN_IMAGE') }}{{ lang('COLON') }}</label><br></dt>
 				<dd>
@@ -133,7 +160,7 @@
 					<label><input type="radio" class="radio" name="tzv_main_image" value="0"{% if not ACP_MOT_TZV_MAIN_IMAGE %} id="tzv_main_image" checked="checked"{% endif %} /> {{ lang('NO') }}</label>
 				</dd>
 			</dl>
-			
+
 			<dl>
 				<dt><label for="tzv_maininfo">{{ lang('ACP_MOT_TZV_MAININFO') }}{{ lang('COLON') }}</label><br></dt>
 				<dd>
@@ -141,7 +168,7 @@
 					<label><input type="radio" class="radio" name="tzv_maininfo" value="0"{% if not ACP_MOT_TZV_MAININFO %} id="tzv_maininfo" checked="checked"{% endif %} /> {{ lang('NO') }}</label>
 				</dd>
 			</dl>
-			
+
 			<dl>
 				<dt><label for="tzv_support_enable">{{ lang('ACP_MOT_TZV_SUPPORT_ENABLE') }}{{ lang('COLON') }}</label><br>{{ lang('ACP_MOT_TZV_SUPPORT_EXPL') }}</dt>
 				<dd>
@@ -149,13 +176,27 @@
 					<label><input type="radio" class="radio" name="tzv_support_enable" value="0"{% if not ACP_MOT_TZV_SUPPORT_ENABLE %} id="tzv_support_enable" checked="checked"{% endif %} /> {{ lang('NO') }}</label>
 				</dd>
 			</dl>
-			
 			<dl>
 				<dt><label for="tzv_support">{{ lang('ACP_MOT_TZV_SUPPORT_LINK') }}{{ lang('COLON') }}</label><br></dt>
 				<dd><input type="text" size="50" id="tzv_support" name="tzv_support" value="{{ ACP_MOT_TZV_SUPPORT }}" /></dd>
 			</dl>
+
+			<dl>
+				<dt><label for="tzv_latest_tz_view">{{ lang('ACP_MOT_TZV_LATEST_TZ_VIEW') }}{{ lang('COLON') }}</label><br></dt>
+				<dd>
+					<label><input type="radio" class="radio" name="tzv_latest_tz_view" value="1"{% if ACP_MOT_TZV_LATEST_TZ_VIEW %} id="tzv_latest_tz_view" checked="checked"{% endif %} /> {{ lang('ACP_MOT_TZV_LIST_TZ_DETAIL') }}</label>
+					<label><input type="radio" class="radio" name="tzv_latest_tz_view" value="0"{% if not ACP_MOT_TZV_LATEST_TZ_VIEW %} id="tzv_latest_tz_view" checked="checked"{% endif %} /> {{ lang('ACP_MOT_TZV_LIST_TZ_SHORT') }}</label>
+				</dd>
+			</dl>
+			<dl>
+				<dt><label for="tzv_list_tz_view">{{ lang('ACP_MOT_TZV_LIST_TZ_VIEW') }}{{ lang('COLON') }}</label><br></dt>
+				<dd>
+					<label><input type="radio" class="radio" name="tzv_list_tz_view" value="1"{% if ACP_MOT_TZV_LIST_TZ_VIEW %} id="tzv_list_tz_view" checked="checked"{% endif %} /> {{ lang('ACP_MOT_TZV_LIST_TZ_DETAIL') }}</label>
+					<label><input type="radio" class="radio" name="tzv_list_tz_view" value="0"{% if not ACP_MOT_TZV_LIST_TZ_VIEW %} id="tzv_list_tz_view" checked="checked"{% endif %} /> {{ lang('ACP_MOT_TZV_LIST_TZ_SHORT') }}</label>
+				</dd>
+			</dl>
 		</fieldset>
-		
+
 		<fieldset>
 			<legend>{{ lang('ACP_MOT_TZV_PAGINATION') }}</legend>
 			<dl>
@@ -168,13 +209,13 @@
 				<dd><input type="number" id="tzv_rows_front" name="tzv_rows_front" min="2" max="50" value="{{ ACP_MOT_TZV_ROWS_FRONT }}" /></dd>
 			</dl>
 		</fieldset>
-		
+
 		<p class="submit-buttons">
 			<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}" />&nbsp;
 			<input class="button2" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}" />
 			{{ S_FORM_TOKEN }}
 		</p>
-	
+
 	</form>
 
 {% INCLUDE 'overall_footer.html' %}

@@ -7,7 +7,6 @@
 					<table class="table1" cellspacing="1" padding="1">
 						<thead>
 							<tr>
-							<tr>
 								<th style="text-align:left;">{{ lang('MOT_TZV_NEW_EVENT') }}</th>
 								<th style="text-align:left;">{{ lang('MOT_TZV_NEW_FLAG') }}</th>
 								<th style="text-align:left;">{{ lang('MOT_TZV_NEW_LAND') }}</th>
@@ -15,10 +14,10 @@
 								<th style="text-align:left;">{{ lang('MOT_TZV_NEW_TIME') }}</th>
 								<th style="text-align:left;">{{ lang('MOT_TZV_NEW_AUTHOR') }}</th>
 							</tr>
-						</thead>	
+						</thead>
 
 						<tbody>
-							{% if MOT_TZV_NEWS_ADD_ENABLE %}				
+							{% if MOT_TZV_NEWS_ADD_ENABLE %}
 							<tr class="bg2">
 								<td class="indexlink" "text-align:left;"><a href="{{ U_MOT_TZV_NEW_EVENT }}" title="{{ lang('MOT_TZV_NEW_EVENT') }}">{{ MOT_TZV_NEW_EVENT }}</a></td>
 								<td style="text-align:absolute;"><img src={{ COUNTRY_IMG }} title="{{ COUNTRY_NAME }}"></td>
@@ -26,15 +25,15 @@
 								<td style="text-align:left;">{{ MOT_TZV_NEW_REGION }}</td>
 								<td style="text-align:left;">{{ MOT_TZV_NEW_TIME }}</td>
 								<td style="text-align:left;">{{ MOT_TZV_NEWS_AUTHOR }}</td>
-							</tr>			
+							</tr>
 							{% else %}
 								<tr class="bg1">
 									<td colspan="6">{{ lang('MOT_TZV_NO_NEW_EVENT') }}</td>
 								</tr>
 							{% endif %}
 						</tbody>
-					</table>                
-				</div>  
+					</table>
+				</div>
 			</div>
 
 		{% endif %}
