@@ -1,7 +1,7 @@
 name: Tests
 
 env:
-    EXTNAME: mot/usermap # Your extension vendor/package name
+    EXTNAME: mot/tzv    # Your extension vendor/package name
     SNIFF: 1            # Run code sniffer on your code? 1 or 0
     IMAGE_ICC: 1        # Run icc profile sniffer on your images? 1 or 0
     EPV: 1              # Run EPV (Extension Pre Validator) on your code? 1 or 0
@@ -25,10 +25,15 @@ jobs:
         strategy:
             matrix:
                 include:
-                    - php: '7.2'
-                    - php: '7.3'
-                    - php: '7.4'
-                    - php: '8.0'
+                  - php: '7.2'
+                    db: "none"
+                    NOTESTS: 1
+                  - php: '7.3'
+                    db: "none"
+                    NOTESTS: 1
+                  - php: '7.4'
+                    db: "none"
+                    NOTESTS: 1
 
         name: PHP ${{ matrix.php }} - ${{ matrix.db }}
 
