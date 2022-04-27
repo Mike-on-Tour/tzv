@@ -3,15 +3,18 @@
 		<span style="font-size: 100%; line-height: 100%;">
 			<div style="text-align:center;">
 				<p>{{ lang('MOT_TZV_OPENSTREETMAP_INFO') }}</p>
-					<!-- Karte -->
-					<iframe width="{{ MOT_TZV_MAPS_WIDTH }}" height="{{ MOT_TZV_MAPS_HEIGHT}}" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" 
-					src="https://www.openstreetmap.org/export/embed.html?bbox= {{ MOT_TZV_EVENT_MAPS_LON }}%2C{{ MOT_TZV_EVENT_MAPS_LAT }}%2C{{ MOT_TZV_EVENT_MAPS_LON }}%2C{{ MOT_TZV_EVENT_MAPS_LAT }}&amp;layer=mapnik&amp;marker={{ MOT_TZV_EVENT_MAPS_LAT }}%2C{{ MOT_TZV_EVENT_MAPS_LON }}" style="border: 1px solid black"></iframe><br/><small>
-						
-					<!-- Link -->
-					<a href="https://www.openstreetmap.org/?mlat={{ MOT_TZV_EVENT_MAPS_LAT }}&amp;mlon={{ MOT_TZV_EVENT_MAPS_LON }}#map={{ MOT_TZV_MAPS_ZOOM }}/{{ MOT_TZV_EVENT_MAPS_LAT }}/{{ MOT_TZV_EVENT_MAPS_LON }}">Größere Karte anzeigen</a></small>
+
+				<iframe width="{{ MOT_TZV_MAPS_WIDTH }}" height="{{ MOT_TZV_MAPS_HEIGHT}}" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" 
+					src="https://www.openstreetmap.org/export/embed.html?bbox={{ MOT_TZV_OSM_LON_S }}%2C{{ MOT_TZV_OSM_LAT_S }}%2C{{ MOT_TZV_OSM_LON_E }}%2C{{ MOT_TZV_OSM_LAT_E }}&amp;layer=mapnik&amp;marker={{ MOT_TZV_EVENT_MAPS_LAT }}%2C{{ MOT_TZV_EVENT_MAPS_LON }}" style="border: 1px solid black"></iframe>
+
+				<br>
+
+				<small>
+				<!-- Link to bigger map -->
+				<a href="https://www.openstreetmap.org/?mlat={{ MOT_TZV_EVENT_MAPS_LAT }}&amp;mlon={{ MOT_TZV_EVENT_MAPS_LON }}#map={{ MOT_TZV_MAPS_ZOOM }}/{{ MOT_TZV_EVENT_MAPS_LAT }}/{{ MOT_TZV_EVENT_MAPS_LON }}">{{ lang('MOT_TZV_OSM_LARGER_MAP') }}</a></small>
 							
 				<div class="back2top"><a href="#wrap" class="top" title="{{ lang('BACK_TO_TOP') }}">{{ lang('BACK_TO_TOP') }}&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
 			</div>
 		</span>
 	</dt>
-</dl>   
+</dl>

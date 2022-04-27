@@ -24,6 +24,10 @@ mot_tzv_posting:
     path: /mot_tzv/posting/{mode}/{id}/{post}
     defaults: { _controller: mot.tzv.controller.mot_tzv_main:posting, post: NULL }
 
+mot_tzv_map:
+    path: /mot_tzv/map
+    defaults: { _controller: mot.tzv.controller.mot_tzv_main:map }
+
 mot_tzv_tzvlist:
     path: /mot_tzv/tzvlist
     defaults: { _controller: mot.tzv.controller.mot_tzv_main:tzvlist }

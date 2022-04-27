@@ -33,6 +33,7 @@
 								<a href="{{ MOT_TZV_CREATE_LINK }}" class="button icon-button reply-icon" title="{{ lang('MOT_TZV_MAIN_ADD') }}">{{ lang('MOT_TZV_MAIN_ADD') }}</a>
 							{% endif %}
 							{% if MOT_TZV_LIST_AUTH %}
+								<a href="{{ MOT_TZV_MAP_LINK }}" class="button icon-button reply-icon" title="{{ lang('MOT_TZV_MAIN_MAP') }}">{{ lang('MOT_TZV_MAIN_MAP') }}</a>
 								<a href="{{ MOT_TZV_LIST_LINK }}" class="button icon-button reply-icon" title="{{ lang('MOT_TZV_MAIN_VIEW') }}">{{ lang('MOT_TZV_MAIN_VIEW') }}</a>
 							{% endif %}
 							{% if MOT_TZV_SUPPORT_ENABLE %}
@@ -57,9 +58,12 @@
 											{{ lang('MOT_TZV_SEARCH_AUSWAHL') }}
 										</div>
 
-										{% INCLUDE '@mot_tzv/mot_tzv_search_country.html' %}
-										{% INCLUDE '@mot_tzv/mot_tzv_search_region.html' %}
-										{% INCLUDE '@mot_tzv/mot_tzv_search_cats.html' %}
+										<table>
+											{% INCLUDE '@mot_tzv/mot_tzv_search_country.html' %}
+											{% INCLUDE '@mot_tzv/mot_tzv_search_region.html' %}
+											{% INCLUDE '@mot_tzv/mot_tzv_search_cats.html' %}
+										</table>
+
 										<br>
 
 										<div class="rules">
@@ -69,7 +73,7 @@
 										<form id="postform" method="post" action="{{ U_FORM_ACTION }}" enctype="multipart/form-data">
 											<table>
 												<tr>
-													<td width="130px">{{ lang('MOT_TZV_SEARCH_TOURZIEL') }}{{ lang('COLON') }}</td>
+													<td>{{ lang('MOT_TZV_SEARCH_TOURZIEL') }}{{ lang('COLON') }}&nbsp;</td>
 													<td><input type="text" id="name" name="name" size="30" value="{{ MOT_TZV_POST_NAME }}" class="inputbox autowidth" /></td>
 												</tr>
 												<tr>
@@ -77,7 +81,7 @@
 													<td>&nbsp;</td>
 												</tr>
 												<tr>
-													<td width="130px">{{ lang('MOT_TZV_SEARCH_PLZ') }}{{ lang('COLON') }}</td>
+													<td>{{ lang('MOT_TZV_SEARCH_PLZ') }}{{ lang('COLON') }}&nbsp;</td>
 													<td><input type="text" id="plz" name="plz" size="6" value="{{ MOT_TZV_POST_PLZ }}" class="inputbox autowidth" /></td>
 												</tr>
 												<tr>
@@ -85,7 +89,7 @@
 													<td>&nbsp;</td>
 												</tr>
 												<tr>
-													<td width="130px">{{ lang('MOT_TZV_SEARCH_ORT') }}{{ lang('COLON') }}</td>
+													<td>{{ lang('MOT_TZV_SEARCH_ORT') }}{{ lang('COLON') }}&nbsp;</td>
 													<td><input type="text" id="ort" name="ort" size="30" value="{{ MOT_TZV_POST_ORT }}" class="inputbox autowidth" /></td>
 												</tr>
 												<tr>
@@ -93,7 +97,7 @@
 													<td>&nbsp;</td>
 												</tr>
 												<tr>
-													<td width="100px">&nbsp;</td><td><input class="button icon-button reply-icon" type="submit" name="submit" value="{{ lang('MOT_TZV_BUTTON_SUCHEN') }}"></td>
+													<td>&nbsp;</td><td><input class="button icon-button reply-icon" type="submit" name="submit" value="{{ lang('MOT_TZV_BUTTON_SUCHEN') }}"></td>
 												</tr>
 											</table>
 										</form>

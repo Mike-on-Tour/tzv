@@ -24,11 +24,11 @@ class mot_tzv_main
 	/* @var \phpbb\controller\helper */
 	protected $helper;
 
-	/** @var \phpbb\extension\manager */
-	protected $phpbb_extension_manager;
-
 	/** @var \phpbb\language\language $language Language object */
 	protected $language;
+
+	/** @var \phpbb\notification\manager */
+	protected $notification_manager;
 
 	/** @var \phpbb\pagination  */
 	protected $pagination;
@@ -73,7 +73,7 @@ class mot_tzv_main
 	 * {@inheritdoc
 	 */
 	public function __construct(\phpbb\auth\auth $auth, \phpbb\config\config $config, \phpbb\db\driver\driver_interface $db,
-								\phpbb\controller\helper $helper, \phpbb\extension\manager $phpbb_extension_manager, \phpbb\language\language $language,
+								\phpbb\controller\helper $helper, \phpbb\language\language $language, \phpbb\notification\manager $notification_manager,
 								\phpbb\pagination $pagination, \phpbb\path_helper $path_helper, \phpbb\request\request $request,
 								\phpbb\template\template $template, \phpbb\user $user, \mot\tzv\functions\mot_tzv_events $mot_tzv_events, $root_path, $php_ext,
 								$mot_tzv_tourziel_table, $mot_tzv_tourziel_country_table, $mot_tzv_tourziel_region_table,
@@ -83,8 +83,8 @@ class mot_tzv_main
 		$this->config = $config;
 		$this->db = $db;
 		$this->helper = $helper;
-		$this->phpbb_extension_manager = $phpbb_extension_manager;
 		$this->language = $language;
+		$this->notification_manager = $notification_manager;
 		$this->pagination = $pagination;
 		$this->path_helper = $path_helper;
 		$this->request = $request;
@@ -100,13 +100,10 @@ class mot_tzv_main
 		$this->tourziel_cats_table = $mot_tzv_tourziel_cats_table;
 		$this->tourziel_wlan_table = $mot_tzv_tourziel_wlan_table;
 
-		$this->md_manager = $this->phpbb_extension_manager->create_extension_metadata_manager('mot/tzv');
-		$this->tzv_version = $this->md_manager->get_metadata('version');
-		$this->ext_path = $this->phpbb_extension_manager->get_extension_path('mot/tzv', true);
-
 		$this->tzv_index_route = $this->helper->route('mot_tzv_index');
 		$this->tzv_create_route = $this->helper->route('mot_tzv_create');
 		$this->tzv_list_route = $this->helper->route('mot_tzv_tzvlist');
+		$this->tzv_map_route = $this->helper->route('mot_tzv_map');
 		$this->tzv_moderate_route = $this->helper->route('mot_tzv_moderate');
 		$this->tzv_search_route = $this->helper->route('mot_tzv_search');
 		$this->tzv_support_route = $this->path_helper->get_web_root_path() . $this->config['mot_tzv_support']; // Support Link
@@ -142,6 +139,7 @@ class mot_tzv_main
 			'MOT_TZV_CREATE_AUTH'		=> $this->auth->acl_get('u_mot_tzv_add'),
 			'MOT_TZV_CREATE_LINK'		=> $this->tzv_create_route,
 			'MOT_TZV_LIST_AUTH'			=> $this->auth->acl_get('u_mot_tzv_view'),
+			'MOT_TZV_MAP_LINK'			=> $this->tzv_map_route,
 			'MOT_TZV_LIST_LINK'			=> $this->tzv_list_route,
 			'MOT_TZV_SEARCH_LINK'		=> $this->tzv_search_route,
 			'MOT_TZV_TZV_SUPPORT'		=> $this->tzv_support_route, // Support Link
@@ -209,6 +207,27 @@ class mot_tzv_main
 
 			$new_id = $this->events->add_event($input_data, $this->tzv_create_route);
 
+			// get users to be notified in case of a new tour destination
+			$mod_users = $this->events->get_tzv_moderators();
+			// prepare users data for the notification message
+			if (!function_exists('get_username_string'))
+			{
+				include($this->root_path . 'includes/functions_content.' . $this->php_ext);
+			}
+			$display_username = get_username_string('no_profile', $this->user->data['user_id'], $this->user->data['username'], $this->user->data['user_colour']);
+			// prepare notification data
+			$notification_data = array(
+				'tz_id'				=> $new_id,
+				'tz_name'			=> $this->request->variable('mot_tzv_name', '', true),
+				'creator'			=> $this->user->data['username'],
+				'display_username'	=> $display_username,
+				'user_ids'			=> $mod_users,
+				'parent'			=> 0,
+			);
+			$notification_data = array_merge($notification_data, ['work_mode' => 'notify']);
+			// notify moderators that a new POI has been created
+			$this->notification_manager->add_notifications('mot.tzv.notification.type.notify_new_tz', $notification_data);
+
 			meta_refresh(15, $this->tzv_list_route); // nach 15 Sek. zu Tourziel-Liste
 
 			$message =  $this->language->lang('MOT_TZV_EVENT_ADD_SUCCESSFUL') . '<br><br><a href="' . $this->helper->route('mot_tzv_event', ['id' => $new_id]) . '">'. $this->language->lang('MOT_TZV_VIEW_EVENT') . '</a><br><a href="' . $this->tzv_index_route . '">'. $this->language->lang('MOT_TZV_RETURN_TOURZIEL') . '</a>';
@@ -238,10 +257,10 @@ class mot_tzv_main
 			'MOT_TZV_INDEX_AUTH'		=> $this->auth->acl_get('u_mot_tzv_mainview'),
 			'MOT_TZV_INDEX_LINK'		=> $this->tzv_index_route,
 			'MOT_TZV_LIST_AUTH'			=> $this->auth->acl_get('u_mot_tzv_view'),
+			'MOT_TZV_MAP_LINK'			=> $this->tzv_map_route,
 			'MOT_TZV_LIST_LINK'			=> $this->tzv_list_route,
 			'MOT_TZV_SEARCH_LINK'		=> $this->tzv_search_route,
 
-			'MOT_TZV_CREATE_TZ'			=> true,
 			'MOT_TZV_COORD_MANDATORY'	=> $this->config['mot_tzv_maps_enable'],
 
 			'S_BBCODE_ALLOWED'			=> true,
@@ -278,8 +297,8 @@ class mot_tzv_main
 		$content = '<br><table>';
 		$content .= '<tr><td>' . $this->language->lang('MOT_TZV_LISTEN_NAME') . ':</td>' . '<td> &nbsp;&nbsp;<b>' . $event['name'] . '</b></td></tr>';
 		$content .= '<tr><td>' . $this->language->lang('MOT_TZV_LISTEN_CATEGORY') . ':</td>' . '<td> &nbsp;&nbsp;' . $event['cat_name'] . '</td></tr>';
-		$content .= '<tr><td>' . $this->language->lang('MOT_TZV_LISTEN_LAND') . ':</td>' . '<td> &nbsp;&nbsp;<img src="' .  $flag . '" title="' . $event['country_name'] . '"> ' . $event['country_name'] . ' / ' . $event['region_name'] . '</td></tr>';
-		$content .= '<tr><td>' . $this->language->lang('MOT_TZV_TOURZIEL_PLZ_ORT') . ':</td>' . '<td> &nbsp;&nbsp;' . $event['postalcode'] . '&nbsp;&nbsp;' . $event['city'] . '</td></tr>';
+		$content .= '<tr><td>' . $this->language->lang('MOT_TZV_LISTEN_LAND') . ' / ' . $this->language->lang('MOT_TZV_LISTEN_REGION') . ':</td>' . '<td> &nbsp;&nbsp;<img src="' .  $flag . '" title="' . $event['country_name'] . '"> ' . $event['country_name'] . ' / ' . $event['region_name'] . '</td></tr>';
+		$content .= '<tr><td>' . $this->language->lang('MOT_TZV_TOURZIEL_PLZ_ORT') . ':</td>' . '<td> &nbsp;&nbsp;' . $event['postalcode'] . '&nbsp;' . $event['city'] . '</td></tr>';
 		$content .= '<tr><td>' . $this->language->lang('MOT_TZV_TOURZIEL_STRASSE_NR') . ':</td>' . '<td> &nbsp;&nbsp;' . $event['street'] . '</td></tr>';
 		$content .= '<tr><td>' . $this->language->lang('MOT_TZV_LISTEN_TELEFON') . ':</td>' . '<td> &nbsp;&nbsp;' . $event['telephone'] . '</td></tr>';
 		$content .= '<tr><td>' . $this->language->lang('MOT_TZV_LISTEN_EMAIL') . ':</td>' . '<td> &nbsp;&nbsp;' . '<a href=mailto:' . $event['email'] . '>' . $event['email'] . '</a>' . '</td></tr>';
@@ -312,11 +331,11 @@ class mot_tzv_main
 
 		if ($this->user->data['user_id'] == $event['user_id'])
 		{
-			if ($this->auth->acl_get('u_tzv_delete_own'))
+			if ($this->auth->acl_get('u_mot_tzv_delete_own'))
 			{
 				$this->template->assign_var('U_DELETE_LINK', $this->helper->route('mot_tzv_manage', ['mode' => 'delete', 'id' => $id]));
 			}
-			if ($this->auth->acl_get('u_tzv_edit_own'))
+			if ($this->auth->acl_get('u_mot_tzv_edit_own'))
 			{
 				$this->template->assign_var('U_EDIT_LINK', $this->helper->route('mot_tzv_manage', ['mode' => 'edit', 'id' => $id]));
 			}
@@ -343,6 +362,18 @@ class mot_tzv_main
 		// Get country info to display flags
 		$this->events->get_country_info();
 
+		if ($this->config['mot_tzv_ostreetmap_enable'])
+		{
+			$osm_bbox = $this->events->lonlat_to_bbox($this->config['mot_tzv_maps_width'], $this->config['mot_tzv_maps_height'], $event['maps_lat'], $event['maps_lon'], $this->config['mot_tzv_maps_zoom']);
+
+			$this->template->assign_vars([
+				'MOT_TZV_OSM_LON_S'		=> $osm_bbox['lon_s'],
+				'MOT_TZV_OSM_LAT_S'		=> $osm_bbox['lat_s'],
+				'MOT_TZV_OSM_LON_E'		=> $osm_bbox['lon_e'],
+				'MOT_TZV_OSM_LAT_E'		=> $osm_bbox['lat_e'],
+			]);
+		}
+
 		$this->template->assign_vars([
 			'MOT_TZV_TOURZIEL_NUMBER'	=> $this->language->lang('MOT_TZV_COUNT_TOTAL_DEST', $this->events->get_total_count_tourziele()),
 			'MOT_TZV_COUNTRY_ENABLE'	=> $this->config['mot_tzv_country_enable'],
@@ -361,6 +392,7 @@ class mot_tzv_main
 			'MOT_TZV_CREATE_AUTH'		=> $this->auth->acl_get('u_mot_tzv_add'),
 			'MOT_TZV_CREATE_LINK'		=> $this->tzv_create_route,
 			'MOT_TZV_LIST_AUTH'			=> $this->auth->acl_get('u_mot_tzv_view'),
+			'MOT_TZV_MAP_LINK'			=> $this->tzv_map_route,
 			'MOT_TZV_LIST_LINK'			=> $this->tzv_list_route,
 			'MOT_TZV_SEARCH_LINK'		=> $this->tzv_search_route,
 
@@ -425,6 +457,7 @@ class mot_tzv_main
 			'MOT_TZV_CREATE_AUTH'		=> $this->auth->acl_get('u_mot_tzv_add'),
 			'MOT_TZV_CREATE_LINK'		=> $this->tzv_create_route,
 			'MOT_TZV_LIST_AUTH'			=> $this->auth->acl_get('u_mot_tzv_view'),
+			'MOT_TZV_MAP_LINK'			=> $this->tzv_map_route,
 			'MOT_TZV_LIST_LINK'			=> $this->tzv_list_route,
 			'MOT_TZV_SEARCH_LINK'		=> $this->tzv_search_route,
 			'MOT_TZV_LAST_5_EVENTS'		=> $last_5,
@@ -463,6 +496,28 @@ class mot_tzv_main
 				if (confirm_box(true))
 				{
 					$this->events->delete_event($id);
+
+					// get users to be notified in case of a deleted tour destination
+					$mod_users = $this->events->get_tzv_moderators();
+					// prepare users data for the notification message
+					if (!function_exists('get_username_string'))
+					{
+						include($this->root_path . 'includes/functions_content.' . $this->php_ext);
+					}
+					$display_username = get_username_string('no_profile', $this->user->data['user_id'], $this->user->data['username'], $this->user->data['user_colour']);
+					// prepare notification data
+					$notification_data = array(
+						'tz_id'				=> $id,
+						'tz_name'			=> $this->request->variable('mot_tzv_name', '', true),
+						'creator'			=> $this->user->data['username'],
+						'display_username'	=> $display_username,
+						'user_ids'			=> $mod_users,
+						'parent'			=> 0,
+					);
+					$notification_data = array_merge($notification_data, ['work_mode' => 'notify']);
+					// notify moderators that a new POI has been deleted
+					$this->notification_manager->add_notifications('mot.tzv.notification.type.notify_tz_deleted', $notification_data);
+
 					$message = $this->language->lang('MOT_TZV_EVENT_DELETE_SUCCESSFUL') . '<br><br><a href="' . $this->tzv_index_route . '">'. $this->language->lang('MOT_TZV_RETURN_TOURZIEL') . '</a>';
 					trigger_error($message);
 				}
@@ -505,7 +560,6 @@ class mot_tzv_main
 					generate_text_for_storage($message, $uid, $bitfield, $options, $allow_bbcode, $allow_urls, $allow_smilies);
 
 					$input_data = [
-						'user_id'		    => $this->user->data['user_id'],
 						'post_time'			=> time(),
 
 						'name'			    => $this->request->variable('mot_tzv_name', '', true),
@@ -530,9 +584,30 @@ class mot_tzv_main
 
 					$this->events->edit_event($id, $input_data);
 
+					// get users to be notified in case of a edited tour destination
+					$mod_users = $this->events->get_tzv_moderators();
+					// prepare users data for the notification message
+					if (!function_exists('get_username_string'))
+					{
+						include($this->root_path . 'includes/functions_content.' . $this->php_ext);
+					}
+					$display_username = get_username_string('no_profile', $this->user->data['user_id'], $this->user->data['username'], $this->user->data['user_colour']);
+					// prepare notification data
+					$notification_data = array(
+						'tz_id'				=> $id,
+						'tz_name'			=> $this->request->variable('mot_tzv_name', '', true),
+						'creator'			=> $this->user->data['username'],
+						'display_username'	=> $display_username,
+						'user_ids'			=> $mod_users,
+						'parent'			=> 0,
+					);
+					$notification_data = array_merge($notification_data, ['work_mode' => 'notify']);
+					// notify moderators that a new POI has been edited
+					$this->notification_manager->add_notifications('mot.tzv.notification.type.notify_tz_edited', $notification_data);
+
 					meta_refresh(15, $this->tzv_list_route); // nach 15 Sek. zu Tourziel-Liste
 
-					$message =  $this->language->lang('MOT_TZV_EVENT_EDIT_SUCCESSFUL') . '<br><br><a href="' . $this->helper->route('mot_tzv_event', ['id' =>  $event['id']]) . '">'. $this->language->lang('MOT_TZV_RETURN_EVENT') . '</a><br><a href="' . $this->tzv_index_route . '">'. $this->language->lang('MOT_TZV_RETURN_TOURZIEL') . '</a>';
+					$message =  $this->language->lang('MOT_TZV_EVENT_EDIT_SUCCESSFUL') . '<br><br><a href="' . $this->helper->route('mot_tzv_event', ['id' =>  $event['id']]) . '">' . $this->language->lang('MOT_TZV_RETURN_EVENT') . '</a><br><a href="' . $this->tzv_index_route . '">'. $this->language->lang('MOT_TZV_RETURN_TOURZIEL') . '</a>';
 					trigger_error($message);
 				}
 
@@ -568,12 +643,15 @@ class mot_tzv_main
 					'MOT_TZV_CREATE_AUTH'		=> $this->auth->acl_get('u_mot_tzv_add'),
 					'MOT_TZV_CREATE_LINK'		=> $this->tzv_create_route,
 					'MOT_TZV_LIST_AUTH'			=> $this->auth->acl_get('u_mot_tzv_view'),
+					'MOT_TZV_MAP_LINK'			=> $this->tzv_map_route,
 					'MOT_TZV_LIST_LINK'			=> $this->tzv_list_route,
 					'MOT_TZV_SEARCH_LINK'		=> $this->tzv_search_route,
 
 					'MOT_TZV_TOURZIEL_NUMBER'	=> $this->language->lang('MOT_TZV_COUNT_TOTAL_DEST', $this->events->get_total_count_tourziele()),
 					'MOT_TZV_COUNTRY_ENABLE'	=> $this->config['mot_tzv_country_enable'],
 					'MOT_TZV_COORD_MANDATORY'	=> $this->config['mot_tzv_maps_enable'],
+
+					'MOT_TZV_EDIT_TZ'			=> true,
 
 					'MOT_TZV_POST_NAME'			=> $event['name'],
 					'MOT_TZV_SELECT_COUNTRY_ID'	=> $event['country'],
@@ -605,6 +683,66 @@ class mot_tzv_main
 
 
 	/*--------------
+	 TOURZIEL MAP
+	--------------*/
+	public function map()
+	{
+		if (!$this->auth->acl_get('u_mot_tzv_view'))
+		{
+			trigger_error($this->language->lang('MOT_TZV_TOURZIEL_NO_VIEW'));
+		}
+
+		if ($this->auth->acl_get('m_mot_tzv_edit'))
+		{
+			$this->template->assign_var('MOT_TZV_MODERATE_LINK', $this->tzv_moderate_route);
+		}
+
+		$tourziel_array = [];
+		$tourziele = $this->events->get_events();
+		foreach ($tourziele as $row)
+		{
+			if ($row['maps_lat'] != '0' && $row['maps_lon'] != '0')
+			{
+				// set the route to this Tourziel's detail view
+				$row['url'] = $this->helper->route('mot_tzv_event', ['id' =>  $row['id']]);
+				$tourziel_array[] = $row;
+			}
+		}
+
+		$map_config = [
+			'Lat'			=> $this->config['mot_tzv_map_lat'],
+			'Lon'			=> $this->config['mot_tzv_map_lon'],
+			'Zoom'			=> $this->config['mot_tzv_map_zoom'],
+			'Cluster'		=> $this->config['mot_tzv_map_enable_clusters'],
+		];
+
+		// Get country info to display flags
+		$this->events->get_country_info();
+
+		$this->template->assign_vars([
+			'MOT_TZV_INDEX_AUTH'		=> $this->auth->acl_get('u_mot_tzv_mainview'),
+			'MOT_TZV_INDEX_LINK'		=> $this->tzv_index_route,
+			'MOT_TZV_CREATE_AUTH'		=> $this->auth->acl_get('u_mot_tzv_add'),
+			'MOT_TZV_CREATE_LINK'		=> $this->tzv_create_route,
+			'MOT_TZV_LIST_AUTH'			=> $this->auth->acl_get('u_mot_tzv_view'),
+			'MOT_TZV_LIST_LINK'			=> $this->tzv_list_route,
+			'MOT_TZV_SEARCH_LINK'		=> $this->tzv_search_route,
+			'MOT_TZV_TZV_SUPPORT'		=> $this->tzv_support_route, // Support Link
+			'MOT_TZV_TOURZIEL_NUMBER'	=> $this->language->lang('MOT_TZV_COUNT_TOTAL_DEST', $this->events->get_total_count_tourziele()),
+			'MOT_TZV_COUNTRY_ENABLE'	=> $this->config['mot_tzv_country_enable'],
+			'MOT_TZV_MAPS_ENABLE'		=> $this->config['mot_tzv_maps_enable'],
+
+			'MOT_TZV_MARKER_COUNT'		=> count($tourziel_array),
+
+			'MOT_TZV_MAPCONFIG'			=> json_encode($map_config),
+			'MOT_TZV_TOURZIELE'			=> json_encode($tourziel_array),
+		]);
+
+		return $this->helper->render('mot_tzv_main_map.html', $this->language->lang('MOT_TZV_MAIN_MAP'));
+	}
+
+
+	/*--------------
 	 TOURZIEL LISTE
 	--------------*/
 	public function tzvlist()
@@ -631,7 +769,7 @@ class mot_tzv_main
 		{
 			// set parameters for pagination
 			$start = $this->request->variable('start', 0);
-			$limit = (int) $this->config['mot_tzv_rows_per_page'];
+			$limit = $this->config['mot_tzv_rows_per_page'];
 
 			// get the last Tourziel
 			$newest_tz = $this->events->get_events(0, 1, true);
@@ -655,6 +793,7 @@ class mot_tzv_main
 			}
 
 			$this->template->assign_vars([
+				'NEWEST_LISTEN_URL'			=> $this->helper->route('mot_tzv_event', ['id' =>  $newest_tz['id']]),
 				'NEWEST_LISTEN_ID'			=> $newest_tz['id'],
 				'NEWEST_LISTEN_NAME'		=> $newest_tz['name'],
 				'NEWEST_LISTEN_CATEGORY'	=> $newest_tz['cat_name'],
@@ -717,6 +856,7 @@ class mot_tzv_main
 				}
 
 				$this->template->assign_block_vars('tzlist', [
+					'LISTEN_URL'		=> $this->helper->route('mot_tzv_event', ['id' =>  $row['id']]),
 					'LISTEN_ID'		    => $row['id'],
 					'LISTEN_NAME'		=> $row['name'],
 					'LISTEN_CATEGORY'	=> $row['cat_name'],
@@ -759,10 +899,13 @@ class mot_tzv_main
 			'MOT_TZV_INDEX_LINK'		=> $this->tzv_index_route,
 			'MOT_TZV_CREATE_AUTH'		=> $this->auth->acl_get('u_mot_tzv_add'),
 			'MOT_TZV_CREATE_LINK'		=> $this->tzv_create_route,
+			'MOT_TZV_MAP_LINK'			=> $this->tzv_map_route,
 			'MOT_TZV_SEARCH_LINK'		=> $this->tzv_search_route,
 			'MOT_TZV_TOURZIEL_NUMBER'	=> $this->language->lang('MOT_TZV_COUNT_TOTAL_DEST', $this->events->get_total_count_tourziele()),
 			'MOT_TZV_COUNTRY_ENABLE'	=> $this->config['mot_tzv_country_enable'],
 			'MOT_TZV_MAPS_ENABLE'		=> $this->config['mot_tzv_maps_enable'],
+			'MOT_TZV_LONG_NEWEST'		=> $this->config['mot_tzv_latest_tz_view'],
+			'MOT_TZV_LONG_TABLE'		=> $this->config['mot_tzv_list_tz_view'],
 			'MOT_TZV_TOTAL_POSTS'		=> $total_tz,
 		]);
 
@@ -787,10 +930,10 @@ class mot_tzv_main
 
 		// set parameters for pagination
 		$start = $this->request->variable('start', 0);
-		$limit = (int) $this->config['mot_tzv_rows_per_page'];
+		$limit = $this->config['mot_tzv_rows_per_page'];
 
 		$submit = $this->request->variable('submit', '');
-		if ($submit == 'Suchen')
+		if ($submit == $this->language->lang('MOT_TZV_BUTTON_SUCHEN'))
 		{
 			$id	= $this->request->variable('id', 0);		// Just to have something without a leading 'OR' to start the WHERE clause with
 
@@ -861,6 +1004,7 @@ class mot_tzv_main
 				}
 
 				$this->template->assign_block_vars('tzlist', [
+					'LISTEN_URL'		=> $this->helper->route('mot_tzv_event', ['id' =>  $row['id']]),
 					'LISTEN_ID'		    => $row['id'],
 					'LISTEN_NAME'		=> $row['name'],
 					'LISTEN_CATEGORY'	=> $row['cat_name'],
@@ -923,9 +1067,11 @@ class mot_tzv_main
 			'MOT_TZV_CREATE_AUTH'		=> $this->auth->acl_get('u_mot_tzv_add'),
 			'MOT_TZV_CREATE_LINK'		=> $this->tzv_create_route,
 			'MOT_TZV_LIST_AUTH'			=> $this->auth->acl_get('u_mot_tzv_view'),
+			'MOT_TZV_MAP_LINK'			=> $this->tzv_map_route,
 			'MOT_TZV_LIST_LINK'			=> $this->tzv_list_route,
 			'MOT_TZV_SEARCH_ACTIVE'		=> true,
 			'MOT_TZV_MAPS_ENABLE'		=> $this->config['mot_tzv_maps_enable'],
+			'MOT_TZV_LONG_TABLE'		=> $this->config['mot_tzv_list_tz_view'],
 
 			'MOT_TZV_SELECT_COUNTRY_ID'	=> $this->request->variable('mot_tzv_country', 0),
 			'MOT_TZV_SELECT_REGION_ID'	=> $this->request->variable('mot_tzv_region', 0),

@@ -4,22 +4,40 @@ All changes to `Adressverwaltung Tourziele` will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.3.0] - 2022-04-27
+
+### Added
+-	An overview map (including marker clustering) and four new config variables for it
+-	UCP tab to show the respective user his "own" tour destinations including the possibility to edit or delete them if the proper permissions are granted
+-	Two settings to the ACP settigs tab to enable administrators to choose how the latest tour destination and the list of tour destinations will be displayed
+	(either as a detailled view or as a table row) and two new config variables to hold these values
+-	Notification of moderators permitted to edit or delete tour destinations in cases of a creted, edited or deleted tour destination
+
+### Changed
+
+### Fixed
+-	The calculation and the display of the OSM map within the detail view of a tour destination
+-	A bug in the edit mode which changed the author of a tour destination if a moderator edited it
+-	A bug with the user permissions which prevented authorised users to edit or delete their own tour destinations
+
+### Removed
+  
+  
 ## [0.2.1] - 2022-04-19
 
 ### Added
 -	A config variable holding the URL for the flags
--	A new column to the TOURZIEL_TABLE to hold the username of a deleted user for displaying the Tourziel
+-	A new column to the TOURZIEL_TABLE to hold the username of a deleted user for displaying the tour destinations
 
 ### Changed
--	The link in the forum lists display of the newest Tourziel from the Tourziel list to this Tourziel's detail view in `event/mot_tzv_listener.php`
+-	The link in the forum lists display of the newest tour destination from the tour destinations list to this tour destinations's detail view in `event/mot_tzv_listener.php`
 -	The link to the country flags from an internal directory to `https://flagcdn.com/16x12/`
 
-
 ### Fixed
--	Wrong link to former Tourziel list in `event/mot_tzv_listener.php` which resulted in a "page not found" error
--	Three wrong links to the Tourziel index generated with `gemerate_board_url` which resulted in a "page not found" error
+-	Wrong link to former tour destinations list in `event/mot_tzv_listener.php` which resulted in a "page not found" error
+-	Three wrong links to the tour destinations index generated with `gemerate_board_url` which resulted in a "page not found" error
 -	A wrong location of the support link and its enabler definition in `event/mot_tzv_listener.php` which led to it being not dislayed if there were no new
-	Tourziele
+	tour destinations
 -	Added missing `sql_freeresult` in `functions/mot_tzv_events.php` in `function get_events()`
 -	Missing coordinates in search result list
 
@@ -34,8 +52,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 -	A confirmation box to all delete operations in the ACP
 -	An English language pack in order to adhere to English language as default and fall back language
--	A Javascript file to check input entries while adding a new Tourziel entry
--	A check for the Tourziel name already existing to the SQL query adding a new Tourziel to prevent multiple entries with the same name, affected file is
+-	A Javascript file to check input entries while adding a new tour destination entry
+-	A check for the tour destination's name already existing to the SQL query adding a new Tourziel to prevent multiple entries with the same name, affected file is
 	`functions/events.php`
 
 ### Changed

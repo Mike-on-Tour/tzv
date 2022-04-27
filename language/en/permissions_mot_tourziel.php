@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB Extension [Adressverwaltung - Tourziele]
-* @copyright (c) 2014-2021 waldkatze - http://www.polarbiker-oberlausitz.de/mod_demo/
+* @copyright (c) 2022 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 * @language file [deutsch / Du]

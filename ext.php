@@ -27,6 +27,70 @@ class ext extends \phpbb\extension\base
 		return true;
 	}
 
+	public function enable_step($old_state)
+	{
+		switch ($old_state)
+		{
+			case '': // Empty means nothing has run yet
+				$phpbb_notifications = $this->container->get('notification_manager');
+				$phpbb_notifications->enable_notifications('mot.tzv.notification.type.notify_new_tz');
+				$phpbb_notifications->enable_notifications('mot.tzv.notification.type.notify_tz_edited');
+				$phpbb_notifications->enable_notifications('mot.tzv.notification.type.notify_tz_deleted');
+
+				return 'notifications';
+			break;
+
+			default:
+				return parent::enable_step($old_state);
+			break;
+		}
+	}
+
+	public function disable_step($old_state)
+	{
+		switch ($old_state)
+		{
+			case '': // Empty means nothing has run yet
+				$phpbb_notifications = $this->container->get('notification_manager');
+				$phpbb_notifications->disable_notifications('mot.tzv.notification.type.notify_new_tz');
+				$phpbb_notifications->disable_notifications('mot.tzv.notification.type.notify_tz_edited');
+				$phpbb_notifications->disable_notifications('mot.tzv.notification.type.notify_tz_deleted');
+
+				return 'notifications';
+			break;
+
+			default:
+				return parent::disable_step($old_state);
+			break;
+		}
+	}
+
+	public function purge_step($old_state)
+	{
+		switch ($old_state)
+		{
+			case '': // Empty means nothing has run yet
+				try
+				{
+					$phpbb_notifications = $this->container->get('notification_manager');
+					$phpbb_notifications->purge_notifications('mot.tzv.notification.type.notify_new_tz');
+					$phpbb_notifications->purge_notifications('mot.tzv.notification.type.notify_tz_edited');
+					$phpbb_notifications->purge_notifications('mot.tzv.notification.type.notify_tz_deleted');
+				}
+				catch (\phpbb\notification\exception $e)
+				{
+					// continue
+				}
+
+				return 'notifications';
+			break;
+
+			default:
+				return parent::purge_step($old_state);
+			break;
+		}
+	}
+
 	private function get_adm_back_link()
 	{
 		return adm_back_link(append_sid('index.' . $this->container->getParameter('core.php_ext'), 'i=acp_extensions&amp;mode=main'));

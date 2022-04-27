@@ -113,7 +113,7 @@ class mot_tzv_events
 		{
 			if ($limit == false)
 			{
-				$sql .= 'ORDER_BY post_time';
+				$sql .= 'ORDER BY post_time';
 				$result = $this->db->sql_query($sql);
 
 				while ($row = $this->db->sql_fetchrow($result))
@@ -240,10 +240,9 @@ class mot_tzv_events
 	function get_total_count_tourziele()
 	{
 		$sql = 'SELECT COUNT(*) AS count
-				FROM ' . $this->tourziel_table . '
-				ORDER BY id';
+				FROM ' . $this->tourziel_table;
 		$result = $this->db->sql_query($sql);
-		$count  = (int) $this->db->sql_fetchfield('count');
+		$count = $this->db->sql_fetchfield('count');
 		$this->db->sql_freeresult($result);
 
 		return $count;
@@ -380,4 +379,109 @@ class mot_tzv_events
 		return '<br><br><a href="' . $u_action . '">&laquo; ' . $lang_str . '</a>';
 	}
 
+
+	/*
+	* Get the OSM tile number for a given coordinate and a given zoom factor
+	* @params	float		$lat		the coordinate's latitude as decimal degree
+	*		float		$lon		the coordinate's longitude as decimal degree
+	*		integer	$zoom	the current zoom factor
+	*
+	* @return	array		array with the tile numbers in x and y direction
+	*/
+	private function get_tile_number($lat, $lon, $zoom)
+	{
+		$xtile = intval( ($lon+180)/360 * 2**$zoom );
+		$ytile = intval( (1 - (log( tan(deg2rad($lat)) + 1/cos(deg2rad($lat)) )/M_PI)) * 2**($zoom-1) );
+
+		return [
+			'xtile' => $xtile,
+			'ytile' => $ytile,
+		];
+	}
+
+
+	/*
+	* Get the center coordinate of a given pair of tile numbers at a given zoom factor
+	* @params	integer	$xtile	the tile number in x direction
+	* 		integer	$ytile	the tile number in y direction
+	*		integer	$zoom	the current zoom factor
+	*
+	* @return	array		array with the latitude and longitude of the tile center as decimal degree
+	*/
+	private function get_lon_lat($xtile, $ytile, $zoom)
+	{
+		$n = 2 ** $zoom;
+		$lon_deg = $xtile / $n * 360.0 - 180.0;
+		$lat_deg = rad2deg(atan(sinh(M_PI * (1 - 2 * $ytile / $n))));
+
+		return [
+			'lon'	=> $lon_deg,
+			'lat'	=> $lat_deg,
+		];
+	}
+
+	/*
+	* Get the coordinates of the upper left and lower right corner to define a box for a given coordinate at a given zoom factor in a defined window
+	* @params	integer	$width	the window's width in pixels
+	*		integer	$height	the window's height in pixels
+	* 		float		$lat		the coordinate's latitude as decimal degree
+	*		float		$lon		the coordinate's longitude as decimal degree
+	*		integer	$zoom	the current zoom factor
+	*
+	* @return	array		array with the latitudes and longitudes of the map boxes upper left and lower right corner as decimal degrees
+	*/
+	public function lonlat_to_bbox($width, $height, $lat, $lon, $zoom)
+	{
+		$tile_size = 256;
+
+		$tiles = $this->get_tile_number($lat, $lon, $zoom);
+
+		$xtile_s = ($tiles['xtile'] * $tile_size - $width/2) / $tile_size;
+		$ytile_s = ($tiles['ytile'] * $tile_size - $height/2) / $tile_size;
+		$xtile_e = ($tiles['xtile'] * $tile_size + $width/2) / $tile_size;
+		$ytile_e = ($tiles['ytile'] * $tile_size + $height/2) / $tile_size;
+
+		$coord_s = $this->get_lon_lat($xtile_s, $ytile_s, $zoom);
+		$coord_e = $this->get_lon_lat($xtile_e, $ytile_e, $zoom);
+
+		return [
+			'lon_s'	=> $lon - (($coord_e['lon'] - $coord_s['lon']) / 2),
+			'lat_s'	=> $lat + (($coord_s['lat'] - $coord_e['lat']) / 2),
+			'lon_e'	=> $lon + (($coord_e['lon'] - $coord_s['lon']) / 2),
+			'lat_e'	=> $lat - (($coord_s['lat'] - $coord_e['lat']) / 2),
+		];
+	}
+
+
+	/*
+	* Get the user ids od those users who have moderators perissions to edit or delete tour destinations
+	*
+	* @retuen	array		all respective user ids
+	*/
+	public function get_tzv_moderators()
+	{
+		// get the users supposed to get notified of a new POI
+		$sql = 'SELECT user_id
+				FROM  ' . USERS_TABLE . '
+				WHERE ' . $this->db->sql_in_set('user_type', [USER_NORMAL, USER_FOUNDER]) . '
+				ORDER BY user_id ASC';
+		$result = $this->db->sql_query($sql);
+		$users_total = $this->db->sql_fetchrowset($result);
+		$this->db->sql_freeresult($result);
+		$users_all = [];
+		foreach ($users_total as $row)
+		{
+			$users_all[] = $row['user_id'];
+		}
+		$tzv_mods_edit = $this->auth->acl_get_list($users_all, 'm_mot_tzv_edit')[0]['m_mot_tzv_edit'];
+		$tzv_mods_delete = $this->auth->acl_get_list($users_all, 'm_mot_tzv_delete')[0]['m_mot_tzv_delete'];
+		$tzv_mods = array_replace_recursive($tzv_mods_edit, $tzv_mods_delete);
+
+		// Make sure we have at least an empty array to prevent errors
+		if (empty($tzv_mods))
+		{
+			$tzv_mods = [];
+		}
+		return $tzv_mods;
+	}
 }
