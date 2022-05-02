@@ -4,6 +4,23 @@ All changes to `Adressverwaltung Tourziele` will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.4.0] - 2022-05-02
+
+### Added
+-	A map to the search results to show search results listed in the results table
+-	The possibility to display own images on the index page instead or in addition to the pre-installed images
+
+### Changed
+-	Changed the call to `kurviger.de` to open a new tab (or window), omitted the variables for routing in the call (these should be the user's choice and
+	he can do it at `kurviger.de`) and added a location variable if location is not 'de' and in one of the supported languages of `kurviger.de`
+	(currently ['en', 'es', 'fr', 'it', 'nl',])  
+	Definition of the language variable in `language/xx/common.php`
+
+### Fixed
+
+### Removed
+  
+  
 ## [0.3.0] - 2022-04-27
 
 ### Added
