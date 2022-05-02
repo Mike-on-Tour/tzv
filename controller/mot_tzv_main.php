@@ -130,6 +130,23 @@ class mot_tzv_main
 		// Get country info to display flags
 		$this->events->get_country_info();
 
+		// if images are to be displayed in the main window go and get them
+		if ($this->config['mot_tzv_main_image'])
+		{
+			$this->image_path = $this->path_helper->get_web_root_path() . 'ext/mot/tzv/images/';
+			$files = scandir($this->image_path);
+
+			foreach ($files as $element)
+			{
+				if (is_file ($this->image_path . $element))
+				{
+					$this->template->assign_block_vars('tz_image', [
+						'IMAGE_SRC'		=> $this->image_path . $element,
+					]);
+				}
+			}
+		}
+
 		$this->template->assign_vars([
 			'MOT_TZV_TOURZIEL_NUMBER'	=> $this->language->lang('MOT_TZV_COUNT_TOTAL_DEST', $this->events->get_total_count_tourziele()),
 			'MOT_TZV_COUNTRY_ENABLE'	=> $this->config['mot_tzv_country_enable'],
@@ -380,6 +397,7 @@ class mot_tzv_main
 
 			'MOT_TZV_MAPS_ENABLE'		=> $this->config['mot_tzv_maps_enable'],
 			'MOT_TZV_KURVIGER_ENABLE'	=> $this->config['mot_tzv_kurviger_enable'],
+			'MOT_TZV_KURVIGER_LANG'		=> in_array($this->language->lang('MOT_TZV_MAP_LANG'), ['en', 'es', 'fr', 'it', 'nl',]) ? $this->language->lang('MOT_TZV_MAP_LANG') : '',
 			'MOT_TZV_GOOGLEMAP_ENABLE'	=> $this->config['mot_tzv_googlemap_enable'],
 			'MOT_TZV_OSMMAP_ENABLE'		=> $this->config['mot_tzv_ostreetmap_enable'],
 
@@ -932,6 +950,9 @@ class mot_tzv_main
 		$start = $this->request->variable('start', 0);
 		$limit = $this->config['mot_tzv_rows_per_page'];
 
+		$tourziel_array = [];
+		$total_tz = 0;
+
 		$submit = $this->request->variable('submit', '');
 		if ($submit == $this->language->lang('MOT_TZV_BUTTON_SUCHEN'))
 		{
@@ -1028,6 +1049,13 @@ class mot_tzv_main
 					'COUNTRY_NAME'      => $row['country_name'],
 					'COUNTRY_IMG'       => $this->tzv_flags_url . $row['country_image'],
 				]);
+
+				if ($row['maps_lat'] != '0' && $row['maps_lon'] != '0')
+				{
+					// set the route to this Tourziel's detail view
+					$row['url'] = $this->helper->route('mot_tzv_event', ['id' =>  $row['id']]);
+					$tourziel_array[] = $row;
+				}
 			}
 			$this->db->sql_freeresult($result);
 
@@ -1058,6 +1086,13 @@ class mot_tzv_main
 		// Get country info to display flags
 		$this->events->get_country_info();
 
+		$map_config = [
+			'Lat'			=> $this->config['mot_tzv_map_lat'],
+			'Lon'			=> $this->config['mot_tzv_map_lon'],
+			'Zoom'			=> $this->config['mot_tzv_map_zoom'],
+			'Cluster'		=> $this->config['mot_tzv_map_enable_clusters'],
+		];
+
 		$this->template->assign_vars([
 			'U_FORM_ACTION'				=> $this->tzv_search_route,
 			'MOT_TZV_TOURZIEL_NUMBER'	=> $this->language->lang('MOT_TZV_COUNT_TOTAL_DEST', $this->events->get_total_count_tourziele()),
@@ -1072,6 +1107,7 @@ class mot_tzv_main
 			'MOT_TZV_SEARCH_ACTIVE'		=> true,
 			'MOT_TZV_MAPS_ENABLE'		=> $this->config['mot_tzv_maps_enable'],
 			'MOT_TZV_LONG_TABLE'		=> $this->config['mot_tzv_list_tz_view'],
+			'MOT_TZV_TOTAL_TZ'			=> $this->events->get_total_count_tourziele(),
 
 			'MOT_TZV_SELECT_COUNTRY_ID'	=> $this->request->variable('mot_tzv_country', 0),
 			'MOT_TZV_SELECT_REGION_ID'	=> $this->request->variable('mot_tzv_region', 0),
@@ -1079,6 +1115,10 @@ class mot_tzv_main
 			'MOT_TZV_POST_NAME'			=> $this->request->variable('name', '', true),
 			'MOT_TZV_POST_PLZ'			=> $this->request->variable('plz', '', true),
 			'MOT_TZV_POST_ORT'			=> $this->request->variable('ort', '', true),
+
+			'MOT_TZV_MAPCONFIG'			=> json_encode($map_config),
+			'MOT_TZV_TOURZIELE'			=> json_encode($tourziel_array),
+			'MOT_TZV_ENABLE_SEARCH_MAP'	=> $total_tz,
 		]);
 
 		return $this->helper->render('mot_tzv_main_search.html', $this->language->lang('MOT_TZV_TOURZIEL'));

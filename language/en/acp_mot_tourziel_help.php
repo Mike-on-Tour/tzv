@@ -29,7 +29,12 @@ $lang = array_merge($lang, [
 									&bull;&nbsp;License <a href="http://opensource.org/licenses/gpl-license.php"> http://opensource.org/licenses/gpl-license.php</a> GNU Public License<br>',
 
 	'ACP_MOT_TZV_HISTORY'		=> 'Tour destinations history',
-	'ACP_MOT_TZV_HUPDATE'		=> '&bull;&nbsp;2022 Version 0.3.0<br>
+	'ACP_MOT_TZV_HUPDATE'		=> '&bull;&nbsp;2022 Version 0.4.0<br>
+									- Search results are now shown on a map in addition to the table<br>
+									- Changed the call to kurviger.de to open a new tab or window<br>
+									- kurviger.de will be called with a localisation variable to set the users language if this language is supported (e.g. if user uses English kurviger.de will open in English)<br>
+									- The images on the Tour destinations index page are no longer hard coded, the admin can use his own preferred images<br>
+									&bull;&nbsp;2022 Version 0.3.0<br>
 									- Added a general map to display all tour destinations<br>
 									- Added a new UCP tab to list all tour destinations of the respective user<br>
 									- Choice of a detailed or more general (table) display of items within the Tour destination list and the search result<br>

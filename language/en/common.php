@@ -78,11 +78,10 @@ $lang = array_merge($lang, [
 		2	=> 'Currently <strong>%1$d</strong> items are listed in the database.',
 	],
 	'MOT_TZV_COUNTRY_EINTRAG'			=> 'Registered countries',
-	'MOT_TZV_MAINNEWS_INFO'				=> '&bull;&nbsp;&nbsp;Display all tour destinations on a general map.<br>
-											&bull;&nbsp;&nbsp;A new UCP tab to list all tour destinations of the respective user.<br>
-											&bull;&nbsp;&nbsp;Choice of a detailed or more general (table) display of items within the Tour destination list and the search result.<br>
-											&bull;&nbsp;&nbsp;Notification of moderators in case of newly created, edited or deleted items.<br>
-											&bull;&nbsp;&nbsp;Corrected the display of the OSM detail map.<br>',
+	'MOT_TZV_MAINNEWS_INFO'				=> '&bull;&nbsp;&nbsp;Search results are now shown on a map in addition to the table.<br>
+											&bull;&nbsp;&nbsp;Changed the call to kurviger.de to open a new tab or window.<br>
+											&bull;&nbsp;&nbsp;kurviger.de will be called with a localisation variable to set the users language if this language is supported (e.g. if user uses English kurviger.de will open in English).<br>
+											&bull;&nbsp;&nbsp;The images on the Tour destinations index page are no longer hard coded, the admin can use his own preferred images.<br>',
 	'MOT_TZV_NUTZUNG_MAPS'				=> 'Google Maps Terms of Use',
 
 	// Map
@@ -96,7 +95,7 @@ $lang = array_merge($lang, [
 		1	=> 'Of the existing items %1$d item is shown on the map.',
 		2	=> 'Of the existing items %1$d items are shown on the map.',
 	],
-	'MOT_TZV_MAP_LANG'					=> 'en',	// set according to this language
+	'MOT_TZV_MAP_LANG'					=> 'en',	// set according to this language, USE LOWERCASE LETTERS ONLY!!!
 	'MOT_TZV_OSM_LARGER_MAP'			=> 'View larger map',
 
 	// [Eintragen / Ändern]

@@ -25,12 +25,11 @@
 							{% endif %}
 
 							{% if MOT_TZV_MAIN_IMAGE %}
-								<span class="responsive-hide"><strong>
-									<div class="main1"></div>
-									<div class="main2"></div>
-									<div class="main3"></div>
-									<br>
-								</strong></span>
+								<div class="responsive-hide image-box">
+									{% for tz_image in tz_image %}
+										<div class="main"><img class="image_main" src="{{ tz_image.IMAGE_SRC }}"></div>
+									{% endfor %}
+								</div>
 							{% endif %}
 
 							{% if ACP_MOT_TZV_MAININFO %}

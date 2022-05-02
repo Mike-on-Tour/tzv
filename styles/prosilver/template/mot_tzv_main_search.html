@@ -3,6 +3,17 @@
 
 {% INCLUDE 'overall_header.html' %}
 
+{% if not INCLUDED_MOT_TZV_MAP_JS %}
+	{% INCLUDECSS '@mot_tzv/thirdparty/leaflet.css' %}
+	{% INCLUDECSS '@mot_tzv/thirdparty/MarkerCluster.css' %}
+	{% INCLUDECSS '@mot_tzv/thirdparty/MarkerCluster.Default.css' %}
+	{% INCLUDECSS '@mot_tzv/mot_tourziel.css' %}
+	{% INCLUDEJS '@mot_tzv/thirdparty/leaflet.js' %}
+	{% INCLUDEJS '@mot_tzv/thirdparty/leaflet.markercluster.js' %}
+	{% INCLUDEJS '@mot_tzv/mot_tzv_map.js' %}
+	{% set INCLUDED_MOT_TZV_MAP_JS = true %}
+{% endif %}
+
 <div class="forabg">
 	<div class="inner">
 		<ul class="topiclist">
@@ -49,72 +60,92 @@
 
 					<h2 >{{ lang('MOT_TZV_MAIN_SEARCH') }}</h2>
 
-					<ul class="topiclist forums">
-						<li class="row">
-							<dl>
-								<dt style="width: 99%; text-align: left; margin: 10px 10px 10px 10px;">
-									<span style="font-size: 100%; line-height: 100%;">
-										<div class="rules">
-											{{ lang('MOT_TZV_SEARCH_AUSWAHL') }}
-										</div>
+					{% if MOT_TZV_TOTAL_TZ %}	{# Show this block only if there are any tour destinations #}
+						<ul class="topiclist forums">
+							<li class="row">
+								<dl>
+									<dt style="width: 99%; text-align: left; margin: 10px 10px 10px 10px;">
+										<span style="font-size: 100%; line-height: 100%;">
+											<div class="rules">
+												{{ lang('MOT_TZV_SEARCH_AUSWAHL') }}
+											</div>
 
-										<table>
-											{% INCLUDE '@mot_tzv/mot_tzv_search_country.html' %}
-											{% INCLUDE '@mot_tzv/mot_tzv_search_region.html' %}
-											{% INCLUDE '@mot_tzv/mot_tzv_search_cats.html' %}
-										</table>
-
-										<br>
-
-										<div class="rules">
-											{{ lang('MOT_TZV_SEARCH_TEXT') }}
-										</div>
-
-										<form id="postform" method="post" action="{{ U_FORM_ACTION }}" enctype="multipart/form-data">
 											<table>
-												<tr>
-													<td>{{ lang('MOT_TZV_SEARCH_TOURZIEL') }}{{ lang('COLON') }}&nbsp;</td>
-													<td><input type="text" id="name" name="name" size="30" value="{{ MOT_TZV_POST_NAME }}" class="inputbox autowidth" /></td>
-												</tr>
-												<tr>
-													<td>&nbsp;</td>
-													<td>&nbsp;</td>
-												</tr>
-												<tr>
-													<td>{{ lang('MOT_TZV_SEARCH_PLZ') }}{{ lang('COLON') }}&nbsp;</td>
-													<td><input type="text" id="plz" name="plz" size="6" value="{{ MOT_TZV_POST_PLZ }}" class="inputbox autowidth" /></td>
-												</tr>
-												<tr>
-													<td>&nbsp;</td>
-													<td>&nbsp;</td>
-												</tr>
-												<tr>
-													<td>{{ lang('MOT_TZV_SEARCH_ORT') }}{{ lang('COLON') }}&nbsp;</td>
-													<td><input type="text" id="ort" name="ort" size="30" value="{{ MOT_TZV_POST_ORT }}" class="inputbox autowidth" /></td>
-												</tr>
-												<tr>
-													<td>&nbsp;</td>
-													<td>&nbsp;</td>
-												</tr>
-												<tr>
-													<td>&nbsp;</td><td><input class="button icon-button reply-icon" type="submit" name="submit" value="{{ lang('MOT_TZV_BUTTON_SUCHEN') }}"></td>
-												</tr>
+												{% INCLUDE '@mot_tzv/mot_tzv_search_country.html' %}
+												{% INCLUDE '@mot_tzv/mot_tzv_search_region.html' %}
+												{% INCLUDE '@mot_tzv/mot_tzv_search_cats.html' %}
 											</table>
-										</form>
-									</span>
-								</dt>
-							</dl>
-						</li>
-					</ul>
-					<br>
 
-					{% include '@mot_tzv/mot_tzv_tzlist_table.html' %}
+											<br>
 
+											<div class="rules">
+												{{ lang('MOT_TZV_SEARCH_TEXT') }}
+											</div>
+
+											<form id="postform" method="post" action="{{ U_FORM_ACTION }}" enctype="multipart/form-data">
+												<table>
+													<tr>
+														<td>{{ lang('MOT_TZV_SEARCH_TOURZIEL') }}{{ lang('COLON') }}&nbsp;</td>
+														<td><input type="text" id="name" name="name" size="30" value="{{ MOT_TZV_POST_NAME }}" class="inputbox autowidth" /></td>
+													</tr>
+													<tr>
+														<td>&nbsp;</td>
+														<td>&nbsp;</td>
+													</tr>
+													<tr>
+														<td>{{ lang('MOT_TZV_SEARCH_PLZ') }}{{ lang('COLON') }}&nbsp;</td>
+														<td><input type="text" id="plz" name="plz" size="6" value="{{ MOT_TZV_POST_PLZ }}" class="inputbox autowidth" /></td>
+													</tr>
+													<tr>
+														<td>&nbsp;</td>
+														<td>&nbsp;</td>
+													</tr>
+													<tr>
+														<td>{{ lang('MOT_TZV_SEARCH_ORT') }}{{ lang('COLON') }}&nbsp;</td>
+														<td><input type="text" id="ort" name="ort" size="30" value="{{ MOT_TZV_POST_ORT }}" class="inputbox autowidth" /></td>
+													</tr>
+													<tr>
+														<td>&nbsp;</td>
+														<td>&nbsp;</td>
+													</tr>
+													<tr>
+														<td>&nbsp;</td><td><input class="button icon-button reply-icon" type="submit" name="submit" value="{{ lang('MOT_TZV_BUTTON_SUCHEN') }}"></td>
+													</tr>
+												</table>
+											</form>
+										</span>
+									</dt>
+								</dl>
+							</li>
+						</ul>
+						<br>
+
+						{% include '@mot_tzv/mot_tzv_tzlist_table.html' %}
+
+						{% if MOT_TZV_ENABLE_SEARCH_MAP %}		{# Show map only if there are any search results #}
+							<div>&nbsp;</div>
+							<div class="mot_tzv_map" id="mot_tzv_map"></div>
+						{% endif %}
+					{% endif %}
 				</div>
 			</li>
 		</ul>
 	</div>
 </div>
+
+<script>
+// <![CDATA[
+	// Define own JS variables
+	var motTzv = {};
+
+	motTzv.jsMapConfig = {{ MOT_TZV_MAPCONFIG }};
+	motTzv.jsTourziele = {{ MOT_TZV_TOURZIELE }};
+
+	motTzv.jsStreetDesc = "{{ lang('MOT_TZV_STREET_DESC')|e('js') }}";
+	motTzv.jsTopoDesc = "{{ lang('MOT_TZV_TOPO_DESC')|e('js') }}";
+	motTzv.jsSatDesc = "{{ lang('MOT_TZV_SAT_DESC')|e('js') }}";
+// ]]>
+</script>
 
 {% INCLUDE '@mot_tzv/mot_tzv_main_footer.html' %}
 {% INCLUDE 'overall_footer.html' %}

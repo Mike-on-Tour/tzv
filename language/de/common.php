@@ -78,11 +78,10 @@ $lang = array_merge($lang, [
 		2	=> 'Insgesamt <strong>%1$d</strong> Tourziele in der Datenbank.',
 	],
 	'MOT_TZV_COUNTRY_EINTRAG'			=> 'Eingetragene Länder',
-	'MOT_TZV_MAINNEWS_INFO'				=> '&bull;&nbsp;&nbsp;Anzeige der Tourziele auf einer Übersichtskarte.<br>
-											&bull;&nbsp;&nbsp;Reiter im UCP mit Bearbeitung der Tourziele des Mitgliedes.<br>
-											&bull;&nbsp;&nbsp;Anzeige der Tourziele in der Tourziel Liste und im Suchergebnis detailliert wie bisher oder kurz als Tabelle.<br>
-											&bull;&nbsp;&nbsp;Benachrichtigung der Tourziel-Moderatoren bei neu erstellten, geänderten oder gelöschten Tourzielen.<br>
-											&bull;&nbsp;&nbsp;Anzeige der OSM-Detailkarte korrigiert.<br>',
+	'MOT_TZV_MAINNEWS_INFO'				=> '&bull;&nbsp;&nbsp;Anzeige der Suchergebnisse zusätzlich zur Tabelle auf einer Karte.<br>
+											&bull;&nbsp;&nbsp;Datenübergabe an kurviger.de öffnet jetzt in einem neuen Tab oder Fenster.<br>
+											&bull;&nbsp;&nbsp;kurviger.de wird im Falle einer dort unterstützten Sprache in dieser aufgerufen (z.B. bei Nutzersprache Englisch in Englisch).<br>
+											&bull;&nbsp;&nbsp;Die Bilder auf der Tourziel Hauptseite sind nicht mehr fest vorgegeben, der Admin kann eigene Bilder verwenden.<br>',
 	'MOT_TZV_NUTZUNG_MAPS'				=> 'Nutzungsbedingungen Google Maps',
 
 	// Map
@@ -96,7 +95,7 @@ $lang = array_merge($lang, [
 		1	=> 'Von den vorhandenen Tourzielen wird %1$d Tourziel in der Karte angezeigt.',
 		2	=> 'Von den vorhandenen Tourzielen werden %1$d Tourziele in der Karte angezeigt.',
 	],
-	'MOT_TZV_MAP_LANG'					=> 'de',	// set according to this language
+	'MOT_TZV_MAP_LANG'					=> 'de',	// set according to this language, USE LOWERCASE LETTERS ONLY!!!
 	'MOT_TZV_OSM_LARGER_MAP'			=> 'Größere Karte anzeigen',
 
 	// [Eintragen / Ändern]
