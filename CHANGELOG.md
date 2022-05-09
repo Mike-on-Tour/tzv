@@ -4,6 +4,18 @@ All changes to `Adressverwaltung Tourziele` will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.4.2] - 2022-05-09
+
+### Added
+-	The ability to create a new item by right-clicking onto the desired map location and then be redirected to the input form with this location's coordinates
+
+### Changed
+
+### Fixed
+
+### Removed
+  
+  
 ## [0.4.1] - 2022-05-03
 
 ### Added
@@ -21,7 +33,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
   
   
-
 ## [0.4.0] - 2022-05-02
 
 ### Added

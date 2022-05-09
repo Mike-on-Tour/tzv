@@ -26,7 +26,7 @@ $lang = array_merge($lang, [
 	'MOT_TZV_TOURZIEL_MAIN'				=> 'Motorrad &bull;&nbsp;Tourziele Datenbank',
 
 	// Forum Index
-	'MOT_TZV_NEW_EVENT'					=> 'Neuester Tourziel Eintrag',
+	'MOT_TZV_NEW_EVENT'					=> 'Neuester/zuletzt geänderter Tourziel Eintrag',
 	'MOT_TZV_NEW_FLAG'					=> 'Flagge',
 	'MOT_TZV_NEW_LAND'					=> 'Land',
 	'MOT_TZV_NEW_REGION'				=> 'Region',
@@ -39,7 +39,7 @@ $lang = array_merge($lang, [
 	'MOT_TZV_MAIN_INDEX'				=> 'Tourziel Home',
 	'MOT_TZV_MAIN_ADD'					=> 'Neuer Eintrag',
 	'MOT_TZV_MAIN_VIEW'					=> 'Tourziel Liste',
-	'MOT_TZV_MAIN_VIEW_NEW'				=> 'Neuester Eintrag',
+	'MOT_TZV_MAIN_VIEW_NEW'				=> 'Neuester/zuletzt geänderter Eintrag',
 	'MOT_TZV_MAIN_MAP'					=> 'Tourziel Karte',
 	'MOT_TZV_MAIN_SEARCH'				=> 'Tourziel Suche',
 	'MOT_TZV_MAIN_SUPPORT'				=> 'Tourziel Support',
@@ -88,7 +88,8 @@ $lang = array_merge($lang, [
 	'MOT_TZV_STREET_DESC'				=> 'Straßenkarte',
 	'MOT_TZV_TOPO_DESC'					=> 'Topografische Karte',
 	'MOT_TZV_SAT_DESC'					=> 'Satellitenbild',
-	'MOT_TZV_MAP_LEGEND_TEXT'			=> 'Zoomen der Karte mit dem Mausrad mit einem Klick in die Karte ein- und ausschalten.<br>
+	'MOT_TZV_MAP_LEGEND_TEXT'			=> 'Zoomen der Karte mit dem Mausrad mit einem Links-Klick in die Karte ein- und ausschalten.<br>
+											Erstellen eines neuen Tourzieles mit Rechts-Klick auf dessen Kartenposition starten.<br>
 											<i>Klicken auf einen Marker öffnet die Detailansicht in einem neuen Browser-Tab.</i>',
 	'MOT_TZV_MARKER_COUNT'				=> [
 		0	=> 'Von den vorhandenen Tourzielen wird kein Tourziel in der Karte angezeigt.',
