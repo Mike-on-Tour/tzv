@@ -75,8 +75,8 @@ class mot_tzv_main
 	public function __construct(\phpbb\auth\auth $auth, \phpbb\config\config $config, \phpbb\db\driver\driver_interface $db,
 								\phpbb\controller\helper $helper, \phpbb\language\language $language, \phpbb\notification\manager $notification_manager,
 								\phpbb\pagination $pagination, \phpbb\path_helper $path_helper, \phpbb\request\request $request,
-								\phpbb\template\template $template, \phpbb\user $user, \mot\tzv\functions\mot_tzv_events $mot_tzv_events, $root_path, $php_ext,
-								$mot_tzv_tourziel_table, $mot_tzv_tourziel_country_table, $mot_tzv_tourziel_region_table,
+								\phpbb\template\template $template, \phpbb\user $user, \mot\tzv\functions\mot_tzv_events $mot_tzv_events,
+								$root_path, $php_ext, $mot_tzv_tourziel_table, $mot_tzv_tourziel_country_table, $mot_tzv_tourziel_region_table,
 								$mot_tzv_tourziel_cats_table, $mot_tzv_tourziel_wlan_table)
 	{
 		$this->auth = $auth;
@@ -286,6 +286,18 @@ class mot_tzv_main
 			'S_BBCODE_FLASH'			=> true,
 			'S_LINKS_ALLOWED'			=> true,
 		]);
+
+		// Check whether we got a pair of coordinates
+		$ajax_data = [];
+		$ajax_data['lat'] = $this->request->variable('lat', '');
+		$ajax_data['lng'] = $this->request->variable('lng', '');
+		if ($ajax_data['lat'] != '' && $ajax_data['lng'] != '')
+		{
+			$this->template->assign_vars([
+				'MOT_TZV_POST_MAPS_LAT'		=> $ajax_data['lat'],
+				'MOT_TZV_POST_MAPS_LON'		=> $ajax_data['lng'],
+			]);
+		}
 
 		if (!function_exists('display_custom_bbcodes'))
 		{

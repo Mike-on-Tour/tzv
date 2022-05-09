@@ -22,7 +22,7 @@ class ext extends \phpbb\extension\base
 
 		if (!(phpbb_version_compare(PHPBB_VERSION, $phpbb_min_ver, '>=') && phpbb_version_compare(PHPBB_VERSION, $phpbb_below_ver, '<')))
 		{
-			trigger_error(sprintf($language->lang['MOT_TZV_ERROR_EXTENSION_NOT_ENABLE'] . '<br>' . $language->lang['MOT_TZV_ERROR_MESSAGE_PHPBB_VERSION'], $style_switch, $phpbb_min_ver, $phpbb_below_ver) . $this->get_adm_back_link(), E_USER_WARNING);
+			trigger_error(sprintf($language->lang('MOT_TZV_ERROR_EXTENSION_NOT_ENABLE') . '<br>' . $language->lang('MOT_TZV_ERROR_MESSAGE_PHPBB_VERSION'), $style_switch, $phpbb_min_ver, $phpbb_below_ver) . $this->get_adm_back_link(), E_USER_WARNING);
 		}
 		return true;
 	}

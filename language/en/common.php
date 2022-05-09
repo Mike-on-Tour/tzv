@@ -26,7 +26,7 @@ $lang = array_merge($lang, [
 	'MOT_TZV_TOURZIEL_MAIN'				=> 'Motorcycle &bull;&nbsp;Tour destinations database',
 
 	// Forum Index
-	'MOT_TZV_NEW_EVENT'					=> 'Latest Tour destination item',
+	'MOT_TZV_NEW_EVENT'					=> 'Latest/last edited Tour destination item',
 	'MOT_TZV_NEW_FLAG'					=> 'Flag',
 	'MOT_TZV_NEW_LAND'					=> 'Country',
 	'MOT_TZV_NEW_REGION'				=> 'Region',
@@ -39,7 +39,7 @@ $lang = array_merge($lang, [
 	'MOT_TZV_MAIN_INDEX'				=> 'Tour destination index',
 	'MOT_TZV_MAIN_ADD'					=> 'New item',
 	'MOT_TZV_MAIN_VIEW'					=> 'Tour destination list',
-	'MOT_TZV_MAIN_VIEW_NEW'				=> 'Latest item',
+	'MOT_TZV_MAIN_VIEW_NEW'				=> 'Latest/last edited item',
 	'MOT_TZV_MAIN_MAP'					=> 'Tour destination map',
 	'MOT_TZV_MAIN_SEARCH'				=> 'Tour destination search',
 	'MOT_TZV_MAIN_SUPPORT'				=> 'Tour destination support',
@@ -88,7 +88,8 @@ $lang = array_merge($lang, [
 	'MOT_TZV_STREET_DESC'				=> 'Street map',
 	'MOT_TZV_TOPO_DESC'					=> 'Topographical map',
 	'MOT_TZV_SAT_DESC'					=> 'Satellite image',
-	'MOT_TZV_MAP_LEGEND_TEXT'			=> 'Toggle mousewheel zoom by clicking on the map.<br>
+	'MOT_TZV_MAP_LEGEND_TEXT'			=> 'Toggle mousewheel zoom by left-clicking on the map.<br>
+											Start creating a new item by right-clicking on its map location.<br>
 											<i>Click on a marker to show the detailed view in a new browser tab.</i>',
 	'MOT_TZV_MARKER_COUNT'				=> [
 		0	=> 'Of the existing items none are shown on the map.',

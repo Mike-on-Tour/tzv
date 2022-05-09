@@ -35,6 +35,3 @@ mot_tzv_tzvlist:
 mot_tzv_search:
     path: /mot_tzv/search
     defaults: { _controller: mot.tzv.controller.mot_tzv_main:search }
-
-mot_tzv_images:
-    path: /ext/mot/tzv/images/

@@ -76,4 +76,8 @@ motTzv.markerLayer.addTo(motTzv.map);
 
 motTzv.jsTourziele.forEach(motTzv.addMarker);
 
+motTzv.map.addEventListener('contextmenu', function(evt) {
+	window.location.replace(motTzv.jsAjaxCreate + '?lat=' + evt.latlng.lat + '&lng=' + evt.latlng.lng);
+});
+
 })(jQuery); // Avoid conflicts with other libraries
