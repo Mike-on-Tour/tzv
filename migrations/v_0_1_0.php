@@ -211,16 +211,16 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 		if ($this->db_tools->sql_table_exists($this->table_prefix . 'mot_tourziel_country'))
 		{
 			$sql_ary = [
-				['country_id' => '1', 'country_name' => 'Deutschland', 'country_image' => 'de.png'],
-				['country_id' => '2', 'country_name' => 'Österreich', 'country_image' => 'at.png'],
-				['country_id' => '3', 'country_name' => 'Schweiz', 'country_image' => 'ch.png'],
-				['country_id' => '4', 'country_name' => 'Belgien', 'country_image' => 'be.png'],
-				['country_id' => '5', 'country_name' => 'Tschechien', 'country_image' => 'cz.png'],
-				['country_id' => '6', 'country_name' => 'Polen', 'country_image' => 'pl.png'],
-				['country_id' => '7', 'country_name' => 'Dänemark', 'country_image' => 'dk.png'],
-				['country_id' => '8', 'country_name' => 'Niederlande', 'country_image' => 'nl.png'],
-				['country_id' => '9', 'country_name' => 'Frankreich', 'country_image' => 'fr.png'],
-				['country_id' => '10', 'country_name' => 'Luxemburg', 'country_image' => 'lu.png'],
+				['country_name' => 'Deutschland', 'country_image' => 'de.png'],
+				['country_name' => 'Österreich', 'country_image' => 'at.png'],
+				['country_name' => 'Schweiz', 'country_image' => 'ch.png'],
+				['country_name' => 'Belgien', 'country_image' => 'be.png'],
+				['country_name' => 'Tschechien', 'country_image' => 'cz.png'],
+				['country_name' => 'Polen', 'country_image' => 'pl.png'],
+				['country_name' => 'Dänemark', 'country_image' => 'dk.png'],
+				['country_name' => 'Niederlande', 'country_image' => 'nl.png'],
+				['country_name' => 'Frankreich', 'country_image' => 'fr.png'],
+				['country_name' => 'Luxemburg', 'country_image' => 'lu.png'],
 			];
 			$this->db->sql_multi_insert($this->table_prefix . 'mot_tourziel_country', $sql_ary);
 		}
@@ -231,22 +231,22 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 		if ($this->db_tools->sql_table_exists($this->table_prefix . 'mot_tourziel_region'))
 		{
 			$sql_ary = [
-				['region_id' => '1', 'region_name' => 'Baden-Württemberg'],
-				['region_id' => '2', 'region_name' => 'Bayern'],
-				['region_id' => '3', 'region_name' => 'Berlin'],
-				['region_id' => '4', 'region_name' => 'Brandenburg'],
-				['region_id' => '5', 'region_name' => 'Bremen'],
-				['region_id' => '6', 'region_name' => 'Hamburg'],
-				['region_id' => '7', 'region_name' => 'Hessen'],
-				['region_id' => '8', 'region_name' => 'Mecklenburg-Vorpommern'],
-				['region_id' => '9', 'region_name' => 'Niedersachsen'],
-				['region_id' => '10', 'region_name' => 'Nordrhein-Westfalen'],
-				['region_id' => '11', 'region_name' => 'Rheinland-Pfalz'],
-				['region_id' => '12', 'region_name' => 'Saarland'],
-				['region_id' => '13', 'region_name' => 'Sachsen'],
-				['region_id' => '14', 'region_name' => 'Sachsen-Anhalt'],
-				['region_id' => '15', 'region_name' => 'Schleswig-Holstein'],
-				['region_id' => '16', 'region_name' => 'Thüringen'],
+				['region_name' => 'Baden-Württemberg'],
+				['region_name' => 'Bayern'],
+				['region_name' => 'Berlin'],
+				['region_name' => 'Brandenburg'],
+				['region_name' => 'Bremen'],
+				['region_name' => 'Hamburg'],
+				['region_name' => 'Hessen'],
+				['region_name' => 'Mecklenburg-Vorpommern'],
+				['region_name' => 'Niedersachsen'],
+				['region_name' => 'Nordrhein-Westfalen'],
+				['region_name' => 'Rheinland-Pfalz'],
+				['region_name' => 'Saarland'],
+				['region_name' => 'Sachsen'],
+				['region_name' => 'Sachsen-Anhalt'],
+				['region_name' => 'Schleswig-Holstein'],
+				['region_name' => 'Thüringen'],
 			];
 			$this->db->sql_multi_insert($this->table_prefix . 'mot_tourziel_region', $sql_ary);
 		}
@@ -257,14 +257,14 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 		if ($this->db_tools->sql_table_exists($this->table_prefix . 'mot_tourziel_cats'))
 		{
 			$sql_ary = [
-				['cat_id' => '1', 'cat_name' => 'Hotel'],
-				['cat_id' => '2', 'cat_name' => 'Pension'],
-				['cat_id' => '3', 'cat_name' => 'Gaststätte'],
-				['cat_id' => '4', 'cat_name' => 'Bikertreffpunkt'],
-				['cat_id' => '5', 'cat_name' => 'Sehenswürdigkeit'],
-				['cat_id' => '6', 'cat_name' => 'Eiscafe'],
-				['cat_id' => '7', 'cat_name' => 'Freizeitpark'],
-				['cat_id' => '8', 'cat_name' => 'Museum'],
+				['cat_name' => 'Hotel'],
+				['cat_name' => 'Pension'],
+				['cat_name' => 'Gaststätte'],
+				['cat_name' => 'Bikertreffpunkt'],
+				['cat_name' => 'Sehenswürdigkeit'],
+				['cat_name' => 'Eiscafe'],
+				['cat_name' => 'Freizeitpark'],
+				['cat_name' => 'Museum'],
 			];
 			$this->db->sql_multi_insert($this->table_prefix . 'mot_tourziel_cats', $sql_ary);
 		}
@@ -275,9 +275,9 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 		if ($this->db_tools->sql_table_exists($this->table_prefix . 'mot_tourziel_wlan'))
 		{
 			$sql_ary = [
-				['wlan_id' => '1', 'wlan_name' => 'WLAN unbekannt'],
-				['wlan_id' => '2', 'wlan_name' => 'WLAN mit Passwort'],
-				['wlan_id' => '3', 'wlan_name' => 'WLAN offen'],
+				['wlan_name' => 'WLAN unbekannt'],
+				['wlan_name' => 'WLAN mit Passwort'],
+				['wlan_name' => 'WLAN offen'],
 			];
 			$this->db->sql_multi_insert($this->table_prefix . 'mot_tourziel_wlan', $sql_ary);
 		}
