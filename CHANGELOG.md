@@ -4,6 +4,24 @@ All changes to `Adressverwaltung Tourziele` will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.4.1] - 2022-05-03
+
+### Added
+
+### Changed
+
+### Fixed
+-	COUNT queries in `controller/mot_tzv_acp.php` and `controller/mot_tzv_main.php` to satisfy PostgreSQL queries (remove single quotes)
+-	Inserting initial values into the COUNTRY_, REGION_, CATEGORY_ and WLAN_TABLEs by deleting the given ids in order to prevent error messages
+	when using PostgreSQL (`migrations/v_0_1_0.php`)
+-	Root paths in `controller/mot_tzv_main.php` and `styles/prosilver/template/mot_tzv_main_index.html` since the function
+	`$path_helper->get_web_root_path()` only works correctly if the 'Enable URL Rewriting' setting is set to 'Yes' which is fixed by using the `$root_path`
+	variable which works correctly independently from the 'Enable URL Rewriting' setting
+
+### Removed
+  
+  
+
 ## [0.4.0] - 2022-05-02
 
 ### Added

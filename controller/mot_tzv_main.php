@@ -133,7 +133,8 @@ class mot_tzv_main
 		// if images are to be displayed in the main window go and get them
 		if ($this->config['mot_tzv_main_image'])
 		{
-			$this->image_path = $this->path_helper->get_web_root_path() . 'ext/mot/tzv/images/';
+			$this->image_path = $this->root_path . 'ext/mot/tzv/images/';
+			$this->image_path_web = $this->path_helper->get_web_root_path() . 'ext/mot/tzv/images/';
 			$files = scandir($this->image_path);
 
 			foreach ($files as $element)
@@ -141,7 +142,7 @@ class mot_tzv_main
 				if (is_file ($this->image_path . $element))
 				{
 					$this->template->assign_block_vars('tz_image', [
-						'IMAGE_SRC'		=> $this->image_path . $element,
+						'IMAGE_SRC'		=> $this->image_path_web . $element,
 					]);
 				}
 			}
@@ -966,7 +967,7 @@ class mot_tzv_main
 			$ort = ($this->request->variable('ort', '', true)) ? " OR tz.city LIKE '%" . $this->db->sql_escape($this->request->variable('ort', '', true)) . "%'": '';
 
 			// Get total number of Tourziele which meet the search criteria
-			$count_sql = "SELECT COUNT(tz.id) AS 'total_tz' FROM " . $this->tourziel_table . ' tz
+			$count_sql = "SELECT COUNT(tz.id) AS total_tz FROM " . $this->tourziel_table . ' tz
 						WHERE id = ' . (int) $id
 						. $country
 						. $region

@@ -331,7 +331,7 @@ class mot_tzv_acp
 		}
 
 		// Get total number of countries for pagination
-		$count_sql = "SELECT COUNT(country_id) AS 'total_countries' FROM " . $this->tourziel_country_table;
+		$count_sql = "SELECT COUNT(country_id) AS total_countries FROM " . $this->tourziel_country_table;
 		$result = $this->db->sql_query($count_sql);
 		$row = $this->db->sql_fetchrow($result);
 		$total_countries = $row['total_countries'];
@@ -531,7 +531,7 @@ class mot_tzv_acp
 		}
 
 		// Get total number of regions for pagination
-		$count_sql = "SELECT COUNT(region_id) AS 'total_regions' FROM " . $this->tourziel_region_table;
+		$count_sql = "SELECT COUNT(region_id) AS total_regions FROM " . $this->tourziel_region_table;
 		$result = $this->db->sql_query($count_sql);
 		$row = $this->db->sql_fetchrow($result);
 		$total_regions = $row['total_regions'];
@@ -730,7 +730,7 @@ class mot_tzv_acp
 		}
 
 		// Get total number of categories for pagination
-		$count_sql = "SELECT COUNT(cat_id) AS 'total_categories' FROM " . $this->tourziel_cats_table;
+		$count_sql = "SELECT COUNT(cat_id) AS total_categories FROM " . $this->tourziel_cats_table;
 		$result = $this->db->sql_query($count_sql);
 		$row = $this->db->sql_fetchrow($result);
 		$total_categories = $row['total_categories'];
@@ -928,7 +928,7 @@ class mot_tzv_acp
 		}
 
 		// Get total number of WLANs for pagination
-		$count_sql = "SELECT COUNT(wlan_id) AS 'total_wlans' FROM " . $this->tourziel_wlan_table;
+		$count_sql = "SELECT COUNT(wlan_id) AS total_wlans FROM " . $this->tourziel_wlan_table;
 		$result = $this->db->sql_query($count_sql);
 		$row = $this->db->sql_fetchrow($result);
 		$total_wlans = $row['total_wlans'];
