@@ -24,15 +24,15 @@
 		{{ lang('ACP_MOT_TZV_COUNTRY_FLAGADDL') }}
 			<dl>
 				<dt><label for="country_name">{{ lang('ACP_MOT_TZV_COUNTRY_NAME') }}:</label><br><span>{{ lang('ACP_MOT_TZV_COUNTRY_NAME_EXPL') }}</span></dt>
-				<dd><input name="country_name" type="text" id="country_name" value="{{ COUNTRY_NAME }}" maxlength="255" /></dd>
+				<dd><input name="country_name" type="text" id="country_name" value="{{ COUNTRY_NAME }}" maxlength="255" autofocus></dd>
 			</dl>
 			<dl>
 				<dt><label for="country_img">{{ lang('ACP_MOT_TZV_COUNTRY_IMG') }}:</label><br><span>{{ lang('ACP_MOT_TZV_COUNTRY_IMG_EXPL') }}</span></dt>
-				<dd><input name="country_img" type="text" id="country_img" value="{{ COUNTRY_IMG }}" maxlength="255" /></dd>
+				<dd><input name="country_img" type="text" id="country_img" value="{{ COUNTRY_IMG }}" maxlength="255"></dd>
 			</dl>
 
 			<p class="submit-buttons">
-				<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}" />
+				<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}">
 			</p>
 			{{ S_FORM_TOKEN }}
 		</fieldset>
@@ -47,7 +47,7 @@
 
 	<form id="acp_flags" method="post" action="{{ U_ACTION }}">
 		<fieldset class="quick">
-			<input class="button2" name="add" type="submit" value="{{ lang('ACP_MOT_TZV_COUNTRY_ADD') }}" />
+			<input class="button2" name="add" type="submit" value="{{ lang('ACP_MOT_TZV_COUNTRY_ADD') }}">
 		</fieldset>
 
 		{% if pagination %}
@@ -70,7 +70,7 @@
 			{% for country in country %}
 				<tr>
 					<td >{{ country.COUNTRY_NAME }}</td>
-					<td style="text-align: center;"><img src="{{ country.COUNTRY_IMG }}" alt="{{ country.COUNTRY_NAME }}" title="{{ country.COUNTRY_NAME }}" /></td>
+					<td style="text-align: center;"><img src="{{ country.COUNTRY_IMG }}" alt="{{ country.COUNTRY_NAME }}" title="{{ country.COUNTRY_NAME }}"></td>
 					<td style="text-align: center;">{{ country.COUNTRY_COUNT }}</td>
 					<td style="text-align: right; white-space: nowrap;">
 						<center>&nbsp;<a href="{{ country.U_EDIT }}">{{ ICON_EDIT }}</a> <a href="{{ country.U_DELETE }}">{{ ICON_DELETE }}</a></center>
@@ -92,7 +92,7 @@
 		{% endif %}
 
 		<fieldset class="quick">
-			<input class="button2" name="add" type="submit" value="{{ lang('ACP_MOT_TZV_COUNTRY_ADD') }}" />
+			<input class="button2" name="add" type="submit" value="{{ lang('ACP_MOT_TZV_COUNTRY_ADD') }}">
 		</fieldset>
 		{{ S_FORM_TOKEN }}
 

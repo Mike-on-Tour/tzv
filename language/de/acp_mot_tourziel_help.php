@@ -29,7 +29,12 @@ $lang = array_merge($lang, [
 									&bull;&nbsp;License <a href="http://opensource.org/licenses/gpl-license.php"> http://opensource.org/licenses/gpl-license.php</a> GNU Public License<br>',
 
 	'ACP_MOT_TZV_HISTORY'		=> 'Tourziele History',
-	'ACP_MOT_TZV_HUPDATE'		=> '&bull;&nbsp;2022 Version 0.4.0<br>
+	'ACP_MOT_TZV_HUPDATE'		=> '&bull;&nbsp;2022 Version 0.5.0<br>
+									- Suche in OSM (Nominatim) in die Karte eingefügt<br>
+									- Datenübergabe an komoot.de zur Routenplanung für Wanderer und Radfahrer (öffnet in einem neuen Tab oder Fenster)<br>
+									- komoot.de wird im Falle einer dort unterstützten Sprache in dieser aufgerufen (z.B. bei Nutzersprache Englisch in Englisch)<br>
+									- Rechtsklick in die Karte öffnet Eingabefenster für neues Tourziel und übernimmt gleich die Koodinaten, auf die die Maus beim Rechtsklick zeigte<br>
+									&bull;&nbsp;2022 Version 0.4.0<br>
 									- Anzeige der Suchergebnisse zusätzlich zur Tabelle auf einer Karte<br>
 									- Datenübergabe an kurviger.de öffnet jetzt in einem neuen Tab oder Fenster<br>
 									- kurviger.de wird im Falle einer dort unterstützten Sprache in dieser aufgerufen (z.B. bei Nutzersprache Englisch in Englisch)<br>

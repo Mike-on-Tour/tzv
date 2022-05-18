@@ -29,7 +29,12 @@ $lang = array_merge($lang, [
 									&bull;&nbsp;License <a href="http://opensource.org/licenses/gpl-license.php"> http://opensource.org/licenses/gpl-license.php</a> GNU Public License<br>',
 
 	'ACP_MOT_TZV_HISTORY'		=> 'Tour destinations history',
-	'ACP_MOT_TZV_HUPDATE'		=> '&bull;&nbsp;2022 Version 0.4.0<br>
+	'ACP_MOT_TZV_HUPDATE'		=> '&bull;&nbsp;2022 Version 0.5.0<br>
+									- Added an OSM search (Nominatim) to the map<br>
+									- Added a data transfer to komoot.de to enable route planning for hikers and bikers (opens in a new tab or window)<br>
+									- komoot.de will be called with a localisation variable to set the users language if this language is supported (e.g. if user uses English komoot.de will open in English)<br>
+									- Added the ability to create a new item by right-clicking onto the desired map location and then be redirected to the input form with this location`s coordinates<br>
+									&bull;&nbsp;2022 Version 0.4.0<br>
 									- Search results are now shown on a map in addition to the table<br>
 									- Changed the call to kurviger.de to open a new tab or window<br>
 									- kurviger.de will be called with a localisation variable to set the users language if this language is supported (e.g. if user uses English kurviger.de will open in English)<br>

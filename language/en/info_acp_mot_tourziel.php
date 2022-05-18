@@ -26,7 +26,7 @@ $lang = array_merge($lang, [
 	'ACP_MOT_TZV_CATEGORY'			=> 'Attend to categories',
 	'ACP_MOT_TZV_WLAN'				=> 'Attend to WLAN options',
 	'ACP_MOT_TZV_INFO'				=> 'Info / Support / Update',
-	'ACP_MOT_TZV_VERSION'			=> '<img src="https://img.shields.io/badge/Version-%1$s-green.svg?style=plastic" />',
+	'ACP_MOT_TZV_VERSION'			=> '<img src="https://img.shields.io/badge/Version-%1$s-green.svg?style=plastic">',
 	'ACP_MOT_TZV_HELP'				=> 'Please refer to the help section at <b>Info / Support / Update</b> prior to changing any settings.',
 
 	// Permissions
@@ -60,10 +60,12 @@ $lang = array_merge($lang, [
 	'ACP_MOT_TZV_MAPS_ENABLE'		=> 'Enable detail map(s) with detailed view',
 	'ACP_MOT_TZV_MAPS_ENABLE_EXPL'	=> 'Switches ALL detail map function on or off',
 	'ACP_MOT_TZV_MAPS_EXPLAIN'		=> 'Detail map(s) must be enabled as a prerequisite',
+	'ACP_MOT_TZV_KURVIGER_ENABLE'	=> 'Hand GPS data over to www.kurviger.de',
+	'ACP_MOT_TZV_KURVIGER_EXPL'		=> 'Hand tour destination`s GPS data over to route planner for motor cycles',
+	'ACP_MOT_TZV_KOMOOT_ENABLE'		=> 'Hand GPS data over to www.komoot.de',
+	'ACP_MOT_TZV_KOMOOT_EXPL'		=> 'Hand tour destination`s GPS data over to route planner for hikers and bikers',
 	'ACP_MOT_TZV_GOOGLEMAP_ENABLE'	=> 'Show Google Maps',
 	'ACP_MOT_TZV_OSMMAP_ENABLE'		=> 'Show OpenStreetMap',
-	'ACP_MOT_TZV_KURVIGER_ENABLE'	=> 'Hand GPS data over to www.kurviger.de',
-	'ACP_MOT_TZV_KURVIGER_EXPL'		=> 'Hand tour destination`s GPS data over to route planner',
 	'ACP_MOT_TZV_MSG_GOOGLE_ON'		=> 'Detail maps are enabled',
 	'ACP_MOT_TZV_MSG_GOOGLE_OFF'	=> 'Detail maps are disabled',
 	'ACP_MOT_TZV_MAPS_WIDTH'		=> 'Width of the detail map(s) (pixels)',
