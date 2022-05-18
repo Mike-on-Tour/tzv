@@ -4,6 +4,20 @@ All changes to `Adressverwaltung Tourziele` will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.5.0] - 2022-05-19
+
+### Added
+-	Transfer of GPS data to a route planner for hikers and bikers including starting that route planner in the user's language if it is supported
+
+### Changed
+-	The sequence of settings for maps and data transfer to route planners
+
+### Fixed
+-	Queries in `functions/mot_tzv_events.php` to satisfy PostgreSQL queries (remove single quotes)
+
+### Removed
+  
+  
 ## [0.4.2] - 2022-05-09
 
 ### Added

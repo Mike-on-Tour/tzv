@@ -63,8 +63,9 @@ $lang = array_merge($lang, [
 	'MOT_TZV_TOURZIEL_GPS_DAT'			=> 'GPS',
 	'MOT_TZV_DATE_ADD_EDIT'				=> '<br><b>Created on</b>',
 	'MOT_TZV_OPENSTREETMAP_INFO'		=> 'Click on <strong>View larger map</strong> underneath the map.<br><br>',
-	'MOT_TZV_KURVIGER_INFO'				=> 'Hand GPS data over to route planner https://kurviger.de',
-	'MOT_TZV_KURVIGER_ADD'				=> 'Data transfer',
+	'MOT_TZV_KURVIGER_INFO'				=> 'Hand GPS data over to motor cycle route planner https://kurviger.de',
+	'MOT_TZV_KOMOOT_INFO'				=> 'Hand GPS data over to hiker and biker route planner https://www.komoot.de',
+	'MOT_TZV_DATA_HANDOVER'				=> 'Data transfer',
 
 	// [Moderator-Funktion]
 	'MOT_TZV_TOURZIEL_MODERATE'			=> 'Tour destination moderator',
@@ -78,10 +79,10 @@ $lang = array_merge($lang, [
 		2	=> 'Currently <strong>%1$d</strong> items are listed in the database.',
 	],
 	'MOT_TZV_COUNTRY_EINTRAG'			=> 'Registered countries',
-	'MOT_TZV_MAINNEWS_INFO'				=> '&bull;&nbsp;&nbsp;Search results are now shown on a map in addition to the table.<br>
-											&bull;&nbsp;&nbsp;Changed the call to kurviger.de to open a new tab or window.<br>
-											&bull;&nbsp;&nbsp;kurviger.de will be called with a localisation variable to set the users language if this language is supported (e.g. if user uses English kurviger.de will open in English).<br>
-											&bull;&nbsp;&nbsp;The images on the Tour destinations index page are no longer hard coded, the admin can use his own preferred images.<br>',
+	'MOT_TZV_MAINNEWS_INFO'				=> '&bull;&nbsp;&nbsp;Added an OSM search (Nominatim) to the map.<br>
+											&bull;&nbsp;&nbsp;Added a data transfer to komoot.de to enable route planning for hikers and bikers (opens in a new tab or window).<br>
+											&bull;&nbsp;&nbsp;komoot.de will be called with a localisation variable to set the users language if this language is supported (e.g. if user uses English komoot.de will open in English).<br>
+											&bull;&nbsp;&nbsp;Added the ability to create a new item by right-clicking onto the desired map location and then be redirected to the input form with this location`s coordinates.<br>',
 	'MOT_TZV_NUTZUNG_MAPS'				=> 'Google Maps Terms of Use',
 
 	// Map

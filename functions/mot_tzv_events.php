@@ -219,7 +219,7 @@ class mot_tzv_events
 	// [Tourziel ändern]
 	public function edit_event($id, $sql_array)
 	{
-		$sql = 'UPDATE ' . $this->tourziel_table . ' SET ' . $this->db->sql_build_array('UPDATE', $sql_array) . ' WHERE `id` = ' . (int) $id;
+		$sql = 'UPDATE ' . $this->tourziel_table . ' SET ' . $this->db->sql_build_array('UPDATE', $sql_array) . ' WHERE id = ' . (int) $id;
 		$this->db->sql_query($sql);
 	}
 
@@ -227,7 +227,7 @@ class mot_tzv_events
 	// [Tourziel löschen]
 	public function delete_event($id)
 	{
-		$sql = 'DELETE FROM ' . $this->tourziel_table . ' WHERE `id` = ' . (int) $id;
+		$sql = 'DELETE FROM ' . $this->tourziel_table . ' WHERE id = ' . (int) $id;
 		$this->db->sql_query($sql);
 	}
 

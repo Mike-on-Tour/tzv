@@ -64,7 +64,8 @@ $lang = array_merge($lang, [
 	'MOT_TZV_DATE_ADD_EDIT'				=> '<br><b>Eingetragen am</b>',
 	'MOT_TZV_OPENSTREETMAP_INFO'		=> 'Klick unten auf <strong>Größere Karte anzeigen</strong>.<br><br>',
 	'MOT_TZV_KURVIGER_INFO'				=> 'Übergabe der GPS-Daten an den Motorradtourenplaner https://kurviger.de',
-	'MOT_TZV_KURVIGER_ADD'				=> 'Datenübergabe',
+	'MOT_TZV_KOMOOT_INFO'				=> 'Übergabe der GPS-Daten an den Routenplaner für Wanderer und Radfahrer https://www.komoot.de',
+	'MOT_TZV_DATA_HANDOVER'				=> 'Datenübergabe',
 
 	// [Moderator-Funktion]
 	'MOT_TZV_TOURZIEL_MODERATE'			=> 'Tourziel Moderator',
@@ -78,10 +79,10 @@ $lang = array_merge($lang, [
 		2	=> 'Insgesamt <strong>%1$d</strong> Tourziele in der Datenbank.',
 	],
 	'MOT_TZV_COUNTRY_EINTRAG'			=> 'Eingetragene Länder',
-	'MOT_TZV_MAINNEWS_INFO'				=> '&bull;&nbsp;&nbsp;Anzeige der Suchergebnisse zusätzlich zur Tabelle auf einer Karte.<br>
-											&bull;&nbsp;&nbsp;Datenübergabe an kurviger.de öffnet jetzt in einem neuen Tab oder Fenster.<br>
-											&bull;&nbsp;&nbsp;kurviger.de wird im Falle einer dort unterstützten Sprache in dieser aufgerufen (z.B. bei Nutzersprache Englisch in Englisch).<br>
-											&bull;&nbsp;&nbsp;Die Bilder auf der Tourziel Hauptseite sind nicht mehr fest vorgegeben, der Admin kann eigene Bilder verwenden.<br>',
+	'MOT_TZV_MAINNEWS_INFO'				=> '&bull;&nbsp;&nbsp;Suche in OSM (Nominatim) in die Karte eingefügt.<br>
+											&bull;&nbsp;&nbsp;Datenübergabe an komoot.de zur Routenplanung für Wanderer und Radfahrer (öffnet in einem neuen Tab oder Fenster).<br>
+											&bull;&nbsp;&nbsp;komoot.de wird im Falle einer dort unterstützten Sprache in dieser aufgerufen (z.B. bei Nutzersprache Englisch in Englisch).<br>
+											&bull;&nbsp;&nbsp;Rechtsklick in die Karte öffnet Eingabefenster für neues Tourziel und übernimmt gleich die Koodinaten, auf die die Maus beim Rechtsklick zeigte.<br>',
 	'MOT_TZV_NUTZUNG_MAPS'				=> 'Nutzungsbedingungen Google Maps',
 
 	// Map

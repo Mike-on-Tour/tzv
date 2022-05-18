@@ -404,6 +404,7 @@ class mot_tzv_main
 			]);
 		}
 
+		$komoot_langs = ['de' => 'de', 'en' => 'com', 'es' => 'es', 'fr' => 'fr', 'it' => 'it', 'nl' => 'nl'];
 		$this->template->assign_vars([
 			'MOT_TZV_TOURZIEL_NUMBER'	=> $this->language->lang('MOT_TZV_COUNT_TOTAL_DEST', $this->events->get_total_count_tourziele()),
 			'MOT_TZV_COUNTRY_ENABLE'	=> $this->config['mot_tzv_country_enable'],
@@ -411,6 +412,8 @@ class mot_tzv_main
 			'MOT_TZV_MAPS_ENABLE'		=> $this->config['mot_tzv_maps_enable'],
 			'MOT_TZV_KURVIGER_ENABLE'	=> $this->config['mot_tzv_kurviger_enable'],
 			'MOT_TZV_KURVIGER_LANG'		=> in_array($this->language->lang('MOT_TZV_MAP_LANG'), ['en', 'es', 'fr', 'it', 'nl',]) ? $this->language->lang('MOT_TZV_MAP_LANG') : '',
+			'MOT_TZV_KOMOOT_ENABLE'		=> $this->config['mot_tzv_komoot_enable'],
+			'MOT_TZV_KOMOOT_LANG'		=> in_array($this->language->lang('MOT_TZV_MAP_LANG'), ['de', 'en', 'es', 'fr', 'it', 'nl',]) ? $komoot_langs[$this->language->lang('MOT_TZV_MAP_LANG')] : 'com',
 			'MOT_TZV_GOOGLEMAP_ENABLE'	=> $this->config['mot_tzv_googlemap_enable'],
 			'MOT_TZV_OSMMAP_ENABLE'		=> $this->config['mot_tzv_ostreetmap_enable'],
 

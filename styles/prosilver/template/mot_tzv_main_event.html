@@ -91,6 +91,9 @@
 						{% if MOT_TZV_KURVIGER_ENABLE %}
 							{% INCLUDE '@mot_tzv/mot_tzv_maps_kurviger.html' %}
 						{% endif %}
+						{% if MOT_TZV_KOMOOT_ENABLE %}
+							{% INCLUDE '@mot_tzv/mot_tzv_maps_komoot.html' %}
+						{% endif %}
 						{% if MOT_TZV_GOOGLEMAP_ENABLE %}
 							{% INCLUDE '@mot_tzv/mot_tzv_maps_google.html' %}
 						{% endif %}

@@ -26,7 +26,7 @@ $lang = array_merge($lang, [
 	'ACP_MOT_TZV_CATEGORY'			=> 'Kategorie bearbeiten',
 	'ACP_MOT_TZV_WLAN'				=> 'WLAN bearbeiten',
 	'ACP_MOT_TZV_INFO'				=> 'Info / Support / Update',
-	'ACP_MOT_TZV_VERSION'			=> '<img src="https://img.shields.io/badge/Version-%1$s-green.svg?style=plastic" />',
+	'ACP_MOT_TZV_VERSION'			=> '<img src="https://img.shields.io/badge/Version-%1$s-green.svg?style=plastic">',
 	'ACP_MOT_TZV_HELP'				=> 'Hilfe zu Einstellungen findest Du unter: <b>Info / Support / Update</b> Bitte vor Änderungen lesen.',
 
 	// Einstellungen Berechtigung
@@ -60,10 +60,12 @@ $lang = array_merge($lang, [
 	'ACP_MOT_TZV_MAPS_ENABLE'		=> 'Detailansicht Karte anzeigen',
 	'ACP_MOT_TZV_MAPS_ENABLE_EXPL'	=> 'Schaltet alle Kartenfunktionen ein / aus',
 	'ACP_MOT_TZV_MAPS_EXPLAIN'		=> 'Detailansicht Karte muss aktiviert sein',
-	'ACP_MOT_TZV_GOOGLEMAP_ENABLE'	=> 'Karte Google Maps anzeigen',
-	'ACP_MOT_TZV_OSMMAP_ENABLE'		=> 'Karte OpeStreetMap anzeigen',
 	'ACP_MOT_TZV_KURVIGER_ENABLE'	=> 'GPS-Datenübergabe an www.kurviger.de',
 	'ACP_MOT_TZV_KURVIGER_EXPL'		=> 'Übergibt eingetragene GPS-Daten direkt an Motorradroutenplaner',
+	'ACP_MOT_TZV_KOMOOT_ENABLE'		=> 'GPS-Datenübergabe an www.komoot.de',
+	'ACP_MOT_TZV_KOMOOT_EXPL'		=> 'Übergibt eingetragene GPS-Daten direkt an Routenplaner für Wanderer und Radfahrer',
+	'ACP_MOT_TZV_GOOGLEMAP_ENABLE'	=> 'Karte Google Maps anzeigen',
+	'ACP_MOT_TZV_OSMMAP_ENABLE'		=> 'Karte OpeStreetMap anzeigen',
 	'ACP_MOT_TZV_MSG_GOOGLE_ON'		=> 'Kartenfunktion ist eingeschaltet',
 	'ACP_MOT_TZV_MSG_GOOGLE_OFF'	=> 'Kartenfunktionen ist ausgeschaltet',
 	'ACP_MOT_TZV_MAPS_WIDTH'		=> 'Detailkarte Karte Breite (Pixel)',

@@ -23,11 +23,11 @@
 
 			<dl>
 				<dt><label for="wlan_name">{{ lang('ACP_MOT_TZV_WLAN_NAME') }}:</label><br><span>{{ lang('ACP_MOT_TZV_WLAN_NAME_EXPL') }}</span></dt>
-				<dd><input name="wlan_name" type="text" id="wlan_name" value="{{ WLAN_NAME }}" maxlength="255" /></dd>
+				<dd><input name="wlan_name" type="text" id="wlan_name" value="{{ WLAN_NAME }}" maxlength="255" autofocus></dd>
 			</dl>
 
 			<p class="submit-buttons">
-				<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}" />
+				<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}">
 			</p>
 			{{ S_FORM_TOKEN }}
 		</fieldset>
@@ -43,7 +43,7 @@
 
 	<form id="acp_wlan" method="post" action="{{ U_ACTION }}">
 		<fieldset class="quick">
-			<input class="button2" name="add" type="submit" value="{{ lang('ACP_MOT_TZV_WLAN_ADD') }}" />
+			<input class="button2" name="add" type="submit" value="{{ lang('ACP_MOT_TZV_WLAN_ADD') }}">
 		</fieldset>
 
 		{% if pagination %}
@@ -88,7 +88,7 @@
 		{% endif %}
 
 		<fieldset class="quick">
-			<input class="button2" name="add" type="submit" value="{{ lang('ACP_MOT_TZV_WLAN_ADD') }}" />
+			<input class="button2" name="add" type="submit" value="{{ lang('ACP_MOT_TZV_WLAN_ADD') }}">
 			{{ S_FORM_TOKEN }}
 		</fieldset>
 

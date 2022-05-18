@@ -71,6 +71,8 @@ motTzv.baseMap = {
 
 motTzv.layerControl = new L.control.layers(motTzv.baseMap).addTo(motTzv.map);
 
+L.Control.geocoder().addTo(motTzv.map);
+
 motTzv.markerLayer = (motTzv.jsMapConfig['Cluster'] == 1) ? new L.markerClusterGroup() : new L.layerGroup();
 motTzv.markerLayer.addTo(motTzv.map);
 

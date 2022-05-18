@@ -107,9 +107,10 @@ class mot_tzv_acp
 			$this->config->set('mot_tzv_map_enable_clusters', $this->request->variable('mot_tzv_map_enable_clusters', 0));
 
 			$this->config->set('mot_tzv_maps_enable', $this->request->variable('tzv_maps_enable', 0));				// Karte in Detailansicht ein/aus
+			$this->config->set('mot_tzv_kurviger_enable', $this->request->variable('tzv_kurviger_enable', 0));		// Datenübergabe an www.kurviger.de
+			$this->config->set('mot_tzv_komoot_enable', $this->request->variable('tzv_komoot_enable', 0));			// Datenübergabe an www.komoot.de
 			$this->config->set('mot_tzv_googlemap_enable', $this->request->variable('tzv_googlemap_enable', 0));	// Karte Googlemap
 			$this->config->set('mot_tzv_ostreetmap_enable', $this->request->variable('tzv_ostreetmap_enable', 0));	// Karte Openstreetmap
-			$this->config->set('mot_tzv_kurviger_enable', $this->request->variable('tzv_kurviger_enable', 0));		// Datenübergabe an www.kurviger.de
 			$this->config->set('mot_tzv_maps_width', $this->request->variable('tzv_maps_width', ''));				// Karte Breite
 			$this->config->set('mot_tzv_maps_height', $this->request->variable('tzv_maps_height', ''));				// Karte Höhe
 			$this->config->set('mot_tzv_maps_zoom', $this->request->variable('tzv_maps_zoom', 6));					// Karte Zoom
@@ -141,9 +142,10 @@ class mot_tzv_acp
 			'ACP_MOT_TZV_MAP_CLUSTERS'		=> $this->config['mot_tzv_map_enable_clusters'],
 
 			'ACP_MOT_TZV_MAPS_ENABLE'		=> $this->config['mot_tzv_maps_enable'],
+			'ACP_MOT_TZV_KURVIGER_ENABLE'	=> $this->config['mot_tzv_kurviger_enable'],
+			'ACP_MOT_TZV_KOMOOT_ENABLE'		=> $this->config['mot_tzv_komoot_enable'],
 			'ACP_MOT_TZV_GOOGLEMAP_ENABLE'	=> $this->config['mot_tzv_googlemap_enable'],
 			'ACP_MOT_TZV_OSMMAP_ENABLE'		=> $this->config['mot_tzv_ostreetmap_enable'],
-			'ACP_MOT_TZV_KURVIGER_ENABLE'	=> $this->config['mot_tzv_kurviger_enable'],
 			'ACP_MOT_TZV_MAPS_WIDTH'		=> $this->config['mot_tzv_maps_width'],
 			'ACP_MOT_TZV_MAPS_HEIGHT'		=> $this->config['mot_tzv_maps_height'],
 			'ACP_MOT_TZV_MAPS_ZOOM'			=> $this->config['mot_tzv_maps_zoom'],
