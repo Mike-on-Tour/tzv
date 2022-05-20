@@ -201,7 +201,7 @@ class mot_tzv_acp
 				}
 				else
 				{
-					$country_name = $this->request->variable('name', '');
+					$country_name = $this->request->variable('name', '', true);
 					confirm_box(false, '<p>' . $this->language->lang('ACP_MOT_TZV_COUNTRY_CONFIRM_DELETE', $country_name) . '</p>', build_hidden_fields([
 						'id'		=> $country_id,
 						'action'	=> 'delete',
@@ -404,7 +404,7 @@ class mot_tzv_acp
 				}
 				else
 				{
-					$region_name = $this->request->variable('name', '');
+					$region_name = $this->request->variable('name', '', true);
 					confirm_box(false, '<p>' . $this->language->lang('ACP_MOT_TZV_REGION_CONFIRM_DELETE', $region_name) . '</p>', build_hidden_fields([
 						'id'		=> $region_id,
 						'action'	=> 'delete',
@@ -603,7 +603,7 @@ class mot_tzv_acp
 				}
 				else
 				{
-					$cat_name = $this->request->variable('name', '');
+					$cat_name = $this->request->variable('name', '', true);
 					confirm_box(false, '<p>' . $this->language->lang('ACP_MOT_TZV_CAT_CONFIRM_DELETE', $cat_name) . '</p>', build_hidden_fields([
 						'id'		=> $cat_id,
 						'action'	=> 'delete',
@@ -802,7 +802,7 @@ class mot_tzv_acp
 				}
 				else
 				{
-					$wlan_name = $this->request->variable('name', '');
+					$wlan_name = $this->request->variable('name', '', true);
 					confirm_box(false, '<p>' . $this->language->lang('ACP_MOT_TZV_WLAN_CONFIRM_DELETE', $wlan_name) . '</p>', build_hidden_fields([
 						'id'		=> $wlan_id,
 						'action'	=> 'delete',
