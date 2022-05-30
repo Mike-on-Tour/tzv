@@ -116,6 +116,7 @@ $lang = array_merge($lang, [
 
 	'MOT_TZV_HWTEXT_SEND'				=> '&bull;&nbsp;&nbsp; <b>Prüfe vor Absenden noch einmal alle Eingaben.</b>',
 	'MOT_TZV_TOURZIEL_INVALID'			=> 'Ein Tourziel-Eintrag mit diesem Namen existiert bereits! Alle Eingaben wurden verworfen!',
+	'MOT_TZV_GENERAL_ERROR'				=> 'Fehler beim Speichern des Tourzieles:<br><strong>%1$s</strong><br>',
 
 	// Select-Boxen
 	'MOT_TZV_AUSWAHL'					=> 'Bitte auswählen',
@@ -179,6 +180,7 @@ $lang = array_merge($lang, [
 	'MOT_TZV_TOURZIEL_NO_EDIT'			=> 'Du bist nicht berechtigt Tourziele zu ändern!',
 	'MOT_TZV_TOURZIEL_NO_VIEW'			=> 'Du bist nicht berechtigt Tourziele zu sehen!',
 	'MOT_TZV_NO_ENTRIES'				=> 'Keine Einträge',
+	'MOT_TZV_NO_SUCH_ITEM'				=> 'Das gewünschte Tourziel existiert nicht!',
 
 	// Notifications
 	'MOT_TZV_NOTIFY_NEW_TZ'				=> '<strong>Neues Tourziel erstellt</strong><br>Das Mitglied „%2$s“ hat ein neues Tourziel mit dem Namen „<strong>%1$s</strong>“ erstellt.',

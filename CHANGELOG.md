@@ -4,10 +4,29 @@ All changes to `Adressverwaltung Tourziele` will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.5.1] - 2022-05-29
+
+### Added
+
+### Changed
+-	The error display management while storing a new item in `functions/mot_tzv_events.php` function `add_event` to display a general error message if an error
+	other than error code 1062 (item already exists) occurs in order to get a valid error message
+-	The behavior of the detiled view to display an error message if an item can not be found (e.g. because it was deleted prior to clicking the notification)
+
+### Fixed
+-	Requesting variables missing a `true` statement to handle non-ASCII characters correctly while deleting countries, regions, categories and WLAN options
+	in `controller/mot_tzv_acp.php`
+-	An issue which led to not displaying search results on the map due to missing includes of the 'Nominatim' search control element to the map used to
+	display the search results
+
+### Removed
+  
+  
 ## [0.5.0] - 2022-05-19
 
 ### Added
 -	Transfer of GPS data to a route planner for hikers and bikers including starting that route planner in the user's language if it is supported
+-	A search control element to the map to search the OSM database for addresses, features and so on with 'Nominatim'
 
 ### Changed
 -	The sequence of settings for maps and data transfer to route planners
