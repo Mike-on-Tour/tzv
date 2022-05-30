@@ -321,6 +321,10 @@ class mot_tzv_main
 	public function event($id)
 	{
 		$event = $this->events->get_events($id);
+		if (empty($event))
+		{
+			trigger_error($this->language->lang('MOT_TZV_NO_SUCH_ITEM') . $this->events->tzv_back_link($this->tzv_index_route, $this->language->lang('MOT_TZV_MAIN_INDEX')), E_USER_WARNING);
+		}
 
 		$flag = $this->tzv_flags_url . $event['country_image'];
 

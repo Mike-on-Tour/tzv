@@ -116,6 +116,7 @@ $lang = array_merge($lang, [
 
 	'MOT_TZV_HWTEXT_SEND'				=> '&bull;&nbsp;&nbsp; <b>Please check your input before submitting.</b>',
 	'MOT_TZV_TOURZIEL_INVALID'			=> 'An item with this name already exists! Your input was rejected!',
+	'MOT_TZV_GENERAL_ERROR'				=> 'An error occurred while saving an item:<br><strong>%1$s</strong><br>',
 
 	// Select-Boxen
 	'MOT_TZV_AUSWAHL'					=> 'Please choose',
@@ -179,6 +180,7 @@ $lang = array_merge($lang, [
 	'MOT_TZV_TOURZIEL_NO_EDIT'			=> 'You do not have the permission to edit a tour destination!',
 	'MOT_TZV_TOURZIEL_NO_VIEW'			=> 'You do not have the permission to view Tour destinations!',
 	'MOT_TZV_NO_ENTRIES'				=> 'No items found',
+	'MOT_TZV_NO_SUCH_ITEM'				=> 'The selected item does not exist!',
 
 	// Notifications
 	'MOT_TZV_NOTIFY_NEW_TZ'				=> '<strong>New tour destination</strong><br>The user „%2$s“ created a new POI named „<strong>%1$s</strong>“.',

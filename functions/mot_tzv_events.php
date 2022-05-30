@@ -148,17 +148,20 @@ class mot_tzv_events
 
 			$result = $this->db->sql_query($sql);
 			$event = $this->db->sql_fetchrow($result);
-
-			if ($edit == true)
-			{
-				decode_message($event['message'], $event['bbcode_uid']);
-			}
-			else
-			{
-				$event['message'] = generate_text_for_display($event['message'], $event['bbcode_uid'], $event['bbcode_bitfield'], $event['bbcode_options'],
-				$event['enable_magic_url'], $event['enable_smilies'], $event['enable_bbcode']);
-			}
 			$this->db->sql_freeresult($result);
+
+			if (!empty($event))
+			{
+				if ($edit == true)
+				{
+					decode_message($event['message'], $event['bbcode_uid']);
+				}
+				else
+				{
+					$event['message'] = generate_text_for_display($event['message'], $event['bbcode_uid'], $event['bbcode_bitfield'], $event['bbcode_options'],
+					$event['enable_magic_url'], $event['enable_smilies'], $event['enable_bbcode']);
+				}
+			}
 			return $event;
 		}
 	}
@@ -203,9 +206,15 @@ class mot_tzv_events
 		{
 			$sql_error = $this->db->get_sql_error_returned();
 			$this->db->sql_return_on_error();
-			if ($sql_error['code'] == 1062)
+			switch ($sql_error['code'])
 			{
-				trigger_error($this->language->lang('MOT_TZV_TOURZIEL_INVALID') . $this->tzv_back_link($back_link, $this->language->lang('MOT_TZV_MAIN_ADD')), E_USER_WARNING);
+				case 1062:
+					trigger_error($this->language->lang('MOT_TZV_TOURZIEL_INVALID') . $this->tzv_back_link($back_link, $this->language->lang('MOT_TZV_MAIN_ADD')), E_USER_WARNING);
+					break;
+				default:
+					$err_msg = $sql_error['code'] . ': ' . $sql_error['message'];
+					trigger_error($this->language->lang('MOT_TZV_GENERAL_ERROR', $err_msg) . $this->tzv_back_link($back_link, $this->language->lang('MOT_TZV_MAIN_ADD')), E_USER_WARNING);
+					break;
 			}
 		}
 		else

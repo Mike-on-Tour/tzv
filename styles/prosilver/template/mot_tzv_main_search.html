@@ -7,9 +7,11 @@
 	{% INCLUDECSS '@mot_tzv/thirdparty/leaflet.css' %}
 	{% INCLUDECSS '@mot_tzv/thirdparty/MarkerCluster.css' %}
 	{% INCLUDECSS '@mot_tzv/thirdparty/MarkerCluster.Default.css' %}
+	{% INCLUDECSS '@mot_tzv/thirdparty/Control.Geocoder.css' %}
 	{% INCLUDECSS '@mot_tzv/mot_tourziel.css' %}
 	{% INCLUDEJS '@mot_tzv/thirdparty/leaflet.js' %}
 	{% INCLUDEJS '@mot_tzv/thirdparty/leaflet.markercluster.js' %}
+	{% INCLUDEJS '@mot_tzv/thirdparty/leaflet.control.geocoder.js' %}
 	{% INCLUDEJS '@mot_tzv/mot_tzv_map.js' %}
 	{% set INCLUDED_MOT_TZV_MAP_JS = true %}
 {% endif %}
@@ -132,7 +134,7 @@
 		</ul>
 	</div>
 </div>
-
+{{ MOT_TZV_TOURZIELE }}
 <script>
 // <![CDATA[
 	// Define own JS variables
@@ -144,6 +146,8 @@
 	motTzv.jsStreetDesc = "{{ lang('MOT_TZV_STREET_DESC')|e('js') }}";
 	motTzv.jsTopoDesc = "{{ lang('MOT_TZV_TOPO_DESC')|e('js') }}";
 	motTzv.jsSatDesc = "{{ lang('MOT_TZV_SAT_DESC')|e('js') }}";
+
+	motTzv.jsAjaxCreate = "{{ MOT_TZV_CREATE_LINK|e('js') }}";
 // ]]>
 </script>
 
