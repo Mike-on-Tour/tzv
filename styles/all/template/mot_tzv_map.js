@@ -33,6 +33,11 @@ motTzv.addMarker = function(item) {
 	marker.addTo(motTzv.markerLayer);
 }
 
+motTzv.addLayers = function(item) {
+}
+
+/* ---------------------------------------------------------------------------------------	main functions	---------------------------------------------------------------------------------------  */
+
 motTzv.mapOptions = {
 	center: [motTzv.jsMapConfig['Lat'], motTzv.jsMapConfig['Lon']],
 	zoom: motTzv.jsMapConfig['Zoom'],
@@ -71,13 +76,19 @@ motTzv.baseMap = {
 
 motTzv.layerControl = new L.control.layers(motTzv.baseMap).addTo(motTzv.map);
 
+// Add the search element to the map
 L.Control.geocoder().addTo(motTzv.map);
+motTzv.jsMultipleLayers = false;
+if (motTzv.jsMultipleLayers) {
+	alert(JSON.stringify(motTzv.jsTourziele));
+	motTzv.jsTourziele.forEach(motTzv.addLayers);
+} else {
+	motTzv.markerLayer = (motTzv.jsMapConfig['Cluster'] == 1) ? new L.markerClusterGroup() : new L.layerGroup();
+	motTzv.markerLayer.addTo(motTzv.map);
+	motTzv.jsTourziele.forEach(motTzv.addMarker);
+}
 
-motTzv.markerLayer = (motTzv.jsMapConfig['Cluster'] == 1) ? new L.markerClusterGroup() : new L.layerGroup();
-motTzv.markerLayer.addTo(motTzv.map);
-
-motTzv.jsTourziele.forEach(motTzv.addMarker);
-
+// Call the create function at right click into the map with the coordinates the mouse points to at this moment
 motTzv.map.addEventListener('contextmenu', function(evt) {
 	window.location.replace(motTzv.jsAjaxCreate + '?lat=' + evt.latlng.lat + '&lng=' + evt.latlng.lng);
 });
