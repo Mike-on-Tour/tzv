@@ -4,6 +4,20 @@ All changes to `Adressverwaltung Tourziele` will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.5.2] - 2022-05-31
+
+### Added
+
+### Changed
+
+### Fixed
+-	A PHP Notice in debug mode if no moderators with the permission to edit or delete tour destinations exist; affected file is `functions/mot_tzv_events.php`
+-	The length of the `homepage` column to 255 characters (formerly 50 characters) in the MOT_TOURZIEL_TABLE in order toprevent error messages while storing
+	a new item in the database
+
+### Removed
+  
+  
 ## [0.5.1] - 2022-05-29
 
 ### Added
@@ -11,7 +25,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 -	The error display management while storing a new item in `functions/mot_tzv_events.php` function `add_event` to display a general error message if an error
 	other than error code 1062 (item already exists) occurs in order to get a valid error message
--	The behavior of the detiled view to display an error message if an item can not be found (e.g. because it was deleted prior to clicking the notification)
+-	The behavior of the detailed view to display an error message if an item can not be found (e.g. because it was deleted prior to clicking the notification)
 
 ### Fixed
 -	Requesting variables missing a `true` statement to handle non-ASCII characters correctly while deleting countries, regions, categories and WLAN options
@@ -90,7 +104,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 -	UCP tab to show the respective user his "own" tour destinations including the possibility to edit or delete them if the proper permissions are granted
 -	Two settings to the ACP settigs tab to enable administrators to choose how the latest tour destination and the list of tour destinations will be displayed
 	(either as a detailled view or as a table row) and two new config variables to hold these values
--	Notification of moderators permitted to edit or delete tour destinations in cases of a creted, edited or deleted tour destination
+-	Notification of moderators permitted to edit or delete tour destinations in cases of a created, edited or deleted tour destination
 
 ### Changed
 
@@ -114,7 +128,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 -	Wrong link to former tour destinations list in `event/mot_tzv_listener.php` which resulted in a "page not found" error
--	Three wrong links to the tour destinations index generated with `gemerate_board_url` which resulted in a "page not found" error
+-	Three wrong links to the tour destinations index generated with `generate_board_url` which resulted in a "page not found" error
 -	A wrong location of the support link and its enabler definition in `event/mot_tzv_listener.php` which led to it being not dislayed if there were no new
 	tour destinations
 -	Added missing `sql_freeresult` in `functions/mot_tzv_events.php` in `function get_events()`

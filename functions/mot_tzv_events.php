@@ -463,9 +463,9 @@ class mot_tzv_events
 
 
 	/*
-	* Get the user ids od those users who have moderators perissions to edit or delete tour destinations
+	* Get the user ids of those users who have moderator permissions to edit or delete tour destinations
 	*
-	* @retuen	array		all respective user ids
+	* @return	array		all respective user ids
 	*/
 	public function get_tzv_moderators()
 	{
@@ -477,20 +477,23 @@ class mot_tzv_events
 		$result = $this->db->sql_query($sql);
 		$users_total = $this->db->sql_fetchrowset($result);
 		$this->db->sql_freeresult($result);
-		$users_all = [];
+		$users_all = $tzv_mods = $tzv_mods_edit = $tzv_mods_delete = [];
 		foreach ($users_total as $row)
 		{
 			$users_all[] = $row['user_id'];
 		}
-		$tzv_mods_edit = $this->auth->acl_get_list($users_all, 'm_mot_tzv_edit')[0]['m_mot_tzv_edit'];
-		$tzv_mods_delete = $this->auth->acl_get_list($users_all, 'm_mot_tzv_delete')[0]['m_mot_tzv_delete'];
+		$tzv_mods_edit = $this->auth->acl_get_list($users_all, 'm_mot_tzv_edit');
+		if (!empty($tzv_mods_edit))
+		{
+			$tzv_mods_edit = $tzv_mods_edit[0]['m_mot_tzv_edit'];
+		}
+		$tzv_mods_delete = $this->auth->acl_get_list($users_all, 'm_mot_tzv_delete');
+		if (!empty($tzv_mods_delete))
+		{
+			$tzv_mods_delete = $tzv_mods_delete[0]['m_mot_tzv_delete'];
+		}
 		$tzv_mods = array_replace_recursive($tzv_mods_edit, $tzv_mods_delete);
 
-		// Make sure we have at least an empty array to prevent errors
-		if (empty($tzv_mods))
-		{
-			$tzv_mods = [];
-		}
 		return $tzv_mods;
 	}
 }
