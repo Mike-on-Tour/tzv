@@ -4,6 +4,21 @@ All changes to `Adressverwaltung Tourziele` will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.6.0] - 2022-06-14
+
+### Added
+-	The possibility to display items on the main map in different layers with the layers named after the used categories; this includes a corresponding
+	ACP setting
+-	A 'Tourziel List' link to the moderator page
+
+### Changed
+-	The map's scale control element to display both metric and imperial distances
+
+### Fixed
+
+### Removed
+  
+  
 ## [0.5.2] - 2022-05-31
 
 ### Added
