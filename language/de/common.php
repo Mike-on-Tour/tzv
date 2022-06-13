@@ -79,10 +79,9 @@ $lang = array_merge($lang, [
 		2	=> 'Insgesamt <strong>%1$d</strong> Tourziele in der Datenbank.',
 	],
 	'MOT_TZV_COUNTRY_EINTRAG'			=> 'Eingetragene Länder',
-	'MOT_TZV_MAINNEWS_INFO'				=> '&bull;&nbsp;&nbsp;Suche in OSM (Nominatim) in die Karte eingefügt.<br>
-											&bull;&nbsp;&nbsp;Datenübergabe an komoot.de zur Routenplanung für Wanderer und Radfahrer (öffnet in einem neuen Tab oder Fenster).<br>
-											&bull;&nbsp;&nbsp;komoot.de wird im Falle einer dort unterstützten Sprache in dieser aufgerufen (z.B. bei Nutzersprache Englisch in Englisch).<br>
-											&bull;&nbsp;&nbsp;Rechtsklick in die Karte öffnet Eingabefenster für neues Tourziel und übernimmt gleich die Koodinaten, auf die die Maus beim Rechtsklick zeigte.<br>',
+	'MOT_TZV_MAINNEWS_INFO'				=> '&bull;&nbsp;&nbsp;Anzeige der Tourziele in der Hauptkarte in verschiedenen Overlays, die nach den Kategorien sortiert sind.<br>
+											&bull;&nbsp;&nbsp;Die Overlays können im Kontrollelement rechts oben in der Karte individuell aus- und angeschaltet werden.<br>
+											&bull;&nbsp;&nbsp;Anzeige der Entfernungsskala auf den Karten in metrischen und imperialischen (Meilen) Maßeinheiten.<br>',
 	'MOT_TZV_NUTZUNG_MAPS'				=> 'Nutzungsbedingungen Google Maps',
 
 	// Map

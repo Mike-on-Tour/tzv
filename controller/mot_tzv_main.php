@@ -748,10 +748,11 @@ class mot_tzv_main
 		}
 
 		$map_config = [
-			'Lat'			=> $this->config['mot_tzv_map_lat'],
-			'Lon'			=> $this->config['mot_tzv_map_lon'],
-			'Zoom'			=> $this->config['mot_tzv_map_zoom'],
-			'Cluster'		=> $this->config['mot_tzv_map_enable_clusters'],
+			'Lat'				=> $this->config['mot_tzv_map_lat'],
+			'Lon'				=> $this->config['mot_tzv_map_lon'],
+			'Zoom'				=> $this->config['mot_tzv_map_zoom'],
+			'Cluster'			=> $this->config['mot_tzv_map_enable_clusters'],
+			'MultipleLayers'	=> $this->config['mot_tzv_enable_multi_layers'],
 		];
 
 		// Get country info to display flags
@@ -1107,10 +1108,11 @@ class mot_tzv_main
 		$this->events->get_country_info();
 
 		$map_config = [
-			'Lat'			=> $this->config['mot_tzv_map_lat'],
-			'Lon'			=> $this->config['mot_tzv_map_lon'],
-			'Zoom'			=> $this->config['mot_tzv_map_zoom'],
-			'Cluster'		=> $this->config['mot_tzv_map_enable_clusters'],
+			'Lat'				=> $this->config['mot_tzv_map_lat'],
+			'Lon'				=> $this->config['mot_tzv_map_lon'],
+			'Zoom'				=> $this->config['mot_tzv_map_zoom'],
+			'Cluster'			=> $this->config['mot_tzv_map_enable_clusters'],
+			'MultipleLayers'	=> false,
 		];
 
 		$this->template->assign_vars([

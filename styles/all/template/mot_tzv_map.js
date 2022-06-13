@@ -13,7 +13,7 @@
 /*
 *	Adds a new marker to the map
 *
-*	@params	array		item		one of the arrays within the array holding all the Tourziele
+*	@params	array		item		one of the arrays within the array holding all the tour destinations
 *
 *	@return	none
 */
@@ -33,7 +33,34 @@ motTzv.addMarker = function(item) {
 	marker.addTo(motTzv.markerLayer);
 }
 
+/*
+*	Adds markers to map overlays named after the used item categories
+*
+*	@params	array		item		one of the arrays within the array holding all the items
+*
+*	@return	none
+*/
 motTzv.addLayers = function(item) {
+	// Create the marker
+	var markerOptions = {
+		title:		item['name'],
+		clickable:	true,
+		draggable:	false,
+	}
+	var marker = new L.Marker([parseFloat(item['maps_lat']), parseFloat(item['maps_lon'])], markerOptions);
+
+	marker.url = item['url'];
+	marker.on('click', function(){
+		var newTab = window.open(this.url, '_blank');
+	});
+
+	// Check whether an overlay with this name already exists and if not, create it and add it to the map
+	if (item['cat_name'] in motTzv.userOverlays === false) {
+		motTzv.userOverlays[item['cat_name']] = (motTzv.jsMapConfig['Cluster'] == 1) ? new L.markerClusterGroup(motTzv.groupOptions) : new L.layerGroup(motTzv.groupOptions);
+		motTzv.userOverlays[item['cat_name']].addTo(motTzv.map);
+	}
+	// Add the marker to the correct overlay
+	marker.addTo(motTzv.userOverlays[item['cat_name']]);
 }
 
 /* ---------------------------------------------------------------------------------------	main functions	---------------------------------------------------------------------------------------  */
@@ -66,27 +93,33 @@ motTzv.map.addLayer(motTzv.streetLayer);
 
 motTzv.attribution = new L.control.attribution().addAttribution('Map Data &copy; <a href="https://www.openstreetmap.org/copyright" target=_blank">OpenStreetMap</a>').addTo(motTzv.map);
 
-motTzv.scale = new L.control.scale({imperial: false}).addTo(motTzv.map);
+motTzv.scale = new L.control.scale().addTo(motTzv.map);
 
+// Define the basic map layers
 motTzv.baseMap = {
 	[motTzv.jsStreetDesc]	: motTzv.streetLayer,
 	[motTzv.jsTopoDesc]		: motTzv.topoLayer,
 	[motTzv.jsSatDesc]		: motTzv.satLayer,
 }
+// Define the additional map layers
+motTzv.userOverlays = {};
 
-motTzv.layerControl = new L.control.layers(motTzv.baseMap).addTo(motTzv.map);
-
-// Add the search element to the map
-L.Control.geocoder().addTo(motTzv.map);
-motTzv.jsMultipleLayers = false;
-if (motTzv.jsMultipleLayers) {
-	alert(JSON.stringify(motTzv.jsTourziele));
+if (motTzv.jsMapConfig['MultipleLayers'] == 1) {
+	motTzv.groupOptions = {
+		tab: false,	// To prevent errors on Mac with Safari
+	}
 	motTzv.jsTourziele.forEach(motTzv.addLayers);
 } else {
 	motTzv.markerLayer = (motTzv.jsMapConfig['Cluster'] == 1) ? new L.markerClusterGroup() : new L.layerGroup();
 	motTzv.markerLayer.addTo(motTzv.map);
 	motTzv.jsTourziele.forEach(motTzv.addMarker);
 }
+
+// Add the layer control to the map
+motTzv.layerControl = new L.control.layers(motTzv.baseMap, motTzv.userOverlays).addTo(motTzv.map);
+
+// Add the search element to the map
+L.Control.geocoder().addTo(motTzv.map);
 
 // Call the create function at right click into the map with the coordinates the mouse points to at this moment
 motTzv.map.addEventListener('contextmenu', function(evt) {

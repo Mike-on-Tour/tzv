@@ -29,7 +29,11 @@ $lang = array_merge($lang, [
 									&bull;&nbsp;License <a href="http://opensource.org/licenses/gpl-license.php"> http://opensource.org/licenses/gpl-license.php</a> GNU Public License<br>',
 
 	'ACP_MOT_TZV_HISTORY'		=> 'Tourziele History',
-	'ACP_MOT_TZV_HUPDATE'		=> '&bull;&nbsp;2022 Version 0.5.0<br>
+	'ACP_MOT_TZV_HUPDATE'		=> '&bull;&nbsp;2022 Version 0.6.0<br>
+									- Anzeige der Tourziele in der Hauptkarte in verschiedenen Overlays, die nach den Kategorien sortiert sind<br>
+									- Die Overlays können im Kontrollelement rechts oben in der Karte individuell aus- und angeschaltet werden<br>
+									- Anzeige der Entfernungsskala auf den Karten in metrischen und imperialischen (Meilen) Maßeinheiten<br>
+									&bull;&nbsp;2022 Version 0.5.0<br>
 									- Suche in OSM (Nominatim) in die Karte eingefügt<br>
 									- Datenübergabe an komoot.de zur Routenplanung für Wanderer und Radfahrer (öffnet in einem neuen Tab oder Fenster)<br>
 									- komoot.de wird im Falle einer dort unterstützten Sprache in dieser aufgerufen (z.B. bei Nutzersprache Englisch in Englisch)<br>

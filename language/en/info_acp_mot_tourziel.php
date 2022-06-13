@@ -55,6 +55,9 @@ $lang = array_merge($lang, [
 	'ACP_MOT_TZV_MAP_CLUSTERS'		=> 'Cluster markers',
 	'ACP_MOT_TZV_MAP_CLUSTERS_EXP'	=> 'To avoid cluttering the map with a high number of markers you can activate this setting to build clusters of markers.
 										These clusters vary with the zoom.',
+	'ACP_MOT_TZV_MULTI_LAYERS'		=> 'Display markers on various overlays',
+	'ACP_MOT_TZV_MULTI_LAYERS_EXP'	=> 'Activate this setting to display the item markers on several overlays named after the item categories.
+										The number of overlays depends on the number of used categories.',
 
 	'ACP_MOT_TZV_GOOGLE_FUNCTIONS'	=> 'Settings for the maps of the detailed view',
 	'ACP_MOT_TZV_MAPS_ENABLE'		=> 'Enable detail map(s) with detailed view',

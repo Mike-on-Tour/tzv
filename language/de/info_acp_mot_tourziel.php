@@ -55,6 +55,9 @@ $lang = array_merge($lang, [
 	'ACP_MOT_TZV_MAP_CLUSTERS'		=> 'Marker bündeln',
 	'ACP_MOT_TZV_MAP_CLUSTERS_EXP'	=> 'Wenn du diese Einstellung aktivierst, werden die Marker zur Darstellung auf der Karte gebündelt.
 										Damit kann eine Überfrachtung der Karte mit Markern verhindert werden.',
+	'ACP_MOT_TZV_MULTI_LAYERS'		=> 'Marker auf verschiedenen Overlays darstellen',
+	'ACP_MOT_TZV_MULTI_LAYERS_EXP'	=> 'Wenn du diese Einstellung aktivierst, werden die Marker auf der Karte auf verschiedenen Overlays dargestellt.
+										Die Anzahl der Overlays richtet sich nach der Anzahl der verwendeten Kategorien, sie sind nach diesen benannt.',
 
 	'ACP_MOT_TZV_GOOGLE_FUNCTIONS'	=> 'Einstellungen für Karten der Detailanzeige',
 	'ACP_MOT_TZV_MAPS_ENABLE'		=> 'Detailansicht Karte anzeigen',

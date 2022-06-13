@@ -105,6 +105,7 @@ class mot_tzv_acp
 			$this->config->set('mot_tzv_map_lon', $this->request->variable('mot_tzv_map_lon', ''));					//Längengrad des Zentrums Übersichtskarte
 			$this->config->set('mot_tzv_map_zoom', $this->request->variable('mot_tzv_map_zoom', 0));				// Zoom der Übersichtskarte
 			$this->config->set('mot_tzv_map_enable_clusters', $this->request->variable('mot_tzv_map_enable_clusters', 0));
+			$this->config->set('mot_tzv_enable_multi_layers', $this->request->variable('mot_tzv_enable_multi_layers', 0));
 
 			$this->config->set('mot_tzv_maps_enable', $this->request->variable('tzv_maps_enable', 0));				// Karte in Detailansicht ein/aus
 			$this->config->set('mot_tzv_kurviger_enable', $this->request->variable('tzv_kurviger_enable', 0));		// Datenübergabe an www.kurviger.de
@@ -140,6 +141,7 @@ class mot_tzv_acp
 			'ACP_MOT_TZV_LON'				=> $this->config['mot_tzv_map_lon'],
 			'ACP_MOT_TZV_ZOOM'				=> $this->config['mot_tzv_map_zoom'],
 			'ACP_MOT_TZV_MAP_CLUSTERS'		=> $this->config['mot_tzv_map_enable_clusters'],
+			'ACP_MOT_TZV_MULTI_LAYERS'		=> $this->config['mot_tzv_enable_multi_layers'],
 
 			'ACP_MOT_TZV_MAPS_ENABLE'		=> $this->config['mot_tzv_maps_enable'],
 			'ACP_MOT_TZV_KURVIGER_ENABLE'	=> $this->config['mot_tzv_kurviger_enable'],
