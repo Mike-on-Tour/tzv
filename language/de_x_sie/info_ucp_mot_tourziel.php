@@ -6,7 +6,6 @@
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
-
 if (!defined('IN_PHPBB'))
 {
 	exit;
@@ -27,7 +26,7 @@ $lang = array_merge($lang, [
 	'UCP_MOT_TZV_COUNTRY'			=> 'Land / Region',
 	'UCP_MOT_TZV_NO_ENTRIES'		=> 'Keine Einträge',
 	'EDIT'							=> 'Ändern',
-	'UCP_MOT_TZV_NOT_AUTHORISED'	=> 'Du bist zu dieser Operation nicht berechtigt',
+	'UCP_MOT_TZV_NOT_AUTHORISED'	=> 'Sie sind zu dieser Operation nicht berechtigt',
 	'UCP_MOT_TZV_BACK_TO_UCP'		=> 'Zurück zum persönlichen Bereich',
 	// Notification
 	'UCP_MOT_TZV_NOTIFY_MOD'		=> 'Benachrichtigungen zur Adressverwaltung Tourziele',

@@ -8,6 +8,10 @@
 		{{ lang('ACP_MOT_TZV_HELP') }}
 	</fieldset>
 
+	{% if ACP_MOT_TZV_LANG_NOTE != '' %}
+		<div class="errorbox">{{ ACP_MOT_TZV_LANG_NOTE }}</div>
+	{% endif %}
+
 	<fieldset>
 		<legend>{{ lang('ACP_MOT_TZV_PERMISSION_EXPL') }}</legend>
 		{{ lang('ACP_MOT_TZV_PERMISSION') }}<br>

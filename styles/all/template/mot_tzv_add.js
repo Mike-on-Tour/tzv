@@ -1,6 +1,6 @@
 /**
 *
-* package phpBB Extension [Adressverwaltung - Tourziele]
+* @package phpBB Extension [Tour destinations]
 * copyright (c) 2022 Mike-on-Tour
 * license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *

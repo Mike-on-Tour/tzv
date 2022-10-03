@@ -1,30 +1,71 @@
 <?php
 /**
 *
-* @package phpBB Extension [Adressverwaltung - Tourziele]
+* @package phpBB Extension [Tour destinations]
 * @copyright (c) 2014-2021 waldkatze
 * @copyright (c) 2022 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
+
 namespace mot\tzv;
 
 class ext extends \phpbb\extension\base
 {
+	protected $error_message = [];
+	protected $phpbb_min_ver = '3.2.3';
+	protected $phpbb_below_ver = '3.4.0@dev';
+	protected $php_min_ver = '7.2.0';
+	protected $php_below_ver = '8.2.0';
+
 	public function is_enableable()
 	{
-		$phpbb_min_ver	 = '3.2.3';
-		$phpbb_below_ver = '3.4.0@dev';
-
-		$language = $this->container->get('language');
-		$language->add_lang('mot_tzv_ext_enable_error', 'mot/tzv');
-		$style_switch = $language->lang('MOT_TZV_TOURZIEL');
-
-		if (!(phpbb_version_compare(PHPBB_VERSION, $phpbb_min_ver, '>=') && phpbb_version_compare(PHPBB_VERSION, $phpbb_below_ver, '<')))
+		// Set the language element depending on the phpBB version (3.1.x uses the $user->lang object)
+		if (phpbb_version_compare(PHPBB_VERSION, '3.2.0', '<'))
 		{
-			trigger_error(sprintf($language->lang('MOT_TZV_ERROR_EXTENSION_NOT_ENABLE') . '<br>' . $language->lang('MOT_TZV_ERROR_MESSAGE_PHPBB_VERSION'), $style_switch, $phpbb_min_ver, $phpbb_below_ver) . $this->get_adm_back_link(), E_USER_WARNING);
+			$language = $this->container->get('user');
+			$language->add_lang_ext('mot/tzv', 'mot_tzv_ext_enable_error');
 		}
-		return true;
+		else
+		{
+			$language = $this->container->get('language');
+			$language->add_lang('mot_tzv_ext_enable_error', 'mot/tzv');
+		}
+		$ext_name = $language->lang('MOT_TZV_TOURZIEL');
+
+		// Check requirements
+		if (!$this->phpbb_requirement())
+		{
+			$this->error_message[] = $language->lang('MOT_TZV_ERROR_MESSAGE_PHPBB_VERSION', $this->phpbb_min_ver, $this->phpbb_below_ver);
+		}
+
+		if (!$this->php_requirement())
+		{
+			$this->error_message[] = $language->lang('MOT_TZV_PHP_VERSION_ERROR', $this->php_min_ver, $this->php_below_ver);
+		}
+
+		if (!empty($this->error_message))
+		{
+			// Insert general message at the beginning
+			array_unshift($this->error_message, $language->lang('MOT_TZV_ERROR_EXTENSION_NOT_ENABLE', $ext_name));
+			// phpBB versions before 3.3.0 must use 'trigger_error'
+			if (phpbb_version_compare(PHPBB_VERSION, '3.3.0', '<'))
+			{
+				$this->error_message = implode('<br>', $this->error_message);
+				trigger_error($this->error_message, E_USER_WARNING);
+			}
+		}
+		return empty($this->error_message) ? true : $this->error_message;
+	}
+
+	protected function phpbb_requirement()
+	{
+		return phpbb_version_compare(PHPBB_VERSION, $this->phpbb_min_ver, '>=') && phpbb_version_compare(PHPBB_VERSION, $this->phpbb_below_ver, '<');
+	}
+
+	protected function php_requirement()
+	{
+		return phpbb_version_compare(PHP_VERSION, $this->php_min_ver, '>') && phpbb_version_compare(PHP_VERSION, $this->php_below_ver, '<');
 	}
 
 	public function enable_step($old_state)

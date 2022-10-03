@@ -1,0 +1,10 @@
+Subject: Gelöschtes Tourziel auf "{SITENAME}"
+
+Hallo {USERNAME},
+
+Sie bekommen diese eMail, weil auf "{SITENAME}" ein bestehendes Tourziel gelöscht wurde:
+Das Mitglied "{CREATOR}" hat das Tourziel mit dem Namen "{TZ_NAME}" gelöscht.
+
+Wenn Sie zukünftig diese Benachrichtigungs-Mail nicht mehr erhalten möchten, können Sie dies in den Benachrichtigungseinstellungen in Ihrem Benutzerprofil einstellen.
+
+{EMAIL_SIG}

@@ -1,18 +1,35 @@
 <?php
 /**
 *
-* @package phpBB Extension [Adressverwaltung - Tourziele]
+* @package phpBB Extension [Tour destinations]
 * @copyright (c) 2014-2021 waldkatze
 * @copyright (c) 2022 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
-* @language file [deutsch / Du]
+* @language file (British English)
 *
 */
+
 if (!defined('IN_PHPBB'))
 {
 	exit;
 }
+
+// DEVELOPERS PLEASE NOTE
+//
+// All language files should use UTF-8 as their encoding and the files must not contain a BOM.
+//
+// Placeholders can now contain order information, e.g. instead of
+// 'Page %s of %s' you can (and should) write 'Page %1$s of %2$s', this allows
+// translators to re-order the output of data while ensuring it remains correct
+//
+// You do not need this where single placeholders are used, e.g. 'Message %d' is fine
+// equally where a string contains only two placeholders which are used to wrap text
+// in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
+//
+// Some characters you may want to copy&paste:
+// ’ » „ “ — …
+//
 
 if (empty($lang) || !is_array($lang))
 {
@@ -23,7 +40,7 @@ $lang = array_merge($lang, [
 
 	// Titel
 	'MOT_TZV_TOURZIEL'					=> 'Tour destinations',
-	'MOT_TZV_TOURZIEL_MAIN'				=> 'Motorcycle &bull;&nbsp;Tour destinations database',
+	'MOT_TZV_TOURZIEL_MAIN'				=> 'Tour destinations database',
 
 	// Forum Index
 	'MOT_TZV_NEW_EVENT'					=> 'Latest/last edited Tour destination item',
@@ -185,7 +202,4 @@ $lang = array_merge($lang, [
 	'MOT_TZV_NOTIFY_NEW_TZ'				=> '<strong>New tour destination</strong><br>The user „%2$s“ created a new POI named „<strong>%1$s</strong>“.',
 	'MOT_TZV_NOTIFY_TZ_EDITED'			=> '<strong>Edited tour destionation</strong><br>The user „%2$s“ has edited the tour destination named „<strong>%1$s</strong>“.',
 	'MOT_TZV_NOTIFY_TZ_DELETED'			=> '<strong>Deleted tour destination</strong><br>The user „%2$s“ deleted the tour destination named „<strong>%1$s</strong>“.',
-
-	// TZV-FOOTER
-	'MOT_TZV_FOOTER'					=> 'phpBB Extension <b>Tour destinations</b> &copy; <a href="https://www.mike-on-tour.com" target="_blank" rel="noopener">Mike-on-Tour</a> ',
 ]);

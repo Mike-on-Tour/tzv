@@ -1,7 +1,7 @@
 <?php
 /**
 *
-* @package phpBB Extension [Adressverwaltung - Tourziele]
+* @package phpBB Extension [Tour destinations]
 * @copyright (c) 2014-2021 waldkatze
 * @copyright (c) 2022 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
@@ -167,27 +167,6 @@ class mot_tzv_events
 	}
 
 
-	// [Erhalte Events nach Datum] (Moderator)					Unused function
-	public function get_events_of_day($name)
-	{
-		$events = [];
-		$sql_array = [
-			'SELECT' => '*',
-			'FROM'	 => [$this->tourziel_table => 'c'],
-			'WHERE'	 => "c.name = $name",
-		];
-
-		$sql = $this->db->sql_build_query('SELECT', $sql_array);
-		$result = $this->db->sql_query($sql);
-
-		while ($row = $this->db->sql_fetchrow($result))
-		{
-			$events[] = $row;
-		}
-		return $events;
-	}
-
-
 	/*
 	* Stores a newly created Tourziel in the MOT_TOURZIEL_TABLE
 	*
@@ -225,7 +204,7 @@ class mot_tzv_events
 	}
 
 
-	// [Tourziel ändern]
+	// Edit item
 	public function edit_event($id, $sql_array)
 	{
 		$sql = 'UPDATE ' . $this->tourziel_table . ' SET ' . $this->db->sql_build_array('UPDATE', $sql_array) . ' WHERE id = ' . (int) $id;
@@ -233,7 +212,7 @@ class mot_tzv_events
 	}
 
 
-	// [Tourziel löschen]
+	// Delete item
 	public function delete_event($id)
 	{
 		$sql = 'DELETE FROM ' . $this->tourziel_table . ' WHERE id = ' . (int) $id;

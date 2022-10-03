@@ -1,12 +1,13 @@
 <?php
 /**
 *
-* @package phpBB Extension [Adressverwaltung - Tourziele]
+* @package phpBB Extension [Tour destinations]
 * @copyright (c) 2014-2021 waldkatze
 * @copyright (c) 2022 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
+
 namespace mot\tzv\controller;
 
 class mot_tzv_acp
@@ -85,7 +86,7 @@ class mot_tzv_acp
 	}
 
 	/*-------------------------------------
-	Einstellungen / Schalter
+	Settings
 	-------------------------------------*/
 	public function settings()
 	{
@@ -122,7 +123,7 @@ class mot_tzv_acp
 			$this->config->set('mot_tzv_main_image', $this->request->variable('tzv_main_image', 0));				// Anzeige Bilder im TZV-Index
 			$this->config->set('mot_tzv_maininfo_enable', $this->request->variable('tzv_maininfo', 0));				// Anzeige Versionsneuigkeiten im TZV-Index
 			$this->config->set('mot_tzv_support_enable', $this->request->variable('tzv_support_enable', ''));		// Link Support anzeigen
-			$this->config->set('mot_tzv_support', $this->request->variable('tzv_support', ''));						// Link Support
+			$this->config->set('mot_tzv_support', $this->request->variable('tzv_support', '', true));				// Link Support
 			$this->config->set('mot_tzv_latest_tz_view', $this->request->variable('tzv_latest_tz_view', 0));
 			$this->config->set('mot_tzv_list_tz_view', $this->request->variable('tzv_list_tz_view', 0));
 
@@ -132,7 +133,14 @@ class mot_tzv_acp
 			trigger_error($this->language->lang('ACP_MOT_TZV_CONFIG_SAVED') . adm_back_link($this->u_action));				// MESSAGE: Einstellung gespeichert
 		}
 
+		// Check for language pack version
+		$lang_ver = $this->language->is_set('ACP_MOT_TZV_LANG_EXT_VER') ? preg_replace('/[^0-9.]/', '', $this->language->lang('ACP_MOT_TZV_LANG_EXT_VER')) : '0.0.0';
+		$lang_min_ver = $this->md_manager->get_metadata()['extra']['lang-min-ver'];
+		$lang_ver_message_text = $this->language->is_set('ACP_MOT_TZV_LANGPACK_OUTDATED') ? $this->language->lang('ACP_MOT_TZV_LANGPACK_OUTDATED', $this->md_manager->get_metadata('display-name'), $lang_ver, $lang_min_ver) : sprintf('The language pack for the extension <strong>%1$s</strong> is no longer up to date. (installed: %2$s / needed: %3$s)', $this->md_manager->get_metadata('display-name'), $lang_ver, $lang_min_ver);
+		$lang_ver_message = $lang_ver != $lang_min_ver ? $lang_ver_message_text : '';
+
 		$this->template->assign_vars([
+			'ACP_MOT_TZV_LANG_NOTE'			=> $lang_ver_message,
 			'ACP_MOT_TZV_VERSION'			=> $this->language->lang('ACP_MOT_TZV_VERSION', $this->tzv_version),
 			'ACP_MOT_TZV_ENABLE'			=> $this->config['mot_tzv_enable'],
 			'ACP_MOT_TZV_ADMIN'				=> $this->config['mot_tzv_admin'],
@@ -170,7 +178,7 @@ class mot_tzv_acp
 	}
 
 	/*-------------------------------------
-	Einstellungen LÄNDER
+	Country settings
 	-------------------------------------*/
 	public function country()
 	{
@@ -373,7 +381,7 @@ class mot_tzv_acp
 	}
 
 	/*-------------------------------------
-	Einstellungen REGIONEN
+	Region settings
 	-------------------------------------*/
 	public function region()
 	{
@@ -572,7 +580,7 @@ class mot_tzv_acp
 	}
 
 	/*-------------------------------------
-	Einstellungen KATEGORIE
+	Category settings
 	-------------------------------------*/
 	public function category()
 	{
@@ -771,7 +779,7 @@ class mot_tzv_acp
 	}
 
 	/*-------------------------------------
-	Einstellungen WLAN
+	WLAN options
 	-------------------------------------*/
 	public function wlan()
 	{
@@ -969,7 +977,7 @@ class mot_tzv_acp
 	}
 
 	/*-------------------------------------
-	Einstellungen INFO - SUPPORT
+	INFO - SUPPORT
 	-------------------------------------*/
 	public function info()
 	{
