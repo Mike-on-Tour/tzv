@@ -1,0 +1,14 @@
+Subject: Geändertes Tourziel auf "{SITENAME}"
+
+Hallo {USERNAME},
+
+Sie bekommen diese eMail, weil auf "{SITENAME}" ein bestehendes Tourziel geändert wurde:
+Das Mitglied "{CREATOR}" hat das Tourziel mit dem Namen "{TZ_NAME}" geändert.
+
+Wenn Sie dieses Tourziel ansehen möchten, dann klicken Sie auf diesen Link:
+
+{U_DETAILVIEW}
+
+Wenn Sie zukünftig diese Benachrichtigungs-Mail nicht mehr erhalten möchten, können Sie dies in den Benachrichtigungseinstellungen in Ihrem Benutzerprofil einstellen.
+
+{EMAIL_SIG}

@@ -1,7 +1,7 @@
 <?php
 /**
 *
-* @package phpBB Extension [Adressverwaltung - Tourziele]
+* @package phpBB Extension [Tour destinations]
 * @copyright (c) 2014-2021 waldkatze
 * @copyright (c) 2022 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
@@ -35,6 +35,9 @@ class mot_tzv_main
 
 	/** @var \phpbb\path_helper  */
 	protected $path_helper;
+
+	/** @var \phpbb\extension\manager */
+	protected $phpbb_extension_manager;
 
 	/** @var \phpbb\request\request_interface */
 	protected $request;
@@ -74,10 +77,10 @@ class mot_tzv_main
 	 */
 	public function __construct(\phpbb\auth\auth $auth, \phpbb\config\config $config, \phpbb\db\driver\driver_interface $db,
 								\phpbb\controller\helper $helper, \phpbb\language\language $language, \phpbb\notification\manager $notification_manager,
-								\phpbb\pagination $pagination, \phpbb\path_helper $path_helper, \phpbb\request\request $request,
-								\phpbb\template\template $template, \phpbb\user $user, \mot\tzv\functions\mot_tzv_events $mot_tzv_events,
-								$root_path, $php_ext, $mot_tzv_tourziel_table, $mot_tzv_tourziel_country_table, $mot_tzv_tourziel_region_table,
-								$mot_tzv_tourziel_cats_table, $mot_tzv_tourziel_wlan_table)
+								\phpbb\pagination $pagination, \phpbb\path_helper $path_helper, \phpbb\extension\manager $phpbb_extension_manager,
+								\phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user,
+								\mot\tzv\functions\mot_tzv_events $mot_tzv_events, $root_path, $php_ext, $mot_tzv_tourziel_table,
+								$mot_tzv_tourziel_country_table, $mot_tzv_tourziel_region_table, $mot_tzv_tourziel_cats_table, $mot_tzv_tourziel_wlan_table)
 	{
 		$this->auth = $auth;
 		$this->config = $config;
@@ -87,6 +90,7 @@ class mot_tzv_main
 		$this->notification_manager = $notification_manager;
 		$this->pagination = $pagination;
 		$this->path_helper = $path_helper;
+		$this->phpbb_extension_manager 	= $phpbb_extension_manager;
 		$this->request = $request;
 		$this->template = $template;
 		$this->user = $user;
@@ -99,6 +103,10 @@ class mot_tzv_main
 		$this->tourziel_region_table = $mot_tzv_tourziel_region_table;
 		$this->tourziel_cats_table = $mot_tzv_tourziel_cats_table;
 		$this->tourziel_wlan_table = $mot_tzv_tourziel_wlan_table;
+
+		$this->ext_path = $this->phpbb_extension_manager->get_extension_path('mot/tzv', true);
+		$this->md_manager = $this->phpbb_extension_manager->create_extension_metadata_manager('mot/tzv');
+		$this->ext_data = $this->md_manager->get_metadata();
 
 		$this->tzv_index_route = $this->helper->route('mot_tzv_index');
 		$this->tzv_create_route = $this->helper->route('mot_tzv_create');
@@ -113,7 +121,7 @@ class mot_tzv_main
 
 
 	/*--------------
-	 TOURZIEL INDEX
+	 Main index
 	--------------*/
 	public function index()
 	{
@@ -161,6 +169,8 @@ class mot_tzv_main
 			'MOT_TZV_LIST_LINK'			=> $this->tzv_list_route,
 			'MOT_TZV_SEARCH_LINK'		=> $this->tzv_search_route,
 			'MOT_TZV_TZV_SUPPORT'		=> $this->tzv_support_route, // Support Link
+			'MOT_TZV_ACTIVE'			=> true,
+			'MOT_TZV_COPYRIGHT'			=> $this->ext_data['extra']['display-name'] . ' ' . $this->ext_data['version'] . ' &copy; Mike-on-Tour (<a href="' . $this->ext_data['homepage'] . '" target="_blank" rel="noopener">' . $this->ext_data['homepage'] . '</a>)',
 		]);
 
 		return $this->helper->render('mot_tzv_main_index.html', $this->language->lang('MOT_TZV_TOURZIEL'));
@@ -168,7 +178,7 @@ class mot_tzv_main
 
 
 	/*------------------
-	 TOURZIEL EINTRAGEN
+	 Create new item
 	------------------*/
 	public function create()
 	{
@@ -281,6 +291,9 @@ class mot_tzv_main
 
 			'MOT_TZV_COORD_MANDATORY'	=> $this->config['mot_tzv_maps_enable'],
 
+			'MOT_TZV_ACTIVE'			=> true,
+			'MOT_TZV_COPYRIGHT'			=> $this->ext_data['extra']['display-name'] . ' ' . $this->ext_data['version'] . ' &copy; Mike-on-Tour (<a href="' . $this->ext_data['homepage'] . '" target="_blank" rel="noopener">' . $this->ext_data['homepage'] . '</a>)',
+
 			'S_BBCODE_ALLOWED'			=> true,
 			'S_BBCODE_IMG'				=> true,
 			'S_BBCODE_FLASH'			=> true,
@@ -316,7 +329,7 @@ class mot_tzv_main
 
 
 	/*------------------------------------------------
-	 CONTROLLER route/tzv/event/{id} (DETAIL-Anzeige)
+	 Detailed view of item $id
 	------------------------------------------------*/
 	public function event($id)
 	{
@@ -443,6 +456,9 @@ class mot_tzv_main
 			'MOT_TZV_EVENT_POSTER'		=> $username,
 
 			'S_MODERATOR'				=> $moderator,
+
+			'MOT_TZV_ACTIVE'			=> true,
+			'MOT_TZV_COPYRIGHT'			=> $this->ext_data['extra']['display-name'] . ' ' . $this->ext_data['version'] . ' &copy; Mike-on-Tour (<a href="' . $this->ext_data['homepage'] . '" target="_blank" rel="noopener">' . $this->ext_data['homepage'] . '</a>)',
 		]);
 
 		return $this->helper->render('mot_tzv_main_event.html', $this->language->lang('MOT_TZV_TOURZIEL'));
@@ -450,7 +466,7 @@ class mot_tzv_main
 
 
 	/*------------------
-	 TOURZIEL MODERATOR
+	Moderation display
 	------------------*/
 	public function moderate()
 	{
@@ -499,6 +515,9 @@ class mot_tzv_main
 			'MOT_TZV_LIST_LINK'			=> $this->tzv_list_route,
 			'MOT_TZV_SEARCH_LINK'		=> $this->tzv_search_route,
 			'MOT_TZV_LAST_5_EVENTS'		=> $last_5,
+
+			'MOT_TZV_ACTIVE'			=> true,
+			'MOT_TZV_COPYRIGHT'			=> $this->ext_data['extra']['display-name'] . ' ' . $this->ext_data['version'] . ' &copy; Mike-on-Tour (<a href="' . $this->ext_data['homepage'] . '" target="_blank" rel="noopener">' . $this->ext_data['homepage'] . '</a>)',
 		]);
 
 		if (!empty($events))
@@ -511,7 +530,7 @@ class mot_tzv_main
 
 
 	/*----------------------------------------
-	 REGLER für: route/tzv/manage/{mode}/{id}
+	Manage item (edit, delete)
 	----------------------------------------*/
 	public function manage($mode, $id)
 	{
@@ -706,6 +725,9 @@ class mot_tzv_main
 					'MOT_TZV_SELECT_WLAN_ID'	=> $event['wlan'],
 					'MOT_TZV_MESSAGE'		    => $event['message'],
 
+					'MOT_TZV_ACTIVE'			=> true,
+					'MOT_TZV_COPYRIGHT'			=> $this->ext_data['extra']['display-name'] . ' ' . $this->ext_data['version'] . ' &copy; Mike-on-Tour (<a href="' . $this->ext_data['homepage'] . '" target="_blank" rel="noopener">' . $this->ext_data['homepage'] . '</a>)',
+
 					'S_BBCODE_ALLOWED'	=> true,
 					'S_BBCODE_IMG'		=> true,
 					'S_BBCODE_FLASH'	=> true,
@@ -721,7 +743,7 @@ class mot_tzv_main
 
 
 	/*--------------
-	 TOURZIEL MAP
+	 Show main map
 	--------------*/
 	public function map()
 	{
@@ -775,6 +797,9 @@ class mot_tzv_main
 
 			'MOT_TZV_MAPCONFIG'			=> json_encode($map_config),
 			'MOT_TZV_TOURZIELE'			=> json_encode($tourziel_array),
+
+			'MOT_TZV_ACTIVE'			=> true,
+			'MOT_TZV_COPYRIGHT'			=> $this->ext_data['extra']['display-name'] . ' ' . $this->ext_data['version'] . ' &copy; Mike-on-Tour (<a href="' . $this->ext_data['homepage'] . '" target="_blank" rel="noopener">' . $this->ext_data['homepage'] . '</a>)',
 		]);
 
 		return $this->helper->render('mot_tzv_main_map.html', $this->language->lang('MOT_TZV_MAIN_MAP'));
@@ -782,7 +807,7 @@ class mot_tzv_main
 
 
 	/*--------------
-	 TOURZIEL LISTE
+	 List items
 	--------------*/
 	public function tzvlist()
 	{
@@ -946,6 +971,9 @@ class mot_tzv_main
 			'MOT_TZV_LONG_NEWEST'		=> $this->config['mot_tzv_latest_tz_view'],
 			'MOT_TZV_LONG_TABLE'		=> $this->config['mot_tzv_list_tz_view'],
 			'MOT_TZV_TOTAL_POSTS'		=> $total_tz,
+
+			'MOT_TZV_ACTIVE'			=> true,
+			'MOT_TZV_COPYRIGHT'			=> $this->ext_data['extra']['display-name'] . ' ' . $this->ext_data['version'] . ' &copy; Mike-on-Tour (<a href="' . $this->ext_data['homepage'] . '" target="_blank" rel="noopener">' . $this->ext_data['homepage'] . '</a>)',
 		]);
 
 		return $this->helper->render('mot_tzv_main_list.html', $this->language->lang('MOT_TZV_TOURZIEL'));
@@ -953,7 +981,7 @@ class mot_tzv_main
 
 
 	/*--------------
-	 TOURZIEL SUCHE
+	 Search for item
 	--------------*/
 	public function search()
 	{
@@ -1112,7 +1140,7 @@ class mot_tzv_main
 			'Lon'				=> $this->config['mot_tzv_map_lon'],
 			'Zoom'				=> $this->config['mot_tzv_map_zoom'],
 			'Cluster'			=> $this->config['mot_tzv_map_enable_clusters'],
-			'MultipleLayers'	=> false,
+			'MultipleLayers'	=> $this->config['mot_tzv_enable_multi_layers'],
 		];
 
 		$this->template->assign_vars([
@@ -1141,6 +1169,9 @@ class mot_tzv_main
 			'MOT_TZV_MAPCONFIG'			=> json_encode($map_config),
 			'MOT_TZV_TOURZIELE'			=> json_encode($tourziel_array),
 			'MOT_TZV_ENABLE_SEARCH_MAP'	=> $total_tz,
+
+			'MOT_TZV_ACTIVE'			=> true,
+			'MOT_TZV_COPYRIGHT'			=> $this->ext_data['extra']['display-name'] . ' ' . $this->ext_data['version'] . ' &copy; Mike-on-Tour (<a href="' . $this->ext_data['homepage'] . '" target="_blank" rel="noopener">' . $this->ext_data['homepage'] . '</a>)',
 		]);
 
 		return $this->helper->render('mot_tzv_main_search.html', $this->language->lang('MOT_TZV_TOURZIEL'));

@@ -1,9 +1,26 @@
 # Change Log
-All changes to `Adressverwaltung Tourziele` will be documented in this file.
+All changes to `Tour Destinations Database` will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.0.0] - 2022-08-18
+
+### Added
+-	The language pack `de_x_sie`
+-	The overlays for the used categories to the search result map
+
+### Changed
+-	The extensions name into the English translation
+-	The method to return errors during activation in `ext.php` which is now compatible with phpBB 3.1.0
+-	The output of the copyright line in the frontend if the extension is active to phpBB's copyright lines
+
+### Fixed
+-	A missing 'true' statement while requesting the variable for the support link in the ACP settings function
+
+### Removed
+  
+  
 ## [0.6.0] - 2022-06-14
 
 ### Added

@@ -1,12 +1,13 @@
 <?php
 /**
 *
-* @package phpBB Extension [Adressverwaltung - Tourziele]
+* @package phpBB Extension [Tour destinations]
 * @copyright (c) 2014-2021 waldkatze
 * @copyright (c) 2022 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
+
 if (!defined('IN_PHPBB'))
 {
 	exit;
@@ -17,8 +18,29 @@ if (empty($lang) || !is_array($lang))
 	$lang = [];
 }
 
+// DEVELOPERS PLEASE NOTE
+//
+// All language files should use UTF-8 as their encoding and the files must not contain a BOM.
+//
+// Placeholders can now contain order information, e.g. instead of
+// 'Page %s of %s' you can (and should) write 'Page %1$s of %2$s', this allows
+// translators to re-order the output of data while ensuring it remains correct
+//
+// You do not need this where single placeholders are used, e.g. 'Message %d' is fine
+// equally where a string contains only two placeholders which are used to wrap text
+// in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
+//
+// Some characters you may want to copy&paste:
+// ’ » „ “ — …
+//
+
 $lang = array_merge($lang, [
-	// ACP Module
+	// language pack author
+	'ACP_MOT_TZV_LANG_DESC'			=> 'British English',
+	'ACP_MOT_TZV_LANG_EXT_VER' 		=> '1.0.0',
+	'ACP_MOT_TZV_LANG_AUTHOR' 		=> 'Mike-on-Tour',
+
+	// ACP modules
 	'ACP_MOT_TZV_TOURZIEL'			=> 'Tour destinations',
 	'ACP_MOT_TZV_SETTINGS'			=> 'Settings',
 	'ACP_MOT_TZV_COUNTRY'			=> 'Attend to countries',
@@ -104,6 +126,7 @@ $lang = array_merge($lang, [
 	'ACP_MOT_TZV_ERROR_NOT_EXIST'	=> 'The selected entry does not exist.',
 	'ACP_MOT_TZV_NAME_EXISTS'		=> 'An entry with this name already exists!',
 	'ACP_MOT_TZV_NO_ENTRIES'		=> 'No entries',
+	'ACP_MOT_TZV_LANGPACK_OUTDATED'	=> 'The language pack for the extension <strong>%1$s</strong> is no longer up to date. (installed: %2$s / needed: %3$s)',
 
 	// ACP country
 	'ACP_MOT_TZV_DELETE'			=> '<b>Do not delete entries already used in a tour destination.<br>

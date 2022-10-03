@@ -6,8 +6,7 @@
 * @copyright (c) 2022 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
-* @ acp language file [deutsch / Du]
-*
+* @ acp language file (Deutsch / Sie)*
 */
 
 if (!defined('IN_PHPBB'))
@@ -73,25 +72,25 @@ $lang = array_merge($lang, [
 	'ACP_MOT_TZV_HELP'			=> 'Tourziele - Hinweise zu Einstellungen<br><br>',
 	'ACP_MOT_TZV_HELPLINE'		=> '<b>Einstellung Berechtigung</b><br>
 									Die Berechtigungen für die Benutzerrollen ´<strong>Volle Funktionalität</strong>´ und ´<strong>Standard-Funktionalität</strong>´
-									werden bei Installation auf vollen Zugriff voreingestellt. Für alle anderen Rollen setze die Rechte nach deinen Wünschen.<br>
+									werden bei Installation auf vollen Zugriff voreingestellt. Für alle anderen Rollen setzen Sie die Rechte nach Ihren Wünschen.<br>
 									Die Moderator-Berechtigungen werden bei der Installation der Rolle ´<strong>Umfassender Moderator</strong>´ zugewiesen. Alle anderen
-									Moderator-Rollen kannst du nach deinen Wünschen änpassen.<br><br>
+									Moderator-Rollen können Sie nach Ihren Wünschen änpassen.<br><br>
 									<b>Administrator-Modus</b><br>
 									Wenn aktiviert, haben nur Admins Zugriff auf Tourziele. (Gedacht für Testzwecke)<br><br>
 									<b>Einstellungen für die Übersichtskarte</b><br>
-									Hier kannst du den Breiten- und Längengrad des Punktes eingeben, der im Zentrum der Übersichtskarte liegt.<br>
-									Zusammen mit dem beim Aufruf der Karte anzuwendenden Zoom-Faktor kannst du bestimmen, welches Areal die Karte
+									Hier können Sie den Breiten- und Längengrad des Punktes eingeben, der im Zentrum der Übersichtskarte liegt.<br>
+									Zusammen mit dem beim Aufruf der Karte anzuwendenden Zoom-Faktor können Sie bestimmen, welches Areal die Karte
 									abdecken soll.<br>
-									Wenn viele Marker auf der Karte gesetzt sind, kannst du diese abhängig vom Zoom in Gruppen zusammenfassen lassen.<br><br>
+									Wenn viele Marker auf der Karte gesetzt sind, können Sie diese abhängig vom Zoom in Gruppen zusammenfassen lassen.<br><br>
 									<b>Einstellungen für Karten der Detailanzeige</b><br>
 									Die Funktion ist auch komplett abschaltbar.<br>
 									Auswahl zwischen Google-Maps und/oder Openstreetmap.<br>
 									Größe und Zoom der Karten.<br><br>
 									<b>Tourziele Supportlink anzeigen</b><br>
-									Es wird Fragen von deinen Usern zur Bedienung geben.<br>
-									Richte am besten ein eigenes Support-Thema in deinem Forum ein. Den Link dazu kannst du hier setzen (z.B. ´viewtopic.php?f=1&t=69´).<br><br>
+									Es wird Fragen von Ihren Usern zur Bedienung geben.<br>
+									Richten Sie am besten ein eigenes Support-Thema in Ihrem Forum ein. Den Link dazu können Sie hier setzen (z.B. ´viewtopic.php?f=1&t=69´).<br><br>
 									<b>Länder / Kategorie / Region / WLAN</b><br>
-									Passe diese Einstellungen an deine Wünsche an.<br>
-									Die mitgelieferten Daten sind zum Testen gedacht, du kannst sie beliebig ändern und löschen (solange sie noch nicht für Tourziele verwendet wurden).<br>
-									Beachte ausdrücklich den Hinweis im roten Feld der Einstellungen !  ',
+									Passen Sie diese Einstellungen an Ihre Wünsche an.<br>
+									Die mitgelieferten Daten sind zum Testen gedacht, Sie können sie beliebig ändern und löschen (solange sie noch nicht für Tourziele verwendet wurden).<br>
+									Beachten Sie ausdrücklich den Hinweis im roten Feld der Einstellungen !  ',
 ]);

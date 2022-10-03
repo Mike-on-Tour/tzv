@@ -1,7 +1,7 @@
 <?php
 /**
 *
-* @package phpBB Extension [Adressverwaltung - Tourziele]
+* @package phpBB Extension [Tour destinations]
 * @copyright (c) 2022 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
@@ -28,6 +28,9 @@ class mot_tzv_ucp
 
 	/** @var \phpbb\pagination  */
 	protected $pagination;
+
+	/** @var \phpbb\extension\manager */
+	protected $phpbb_extension_manager;
 
 	/** @var \phpbb\request\request_interface */
 	protected $request;
@@ -64,9 +67,10 @@ class mot_tzv_ucp
 	 */
 	public function __construct(\phpbb\auth\auth $auth, \phpbb\config\config $config, \phpbb\db\driver\driver_interface $db,
 								\phpbb\controller\helper $helper, \phpbb\language\language $language, \phpbb\pagination $pagination,
-								\phpbb\request\request_interface $request, \phpbb\template\template $template, \phpbb\user $user,
-								\mot\tzv\functions\mot_tzv_events $mot_tzv_events, $root_path, $php_ext, $mot_tzv_tourziel_table,
-								$mot_tzv_tourziel_country_table, $mot_tzv_tourziel_region_table, $mot_tzv_tourziel_cats_table)
+								\phpbb\extension\manager $phpbb_extension_manager, \phpbb\request\request_interface $request,
+								\phpbb\template\template $template, \phpbb\user $user, \mot\tzv\functions\mot_tzv_events $mot_tzv_events,
+								$root_path, $php_ext, $mot_tzv_tourziel_table, $mot_tzv_tourziel_country_table, $mot_tzv_tourziel_region_table,
+								$mot_tzv_tourziel_cats_table)
 	{
 		$this->auth = $auth;
 		$this->config = $config;
@@ -74,6 +78,7 @@ class mot_tzv_ucp
 		$this->helper = $helper;
 		$this->language = $language;
 		$this->pagination = $pagination;
+		$this->phpbb_extension_manager 	= $phpbb_extension_manager;
 		$this->request = $request;
 		$this->template = $template;
 		$this->user = $user;
@@ -85,6 +90,10 @@ class mot_tzv_ucp
 		$this->tourziel_country_table = $mot_tzv_tourziel_country_table;
 		$this->tourziel_region_table  = $mot_tzv_tourziel_region_table;
 		$this->tourziel_cats_table    = $mot_tzv_tourziel_cats_table;
+
+		$this->ext_path = $this->phpbb_extension_manager->get_extension_path('mot/tzv', true);
+		$this->md_manager = $this->phpbb_extension_manager->create_extension_metadata_manager('mot/tzv');
+		$this->ext_data = $this->md_manager->get_metadata();
 
 		$this->tzv_flags_url = $this->config['mot_tzv_flags_url'];
 	}
@@ -295,6 +304,7 @@ class mot_tzv_ucp
 					'ICON_EDIT_DISABLED'		=> '<i class="icon acp-icon acp-icon-disabled fa-cog fa-fw" title="' . $this->language->lang('EDIT') . '"></i>',
 					'ICON_DELETE'				=> '<i class="icon acp-icon acp-icon-delete fa-times-circle fa-fw" title="' . $this->language->lang('DELETE') . '"></i>',
 					'ICON_DELETE_DISABLED'		=> '<i class="icon acp-icon acp-icon-disabled fa-times-circle fa-fw" title="' . $this->language->lang('DELETE') . '"></i>',
+					'MOT_TZV_COPYRIGHT'			=> $this->ext_data['extra']['display-name'] . ' ' . $this->ext_data['version'] . ' &copy; Mike-on-Tour (<a href="' . $this->ext_data['homepage'] . '" target="_blank" rel="noopener">' . $this->ext_data['homepage'] . '</a>)',
 				]);
 
 				break;

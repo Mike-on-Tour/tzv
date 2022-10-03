@@ -36,7 +36,7 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, [
 	// language pack author
-	'ACP_MOT_TZV_LANG_DESC'			=> 'Deutsch (Du)',
+	'ACP_MOT_TZV_LANG_DESC'			=> 'Deutsch (Sie)',
 	'ACP_MOT_TZV_LANG_EXT_VER' 		=> '1.0.0',
 	'ACP_MOT_TZV_LANG_AUTHOR' 		=> 'Mike-on-Tour',
 
@@ -49,13 +49,13 @@ $lang = array_merge($lang, [
 	'ACP_MOT_TZV_WLAN'				=> 'WLAN bearbeiten',
 	'ACP_MOT_TZV_INFO'				=> 'Info / Support / Update',
 	'ACP_MOT_TZV_VERSION'			=> '<img src="https://img.shields.io/badge/Version-%1$s-green.svg?style=plastic">',
-	'ACP_MOT_TZV_HELP'				=> 'Hilfe zu Einstellungen findest Du unter: <b>Info / Support / Update</b> Bitte vor Änderungen lesen.',
+	'ACP_MOT_TZV_HELP'				=> 'Hilfe zu Einstellungen finden Sie unter: <b>Info / Support / Update</b> Bitte vor Änderungen lesen.',
 
 	// Permissions
 	'ACP_MOT_TZV_PERMISSION_EXPL'	=> 'Tourziele Berechtigungen',
 	'ACP_MOT_TZV_PERMISSION'		=> 'Berechtigungen für die Benutzerrollen <strong>Volle Funktionalität</strong> und <strong>Standard-Funktionaität</strong>
 										werden bei Installation voreingestellt.<br>',
-	'ACP_MOT_TZV_PERMISSION_GROUP'	=> 'Die Berechtigungen kannst du an deine Wünsche anpassen.<br> <b>ACP / BERECHTIGUNGEN / Benutzer-Rollen / Tourziele.</b>',
+	'ACP_MOT_TZV_PERMISSION_GROUP'	=> 'Die Berechtigungen können Sie an Ihre Wünsche anpassen.<br> <b>ACP / BERECHTIGUNGEN / Benutzer-Rollen / Tourziele.</b>',
 
 	// ACP settings
 	'ACP_MOT_TZV_ENABLE_EXPLAIN'	=> 'Tourziele Hauptschalter',
@@ -75,10 +75,10 @@ $lang = array_merge($lang, [
 	'ACP_MOT_TZV_LON_EXP'			=> 'Werte zwischen 180.0° (Osten) und -180.0° (Westen)',
 	'ACP_MOT_TZV_ZOOM'				=> 'Zoom-Faktor der Karte beim Aufruf',
 	'ACP_MOT_TZV_MAP_CLUSTERS'		=> 'Marker bündeln',
-	'ACP_MOT_TZV_MAP_CLUSTERS_EXP'	=> 'Wenn du diese Einstellung aktivierst, werden die Marker zur Darstellung auf der Karte gebündelt.
+	'ACP_MOT_TZV_MAP_CLUSTERS_EXP'	=> 'Wenn Sie diese Einstellung aktivieren, werden die Marker zur Darstellung auf der Karte gebündelt.
 										Damit kann eine Überfrachtung der Karte mit Markern verhindert werden.',
 	'ACP_MOT_TZV_MULTI_LAYERS'		=> 'Marker auf verschiedenen Overlays darstellen',
-	'ACP_MOT_TZV_MULTI_LAYERS_EXP'	=> 'Wenn du diese Einstellung aktivierst, werden die Marker auf der Karte auf verschiedenen Overlays dargestellt.
+	'ACP_MOT_TZV_MULTI_LAYERS_EXP'	=> 'Wenn Sie diese Einstellung aktivieren, werden die Marker auf der Karte auf verschiedenen Overlays dargestellt.
 										Die Anzahl der Overlays richtet sich nach der Anzahl der verwendeten Kategorien, sie sind nach diesen benannt.',
 
 	'ACP_MOT_TZV_GOOGLE_FUNCTIONS'	=> 'Einstellungen für Karten der Detailanzeige',
@@ -122,20 +122,20 @@ $lang = array_merge($lang, [
 	'ACP_MOT_TZV_MSG_DELETED'		=> 'Dieser Eintrag wurde gelöscht.',
 	'ACP_MOT_TZV_MSG_EDITED'		=> 'Eintrag wurde bearbeitet.',
 	'ACP_MOT_TZV_MSG_ADDED'			=> 'Neuer Eintrag wurde hinzugefügt.',
-	'ACP_MOT_TZV_ERROR_NO_NAME'		=> 'Du hast nichts eingegeben.',
+	'ACP_MOT_TZV_ERROR_NO_NAME'		=> 'Sie haben nichts eingegeben.',
 	'ACP_MOT_TZV_ERROR_NOT_EXIST'	=> 'Der ausgewählte Eintrag existiert nicht.',
 	'ACP_MOT_TZV_NAME_EXISTS'		=> 'Es gibt bereits einen Eintrag mit diesem Namen!',
 	'ACP_MOT_TZV_NO_ENTRIES'		=> 'Keine Einträge',
 	'ACP_MOT_TZV_LANGPACK_OUTDATED'	=> 'Das Sprachpaket der Erweiterung <strong>%1$s</strong> ist nicht mehr aktuell. (installiert: %2$s / benötigt: %3$s)',
 
 	// ACP country
-	'ACP_MOT_TZV_DELETE'			=> '<b>Lösche hier keine Einträge wenn schon Tourziele mit diesen Daten eingetragen sind.<br>
+	'ACP_MOT_TZV_DELETE'			=> '<b>Löschen Sie hier keine Einträge wenn schon Tourziele mit diesen Daten eingetragen sind.<br>
 										Das kann zu Fehlern in der Anzeige führen.<br>Tourziel wird dann nicht in der Liste angezeigt!</b>',
 	'ACP_MOT_TZV_COUNTRIES'			=> 'Eingetragene Länder',
 	'ACP_MOT_TZV_COUNTRY_NAME'		=> 'Land',
 	'ACP_MOT_TZV_COUNTRY_IMG'		=> 'Flagge',
 	'ACP_MOT_TZV_COUNTRY_COUNT'		=> 'Anzahl Tourziele',
-	'ACP_MOT_TZV_COUNTRY_CONFIRM_DELETE'	=> 'Willst du das Land mit dem Namen <strong>%s</strong> wirklich löschen?',
+	'ACP_MOT_TZV_COUNTRY_CONFIRM_DELETE'	=> 'Wollen Sie das Land mit dem Namen <strong>%s</strong> wirklich löschen?',
 	'ACP_MOT_TZV_COUNTRY_ADD'		=> 'Neues Land einfügen',
 	'ACP_MOT_TZV_COUNTRY_EDIT'		=> 'Land bearbeiten',
 	'ACP_MOT_TZV_COUNTRY_NAME_EXPL'	=> 'z.B. <b>Deutschland</b>',
@@ -145,7 +145,7 @@ $lang = array_merge($lang, [
 	// ACP region
 	'ACP_MOT_TZV_REGIONS'			=> 'Eingetragene Regionen',
 	'ACP_MOT_TZV_REGION_NAME'		=> 'Region',
-	'ACP_MOT_TZV_REGION_CONFIRM_DELETE'		=> 'Willst du die Region mit dem Namen <strong>%s</strong> wirklich löschen?',
+	'ACP_MOT_TZV_REGION_CONFIRM_DELETE'		=> 'Wollen Sie die Region mit dem Namen <strong>%s</strong> wirklich löschen?',
 	'ACP_MOT_TZV_REGION_ADD'		=> 'Neue Region einfügen',
 	'ACP_MOT_TZV_REGION_EDIT'		=> 'Region bearbeiten',
 	'ACP_MOT_TZV_REGION_NAME_EXPL'	=> 'z.B. <b>Freistaat Sachsen</b>',
@@ -153,7 +153,7 @@ $lang = array_merge($lang, [
 	// ACP category
 	'ACP_MOT_TZV_CATS'				=> 'Eingetragene Kategorien',
 	'ACP_MOT_TZV_CATS_NAME'			=> 'Kategorie',
-	'ACP_MOT_TZV_CAT_CONFIRM_DELETE'	=> 'Willst du die Kategorie mit dem Namen <strong>%s</strong> wirklich löschen?',
+	'ACP_MOT_TZV_CAT_CONFIRM_DELETE'	=> 'Wollen Sie du die Kategorie mit dem Namen <strong>%s</strong> wirklich löschen?',
 	'ACP_MOT_TZV_CAT_ADD'			=> 'Neue Kategorie einfügen',
 	'ACP_MOT_TZV_CAT_EDIT'			=> 'Kategorie bearbeiten',
 	'ACP_MOT_TZV_CAT_NAME_EXPL'		=> 'z.B. <b>Gaststätte</b>',
@@ -161,7 +161,7 @@ $lang = array_merge($lang, [
 	// ACP WLAN options
 	'ACP_MOT_TZV_WLANS'				=> 'Eingetragene WLAN Optionen',
 	'ACP_MOT_TZV_WLAN_NAME'			=> 'WLAN Option',
-	'ACP_MOT_TZV_WLAN_CONFIRM_DELETE'	=> 'Willst du die WLAN Option mit dem Namen <strong>%s</strong> wirklich löschen?',
+	'ACP_MOT_TZV_WLAN_CONFIRM_DELETE'	=> 'Wollen Sie die WLAN Option mit dem Namen <strong>%s</strong> wirklich löschen?',
 	'ACP_MOT_TZV_WLAN_ADD'			=> 'Neue WLAN Option einfügen',
 	'ACP_MOT_TZV_WLAN_EDIT'			=> 'WLAN Option bearbeiten',
 	'ACP_MOT_TZV_WLAN_NAME_EXPL'	=> 'z.B. <b>WLAN für Gäste offen</b>',

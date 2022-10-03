@@ -6,7 +6,7 @@
 * @copyright (c) 2022 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
-* @language file [Deutsch / Du]
+* @language file (Deutsch / Sie)
 *
 */
 
@@ -73,13 +73,13 @@ $lang = array_merge($lang, [
 
 	// [Detailansicht]
 	'MOT_TZV_TOURZIEL_DETAIL'			=> 'Detailansicht',
-	'MOT_TZV_TOURZIEL_DETAIL_CLICK'		=> 'Klicke hier für Detailansicht',
+	'MOT_TZV_TOURZIEL_DETAIL_CLICK'		=> 'Klicken Sie hier für Detailansicht',
 	'MOT_TZV_TOURZIEL_USER_TIPP'		=> 'Hinweis zum Tourziel',
 	'MOT_TZV_TOURZIEL_PLZ_ORT'			=> 'PLZ / Ort',
 	'MOT_TZV_TOURZIEL_STRASSE_NR'		=> 'Straße / Nr',
 	'MOT_TZV_TOURZIEL_GPS_DAT'			=> 'GPS',
 	'MOT_TZV_DATE_ADD_EDIT'				=> '<br><b>Eingetragen am</b>',
-	'MOT_TZV_OPENSTREETMAP_INFO'		=> 'Klick unten auf <strong>Größere Karte anzeigen</strong>.<br><br>',
+	'MOT_TZV_OPENSTREETMAP_INFO'		=> 'Klicken Sie unten auf <strong>Größere Karte anzeigen</strong>.<br><br>',
 	'MOT_TZV_KURVIGER_INFO'				=> 'Übergabe der GPS-Daten an den Motorradtourenplaner https://kurviger.de',
 	'MOT_TZV_KOMOOT_INFO'				=> 'Übergabe der GPS-Daten an den Routenplaner für Wanderer und Radfahrer https://www.komoot.de',
 	'MOT_TZV_DATA_HANDOVER'				=> 'Datenübergabe',
@@ -116,8 +116,8 @@ $lang = array_merge($lang, [
 	'MOT_TZV_OSM_LARGER_MAP'			=> 'Größere Karte anzeigen',
 
 	// [Eintragen / Ändern]
-	'MOT_TZV_HWTEXT_ADD'				=> '&bull;&nbsp;&nbsp;Mit der Suchfunktion kannst du vor einem neuen Eintrag prüfen, ob das Ziel schon in der Datenbank vorhanden ist.<br>
-											&bull;&nbsp;&nbsp;Deine Eingaben <b>müssen nicht vollständig sein.</b> Du kannst <b>deine Eingaben</b> jederzeit ändern oder ergänzen.<br>
+	'MOT_TZV_HWTEXT_ADD'				=> '&bull;&nbsp;&nbsp;Mit der Suchfunktion können Sie vor einem neuen Eintrag prüfen, ob das Ziel schon in der Datenbank vorhanden ist.<br>
+											&bull;&nbsp;&nbsp;Ihre Eingaben <b>müssen nicht vollständig sein.</b> Sie können <b>Ihre Eingaben</b> jederzeit ändern oder ergänzen.<br>
 											&bull;&nbsp;&nbsp;<b>Tourziel / PLZ  / Ort / Text zum Tourziel</b> sind <b>immer Pflichtfelder !</b>',
 
 	'MOT_TZV_HWTEXT_EDIT'				=> '&bull;&nbsp;&nbsp; <b>Hinweis Daten ändern.</b><br>
@@ -129,7 +129,7 @@ $lang = array_merge($lang, [
 											&bull;&nbsp;&nbsp; Beispiel richtig: <b>51.055257</b> | Beispiel falsch: <b>51,055257</b><br>
 											&bull;&nbsp;&nbsp; Das Tourziel kann nur mit korrekten GPS-Daten auf der Karte angezeigt werden.',
 
-	'MOT_TZV_HWTEXT_SEND'				=> '&bull;&nbsp;&nbsp; <b>Prüfe vor Absenden noch einmal alle Eingaben.</b>',
+	'MOT_TZV_HWTEXT_SEND'				=> '&bull;&nbsp;&nbsp; <b>Prüfen Sie vor Absenden noch einmal alle Eingaben.</b>',
 	'MOT_TZV_TOURZIEL_INVALID'			=> 'Ein Tourziel-Eintrag mit diesem Namen existiert bereits! Alle Eingaben wurden verworfen!',
 	'MOT_TZV_GENERAL_ERROR'				=> 'Fehler beim Speichern des Tourzieles:<br><strong>%1$s</strong><br>',
 
@@ -176,13 +176,13 @@ $lang = array_merge($lang, [
 	'MOT_TZV_VIEW_EVENT'				=> 'Zur Detailanzeige',
 	'MOT_TZV_DETAIL_VIEW_LINK'			=> 'Für Detailansicht auf den Namen des Tourzieles klicken',
 	'MOT_TZV_VIEW_EVENT_EDIT'			=> 'Ereignis anzeigen / bearbeiten',
-	'MOT_TZV_EVENT_DELETE_CONFIRM'		=> 'Möchtest du den Eintrag mit dem Namen <strong>%s</strong> wirklich löschen?',
+	'MOT_TZV_EVENT_DELETE_CONFIRM'		=> 'Möchten Sie den Eintrag mit dem Namen <strong>%s</strong> wirklich löschen?',
 
 	// [Suchfunktion]
 	'MOT_TZV_SEARCH_COUNTRY'			=> 'Suche nach Land',
 	'MOT_TZV_SEARCH_REGION'				=> 'Suche nach Region',
 	'MOT_TZV_SEARCH_CATEGORY'			=> 'Suche nach Kategorie',
-	'MOT_TZV_SEARCH_AUSWAHL'			=> 'Wähle ein Feld aus und klicke den dazugehörigen Button `Suchen`.',
+	'MOT_TZV_SEARCH_AUSWAHL'			=> 'Wählen Sie ein Feld aus und klicken den dazugehörigen Button `Suchen`.',
 	'MOT_TZV_SEARCH_TEXT'				=> 'Name des Tourzieles, PLZ oder Ort eingeben und den Button `Suchen` klicken.',
 	'MOT_TZV_SEARCH_TOURZIEL'			=> 'Suche nach Tourziel',
 	'MOT_TZV_SEARCH_PLZ'				=> 'Suche nach PLZ',
@@ -191,9 +191,9 @@ $lang = array_merge($lang, [
 	'MOT_TZV_SEARCH_FOUND'				=> '<b>Anzahl Einträge gefunden</b>',
 
 	// Meldungen Berechtigung
-	'MOT_TZV_TOURZIEL_NO_ADD'			=> 'Du bist nicht berechtigt Tourziele einzutragen!',
-	'MOT_TZV_TOURZIEL_NO_EDIT'			=> 'Du bist nicht berechtigt Tourziele zu ändern!',
-	'MOT_TZV_TOURZIEL_NO_VIEW'			=> 'Du bist nicht berechtigt Tourziele zu sehen!',
+	'MOT_TZV_TOURZIEL_NO_ADD'			=> 'Sie sind nicht berechtigt Tourziele einzutragen!',
+	'MOT_TZV_TOURZIEL_NO_EDIT'			=> 'Sie sind nicht berechtigt Tourziele zu ändern!',
+	'MOT_TZV_TOURZIEL_NO_VIEW'			=> 'Sie sind nicht berechtigt Tourziele zu sehen!',
 	'MOT_TZV_NO_ENTRIES'				=> 'Keine Einträge',
 	'MOT_TZV_NO_SUCH_ITEM'				=> 'Das gewünschte Tourziel existiert nicht!',
 
