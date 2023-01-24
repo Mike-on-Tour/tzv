@@ -29,7 +29,14 @@ $lang = array_merge($lang, [
 									&bull;&nbsp;License <a href="http://opensource.org/licenses/gpl-license.php"> http://opensource.org/licenses/gpl-license.php</a> GNU Public License<br>',
 
 	'ACP_MOT_TZV_HISTORY'		=> 'Tour destinations history',
-	'ACP_MOT_TZV_HUPDATE'		=> '&bull;&nbsp;2022 Version 0.6.0<br>
+	'ACP_MOT_TZV_HUPDATE'		=> '&bull;&nbsp;2022 Version 1.1.0<br>
+									- Added a button leading to a website to find coordinates for named locations to the add/edit item tab
+									- Changed the radio buttons in the ACP settings tab into sliders with the "activated" state on the
+										left and the "deactivated" state on the right side (according to the "Yes" and "No" radio buttons)
+									&bull;&nbsp;2022 Version 1.0.0<br>
+									- Additional language pack: Formal German (de_x_sie)<br>
+									- Category map overlays used in the map displaying search results, too<br>
+									&bull;&nbsp;2022 Version 0.6.0<br>
 									- Displaying the items in different map overlays named after the used categories<br>
 									- Overlays can be switched on and off individually with the layer control element in the map`s upright corner<br>
 									- Displaying the map`s distance scale in metric and imperial units<br>

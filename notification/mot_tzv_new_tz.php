@@ -151,8 +151,8 @@ class mot_tzv_new_tz extends \phpbb\notification\type\base
 	public function get_email_template_variables()
 	{
 		$mail_vars = [
-			'CREATOR'		=> strip_tags(htmlspecialchars_decode($this->get_data('creator'))),
-			'TZ_NAME'		=> strip_tags(htmlspecialchars_decode($this->get_data('tz_name'))),
+			'CREATOR'		=> strip_tags(htmlspecialchars_decode($this->get_data('creator'), `ENT_COMPAT`)),
+			'TZ_NAME'		=> strip_tags(htmlspecialchars_decode($this->get_data('tz_name'), `ENT_COMPAT`)),
 			'U_DETAILVIEW'	=> generate_board_url(true) . $this->helper->route('mot_tzv_event', ['id' => $this->get_data('tz_id'),], false),
 		];
 		return $mail_vars;

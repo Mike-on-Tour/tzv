@@ -4,6 +4,24 @@ All changes to `Tour Destinations Database` will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.0] - 2023-01-24
+
+### Added
+-	A button leading to a website to find coordinates for named locations to the add/edit item tab
+
+### Changed
+-	The range of usable PHP versions to 7.2.0 up to all versions less than 8.3.0
+-	The range of usable phpBB versions to 3.2.0 up to less than 3.4.0 dev
+-	The radio buttons in the ACP settings tab into sliders with the "activated" state on the left and the "deactivated" state on the right side (according
+	to the "Yes" and "No" radio buttons) with a variable `SLIDERS` which can display the old radio buttons if set to 'false' in the
+	`adm/style/acp_mot_tzv_settings.html` file
+-	The explicit usage of `ENT_COMPAT` in the call of `htmlspecialchars_decode()` to comply with the changes in PHP 8.1 and above in all notification PHP files
+
+### Fixed
+
+### Removed
+  
+  
 ## [1.0.0] - 2022-08-18
 
 ### Added

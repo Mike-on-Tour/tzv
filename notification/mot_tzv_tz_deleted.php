@@ -148,8 +148,8 @@ class mot_tzv_tz_deleted extends \phpbb\notification\type\base
 	public function get_email_template_variables()
 	{
 		$mail_vars = [
-			'CREATOR'		=> strip_tags(htmlspecialchars_decode($this->get_data('creator'))),
-			'TZ_NAME'		=> strip_tags(htmlspecialchars_decode($this->get_data('tz_name'))),
+			'CREATOR'		=> strip_tags(htmlspecialchars_decode($this->get_data('creator'), `ENT_COMPAT`)),
+			'TZ_NAME'		=> strip_tags(htmlspecialchars_decode($this->get_data('tz_name'), `ENT_COMPAT`)),
 		];
 		return $mail_vars;
 	}
