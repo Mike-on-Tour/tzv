@@ -1,3 +1,4 @@
+{% set SLIDERS = true %}	{# Set this to 'false' and then purge the cache in order to get the old radio buttons. #}
 {% INCLUDE 'overall_header.html' %}
 {% INCLUDECSS '@mot_tzv/css/mot_tzv_acp.css' %}
 {% INCLUDEJS '@mot_tzv/mot_tzv_acp.js' %}
@@ -34,17 +35,11 @@
 
 			<dl>
 				<dt><label for="tzv_enable">{{ lang('ACP_MOT_TZV_ENABLE') }}{{ lang('COLON') }}</label><br></dt>
-				<dd>
-					<label><input type="radio" class="radio" name="tzv_enable" id="tzv_enable" value="1"{{ ACP_MOT_TZV_ENABLE == 1 ? 'checked' }}> {{ lang('YES') }}</label>
-					<label><input type="radio" class="radio" name="tzv_enable" id="tzv_enable" value="0"{{ ACP_MOT_TZV_ENABLE == 0 ? 'checked' }}> {{ lang('NO') }}</label>
-				</dd>
+				<dd>{{ _self.switch('tzv_enable', ACP_MOT_TZV_ENABLE, SLIDERS) }}</dd>
 			</dl>
 			<dl>
 				<dt><label for="tzv_admin">{{ lang('ACP_MOT_TZV_ADMIN') }}{{ lang('COLON') }}</label><br>{{ lang('ACP_MOT_TZV_ADMIN_EXPL') }}</dt>
-				<dd>
-					<label><input type="radio" class="radio" name="tzv_admin" id="tzv_admin" value="1"{{ ACP_MOT_TZV_ADMIN == 1 ? 'checked' }}> {{ lang('YES') }}</label>
-					<label><input type="radio" class="radio" name="tzv_admin" id="tzv_admin" value="0"{{ ACP_MOT_TZV_ADMIN == 0 ? 'checked' }}> {{ lang('NO') }}</label>
-				</dd>
+				<dd>{{ _self.switch('tzv_admin', ACP_MOT_TZV_ADMIN, SLIDERS) }}</dd>
 			</dl>
 		</fieldset>
 
@@ -67,13 +62,11 @@
 			</dl>
 			<dl>
 				<dt><label for="mot_tzv_map_enable_clusters">{{ lang('ACP_MOT_TZV_MAP_CLUSTERS') }}{{ lang('COLON') }}</label><p>{{ lang('ACP_MOT_TZV_MAP_CLUSTERS_EXP') }}</p></dt>
-				<dd><label><input type="radio" class="radio" name="mot_tzv_map_enable_clusters" id="mot_tzv_map_enable_clusters" value="1"{{ ACP_MOT_TZV_MAP_CLUSTERS == 1 ? 'checked' }}> {{ lang('YES') }}</label>
-					<label><input type="radio" class="radio" name="mot_tzv_map_enable_clusters" id="mot_tzv_map_enable_clusters" value="0"{{ ACP_MOT_TZV_MAP_CLUSTERS == 0 ? 'checked' }}> {{ lang('NO') }}</label>
+				<dd>{{ _self.switch('mot_tzv_map_enable_clusters', ACP_MOT_TZV_MAP_CLUSTERS, SLIDERS) }}</dd>
 			</dl>
 			<dl>
 				<dt><label for="mot_tzv_enable_multi_layers">{{ lang('ACP_MOT_TZV_MULTI_LAYERS') }}{{ lang('COLON') }}</label><p>{{ lang('ACP_MOT_TZV_MULTI_LAYERS_EXP') }}</p></dt>
-				<dd><label><input type="radio" class="radio" name="mot_tzv_enable_multi_layers" id="mot_tzv_enable_multi_layers" value="1"{{ ACP_MOT_TZV_MULTI_LAYERS == 1 ? 'checked' }}> {{ lang('YES') }}</label>
-					<label><input type="radio" class="radio" name="mot_tzv_enable_multi_layers" id="mot_tzv_enable_multi_layers" value="0"{{ ACP_MOT_TZV_MULTI_LAYERS == 0 ? 'checked' }}> {{ lang('NO') }}</label>
+				<dd>{{ _self.switch('mot_tzv_enable_multi_layers', ACP_MOT_TZV_MULTI_LAYERS, SLIDERS) }}</dd>
 			</dl>
 		</fieldset>
 
@@ -90,42 +83,27 @@
 
 			<dl>
 				<dt><label for="tzv_maps_enable">{{ lang('ACP_MOT_TZV_MAPS_ENABLE') }}{{ lang('COLON') }}</label><br>{{ lang('ACP_MOT_TZV_MAPS_ENABLE_EXPL') }}</dt>
-				<dd>
-					<label><input type="radio" class="radio" name="tzv_maps_enable" id="tzv_maps_enable" value="1"{{ ACP_MOT_TZV_MAPS_ENABLE == 1 ? 'checked' }}> {{ lang('YES') }}</label>
-					<label><input type="radio" class="radio" name="tzv_maps_enable" id="tzv_maps_enable" value="0"{{ ACP_MOT_TZV_MAPS_ENABLE == 0 ? 'checked' }}> {{ lang('NO') }}</label>
-				</dd>
+				<dd>{{ _self.switch('tzv_maps_enable', ACP_MOT_TZV_MAPS_ENABLE, SLIDERS) }}</dd>
 			</dl>
 
 			<dl>
 				<dt><label for="tzv_kurviger_enable">{{ lang('ACP_MOT_TZV_KURVIGER_ENABLE') }}{{ lang('COLON') }}</label><br>{{ lang('ACP_MOT_TZV_KURVIGER_EXPL') }}</dt>
-				<dd>
-					<label><input type="radio" class="radio" name="tzv_kurviger_enable" id="tzv_kurviger_enable" value="1"{{ ACP_MOT_TZV_KURVIGER_ENABLE == 1 ? 'checked' }}> {{ lang('YES') }}</label>
-					<label><input type="radio" class="radio" name="tzv_kurviger_enable" id="tzv_kurviger_enable" value="0"{{ ACP_MOT_TZV_KURVIGER_ENABLE == 0 ? 'checked' }}> {{ lang('NO') }}</label>
-				</dd>
+				<dd>{{ _self.switch('tzv_kurviger_enable', ACP_MOT_TZV_KURVIGER_ENABLE, SLIDERS) }}</dd>
 			</dl>
 
 			<dl>
 				<dt><label for="tzv_komoot_enable">{{ lang('ACP_MOT_TZV_KOMOOT_ENABLE') }}{{ lang('COLON') }}</label><br>{{ lang('ACP_MOT_TZV_KOMOOT_EXPL') }}</dt>
-				<dd>
-					<label><input type="radio" class="radio" name="tzv_komoot_enable" id="tzv_komoot_enable" value="1"{{ ACP_MOT_TZV_KOMOOT_ENABLE == 1 ? 'checked' }}> {{ lang('YES') }}</label>
-					<label><input type="radio" class="radio" name="tzv_komoot_enable" id="tzv_komoot_enable" value="0"{{ ACP_MOT_TZV_KOMOOT_ENABLE == 0 ? 'checked' }}> {{ lang('NO') }}</label>
-				</dd>
+				<dd>{{ _self.switch('tzv_komoot_enable', ACP_MOT_TZV_KOMOOT_ENABLE, SLIDERS) }}</dd>
 			</dl>
 
 			<dl>
 				<dt><label for="tzv_googlemap_enable">{{ lang('ACP_MOT_TZV_GOOGLEMAP_ENABLE') }}{{ lang('COLON') }}</label><br>{{ lang('ACP_MOT_TZV_MAPS_EXPLAIN') }}</dt>
-				<dd>
-					<label><input type="radio" class="radio" name="tzv_googlemap_enable" id="tzv_googlemap_enable" value="1"{{ ACP_MOT_TZV_GOOGLEMAP_ENABLE == 1 ? 'checked' }}> {{ lang('YES') }}</label>
-					<label><input type="radio" class="radio" name="tzv_googlemap_enable" id="tzv_googlemap_enable" value="0"{{ ACP_MOT_TZV_GOOGLEMAP_ENABLE == 0 ? 'checked' }}> {{ lang('NO') }}</label>
-				</dd>
+				<dd>{{ _self.switch('tzv_googlemap_enable', ACP_MOT_TZV_GOOGLEMAP_ENABLE, SLIDERS) }}</dd>
 			</dl>
 
 			<dl>
 				<dt><label for="tzv_ostreetmap_enable">{{ lang('ACP_MOT_TZV_OSMMAP_ENABLE') }}{{ lang('COLON') }}</label><br>{{ lang('ACP_MOT_TZV_MAPS_EXPLAIN') }}</dt>
-				<dd>
-					<label><input type="radio" class="radio" name="tzv_ostreetmap_enable" id="tzv_ostreetmap_enable" value="1"{{ ACP_MOT_TZV_OSMMAP_ENABLE == 1 ? 'checked' }}> {{ lang('YES') }}</label>
-					<label><input type="radio" class="radio" name="tzv_ostreetmap_enable" id="tzv_ostreetmap_enable" value="0"{{ ACP_MOT_TZV_OSMMAP_ENABLE == 0 ? 'checked' }}> {{ lang('NO') }}</label>
-				</dd>
+				<dd>{{ _self.switch('tzv_ostreetmap_enable', ACP_MOT_TZV_OSMMAP_ENABLE, SLIDERS) }}</dd>
 			</dl>
 
 			<dl>
@@ -148,50 +126,32 @@
 			<legend>{{ lang('ACP_MOT_TZV_ADDIT_FUNCS') }}</legend>
 			<dl>
 				<dt><label for="tzv_stats_enable">{{ lang('ACP_MOT_TZV_STATS_ENABLE') }}{{ lang('COLON') }}</label><br></dt>
-				<dd>
-					<label><input type="radio" class="radio" name="tzv_stats_enable" id="tzv_stats_enable" value="1"{{ ACP_MOT_TZV_STATS_ENABLE == 1 ? 'checked' }}> {{ lang('YES') }}</label>
-					<label><input type="radio" class="radio" name="tzv_stats_enable" id="tzv_stats_enable" value="0"{{ ACP_MOT_TZV_STATS_ENABLE == 0 ? 'checked' }}> {{ lang('NO') }}</label>
-				</dd>
+				<dd>{{ _self.switch('tzv_stats_enable', ACP_MOT_TZV_STATS_ENABLE, SLIDERS) }}</dd>
 			</dl>
 
 			<dl>
 				<dt><label for="tzv_news_add_enable">{{ lang('ACP_MOT_TZV_NEWS_ADD_ENABLE') }}{{ lang('COLON') }}</label><br></dt>
-				<dd>
-					<label><input type="radio" class="radio" name="tzv_news_add_enable" id="tzv_news_add_enable" value="1"{{ ACP_MOT_TZV_NEWS_ADD_ENABLE == 1 ? 'checked' }}> {{ lang('YES') }}</label>
-					<label><input type="radio" class="radio" name="tzv_news_add_enable" id="tzv_news_add_enable" value="0"{{ ACP_MOT_TZV_NEWS_ADD_ENABLE == 0 ? 'checked' }}> {{ lang('NO') }}</label>
-				</dd>
+				<dd>{{ _self.switch('tzv_news_add_enable', ACP_MOT_TZV_NEWS_ADD_ENABLE, SLIDERS) }}</dd>
 			</dl>
 
 			<dl>
 				<dt><label for="tzv_country_enable">{{ lang('ACP_MOT_TZV_COUNTRY_ENABLE') }}{{ lang('COLON') }}</label><br></dt>
-				<dd>
-					<label><input type="radio" class="radio" name="tzv_country_enable" id="tzv_country_enable" value="1"{{ ACP_MOT_TZV_COUNTRY_ENABLE == 1 ? 'checked' }}> {{ lang('YES') }}</label>
-					<label><input type="radio" class="radio" name="tzv_country_enable" id="tzv_country_enable" value="0"{{ ACP_MOT_TZV_COUNTRY_ENABLE == 0 ? 'checked' }}> {{ lang('NO') }}</label>
-				</dd>
+				<dd>{{ _self.switch('tzv_country_enable', ACP_MOT_TZV_COUNTRY_ENABLE, SLIDERS) }}</dd>
 			</dl>
 
 			<dl>
 				<dt><label for="tzv_main_image">{{ lang('ACP_MOT_TZV_MAIN_IMAGE') }}{{ lang('COLON') }}</label><br></dt>
-				<dd>
-					<label><input type="radio" class="radio" name="tzv_main_image" id="tzv_main_image" value="1"{{ ACP_MOT_TZV_MAIN_IMAGE == 1 ? 'checked' }}> {{ lang('YES') }}</label>
-					<label><input type="radio" class="radio" name="tzv_main_image" id="tzv_main_image" value="0"{{ ACP_MOT_TZV_MAIN_IMAGE == 0 ? 'checked' }}> {{ lang('NO') }}</label>
-				</dd>
+				<dd>{{ _self.switch('tzv_main_image', ACP_MOT_TZV_MAIN_IMAGE, SLIDERS) }}</dd>
 			</dl>
 
 			<dl>
 				<dt><label for="tzv_maininfo">{{ lang('ACP_MOT_TZV_MAININFO') }}{{ lang('COLON') }}</label><br></dt>
-				<dd>
-					<label><input type="radio" class="radio" name="tzv_maininfo" id="tzv_maininfo" value="1"{{ ACP_MOT_TZV_MAININFO == 1 ? 'checked' }}> {{ lang('YES') }}</label>
-					<label><input type="radio" class="radio" name="tzv_maininfo" id="tzv_maininfo" value="0"{{ ACP_MOT_TZV_MAININFO == 0 ? 'checked' }}> {{ lang('NO') }}</label>
-				</dd>
+				<dd>{{ _self.switch('tzv_maininfo', ACP_MOT_TZV_MAININFO, SLIDERS) }}</dd>
 			</dl>
 
 			<dl>
 				<dt><label for="tzv_support_enable">{{ lang('ACP_MOT_TZV_SUPPORT_ENABLE') }}{{ lang('COLON') }}</label><br>{{ lang('ACP_MOT_TZV_SUPPORT_EXPL') }}</dt>
-				<dd>
-					<label><input type="radio" class="radio" name="tzv_support_enable" id="tzv_support_enable" value="1"{{ ACP_MOT_TZV_SUPPORT_ENABLE == 1 ? 'checked' }}> {{ lang('YES') }}</label>
-					<label><input type="radio" class="radio" name="tzv_support_enable" id="tzv_support_enable" value="0"{{ ACP_MOT_TZV_SUPPORT_ENABLE == 0 ? 'checked' }}> {{ lang('NO') }}</label>
-				</dd>
+				<dd>{{ _self.switch('tzv_support_enable', ACP_MOT_TZV_SUPPORT_ENABLE, SLIDERS) }}</dd>
 			</dl>
 			<dl>
 				<dt><label for="tzv_support">{{ lang('ACP_MOT_TZV_SUPPORT_LINK') }}{{ lang('COLON') }}</label><br></dt>
@@ -236,3 +196,14 @@
 	</form>
 
 {% INCLUDE 'overall_footer.html' %}
+
+{% macro switch(name, checked = false, slider) %}
+	{% if slider %}
+		{% spaceless %}
+			<input type="checkbox" class="toggle" name="{{ name }}" value="1"{{ checked ? ' checked' }}>
+		{% endspaceless %}
+	{% else %}
+        <label><input type="radio" class="radio" name="{{ name }}" value="1"{{ checked ? ' checked' }}> {{ lang('YES') }}</label>
+        <label><input type="radio" class="radio" name="{{ name }}" value="0"{{ !checked ? ' checked' }}> {{ lang('NO') }}</label>
+	{% endif %}
+{% endmacro %}

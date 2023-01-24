@@ -61,6 +61,8 @@ $lang = array_merge($lang, [
 	'MOT_TZV_MAIN_SEARCH'				=> 'Tourziel Suche',
 	'MOT_TZV_MAIN_SUPPORT'				=> 'Tourziel Support',
 	'MOT_TZV_SUPPORT_FORUM'				=> 'Support Forum',
+	'MOT_TZV_MAIN_GPSTIPP'				=> 'Gebe auf der folgenden Seite das Tourziel ein. z.B. <b>Landgasthof Börnchen</b>',
+	'MOT_TZV_MAIN_ADDGPS'				=> 'Koordinaten finden',
 
 	'MOT_TZV_RETURN_TOURZIEL'			=> 'Zurück zum Index',
 
@@ -96,8 +98,9 @@ $lang = array_merge($lang, [
 		2	=> 'Insgesamt <strong>%1$d</strong> Tourziele in der Datenbank.',
 	],
 	'MOT_TZV_COUNTRY_EINTRAG'			=> 'Eingetragene Länder',
-	'MOT_TZV_MAINNEWS_INFO'				=> '&bull;&nbsp;&nbsp;Neues Sprachpaket Deutsch (Sie).<br>
-											&bull;&nbsp;&nbsp;Nutzung der Kategorie-Ebenen auch in der Karte mit den Suchergebnissen.<br>',
+	'MOT_TZV_MAINNEWS_INFO'				=> '&bull;&nbsp;&nbsp;Einbau eines Buttons, der zu einer Seite zum Suchen von Koordinaten anhand des Namns eines
+											Zieles führt, um die Eingabe der Koordinaten beim Erstellen/Ändern eines Tourzieles zu erleichtern.<br>
+											&bull;&nbsp;&nbsp;Ersatz der Radio-Buttons durch Slider auf der Einstellungsseite im Admin-Bereich.<br>',
 	'MOT_TZV_NUTZUNG_MAPS'				=> 'Nutzungsbedingungen Google Maps',
 
 	// Map

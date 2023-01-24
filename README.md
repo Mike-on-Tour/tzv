@@ -1,6 +1,6 @@
 # phpBB extension Tour Destinations Database
 
-![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-green)  
+![Version: 1.1.0](https://img.shields.io/badge/Version-1.1.0-green)  
   
 ![phpBB >= 3.2.x Compatible](https://img.shields.io/badge/phpBB-%3E=%203.2.3%20Compatible-009BDF)
 ![phpBB 3.3.x Compatible](https://img.shields.io/badge/phpBB-3.3.x%20Compatible-009BDF)  

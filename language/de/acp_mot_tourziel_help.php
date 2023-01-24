@@ -30,7 +30,11 @@ $lang = array_merge($lang, [
 									&bull;&nbsp;License <a href="http://opensource.org/licenses/gpl-license.php"> http://opensource.org/licenses/gpl-license.php</a> GNU Public License<br>',
 
 	'ACP_MOT_TZV_HISTORY'		=> 'Tourziele History',
-	'ACP_MOT_TZV_HUPDATE'		=> '&bull;&nbsp;2022 Version 1.0.0<br>
+	'ACP_MOT_TZV_HUPDATE'		=> '&bull;&nbsp;2022 Version 1.1.0<br>
+									- Einbau eines Buttons, der zu einer Seite zum Suchen von Koordinaten anhand des Namns eines
+										Zieles führt, um die Eingabe der Koordinaten beim Erstellen/Ändern eines Tourzieles zu erleichtern<br>
+									- Ersatz der Radio-Buttons durch Slider auf der Einstellungsseite im Admin-Bereich<br>
+									&bull;&nbsp;2022 Version 1.0.0<br>
 									- Neues Sprachpaket Deutsch (Sie)<br>
 									- Nutzung der Kategorie-Ebenen auch in der Karte mit den Suchergebnissen<br>
 									&bull;&nbsp;2022 Version 0.6.0<br>

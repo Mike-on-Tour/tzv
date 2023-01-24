@@ -61,6 +61,8 @@ $lang = array_merge($lang, [
 	'MOT_TZV_MAIN_SEARCH'				=> 'Tour destination search',
 	'MOT_TZV_MAIN_SUPPORT'				=> 'Tour destination support',
 	'MOT_TZV_SUPPORT_FORUM'				=> 'Support forum',
+	'MOT_TZV_MAIN_GPSTIPP'				=> 'On the opening site please enter the destination, e.g. <b>Goat Ledge</b>',
+	'MOT_TZV_MAIN_ADDGPS'				=> 'Find coordinates',
 
 	'MOT_TZV_RETURN_TOURZIEL'			=> 'Back to index',
 
@@ -96,9 +98,10 @@ $lang = array_merge($lang, [
 		2	=> 'Currently <strong>%1$d</strong> items are listed in the database.',
 	],
 	'MOT_TZV_COUNTRY_EINTRAG'			=> 'Registered countries',
-	'MOT_TZV_MAINNEWS_INFO'				=> '&bull;&nbsp;&nbsp;Displaying the items in different map overlays named after the used categories.<br>
-											&bull;&nbsp;&nbsp;Overlays can be switched on and off individually with the layer control element in the map`s upright corner.<br>
-											&bull;&nbsp;&nbsp;Displaying the map`s distance scale in metric and imperial units.<br>',
+	'MOT_TZV_MAINNEWS_INFO'				=> '&bull;&nbsp;&nbsp;Added a button leading to a website to find coordinates for named locations to the add/edit
+											item tab.<br>
+											&bull;&nbsp;&nbsp;Changed the radio buttons in the ACP settings tab into sliders with the "activated" state on the
+											left and the "deactivated" state on the right side (according to the "Yes" and "No" radio buttons).<br>',
 	'MOT_TZV_NUTZUNG_MAPS'				=> 'Google Maps Terms of Use',
 
 	// Map

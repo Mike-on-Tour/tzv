@@ -16,7 +16,7 @@ class ext extends \phpbb\extension\base
 	protected $phpbb_min_ver = '3.2.3';
 	protected $phpbb_below_ver = '3.4.0@dev';
 	protected $php_min_ver = '7.2.0';
-	protected $php_below_ver = '8.2.0';
+	protected $php_below_ver = '8.3.0';
 
 	public function is_enableable()
 	{
