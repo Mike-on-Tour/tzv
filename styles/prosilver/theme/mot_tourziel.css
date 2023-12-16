@@ -59,6 +59,7 @@ p {margin-bottom:10px;}
 /* Index Bilder */
 .image-box {
 	display: flex;
+	flex-wrap: wrap;
 	margin-bottom: 10px;
 }
 

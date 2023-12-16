@@ -2,8 +2,8 @@
 /**
 *
 * @package phpBB Extension [Tour destinations]
-* @copyright (c) 2014-2021 waldkatze
-* @copyright (c) 2022 Mike-on-Tour
+* @copyright (c) 2014 - 2021 waldkatze
+* @copyright (c) 2022 - 2023 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
@@ -125,6 +125,11 @@ class mot_tzv_main
 	--------------*/
 	public function index()
 	{
+		if (!$this->config['mot_tzv_enable'] || ($this->config['mot_tzv_enable'] && $this->config['mot_tzv_admin'] && !$this->auth->acl_get('a_')))
+		{
+			trigger_error($this->language->lang('MOT_TZV_TOURZIEL_NO_VIEW'));
+		}
+
 		if (!$this->auth->acl_get('u_mot_tzv_mainview'))
 		{
 			trigger_error($this->language->lang('MOT_TZV_TOURZIEL_NO_VIEW'));

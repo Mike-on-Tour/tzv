@@ -98,10 +98,8 @@ $lang = array_merge($lang, [
 		2	=> 'Currently <strong>%1$d</strong> items are listed in the database.',
 	],
 	'MOT_TZV_COUNTRY_EINTRAG'			=> 'Registered countries',
-	'MOT_TZV_MAINNEWS_INFO'				=> '&bull;&nbsp;&nbsp;Added a button leading to a website to find coordinates for named locations to the add/edit
-											item tab.<br>
-											&bull;&nbsp;&nbsp;Changed the radio buttons in the ACP settings tab into sliders with the "activated" state on the
-											left and the "deactivated" state on the right side (according to the "Yes" and "No" radio buttons).<br>',
+	'MOT_TZV_MAINNEWS_INFO'				=> '&bull;&nbsp;&nbsp;Changes to the ACP (Toggle Control, changes in the ACP settings tab to make it more precise).<br>
+											&bull;&nbsp;&nbsp;Changed the required minimal versions (phpBB 3.2.3 -> 3.3.1 and PHP 7.2.0 -> 7.4.0).<br>',
 	'MOT_TZV_NUTZUNG_MAPS'				=> 'Google Maps Terms of Use',
 
 	// Map

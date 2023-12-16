@@ -1,4 +1,3 @@
-<?php
 /**
 *
 * @package phpBB Extension [Tour destinations]
@@ -8,12 +7,8 @@
 *
 */
 
-.errorbox {
-	border-radius: 8px;
-}
-
-.successbox {
-	border-radius: 8px;
+.warningbox, .successbox, .errorbox {
+	border-radius: 8px !important;
 }
 
 fieldset {

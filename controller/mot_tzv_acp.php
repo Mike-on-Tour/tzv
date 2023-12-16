@@ -99,7 +99,7 @@ class mot_tzv_acp
 				trigger_error($this->language->lang('FORM_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
 			}
 
-			$this->config->set('mot_tzv_enable', $this->request->variable('tzv_enable', 0));						// Tourziele ein/aus
+			$this->config->set('mot_tzv_enable', $this->request->variable('mot_tzv_enable', 0));					// Tourziele ein/aus
 			$this->config->set('mot_tzv_admin', $this->request->variable('tzv_admin', 0));							// Tourziele Testmodus Administrator
 
 			$this->config->set('mot_tzv_map_lat', $this->request->variable('mot_tzv_map_lat', ''));					// Breitengrad des Zentrums Übersichtskarte
@@ -985,7 +985,10 @@ class mot_tzv_acp
 		$this->tpl_name = 'acp_tzv_info';
 		$this->page_title = $this->language->lang('ACP_TZV_INFO');
 
-		$this->template->assign_var('ACP_MOT_TZV_VERSION', $this->language->lang('ACP_MOT_TZV_VERSION', $this->tzv_version));
+		$this->template->assign_vars([
+			'ACP_MOT_TZV_VERSION'	=> $this->language->lang('ACP_MOT_TZV_VERSION', $this->tzv_version),
+			'ACP_MOT_TZV_C_YEAR'	=> date('Y'),
+		]);
 	}
 
 

@@ -2,8 +2,8 @@
 /**
 *
 * @package phpBB Extension [Tour destinations]
-* @copyright (c) 2014-2021 waldkatze
-* @copyright (c) 2022 Mike-on-Tour
+* @copyright (c) 2014 - 2021 waldkatze
+* @copyright (c) 2022 - 2023 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
@@ -37,7 +37,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, [
 	// language pack author
 	'ACP_MOT_TZV_LANG_DESC'			=> 'Deutsch (Du)',
-	'ACP_MOT_TZV_LANG_EXT_VER' 		=> '1.0.0',
+	'ACP_MOT_TZV_LANG_EXT_VER' 		=> '1.2.0',
 	'ACP_MOT_TZV_LANG_AUTHOR' 		=> 'Mike-on-Tour',
 
 	// ACP modules
@@ -58,10 +58,11 @@ $lang = array_merge($lang, [
 	'ACP_MOT_TZV_PERMISSION_GROUP'	=> 'Die Berechtigungen kannst du an deine Wünsche anpassen.<br> <b>ACP / BERECHTIGUNGEN / Benutzer-Rollen / Tourziele.</b>',
 
 	// ACP settings
-	'ACP_MOT_TZV_ENABLE_EXPLAIN'	=> 'Tourziele Hauptschalter',
+	'ACP_MOT_TZV_ENABLE_EXPLAIN'	=> 'Tourziele Schalter',
 	'ACP_MOT_TZV_ENABLE'			=> 'Tourziele aktivieren',
+	'ACP_MOT_TZV_ENABLE_EXPL'		=> 'Tourziele Hauptschalter, schaltet die Erweiterung komplett ab, auch für Administratoren.',
 	'ACP_MOT_TZV_ADMIN'				=> 'Tourziele Administrator-Modus',
-	'ACP_MOT_TZV_ADMIN_EXPL'		=> 'Nur Administrator kann Tourziele sehen.',
+	'ACP_MOT_TZV_ADMIN_EXPL'		=> 'Nur Administratoren können Tourziele sehen.',
 	'ACP_MOT_TZV_ENABLE_MESSAGE'	=> 'Tourziele ist eingeschaltet. Berechtigte Gruppen können Tourziele sehen.',
 	'ACP_MOT_TZV_DISABLE_MESSAGE'	=> 'Tourziele ist ausgeschaltet.',
 	'ACP_MOT_TZV_ADMIN_MESSAGE'		=> 'Administrator-Modus aktiv. Nur Administratoren können Tourziele sehen !',

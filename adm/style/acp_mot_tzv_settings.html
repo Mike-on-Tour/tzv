@@ -1,109 +1,107 @@
-{% set SLIDERS = true %}	{# Set this to 'false' and then purge the cache in order to get the old radio buttons. #}
 {% INCLUDE 'overall_header.html' %}
 {% INCLUDECSS '@mot_tzv/css/mot_tzv_acp.css' %}
 {% INCLUDEJS '@mot_tzv/mot_tzv_acp.js' %}
+{% set switch_type = TOGGLECTRL_TYPE ?? 'toggle' %}
 
-    <fieldset>
-		<h2>{{ lang('ACP_MOT_TZV_TOURZIEL') }} - {{ lang('ACP_MOT_TZV_SETTINGS') }}</h2>
-		{{ ACP_MOT_TZV_VERSION }}<br><br>
-		{{ lang('ACP_MOT_TZV_HELP') }}
-	</fieldset>
+<fieldset>
+	<h2>{{ lang('ACP_MOT_TZV_TOURZIEL') }} - {{ lang('ACP_MOT_TZV_SETTINGS') }}</h2>
+	{{ ACP_MOT_TZV_VERSION }}<br><br>
+	{{ lang('ACP_MOT_TZV_HELP') }}
+</fieldset>
 
-	{% if ACP_MOT_TZV_LANG_NOTE != '' %}
-		<div class="errorbox">{{ ACP_MOT_TZV_LANG_NOTE }}</div>
-	{% endif %}
+{% if ACP_MOT_TZV_LANG_NOTE != '' %}
+	<div class="errorbox">{{ ACP_MOT_TZV_LANG_NOTE }}</div>
+{% endif %}
+
+<fieldset>
+	<legend>{{ lang('ACP_MOT_TZV_PERMISSION_EXPL') }}</legend>
+	{{ lang('ACP_MOT_TZV_PERMISSION') }}<br>
+	{{ lang('ACP_MOT_TZV_PERMISSION_GROUP') }}
+   </fieldset>
+
+<form id="acp_tzv_settings" method="post" action="{{ U_ACTION }}">
 
 	<fieldset>
-		<legend>{{ lang('ACP_MOT_TZV_PERMISSION_EXPL') }}</legend>
-		{{ lang('ACP_MOT_TZV_PERMISSION') }}<br>
-		{{ lang('ACP_MOT_TZV_PERMISSION_GROUP') }}
-    </fieldset>
+		<legend>{{ lang('ACP_MOT_TZV_ENABLE_EXPLAIN') }}</legend>
+		<div id="acp_mot_tzv_member_error" class="errorbox" hidden="true">{{ lang('ACP_MOT_TZV_DISABLE_MESSAGE') }}</div>
 
-	<form id="acp_tzv_settings" method="post" action="{{ U_ACTION }}">
+		<div id="acp_mot_tzv_member_success" class="successbox" hidden="true">{{ lang('ACP_MOT_TZV_ENABLE_MESSAGE') }}</div>
 
-		<fieldset>
-			<legend>{{ lang('ACP_MOT_TZV_ENABLE_EXPLAIN') }}</legend>
-			{% if not ACP_MOT_TZV_ENABLE %}
-				<div class="errorbox">{{ lang('ACP_MOT_TZV_DISABLE_MESSAGE') }}</div>
-			{% endif %}
-			{% if ACP_MOT_TZV_ENABLE %}
-				<div class="successbox">{{ lang('ACP_MOT_TZV_ENABLE_MESSAGE') }}</div>
-			{% endif %}
-			{% if ACP_MOT_TZV_ADMIN %}
-				<div class="errorbox">{{ lang('ACP_MOT_TZV_ADMIN_MESSAGE') }}</div>
-			{% endif %}
+		<div id="acp_mot_tzv_admin_error" class="errorbox" hidden="true">{{ lang('ACP_MOT_TZV_ADMIN_MESSAGE') }}</div>
 
-			<dl>
-				<dt><label for="tzv_enable">{{ lang('ACP_MOT_TZV_ENABLE') }}{{ lang('COLON') }}</label><br></dt>
-				<dd>{{ _self.switch('tzv_enable', ACP_MOT_TZV_ENABLE, SLIDERS) }}</dd>
-			</dl>
+		<dl>
+			<dt><label for="mot_tzv_enable">{{ lang('ACP_MOT_TZV_ENABLE') }}{{ lang('COLON') }}</label><br>{{ lang('ACP_MOT_TZV_ENABLE_EXPL') }}</dt>
+			<dd>{{ _self.switch('mot_tzv_enable', ACP_MOT_TZV_ENABLE, switch_type) }}</dd>
+		</dl>
+
+		<div id="acp_mot_tzv_admin_enable" hidden="true">
 			<dl>
 				<dt><label for="tzv_admin">{{ lang('ACP_MOT_TZV_ADMIN') }}{{ lang('COLON') }}</label><br>{{ lang('ACP_MOT_TZV_ADMIN_EXPL') }}</dt>
-				<dd>{{ _self.switch('tzv_admin', ACP_MOT_TZV_ADMIN, SLIDERS) }}</dd>
+				<dd>{{ _self.switch('tzv_admin', ACP_MOT_TZV_ADMIN, switch_type) }}</dd>
 			</dl>
-		</fieldset>
+		</div>
+	</fieldset>
 
-		<div><p>&nbsp;</p></div>
+	<div><p>&nbsp;</p></div>
 
-		<fieldset>
-			<legend>{{ lang('ACP_MOT_TZV_MAPSETTING_TITLE') }}</legend>
-			<p>{{ lang('ACP_MOT_TZV_MAPSETTING_TEXT') }}</p>
-			<dl>
-				<dt><label for="mot_tzv_map_lat">{{ lang('ACP_MOT_TZV_LAT') }}{{ lang('COLON') }}</label><p>{{ lang('ACP_MOT_TZV_LAT_EXP') }}</p></dt>
-				<dd><input id="mot_tzv_map_lat" type="text" size="10" maxlength="10" name="mot_tzv_map_lat" value="{{ ACP_MOT_TZV_LAT }}"></dd>
-			</dl>
-			<dl>
-				<dt><label for="mot_tzv_map_lon">{{ lang('ACP_MOT_TZV_LON') }}{{ lang('COLON') }}</label><p>{{ lang('ACP_MOT_TZV_LON_EXP') }}</p></dt>
-				<dd><input id="mot_tzv_map_lon" type="text" size="10" maxlength="11" name="mot_tzv_map_lon" value="{{ ACP_MOT_TZV_LON }}"></dd>
-			</dl>
-			<dl>
-				<dt><label for="mot_tzv_map_zoom">{{ lang('ACP_MOT_TZV_ZOOM') }}{{ lang('COLON') }}</label></dt>
-				<dd><input id="mot_tzv_map_zoom" type="number" min="2" max="10" name="mot_tzv_map_zoom" value="{{ ACP_MOT_TZV_ZOOM }}"></dd>
-			</dl>
-			<dl>
-				<dt><label for="mot_tzv_map_enable_clusters">{{ lang('ACP_MOT_TZV_MAP_CLUSTERS') }}{{ lang('COLON') }}</label><p>{{ lang('ACP_MOT_TZV_MAP_CLUSTERS_EXP') }}</p></dt>
-				<dd>{{ _self.switch('mot_tzv_map_enable_clusters', ACP_MOT_TZV_MAP_CLUSTERS, SLIDERS) }}</dd>
-			</dl>
-			<dl>
-				<dt><label for="mot_tzv_enable_multi_layers">{{ lang('ACP_MOT_TZV_MULTI_LAYERS') }}{{ lang('COLON') }}</label><p>{{ lang('ACP_MOT_TZV_MULTI_LAYERS_EXP') }}</p></dt>
-				<dd>{{ _self.switch('mot_tzv_enable_multi_layers', ACP_MOT_TZV_MULTI_LAYERS, SLIDERS) }}</dd>
-			</dl>
-		</fieldset>
+	<fieldset>
+		<legend>{{ lang('ACP_MOT_TZV_MAPSETTING_TITLE') }}</legend>
+		<p>{{ lang('ACP_MOT_TZV_MAPSETTING_TEXT') }}</p>
+		<dl>
+			<dt><label for="mot_tzv_map_lat">{{ lang('ACP_MOT_TZV_LAT') }}{{ lang('COLON') }}</label><p>{{ lang('ACP_MOT_TZV_LAT_EXP') }}</p></dt>
+			<dd><input id="mot_tzv_map_lat" type="text" size="10" maxlength="10" name="mot_tzv_map_lat" value="{{ ACP_MOT_TZV_LAT }}"></dd>
+		</dl>
+		<dl>
+			<dt><label for="mot_tzv_map_lon">{{ lang('ACP_MOT_TZV_LON') }}{{ lang('COLON') }}</label><p>{{ lang('ACP_MOT_TZV_LON_EXP') }}</p></dt>
+			<dd><input id="mot_tzv_map_lon" type="text" size="10" maxlength="11" name="mot_tzv_map_lon" value="{{ ACP_MOT_TZV_LON }}"></dd>
+		</dl>
+		<dl>
+			<dt><label for="mot_tzv_map_zoom">{{ lang('ACP_MOT_TZV_ZOOM') }}{{ lang('COLON') }}</label></dt>
+			<dd><input id="mot_tzv_map_zoom" type="number" min="2" max="10" name="mot_tzv_map_zoom" value="{{ ACP_MOT_TZV_ZOOM }}"></dd>
+		</dl>
+		<dl>
+			<dt><label for="mot_tzv_map_enable_clusters">{{ lang('ACP_MOT_TZV_MAP_CLUSTERS') }}{{ lang('COLON') }}</label><p>{{ lang('ACP_MOT_TZV_MAP_CLUSTERS_EXP') }}</p></dt>
+			<dd>{{ _self.switch('mot_tzv_map_enable_clusters', ACP_MOT_TZV_MAP_CLUSTERS, switch_type) }}</dd>
+		</dl>
+		<dl>
+			<dt><label for="mot_tzv_enable_multi_layers">{{ lang('ACP_MOT_TZV_MULTI_LAYERS') }}{{ lang('COLON') }}</label><p>{{ lang('ACP_MOT_TZV_MULTI_LAYERS_EXP') }}</p></dt>
+			<dd>{{ _self.switch('mot_tzv_enable_multi_layers', ACP_MOT_TZV_MULTI_LAYERS, switch_type) }}</dd>
+		</dl>
+	</fieldset>
 
-		<div><p>&nbsp;</p></div>
+	<div><p>&nbsp;</p></div>
 
-		<fieldset>
-			<legend>{{ lang('ACP_MOT_TZV_GOOGLE_FUNCTIONS') }}</legend>
-			{% if not ACP_MOT_TZV_MAPS_ENABLE %}
-				<div class="errorbox">{{ lang('ACP_MOT_TZV_MSG_GOOGLE_OFF') }}</div>
-			{% endif %}
-			{% if ACP_MOT_TZV_MAPS_ENABLE %}
-				<div class="successbox">{{ lang('ACP_MOT_TZV_MSG_GOOGLE_ON') }}</div>
-			{% endif %}
+	<fieldset>
+		<legend>{{ lang('ACP_MOT_TZV_GOOGLE_FUNCTIONS') }}</legend>
 
-			<dl>
-				<dt><label for="tzv_maps_enable">{{ lang('ACP_MOT_TZV_MAPS_ENABLE') }}{{ lang('COLON') }}</label><br>{{ lang('ACP_MOT_TZV_MAPS_ENABLE_EXPL') }}</dt>
-				<dd>{{ _self.switch('tzv_maps_enable', ACP_MOT_TZV_MAPS_ENABLE, SLIDERS) }}</dd>
-			</dl>
+		<div id="mot_tzv_no_detail_maps" class="errorbox" hidden="true">{{ lang('ACP_MOT_TZV_MSG_GOOGLE_OFF') }}</div>
 
+		<div id="mot_tzv_show_detail_maps" class="successbox" hidden="true">{{ lang('ACP_MOT_TZV_MSG_GOOGLE_ON') }}</div>
+
+		<dl>
+			<dt><label for="tzv_maps_enable">{{ lang('ACP_MOT_TZV_MAPS_ENABLE') }}{{ lang('COLON') }}</label><br>{{ lang('ACP_MOT_TZV_MAPS_ENABLE_EXPL') }}</dt>
+			<dd>{{ _self.switch('tzv_maps_enable', ACP_MOT_TZV_MAPS_ENABLE, switch_type) }}</dd>
+		</dl>
+
+		<div id="mot_tzv_detail_maps" hidden="true">
 			<dl>
 				<dt><label for="tzv_kurviger_enable">{{ lang('ACP_MOT_TZV_KURVIGER_ENABLE') }}{{ lang('COLON') }}</label><br>{{ lang('ACP_MOT_TZV_KURVIGER_EXPL') }}</dt>
-				<dd>{{ _self.switch('tzv_kurviger_enable', ACP_MOT_TZV_KURVIGER_ENABLE, SLIDERS) }}</dd>
+				<dd>{{ _self.switch('tzv_kurviger_enable', ACP_MOT_TZV_KURVIGER_ENABLE, switch_type) }}</dd>
 			</dl>
 
 			<dl>
 				<dt><label for="tzv_komoot_enable">{{ lang('ACP_MOT_TZV_KOMOOT_ENABLE') }}{{ lang('COLON') }}</label><br>{{ lang('ACP_MOT_TZV_KOMOOT_EXPL') }}</dt>
-				<dd>{{ _self.switch('tzv_komoot_enable', ACP_MOT_TZV_KOMOOT_ENABLE, SLIDERS) }}</dd>
+				<dd>{{ _self.switch('tzv_komoot_enable', ACP_MOT_TZV_KOMOOT_ENABLE, switch_type) }}</dd>
 			</dl>
 
 			<dl>
 				<dt><label for="tzv_googlemap_enable">{{ lang('ACP_MOT_TZV_GOOGLEMAP_ENABLE') }}{{ lang('COLON') }}</label><br>{{ lang('ACP_MOT_TZV_MAPS_EXPLAIN') }}</dt>
-				<dd>{{ _self.switch('tzv_googlemap_enable', ACP_MOT_TZV_GOOGLEMAP_ENABLE, SLIDERS) }}</dd>
+				<dd>{{ _self.switch('tzv_googlemap_enable', ACP_MOT_TZV_GOOGLEMAP_ENABLE, switch_type) }}</dd>
 			</dl>
 
 			<dl>
 				<dt><label for="tzv_ostreetmap_enable">{{ lang('ACP_MOT_TZV_OSMMAP_ENABLE') }}{{ lang('COLON') }}</label><br>{{ lang('ACP_MOT_TZV_MAPS_EXPLAIN') }}</dt>
-				<dd>{{ _self.switch('tzv_ostreetmap_enable', ACP_MOT_TZV_OSMMAP_ENABLE, SLIDERS) }}</dd>
+				<dd>{{ _self.switch('tzv_ostreetmap_enable', ACP_MOT_TZV_OSMMAP_ENABLE, switch_type) }}</dd>
 			</dl>
 
 			<dl>
@@ -120,90 +118,93 @@
 				<dt><label for="tzv_maps_zoom">{{ lang('ACP_MOT_TZV_MAPS_ZOOM') }}{{ lang('COLON') }}</label><br></dt>
 				<dd><input type="number" min="1" max="15" id="tzv_maps_zoom" name="tzv_maps_zoom" value="{{ ACP_MOT_TZV_MAPS_ZOOM }}"></dd>
 			</dl>
-		</fieldset>	
+		</div>
+	</fieldset>
 
-		<fieldset>
-			<legend>{{ lang('ACP_MOT_TZV_ADDIT_FUNCS') }}</legend>
-			<dl>
-				<dt><label for="tzv_stats_enable">{{ lang('ACP_MOT_TZV_STATS_ENABLE') }}{{ lang('COLON') }}</label><br></dt>
-				<dd>{{ _self.switch('tzv_stats_enable', ACP_MOT_TZV_STATS_ENABLE, SLIDERS) }}</dd>
-			</dl>
+	<fieldset>
+		<legend>{{ lang('ACP_MOT_TZV_ADDIT_FUNCS') }}</legend>
+		<dl>
+			<dt><label for="tzv_stats_enable">{{ lang('ACP_MOT_TZV_STATS_ENABLE') }}{{ lang('COLON') }}</label><br></dt>
+			<dd>{{ _self.switch('tzv_stats_enable', ACP_MOT_TZV_STATS_ENABLE, switch_type) }}</dd>
+		</dl>
 
-			<dl>
-				<dt><label for="tzv_news_add_enable">{{ lang('ACP_MOT_TZV_NEWS_ADD_ENABLE') }}{{ lang('COLON') }}</label><br></dt>
-				<dd>{{ _self.switch('tzv_news_add_enable', ACP_MOT_TZV_NEWS_ADD_ENABLE, SLIDERS) }}</dd>
-			</dl>
+		<dl>
+			<dt><label for="tzv_news_add_enable">{{ lang('ACP_MOT_TZV_NEWS_ADD_ENABLE') }}{{ lang('COLON') }}</label><br></dt>
+			<dd>{{ _self.switch('tzv_news_add_enable', ACP_MOT_TZV_NEWS_ADD_ENABLE, switch_type) }}</dd>
+		</dl>
 
-			<dl>
-				<dt><label for="tzv_country_enable">{{ lang('ACP_MOT_TZV_COUNTRY_ENABLE') }}{{ lang('COLON') }}</label><br></dt>
-				<dd>{{ _self.switch('tzv_country_enable', ACP_MOT_TZV_COUNTRY_ENABLE, SLIDERS) }}</dd>
-			</dl>
+		<dl>
+			<dt><label for="tzv_country_enable">{{ lang('ACP_MOT_TZV_COUNTRY_ENABLE') }}{{ lang('COLON') }}</label><br></dt>
+			<dd>{{ _self.switch('tzv_country_enable', ACP_MOT_TZV_COUNTRY_ENABLE, switch_type) }}</dd>
+		</dl>
 
-			<dl>
-				<dt><label for="tzv_main_image">{{ lang('ACP_MOT_TZV_MAIN_IMAGE') }}{{ lang('COLON') }}</label><br></dt>
-				<dd>{{ _self.switch('tzv_main_image', ACP_MOT_TZV_MAIN_IMAGE, SLIDERS) }}</dd>
-			</dl>
+		<dl>
+			<dt><label for="tzv_main_image">{{ lang('ACP_MOT_TZV_MAIN_IMAGE') }}{{ lang('COLON') }}</label><br></dt>
+			<dd>{{ _self.switch('tzv_main_image', ACP_MOT_TZV_MAIN_IMAGE, switch_type) }}</dd>
+		</dl>
 
-			<dl>
-				<dt><label for="tzv_maininfo">{{ lang('ACP_MOT_TZV_MAININFO') }}{{ lang('COLON') }}</label><br></dt>
-				<dd>{{ _self.switch('tzv_maininfo', ACP_MOT_TZV_MAININFO, SLIDERS) }}</dd>
-			</dl>
+		<dl>
+			<dt><label for="tzv_maininfo">{{ lang('ACP_MOT_TZV_MAININFO') }}{{ lang('COLON') }}</label><br></dt>
+			<dd>{{ _self.switch('tzv_maininfo', ACP_MOT_TZV_MAININFO, switch_type) }}</dd>
+		</dl>
 
-			<dl>
-				<dt><label for="tzv_support_enable">{{ lang('ACP_MOT_TZV_SUPPORT_ENABLE') }}{{ lang('COLON') }}</label><br>{{ lang('ACP_MOT_TZV_SUPPORT_EXPL') }}</dt>
-				<dd>{{ _self.switch('tzv_support_enable', ACP_MOT_TZV_SUPPORT_ENABLE, SLIDERS) }}</dd>
-			</dl>
+		<dl>
+			<dt><label for="tzv_support_enable">{{ lang('ACP_MOT_TZV_SUPPORT_ENABLE') }}{{ lang('COLON') }}</label><br>{{ lang('ACP_MOT_TZV_SUPPORT_EXPL') }}</dt>
+			<dd>{{ _self.switch('tzv_support_enable', ACP_MOT_TZV_SUPPORT_ENABLE, switch_type) }}</dd>
+		</dl>
+
+		<div id="tzv_support_input" hidden="true">
 			<dl>
 				<dt><label for="tzv_support">{{ lang('ACP_MOT_TZV_SUPPORT_LINK') }}{{ lang('COLON') }}</label><br></dt>
 				<dd><input type="text" size="50" id="tzv_support" name="tzv_support" value="{{ ACP_MOT_TZV_SUPPORT }}"></dd>
 			</dl>
+		</div>
 
-			<dl>
-				<dt><label for="tzv_latest_tz_view">{{ lang('ACP_MOT_TZV_LATEST_TZ_VIEW') }}{{ lang('COLON') }}</label><br></dt>
-				<dd>
-					<label><input type="radio" class="radio" name="tzv_latest_tz_view" id="tzv_latest_tz_view" value="1"{{ ACP_MOT_TZV_LATEST_TZ_VIEW == 1 ? 'checked' }}> {{ lang('ACP_MOT_TZV_LIST_TZ_DETAIL') }}</label>
-					<label><input type="radio" class="radio" name="tzv_latest_tz_view" id="tzv_latest_tz_view" value="0"{{ ACP_MOT_TZV_LATEST_TZ_VIEW == 0 ? 'checked' }}> {{ lang('ACP_MOT_TZV_LIST_TZ_SHORT') }}</label>
-				</dd>
-			</dl>
-			<dl>
-				<dt><label for="tzv_list_tz_view">{{ lang('ACP_MOT_TZV_LIST_TZ_VIEW') }}{{ lang('COLON') }}</label><br></dt>
-				<dd>
-					<label><input type="radio" class="radio" name="tzv_list_tz_view" id="tzv_list_tz_view" value="1"{{ ACP_MOT_TZV_LIST_TZ_VIEW == 1 ? 'checked' }}> {{ lang('ACP_MOT_TZV_LIST_TZ_DETAIL') }}</label>
-					<label><input type="radio" class="radio" name="tzv_list_tz_view" id="tzv_list_tz_view" value="0"{{ ACP_MOT_TZV_LIST_TZ_VIEW == 0 ? 'checked' }}> {{ lang('ACP_MOT_TZV_LIST_TZ_SHORT') }}</label>
-				</dd>
-			</dl>
-		</fieldset>
+		<dl>
+			<dt><label for="tzv_latest_tz_view">{{ lang('ACP_MOT_TZV_LATEST_TZ_VIEW') }}{{ lang('COLON') }}</label><br></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="tzv_latest_tz_view" id="tzv_latest_tz_view" value="1"{{ ACP_MOT_TZV_LATEST_TZ_VIEW == 1 ? 'checked' }}> {{ lang('ACP_MOT_TZV_LIST_TZ_DETAIL') }}</label>
+				<label><input type="radio" class="radio" name="tzv_latest_tz_view" id="tzv_latest_tz_view" value="0"{{ ACP_MOT_TZV_LATEST_TZ_VIEW == 0 ? 'checked' }}> {{ lang('ACP_MOT_TZV_LIST_TZ_SHORT') }}</label>
+			</dd>
+		</dl>
 
-		<fieldset>
-			<legend>{{ lang('ACP_MOT_TZV_PAGINATION') }}</legend>
-			<dl>
-				<dt><label for="tzv_rows_acp">{{ lang('ACP_MOT_TZV_ROWS_ACP') }}{{ lang('COLON') }}</label><br></dt>
-				<dd><input type="number" id="tzv_rows_acp" name="tzv_rows_acp" min="5" max="75" value="{{ ACP_MOT_TZV_ROWS_ACP }}"></dd>
-			</dl>
+		<dl>
+			<dt><label for="tzv_list_tz_view">{{ lang('ACP_MOT_TZV_LIST_TZ_VIEW') }}{{ lang('COLON') }}</label><br></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="tzv_list_tz_view" id="tzv_list_tz_view" value="1"{{ ACP_MOT_TZV_LIST_TZ_VIEW == 1 ? 'checked' }}> {{ lang('ACP_MOT_TZV_LIST_TZ_DETAIL') }}</label>
+				<label><input type="radio" class="radio" name="tzv_list_tz_view" id="tzv_list_tz_view" value="0"{{ ACP_MOT_TZV_LIST_TZ_VIEW == 0 ? 'checked' }}> {{ lang('ACP_MOT_TZV_LIST_TZ_SHORT') }}</label>
+			</dd>
+		</dl>
+	</fieldset>
 
-			<dl>
-				<dt><label for="tzv_rows_front">{{ lang('ACP_MOT_TZV_ROWS_FRONT') }}{{ lang('COLON') }}</label><br></dt>
-				<dd><input type="number" id="tzv_rows_front" name="tzv_rows_front" min="2" max="50" value="{{ ACP_MOT_TZV_ROWS_FRONT }}"></dd>
-			</dl>
-		</fieldset>
+	<fieldset>
+		<legend>{{ lang('ACP_MOT_TZV_PAGINATION') }}</legend>
+		<dl>
+			<dt><label for="tzv_rows_acp">{{ lang('ACP_MOT_TZV_ROWS_ACP') }}{{ lang('COLON') }}</label><br></dt>
+			<dd><input type="number" id="tzv_rows_acp" name="tzv_rows_acp" min="5" max="75" value="{{ ACP_MOT_TZV_ROWS_ACP }}"></dd>
+		</dl>
 
-		<p class="submit-buttons">
-			<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}">&nbsp;
-			<input class="button2" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}">
-			{{ S_FORM_TOKEN }}
-		</p>
+		<dl>
+			<dt><label for="tzv_rows_front">{{ lang('ACP_MOT_TZV_ROWS_FRONT') }}{{ lang('COLON') }}</label><br></dt>
+			<dd><input type="number" id="tzv_rows_front" name="tzv_rows_front" min="2" max="50" value="{{ ACP_MOT_TZV_ROWS_FRONT }}"></dd>
+		</dl>
+	</fieldset>
 
-	</form>
+	<p class="submit-buttons">
+		<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}">&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}">
+		{{ S_FORM_TOKEN }}
+	</p>
+
+</form>
 
 {% INCLUDE 'overall_footer.html' %}
 
-{% macro switch(name, checked = false, slider) %}
-	{% if slider %}
-		{% spaceless %}
-			<input type="checkbox" class="toggle" name="{{ name }}" value="1"{{ checked ? ' checked' }}>
-		{% endspaceless %}
-	{% else %}
+{% macro switch(name, checked = false, type = 'toggle') -%}
+    {% if type == 'toggle' || type == 'checkbox' -%}
+        <input type="checkbox"{{ type == 'toggle' ? ' class="toggle"' }} name="{{ name }}" value="1"{{ checked ? ' checked' }}>
+    {%- elseif type == 'radio' -%}
         <label><input type="radio" class="radio" name="{{ name }}" value="1"{{ checked ? ' checked' }}> {{ lang('YES') }}</label>
         <label><input type="radio" class="radio" name="{{ name }}" value="0"{{ !checked ? ' checked' }}> {{ lang('NO') }}</label>
-	{% endif %}
-{% endmacro %}
+    {%- endif %}
+{%- endmacro %}

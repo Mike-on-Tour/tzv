@@ -2,8 +2,8 @@
 /**
 *
 * @package phpBB Extension [Tour destinations]
-* @copyright (c) 2014-2021 waldkatze
-* @copyright (c) 2022 Mike-on-Tour
+* @copyright (c) 2014 - 2021 waldkatze
+* @copyright (c) 2022 - 2023 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
@@ -37,7 +37,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, [
 	// language pack author
 	'ACP_MOT_TZV_LANG_DESC'			=> 'British English',
-	'ACP_MOT_TZV_LANG_EXT_VER' 		=> '1.0.0',
+	'ACP_MOT_TZV_LANG_EXT_VER' 		=> '1.2.0',
 	'ACP_MOT_TZV_LANG_AUTHOR' 		=> 'Mike-on-Tour',
 
 	// ACP modules
@@ -58,8 +58,9 @@ $lang = array_merge($lang, [
 	'ACP_MOT_TZV_PERMISSION_GROUP'	=> 'You can adapt permissions for all user roles according to your preferences.<br> <b>ACP > PERMISSIONS > User roles > `user role` > Tour destinations</b>',
 
 	// ACP settings
-	'ACP_MOT_TZV_ENABLE_EXPLAIN'	=> 'Tour destinations main settings',
+	'ACP_MOT_TZV_ENABLE_EXPLAIN'	=> 'Tour destinations switches',
 	'ACP_MOT_TZV_ENABLE'			=> 'Enable the extension',
+	'ACP_MOT_TZV_ENABLE_EXPL'		=> 'Tour destinations main switch, deactivates the extension for everyone, even for administrators.',
 	'ACP_MOT_TZV_ADMIN'				=> 'Enable administrator mode',
 	'ACP_MOT_TZV_ADMIN_EXPL'		=> 'If enabled only administrators can see and use the extension.',
 	'ACP_MOT_TZV_ENABLE_MESSAGE'	=> 'Extension is enabled, authorised groups can see and use it.',
