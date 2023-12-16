@@ -98,9 +98,8 @@ $lang = array_merge($lang, [
 		2	=> 'Insgesamt <strong>%1$d</strong> Tourziele in der Datenbank.',
 	],
 	'MOT_TZV_COUNTRY_EINTRAG'			=> 'Eingetragene Länder',
-	'MOT_TZV_MAINNEWS_INFO'				=> '&bull;&nbsp;&nbsp;Einbau eines Buttons, der zu einer Seite zum Suchen von Koordinaten anhand des Namns eines
-											Zieles führt, um die Eingabe der Koordinaten beim Erstellen/Ändern eines Tourzieles zu erleichtern.<br>
-											&bull;&nbsp;&nbsp;Ersatz der Radio-Buttons durch Slider auf der Einstellungsseite im Admin-Bereich.<br>',
+	'MOT_TZV_MAINNEWS_INFO'				=> '&bull;&nbsp;&nbsp;Änderungen im Admin-Bereich (Toggle Control, Umbau Einstellungen zur Verbesserung der Aussagekraft der Hinweisboxen).<br>
+											&bull;&nbsp;&nbsp;Ändern der minimal benötigten Versionen (phpBB 3.2.3 -> 3.3.1 und PHP 7.2.0 -> 7.4.0).<br>',
 	'MOT_TZV_NUTZUNG_MAPS'				=> 'Nutzungsbedingungen Google Maps',
 
 	// Map

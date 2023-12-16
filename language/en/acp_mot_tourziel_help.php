@@ -2,8 +2,8 @@
 /**
 *
 * @package phpBB Extension [Tour destinations]
-* @copyright (c) 2014-2021 waldkatze
-* @copyright (c) 2022 Mike-on-Tour
+* @copyright (c) 2014 - 2021 waldkatze
+* @copyright (c) 2022 - 2023 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 * @ acp language file (British English)
@@ -24,12 +24,15 @@ $lang = array_merge($lang, [
 	'ACP_MOT_TZV_INFO_TITLE'	=> 'Info Tour destinations',
 	'ACP_MOT_TZV_UPDATE'		=> '<strong>A backup of your database is recommended prior to updates and settings changes!</strong>',
 	'ACP_MOT_TZV_COPYRIGHT'		=> '&bull;&nbsp;copyright (c) 2014 - 2021 Author: <b>waldkatze</b> (no more support)<br>
-									<span style="color: transparent;">&bull;</span>&nbsp;copyright (c) 2022 Author: <b>Mike-on-Tour</b> (no support via e-mail or PM)<br>',
+									<span style="color: transparent;">&bull;</span>&nbsp;copyright (c) 2022 - %1$s Author: <b>Mike-on-Tour</b> (no support via e-mail or PM)<br>',
 	'ACP_MOT_TZV_SUPPORT'		=> '&bull;&nbsp;EXTENSION Demo / Download / Update <a href="https://www.mike-on-tour.com/" target="_blank">https://www.mike-on-tour.com/</a><br><br>
 									&bull;&nbsp;License <a href="http://opensource.org/licenses/gpl-license.php"> http://opensource.org/licenses/gpl-license.php</a> GNU Public License<br>',
 
 	'ACP_MOT_TZV_HISTORY'		=> 'Tour destinations history',
-	'ACP_MOT_TZV_HUPDATE'		=> '&bull;&nbsp;2022 Version 1.1.0<br>
+	'ACP_MOT_TZV_HUPDATE'		=> '&bull;&nbsp;2023 Version 1.2.0<br>
+									- Changes to the ACP (Toggle Control, changes in the ACP settings tab to make it more precise)
+									- Changed the required minimal versions (phpBB 3.2.3 -> 3.3.1 and PHP 7.2.0 -> 7.4.0)<br>
+									&bull;&nbsp;2022 Version 1.1.0<br>
 									- Added a button leading to a website to find coordinates for named locations to the add/edit item tab
 									- Changed the radio buttons in the ACP settings tab into sliders with the "activated" state on the
 										left and the "deactivated" state on the right side (according to the "Yes" and "No" radio buttons)

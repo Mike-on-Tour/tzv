@@ -4,6 +4,24 @@ All changes to `Tour Destinations Database` will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.2.0] - 2023-12-06
+
+### Added
+-	The usage of either toggles, checkboxes or radio buttons according to a general template variable called `TOGGLECTRL_TYPE` which will be implemented with a future
+	ext `lukewcs/togglectrl`, default is still 'toggles'; affected file is `adm/style/acp_mot_tzv_settings.html`
+-	A check in `controller/mot_tzv_main.php` to prevent displaying the extension through its route (`my-server/mot_tzv`) if it is completely disabled or just available
+	for administrators
+
+### Changed
+-	Minimal PHP version to 7.4.0 and maximal PHP version to less than 8.4.0@dev
+-	Minimal phpBB version to 3.3.1
+-	Some changes in the ACP settings tab to make it more precise
+
+### Fixed
+
+### Removed
+  
+  
 ## [1.1.0] - 2023-01-24
 
 ### Added

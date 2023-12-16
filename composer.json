@@ -3,8 +3,8 @@
 	"type": "phpbb-extension",
 	"description": "Tour Destinations Database for motorcyclists, bikers and hikers",
 	"homepage": "https://www.mike-on-tour.com",
-	"version": "1.1.0",
-	"time": "2023-01-24 12:11:57",
+	"version": "1.2.0",
+	"time": "2023-12-06 12:11:57",
 	"license": "GPL-2.0-only",
 	"authors": [
         {
@@ -20,15 +20,15 @@
 		}
 	],
 	"require": {
-		"php": ">=7.2.0,<8.3.0",
-        "phpbb/phpbb": ">=3.2.3,<3.4.0@dev",
+		"php": ">=7.4.0,<8.3.0",
+        "phpbb/phpbb": ">=3.3.1,<3.4.0@dev",
         "composer/installers": "~1.0.0"
 	},
 	"extra": {
 		"display-name": "Tour Destinations Database",
-		"lang-min-ver": "1.0.0",
+		"lang-min-ver": "1.2.0",
 		"soft-require": {
-			"phpbb/phpbb": ">=3.2.3,<3.4.0@dev"
+			"phpbb/phpbb": ">=3.3.1,<3.4.0@dev"
 		},
 		"version-check": {
 			"host": "www.mike-on-tour.com",

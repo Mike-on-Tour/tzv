@@ -2,26 +2,26 @@
 {% INCLUDE 'overall_header.html' %}
 
 <fieldset>
-    <h2>{{ lang('ACP_MOT_TZV_TOURZIEL') }} - {{ lang('ACP_MOT_TZV_INFO') }}</h2>
-    {{ ACP_MOT_TZV_VERSION }}
+	<h2>{{ lang('ACP_MOT_TZV_TOURZIEL') }} - {{ lang('ACP_MOT_TZV_INFO') }}</h2>
+	{{ ACP_MOT_TZV_VERSION }}
 </fieldset>
 
 <fieldset>
-    {{ lang('ACP_MOT_TZV_COPYRIGHT') }}<br>
-    {{ lang('ACP_MOT_TZV_SUPPORT') }}<br>
-    <div class="errorbox"> 
-    {{ lang('ACP_MOT_TZV_UPDATE') }}
-    </div>
+	{{ lang('ACP_MOT_TZV_COPYRIGHT', ACP_MOT_TZV_C_YEAR) }}<br>
+	{{ lang('ACP_MOT_TZV_SUPPORT') }}<br>
+	<div class="errorbox">
+		{{ lang('ACP_MOT_TZV_UPDATE') }}
+	</div>
 </fieldset>
 
 <fieldset>
-<h2>{{ lang('ACP_MOT_TZV_HISTORY') }}</h2>
-    {{ lang('ACP_MOT_TZV_HUPDATE') }}
+	<h2>{{ lang('ACP_MOT_TZV_HISTORY') }}</h2>
+	{{ lang('ACP_MOT_TZV_HUPDATE') }}
 </fieldset>
 
 <fieldset>
-    <h2>{{ lang('ACP_MOT_TZV_HELP') }}</h2>
-    {{ lang('ACP_MOT_TZV_HELPLINE') }}
+	<h2>{{ lang('ACP_MOT_TZV_HELP') }}</h2>
+	{{ lang('ACP_MOT_TZV_HELPLINE') }}
 </fieldset>
 
 {% INCLUDE 'overall_footer.html' %}

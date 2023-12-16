@@ -2,8 +2,8 @@
 /**
 *
 * @package phpBB Extension [Tour destinations]
-* @copyright (c) 2014-2021 waldkatze
-* @copyright (c) 2022 Mike-on-Tour
+* @copyright (c) 2014 - 2021 waldkatze
+* @copyright (c) 2022 - 2023 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 * @ acp language file [deutsch / Du]
@@ -25,13 +25,16 @@ $lang = array_merge($lang, [
 	'ACP_MOT_TZV_INFO_TITLE'	=> 'Info Tourziele',
 	'ACP_MOT_TZV_UPDATE'		=> '<strong>Vor Änderungen Einstellungen und Update grundsätzlich Datensicherung nicht vergessen !</strong>',
 	'ACP_MOT_TZV_COPYRIGHT'		=> '&bull;&nbsp;copyright (c) 2014 - 2021 Autor: <b>waldkatze</b> (Kein Support mehr)<br>
-									<span style="color: transparent;">&bull;</span>&nbsp;copyright (c) 2022 Autor: <b>Mike-on-Tour</b> (Kein Support per E-Mail oder PN)<br>',
+									<span style="color: transparent;">&bull;</span>&nbsp;copyright (c) 2022 - %1$s Autor: <b>Mike-on-Tour</b> (Kein Support per E-Mail oder PN)<br>',
 	'ACP_MOT_TZV_SUPPORT'		=> '&bull;&nbsp;EXTENSION Demo / Download / Update <a href="https://www.mike-on-tour.com/" target="_blank">https://www.mike-on-tour.com/</a><br><br>
 									&bull;&nbsp;License <a href="http://opensource.org/licenses/gpl-license.php"> http://opensource.org/licenses/gpl-license.php</a> GNU Public License<br>',
 
 	'ACP_MOT_TZV_HISTORY'		=> 'Tourziele History',
-	'ACP_MOT_TZV_HUPDATE'		=> '&bull;&nbsp;2022 Version 1.1.0<br>
-									- Einbau eines Buttons, der zu einer Seite zum Suchen von Koordinaten anhand des Namns eines
+	'ACP_MOT_TZV_HUPDATE'		=> '&bull;&nbsp;2023 Version 1.2.0<br>
+									- Änderungen im Admin-Bereich (Toggle Control, Umbau Einstellungen zur Verbesserung der Aussagekraft der Hinweisboxen)
+									- Ändern der minimal benötigten Versionen (phpBB 3.2.3 -> 3.3.1 und PHP 7.2.0 -> 7.4.0)<br>
+									&bull;&nbsp;2022 Version 1.1.0<br>
+									- Einbau eines Buttons, der zu einer Seite zum Suchen von Koordinaten anhand des Namens eines
 										Zieles führt, um die Eingabe der Koordinaten beim Erstellen/Ändern eines Tourzieles zu erleichtern<br>
 									- Ersatz der Radio-Buttons durch Slider auf der Einstellungsseite im Admin-Bereich<br>
 									&bull;&nbsp;2022 Version 1.0.0<br>
