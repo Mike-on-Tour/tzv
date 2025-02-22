@@ -1,4 +1,14 @@
+{#
+*
+* @package MoT Tour Destinations Database
+* ver 1.3.0
+* @copyright (c) 2022 - 2025 Mike-on-Tour
+* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+*
+#}
+
 {% INCLUDE 'ucp_header.html' %}
+{% INCLUDECSS '@mot_tzv/mot_tzv_main.css' %}
 
 <h2>{{ lang('UCP_MOT_TZV_SUMMARY_TITLE') }}</h2>
 
@@ -14,24 +24,32 @@
 			{% INCLUDE '@mot_tzv/mot_tzv_add_edit_form.html' %}
 
 			<script>
-			// <![CDATA[
 				// Define necessary editor variables
 				var form_name = 'mot_tzv_add_form';
 				var text_name = 'mot_tzv_message';
 
 				// Define own JS variables
 				var motTzv = {};
+				motTzv.jsMandatoryFiedsArr = {{ MOT_TZV_MANDATORY_ARR_JS }};
 				motTzv.jsCoordMandatory = {{ MOT_TZV_COORD_MANDATORY }};
 				motTzv.jsError = "{{ lang('MOT_TZV_ERROR')|e('js') }}";
 				motTzv.jsErrorName = "{{ lang('MOT_TZV_ERROR_NAME')|e('js') }}";
+				motTzv.jsErrorCountry = "{{ lang('MOT_TZV_ERROR_COUNTRY')|e('js') }}";
+				motTzv.jsErrorRegion = "{{ lang('MOT_TZV_ERROR_REGION')|e('js') }}";
+				motTzv.jsErrorCategory = "{{ lang('MOT_TZV_ERROR_CATEGORY')|e('js') }}";
 				motTzv.jsErrorPostalcode = "{{ lang('MOT_TZV_ERROR_POSTALCODEZ')|e('js') }}";
 				motTzv.jsErrorCity = "{{ lang('MOT_TZV_ERROR_CITY')|e('js') }}";
+				motTzv.jsErrorStreet = "{{ lang('MOT_TZV_ERROR_STREET')|e('js') }}";
+				motTzv.jsErrorTelephone = "{{ lang('MOT_TZV_ERROR_TELEPHONE')|e('js') }}";
+				motTzv.jsErrorEmail = "{{ lang('MOT_TZV_ERROR_EMAIL')|e('js') }}";
+				motTzv.jsErrorHomepage = "{{ lang('MOT_TZV_ERROR_HOMEPAGE')|e('js') }}";
 				motTzv.jsErrorLat = "{{ lang('MOT_TZV_ERROR_LAT')|e('js') }}";
 				motTzv.jsErrorLon = "{{ lang('MOT_TZV_ERROR_LON')|e('js') }}";
+				motTzv.jsErrorWlan = "{{ lang('MOT_TZV_ERROR_WLAN')|e('js') }}";
 				motTzv.jsErrorMessage = "{{ lang('MOT_TZV_ERROR_MESSAGE')|e('js') }}";
-			// ]]>
 			</script>
 		{% else %}
+			{% import '@mot_tzv/mot_tzv_macros.html' as forms %}
 			{% if pagination %}
 				<div class="pagination">
 					{% include 'pagination.html' %}
@@ -39,30 +57,7 @@
 				</div>
 			{% endif %}
 
-			<table class="table1 zebra-list">
-				<tbody>
-					<tr>
-						<th style="text-align: center;">{{ lang('UCP_MOT_TZV_NAME') }}</th>
-						<th style="text-align: center;">{{ lang('UCP_MOT_TZV_CATEGORY') }}</th>
-						<th style="text-align: center;">{{ lang('UCP_MOT_TZV_COUNTRY') }}</th>
-						<th style="text-align: center;">{{ lang('OPTIONS') }}</th>
-					</tr>
-				{% for tzlist in tzlist %}
-					<tr>
-						<td style="text-align: center;">{{ tzlist.NAME }}</td>
-						<td style="text-align: center;">{{ tzlist.CATEGORY }}</td>
-						<td style="text-align: center;"><img src="{{ tzlist.FLAG }}" title="{{ tzlist.COUNTRY }}"> {{ tzlist.COUNTRY }} / {{ tzlist.REGION }}</td>
-						<td style="text-align: center; white-space: nowrap;">
-							{% if tzlist.U_EDIT != '' %}&nbsp;<a href="{{ tzlist.U_EDIT }}">{{ ICON_EDIT }}</a>{% else %}{{ ICON_EDIT_DISABLED }}{% endif %}{% if tzlist.U_DELETE != '' %}<a href="{{ tzlist.U_DELETE }}">{{ ICON_DELETE }}</a>{% else %}{{ ICON_DELETE_DISABLED }}{% endif %}
-						</td>
-					</tr>
-				{% else %}
-				<tr>
-					<td colspan="4" style="text-align: center;">{{ lang('UCP_MOT_TZV_NO_ENTRIES') }}</td>
-				</tr>
-				{% endfor %}
-				</tbody>
-			</table>
+			{{ forms.table_view(MOT_TZV_DESTINATIONS, true, ICON_EDIT, ICON_EDIT_DISABLED, ICON_DELETE, ICON_DELETE_DISABLED) }}
 
 			{% if pagination %}
 				<div class="pagination">

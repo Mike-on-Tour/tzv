@@ -1,9 +1,9 @@
 <?php
 /**
 *
-* @package phpBB Extension [Tour destinations]
-* @copyright (c) 2014-2021 waldkatze
-* @copyright (c) 2022 Mike-on-Tour
+* @package MoT Tour Destinations Database
+* ver 1.3.0
+* @copyright (c) 2022 - 2025 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
@@ -33,6 +33,9 @@ class mot_tzv_acp
 	/** @var \phpbb\template\template */
 	protected $template;
 
+	/** @var \mot\tzv\includes\mot_tzv_functions */
+	protected $mot_tzv_functions;
+
 	/** @var string PHP extension */
 	protected $php_ext;
 
@@ -59,8 +62,9 @@ class mot_tzv_acp
 	 */
 	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver_interface $db, \phpbb\extension\manager $phpbb_extension_manager,
 								\phpbb\language\language $language, \phpbb\pagination $pagination, \phpbb\request\request_interface $request,
-								\phpbb\template\template $template, $php_ext, $root_path, $mot_tzv_tourziel_table, $mot_tzv_tourziel_country_table,
-								$mot_tzv_tourziel_region_table, $mot_tzv_tourziel_cats_table, $mot_tzv_tourziel_wlan_table)
+								\phpbb\template\template $template, \mot\tzv\includes\mot_tzv_functions $mot_tzv_functions, $php_ext, $root_path,
+								$mot_tzv_tourziel_table, $mot_tzv_tourziel_country_table, $mot_tzv_tourziel_region_table, $mot_tzv_tourziel_cats_table,
+								$mot_tzv_tourziel_wlan_table)
 	{
 		$this->config = $config;
 		$this->db = $db;
@@ -69,6 +73,7 @@ class mot_tzv_acp
 		$this->pagination = $pagination;
 		$this->request = $request;
 		$this->template = $template;
+		$this->mot_tzv_functions = $mot_tzv_functions;
 		$this->phpbb_root_path = $root_path;
 		$this->php_ext = $php_ext;
 		// TZV Tabellen
@@ -85,9 +90,6 @@ class mot_tzv_acp
 		$this->tzv_flags_url = $this->config['mot_tzv_flags_url'];
 	}
 
-	/*-------------------------------------
-	Settings
-	-------------------------------------*/
 	public function settings()
 	{
 		add_form_key('acp_mot_tzv');
@@ -99,12 +101,14 @@ class mot_tzv_acp
 				trigger_error($this->language->lang('FORM_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
 			}
 
-			$this->config->set('mot_tzv_enable', $this->request->variable('mot_tzv_enable', 0));					// Tourziele ein/aus
-			$this->config->set('mot_tzv_admin', $this->request->variable('tzv_admin', 0));							// Tourziele Testmodus Administrator
+			$this->config->set('mot_tzv_enable', $this->request->variable('mot_tzv_enable', 0));
+			$this->config->set('mot_tzv_admin', $this->request->variable('tzv_admin', 0));
 
-			$this->config->set('mot_tzv_map_lat', $this->request->variable('mot_tzv_map_lat', ''));					// Breitengrad des Zentrums Übersichtskarte
-			$this->config->set('mot_tzv_map_lon', $this->request->variable('mot_tzv_map_lon', ''));					//Längengrad des Zentrums Übersichtskarte
-			$this->config->set('mot_tzv_map_zoom', $this->request->variable('mot_tzv_map_zoom', 0));				// Zoom der Übersichtskarte
+			$this->config->set('mot_tzv_mandatory_fields', json_encode($this->request->variable('mot_tzv_mandatory_fields', [0])));
+
+			$this->config->set('mot_tzv_map_lat', $this->request->variable('mot_tzv_map_lat', ''));
+			$this->config->set('mot_tzv_map_lon', $this->request->variable('mot_tzv_map_lon', ''));
+			$this->config->set('mot_tzv_map_zoom', $this->request->variable('mot_tzv_map_zoom', 0));
 			$this->config->set('mot_tzv_map_enable_clusters', $this->request->variable('mot_tzv_map_enable_clusters', 0));
 			$this->config->set('mot_tzv_enable_multi_layers', $this->request->variable('mot_tzv_enable_multi_layers', 0));
 
@@ -145,6 +149,8 @@ class mot_tzv_acp
 			'ACP_MOT_TZV_ENABLE'			=> $this->config['mot_tzv_enable'],
 			'ACP_MOT_TZV_ADMIN'				=> $this->config['mot_tzv_admin'],
 
+			'ACP_MOT_TZV_FIELDS_SELECT'		=> $this->mot_tzv_functions->get_mandatory_fields_selection(json_decode($this->config['mot_tzv_mandatory_fields'])),
+
 			'ACP_MOT_TZV_LAT'				=> $this->config['mot_tzv_map_lat'],
 			'ACP_MOT_TZV_LON'				=> $this->config['mot_tzv_map_lon'],
 			'ACP_MOT_TZV_ZOOM'				=> $this->config['mot_tzv_map_zoom'],
@@ -177,9 +183,6 @@ class mot_tzv_acp
 		]);
 	}
 
-	/*-------------------------------------
-	Country settings
-	-------------------------------------*/
 	public function country()
 	{
 		// set parameters for pagination
@@ -380,9 +383,6 @@ class mot_tzv_acp
 		]);
 	}
 
-	/*-------------------------------------
-	Region settings
-	-------------------------------------*/
 	public function region()
 	{
 		// set parameters for pagination
@@ -579,9 +579,6 @@ class mot_tzv_acp
 		]);
 	}
 
-	/*-------------------------------------
-	Category settings
-	-------------------------------------*/
 	public function category()
 	{
 		// set parameters for pagination
@@ -778,9 +775,6 @@ class mot_tzv_acp
 		]);
 	}
 
-	/*-------------------------------------
-	WLAN options
-	-------------------------------------*/
 	public function wlan()
 	{
 		// set parameters for pagination
@@ -976,9 +970,6 @@ class mot_tzv_acp
 		]);
 	}
 
-	/*-------------------------------------
-	INFO - SUPPORT
-	-------------------------------------*/
 	public function info()
 	{
 		$this->language->add_lang('acp_mot_tourziel_help', 'mot/tzv'); // Sprachdatei

@@ -53,7 +53,7 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 			['config.add', ['mot_tzv_country_enable', 1]],					// Anzeige Länder im TZV-Index
 			['config.add', ['mot_tzv_main_image', 1]],						// Bilder im Tourziel-Index
 			['config.add', ['mot_tzv_support_enable', 0]],					// Link Support anzeigen
-			['config.add', ['mot_tzv_support', 'Link zu Support']],			// Link zu Supportforum
+			['config.add', ['mot_tzv_support', '']],						// Link zu Supportforum
 
 			/* Pagination */
 			['config.add', ['mot_tzv_acp_rows_per_page', 25]],				// Anzahl Zeilen pro Tabellenseite im ACP

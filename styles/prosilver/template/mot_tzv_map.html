@@ -1,0 +1,45 @@
+{#
+*
+* @package MoT Tour Destinations Database
+* ver 1.3.0
+* @copyright (c) 2022 - 2025 Mike-on-Tour
+* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+*
+#}
+
+{% if not INCLUDED_MOT_TZV_MAP_JS %}
+	{% INCLUDECSS '@mot_tzv/thirdparty/leaflet.css' %}
+	{% INCLUDECSS '@mot_tzv/thirdparty/MarkerCluster.css' %}
+	{% INCLUDECSS '@mot_tzv/thirdparty/MarkerCluster.Default.css' %}
+	{% INCLUDECSS '@mot_tzv/thirdparty/Control.Geocoder.css' %}
+	{% INCLUDEJS '@mot_tzv/thirdparty/leaflet.js' %}
+	{% INCLUDEJS '@mot_tzv/thirdparty/leaflet.markercluster.js' %}
+	{% INCLUDEJS '@mot_tzv/thirdparty/leaflet.control.geocoder.js' %}
+	{% INCLUDEJS '@mot_tzv/mot_tzv_map.js' %}
+	{% set INCLUDED_MOT_TZV_MAP_JS = true %}
+{% endif %}
+
+<ul class="topiclist forums" style="padding: 5px">
+	<li>
+		<div class="tourziel">
+			<h2>{{ lang('MOT_TZV_MAIN_MAP') }}</h2>
+
+			<div><p>{{ lang('MOT_TZV_MAP_LEGEND_TEXT') }}<br>{{ lang('MOT_TZV_MARKER_COUNT', MOT_TZV_MARKER_COUNT) }}</p></div>
+
+			<div class="mot_tzv_map" id="mot_tzv_map">
+			</div>
+		</div>
+	</li>
+</ul>
+
+<script>
+	// Define own JS variables
+	motTzv.jsMapConfig = {{ MOT_TZV_MAPCONFIG }};
+	motTzv.jsTourziele = {{ MOT_TZV_TOURZIELE }};
+
+	motTzv.jsStreetDesc = "{{ lang('MOT_TZV_STREET_DESC')|e('js') }}";
+	motTzv.jsTopoDesc = "{{ lang('MOT_TZV_TOPO_DESC')|e('js') }}";
+	motTzv.jsSatDesc = "{{ lang('MOT_TZV_SAT_DESC')|e('js') }}";
+
+	motTzv.jsAjaxCreate = "{{ MOT_TZV_CREATE_LINK|e('js') }}";
+</script>

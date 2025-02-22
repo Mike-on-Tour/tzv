@@ -1,0 +1,82 @@
+{#
+*
+* @package MoT Tour Destinations Database
+* ver 1.3.0
+* @copyright (c) 2022 - 2025 Mike-on-Tour
+* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+*
+#}
+
+{% INCLUDE 'overall_header.html' %}
+{% INCLUDECSS '@mot_tzv/mot_tzv_main.css' %}
+{% INCLUDEJS '@mot_tzv/mot_tzv_main.js' %}
+
+<script>
+	let motTzv = {};
+	motTzv.tab = "{{ MOT_TZV_SELECTED_TAB|e('js') }}";
+</script>
+
+{% if MOT_TZV_ENABLE %}
+    {% if (MOT_TZV_ADMIN and U_ACP) or not MOT_TZV_ADMIN %}
+		<div class="forabg">
+			<div class="inner">
+				<ul class="topiclist">
+					<li class="header">
+						<dl>
+							<dt>{{ lang('MOT_TZV_TOURZIEL') }}</dt>
+							<dd></dd>
+						</dl>
+					</li>
+				</ul>
+			</div>
+
+			<div class="panel bg1">
+				<div id="tabs" class="tabs">
+					<ul>
+						<li id="mot_tzv_tab_index" class="tab"><a href="{{ MOT_TZV_TAB_INDEX }}">{{ lang('MOT_TZV_TAB_INDEX') }}</a></li>
+
+						{% if MOT_TZV_LIST_AUTH %}
+							<li id="mot_tzv_tab_list" class="tab"><a href="{{ MOT_TZV_TAB_LIST }}">{{ lang('MOT_TZV_TAB_LIST') }}</a></li>
+
+							<li id="mot_tzv_tab_map" class="tab"><a href="{{ MOT_TZV_TAB_MAP }}">{{ lang('MOT_TZV_TAB_MAP') }}</a></li>
+
+							<li id="mot_tzv_tab_search" class="tab"><a href="{{ MOT_TZV_TAB_SEARCH }}">{{ lang('MOT_TZV_TAB_SEARCH') }}</a></li>
+						{% endif %}
+
+						{% if MOT_TZV_CREATE_AUTH %}
+							<li id="mot_tzv_tab_create" class="tab"><a href="{{ MOT_TZV_TAB_CREATE }}">{{ lang('MOT_TZV_TAB_CREATE') }}</a></li>
+						{% endif %}
+					</ul>
+				</div>
+
+				<div class="panel bg3">
+					<div id="mot_tzv_box_index" class="inner" hidden="true">
+						{% if MOT_TZV_SELECTED_TAB == 'index' %}{% include 'mot_tzv_index.html' %}{% endif %}
+					</div>
+
+					<div id="mot_tzv_box_list" class="inner" hidden="true">
+						{% if MOT_TZV_SELECTED_TAB == 'list' %}{% include 'mot_tzv_list.html' %}{% endif %}
+					</div>
+
+					<div id="mot_tzv_box_map" class="inner" hidden="true">
+						{% if MOT_TZV_SELECTED_TAB == 'map' %}{% include 'mot_tzv_map.html' %}{% endif %}
+					</div>
+
+					<div id="mot_tzv_box_search" class="inner" hidden="true">
+						{% if MOT_TZV_SELECTED_TAB == 'search' %}{% include 'mot_tzv_search.html' %}{% endif %}
+					</div>
+
+					<div id="mot_tzv_box_create" class="inner" hidden="true">
+						{% if MOT_TZV_SELECTED_TAB == 'create' %}{% include 'mot_tzv_create.html' %}{% endif %}
+					</div>
+
+					<div id="mot_tzv_box_detail" class="inner" hidden="true">
+						{% if MOT_TZV_SELECTED_TAB == 'detail' %}{% include 'mot_tzv_detail.html' %}{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+    {% endif %}
+{% endif %}
+
+{% INCLUDE 'overall_footer.html' %}

@@ -1,0 +1,161 @@
+/*
+*
+* @package MoT Tour Destinations Database
+* ver 1.3.0
+* @copyright (c) 2022 - 2025 Mike-on-Tour
+* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+*
+*/
+
+p {margin-bottom:10px;}
+
+/*
+* Seiteneinstellung
+*/
+.tourziel {
+	width: 98%;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 1em !important;
+	line-height: 1.5em;
+}
+
+.tourziel h2 {
+	font-size: 1.6em;
+}
+
+.tourziel ul li {
+	list-style-type: none;
+}
+
+.tourziel ul {
+	margin-left: 1em;
+}
+
+.tourziel form dl dt {
+	width: 15em;
+	margin: 0 !important;
+	padding: 4px 0;
+}
+
+.panel .tzv-fields dl {
+	margin: 0;
+	padding: 0;
+}
+
+.panel .tzv-fields dl dt {
+	width: 11em;
+	margin: 0;
+	padding: 3px 0 4px 0;
+}
+
+.panel .tzv-fields dl dd {
+	margin-left: 0;
+	padding: 0 0 4px 0;
+	display: block !important;
+}
+
+/* Smilie Box */
+.smiliebox {
+	height: 60px;
+/*	width: 450px; */
+	overflow:auto;
+}
+
+/* main map */
+.mot_tzv_map {
+	height: calc(100vh - 50px);	/* Set map height to screen height minus 50 pixels */
+	width: 100%;
+	padding: 0; margin: 0;
+}
+
+/* Index Bilder */
+.image-box {
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 10px;
+}
+
+.main {
+	margin-left: 0;
+	margin-right: 5px;
+	margin-top: 0px;
+}
+
+.main:last-child {
+	margin-right: 0px;
+}
+
+.image_main {
+	pointer-events: none;
+	width: 200px;
+	height: 150px;
+}
+
+/*
+*
+*/
+@media only screen and (min-width: 900px) {
+	.detail-box {
+		display: grid;
+		grid-template-columns: 60% 10% 20%;
+		gap: 5%;
+	}
+
+	.newest-box {
+		display: grid;
+		grid-template-columns: 70% 25%;
+		gap: 5%;
+	}
+}
+
+.detail-sub-box{
+	min-height: 310px;
+}
+
+.button-sub-box {
+	min-height: 50px;
+}
+
+.avatar-sub-box {
+	min-height: 230px;
+	padding: 0 2em;
+	font-size: 1.2em;
+}
+
+.detail-box .tzv-fields dd, .newest-box .tzv-fields dd {
+	padding: 4px 0 0 4px !important;
+	border: none;
+	margin-bottom: 0px !important;
+	display: block !important;
+}
+
+@media (max-width: 700px) {
+	ul.topiclist dd {
+		display: block !important;
+	}
+}
+
+/*
+* The following style orders are needed to correctly display the icons in the UCP
+*/
+.acp-icon {
+	font-size: 1.5em;
+}
+/* stylelint-enable declaration-property-unit-whitelist */
+
+.acp-icon-settings {
+	color: #62c046;
+}
+
+.acp-icon-delete {
+	color: #d74558;
+}
+
+.acp-icon-resync {
+	color: #f69934;
+}
+
+.acp-icon-disabled {
+	color: #d0d0d0;
+}

@@ -1,8 +1,9 @@
 <?php
 /**
 *
-* @package phpBB Extension [Tour destinations]
-* @copyright (c) 2022 Mike-on-Tour
+* @package MoT Tour Destinations Database
+* ver 1.3.0
+* @copyright (c) 2022 - 2025 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
@@ -16,12 +17,6 @@ class mot_tzv_ucp
 
 	/** @var \phpbb\config\config */
 	protected $config;
-
-	/** @var \phpbb\db\driver\driver_interface */
-	protected $db;
-
-	/* @var \phpbb\controller\helper */
-	protected $helper;
 
 	/** @var \phpbb\language\language $language Language object */
 	protected $language;
@@ -41,8 +36,8 @@ class mot_tzv_ucp
 	/** @var \phpbb\user */
 	protected $user;
 
-	/** @var \mot\tzv\functions\mot_tzv_events */
-	protected $mot_tzv_events;
+	/** @var \mot\tzv\includes\mot_tzv_functions */
+	protected $mot_tzv_functions;
 
 	/** @var string phpBB phpbb root path */
 	protected $root_path;
@@ -50,46 +45,24 @@ class mot_tzv_ucp
 	/** @var string PHP extension */
 	protected $php_ext;
 
-	/** @var string mot.tzv.tables.tourziel */
-	protected $mot_tzv_tourziel_table;
-
-	/** @var string mot.tzv.tables.tourziel */
-	protected $mot_tzv_tourziel_country_table;
-
-	/** @var string mot.tzv.tables.tourziel */
-	protected $mot_tzv_tourziel_region_table;
-
-	/** @var string mot.tzv.tables.tourziel */
-	protected $mot_tzv_tourziel_cats_table;
-
 	/**
 	 * {@inheritdoc
 	 */
-	public function __construct(\phpbb\auth\auth $auth, \phpbb\config\config $config, \phpbb\db\driver\driver_interface $db,
-								\phpbb\controller\helper $helper, \phpbb\language\language $language, \phpbb\pagination $pagination,
-								\phpbb\extension\manager $phpbb_extension_manager, \phpbb\request\request_interface $request,
-								\phpbb\template\template $template, \phpbb\user $user, \mot\tzv\functions\mot_tzv_events $mot_tzv_events,
-								$root_path, $php_ext, $mot_tzv_tourziel_table, $mot_tzv_tourziel_country_table, $mot_tzv_tourziel_region_table,
-								$mot_tzv_tourziel_cats_table)
+	public function __construct(\phpbb\auth\auth $auth, \phpbb\config\config $config, \phpbb\language\language $language, \phpbb\pagination $pagination,
+								\phpbb\extension\manager $phpbb_extension_manager, \phpbb\request\request_interface $request, \phpbb\template\template $template,
+								\phpbb\user $user, \mot\tzv\includes\mot_tzv_functions $mot_tzv_functions, $root_path, $php_ext)
 	{
 		$this->auth = $auth;
 		$this->config = $config;
-		$this->db = $db;
-		$this->helper = $helper;
 		$this->language = $language;
 		$this->pagination = $pagination;
 		$this->phpbb_extension_manager 	= $phpbb_extension_manager;
 		$this->request = $request;
 		$this->template = $template;
 		$this->user = $user;
-		$this->events = $mot_tzv_events;
+		$this->mot_tzv_functions = $mot_tzv_functions;
 		$this->root_path = $root_path;
 		$this->php_ext = $php_ext;
-		// TZV Tabellen
-		$this->tourziel_table         = $mot_tzv_tourziel_table;
-		$this->tourziel_country_table = $mot_tzv_tourziel_country_table;
-		$this->tourziel_region_table  = $mot_tzv_tourziel_region_table;
-		$this->tourziel_cats_table    = $mot_tzv_tourziel_cats_table;
 
 		$this->ext_path = $this->phpbb_extension_manager->get_extension_path('mot/tzv', true);
 		$this->md_manager = $this->phpbb_extension_manager->create_extension_metadata_manager('mot/tzv');
@@ -101,31 +74,34 @@ class mot_tzv_ucp
 	public function summary()
 	{
 		$id = $this->request->variable('id', 0);
-		if ($id != 0)
+		if ($id)
 		{
-			$event = $this->events->get_events($id, false, false, true);
+			$destination = $this->mot_tzv_functions->get_destinations($id, false, false, false, true)[0];
 		}
 
 		$action = $this->request->variable('action', '');
 		switch ($action)
 		{
 			case 'delete':
-				// If the user is not owning this Tourziel with the permission to delete own Tourziele we just display an error message
-				if (!( ($this->user->data['user_id'] == $event['user_id']) && $this->auth->acl_get('u_mot_tzv_delete_own') ) )
+				// If the user does not have the permission to delete own destinations we just display an error message
+				if (!( ($this->user->data['user_id'] == $destination['user_id']) && $this->auth->acl_get('u_mot_tzv_delete_own') ) )
 				{
 					trigger_error('UCP_MOT_TZV_NOT_AUTHORISED');
 				}
 
 				if (confirm_box(true))
 				{
-					$this->events->delete_event($id);
+					$this->mot_tzv_functions->delete_destination($id);
+
+					$this->mot_tzv_functions->create_notification('delete', $id, $destination['name']);
+
 					$message = $this->language->lang('MOT_TZV_EVENT_DELETE_SUCCESSFUL') . '<br><br><a href="' . $this->u_action . '">' . $this->language->lang('UCP_MOT_TZV_BACK_TO_UCP') . '</a>';
 					trigger_error($message);
 				}
 				else
 				{
-					confirm_box(false, '<p>' . $this->language->lang('MOT_TZV_EVENT_DELETE_CONFIRM', $event['name']) . '</p>', build_hidden_fields([
-						'id'	=> $event['id'],
+					confirm_box(false, '<p>' . $this->language->lang('MOT_TZV_EVENT_DELETE_CONFIRM', $destination['name']) . '</p>', build_hidden_fields([
+						'id'	=> $destination['id'],
 					]));
 				}
 
@@ -136,8 +112,8 @@ class mot_tzv_ucp
 				break;
 
 			case 'edit':
-				// If the user is not owning this Tourziel with the permission to edit own Tourziele we just display an error message
-				if (!( ($this->user->data['user_id'] == $event['user_id']) && $this->auth->acl_get('u_mot_tzv_edit_own') ) )
+				// If the user does not have the permission to edit own destinations we just display an error message
+				if (!( ($this->user->data['user_id'] == $destination['user_id']) && $this->auth->acl_get('u_mot_tzv_edit_own') ) )
 				{
 					trigger_error('UCP_MOT_TZV_NOT_AUTHORISED');
 				}
@@ -184,7 +160,10 @@ class mot_tzv_ucp
 						'bbcode_options'    => $options,
 					];
 
-					$this->events->edit_event($id, $input_data);
+					$this->mot_tzv_functions->edit_destination($id, $input_data);
+
+					// Create notification
+					$this->mot_tzv_functions->create_notification('edit', $id, $input_data['name']);
 
 					$message =  $this->language->lang('MOT_TZV_EVENT_EDIT_SUCCESSFUL') . '<br><br><a href="' . $this->u_action . '">' . $this->language->lang('UCP_MOT_TZV_BACK_TO_UCP') . '</a>';
 					trigger_error($message);
@@ -205,91 +184,40 @@ class mot_tzv_ucp
 				}
 				generate_smilies('inline', 1);
 
-				$this->events->set_country_select_values();
-
-				$this->events->set_region_select_values();
-
-				$this->events->set_category_select_values();
-
-				$this->events->set_wlan_select_values();
-
-				// Get country info to display flags
-				$this->events->get_country_info();
-
 				$this->template->assign_vars([
-					'MOT_TZV_TOURZIEL_NUMBER'	=> $this->language->lang('MOT_TZV_COUNT_TOTAL_DEST', $this->events->get_total_count_tourziele()),
-					'MOT_TZV_COUNTRY_ENABLE'	=> $this->config['mot_tzv_country_enable'],
+					'MOT_TZV_MANDATORY_ARR'		=> json_decode($this->config['mot_tzv_mandatory_fields']),
+					'MOT_TZV_MANDATORY_ARR_JS'	=> $this->config['mot_tzv_mandatory_fields'],
 					'MOT_TZV_COORD_MANDATORY'	=> $this->config['mot_tzv_maps_enable'],
 
 					'MOT_TZV_EDIT_TZ'			=> true,
 
-					'MOT_TZV_POST_NAME'			=> $event['name'],
-					'MOT_TZV_SELECT_COUNTRY_ID'	=> $event['country'],
-					'MOT_TZV_SELECT_REGION_ID'	=> $event['region'],
-					'MOT_TZV_SELECT_CAT_ID'		=> $event['category'],
-					'MOT_TZV_POST_PLZ'			=> $event['postalcode'],
-					'MOT_TZV_POST_ORT'			=> $event['city'],
-					'MOT_TZV_POST_STREET'		=> $event['street'],
-					'MOT_TZV_POST_TELEPHONE'	=> $event['telephone'],
-					'MOT_TZV_POST_EMAIL'		=> $event['email'],
-					'MOT_TZV_POST_HOMEPAGE'		=> $event['homepage'],
-					'MOT_TZV_POST_MAPS_LAT'		=> $event['maps_lat'],
-					'MOT_TZV_POST_MAPS_LON'		=> $event['maps_lon'],
-					'MOT_TZV_SELECT_WLAN_ID'	=> $event['wlan'],
-					'MOT_TZV_MESSAGE'		    => $event['message'],
+					'MOT_TZV_COUNTRY_ARR'		=> $this->mot_tzv_functions->get_country_selection((int) $destination['country'], $this->language->lang('MOT_TZV_AUSWAHL')),
+					'MOT_TZV_REGION_ARR'		=> $this->mot_tzv_functions->get_region_selection((int) $destination['region'], $this->language->lang('MOT_TZV_AUSWAHL')),
+					'MOT_TZV_CATEGORY_ARR'		=> $this->mot_tzv_functions->get_category_selection((int) $destination['category'], $this->language->lang('MOT_TZV_AUSWAHL')),
+					'MOT_TZV_WLAN_ARR'			=> $this->mot_tzv_functions->get_wlan_selection((int) $destination['wlan'], $this->language->lang('MOT_TZV_AUSWAHL')),
+					'MOT_TZV_DEST_DETAIL'		=> $destination,
 
-					'S_BBCODE_ALLOWED'	=> true,
-					'S_BBCODE_IMG'		=> true,
-					'S_BBCODE_FLASH'	=> true,
-					'S_LINKS_ALLOWED'	=> true,
+					'S_BBCODE_ALLOWED'			=> true,
+					'S_BBCODE_IMG'				=> true,
+					'S_BBCODE_FLASH'			=> true,
 				]);
 
 				break;
 
 			default:
-				// Get total number of Tourziele from this user (for pagination)
-				$sql = 'SELECT COUNT(*) AS count
-						FROM ' . $this->tourziel_table . '
-						WHERE user_id = ' . (int) $this->user->data['user_id'];
-				$result = $this->db->sql_query($sql);
-				$total_tz = $this->db->sql_fetchfield('count');
-				$this->db->sql_freeresult($result);
-
 				// set parameters for pagination
 				$start = $this->request->variable('start', 0);
 				$limit = $this->config['mot_tzv_rows_per_page'];
 
-				$sql = 'SELECT tz.id, tz.name, tz.maps_lat, tz.maps_lon,
-						ct.country_name, ct.country_image,
-						rt.region_name,
-						kt.cat_name
+				$total_tz = $this->mot_tzv_functions->get_total_count_destinations('t.user_id = ' . (int) $this->user->data['user_id']);
+				$destinations = $this->mot_tzv_functions->get_destinations(0, $limit, $start, false, false, 't.user_id = ' . (int) $this->user->data['user_id']);
 
-						FROM ' . $this->tourziel_table . ' tz
-						JOIN ' . $this->tourziel_country_table . ' ct
-						ON tz.country = ct.country_id
-						JOIN ' . $this->tourziel_region_table . ' rt
-						ON tz.region = rt.region_id
-						JOIN ' . $this->tourziel_cats_table . ' kt
-						ON tz.category = kt.cat_id
-						WHERE tz.user_id = ' . (int) $this->user->data['user_id'] . '
-						ORDER BY tz.id ASC';
-				$result = $this->db->sql_query_limit($sql, $limit, $start);
-				$tourziele = $this->db->sql_fetchrowset($result);
-				$this->db->sql_freeresult($result);
-
-				foreach ($tourziele as $row)
+				foreach ($destinations as &$row)
 				{
-					$this->template->assign_block_vars('tzlist', [
-						'NAME'			=> $row['name'],
-						'CATEGORY'		=> $row['cat_name'],
-						'FLAG'			=> $this->tzv_flags_url . $row['country_image'],
-						'COUNTRY'		=> $row['country_name'],
-						'REGION'		=> $row['region_name'],
-						'MAP_LAT'		=> $row['maps_lat'],
-						'MAP_LON'		=> $row['maps_lon'],
-						'U_EDIT'		=> $this->auth->acl_get('u_mot_tzv_edit_own') ? $this->u_action . '&amp;action=edit&amp;id=' . $row['id'] : '',
-						'U_DELETE'		=> $this->auth->acl_get('u_mot_tzv_delete_own') ? $this->u_action . '&amp;action=delete&amp;id=' . $row['id'] : '',
-					]);
+						// $row['post_time'] = !empty($row['post_time']) ? $this->user->format_date($row['post_time']) : '-';
+						// $row['flag'] = $row['country_name'] ? $this->tzv_flags_url . $row['country_image'] : '';
+						$row['U_EDIT'] = $this->auth->acl_get('u_mot_tzv_edit_own') ? $this->u_action . '&amp;action=edit&amp;id=' . $row['id'] : '';
+						$row['U_DELETE'] = $this->auth->acl_get('u_mot_tzv_delete_own') ? $this->u_action . '&amp;action=delete&amp;id=' . $row['id'] : '';
 				}
 
 				//base url for pagination
@@ -300,6 +228,7 @@ class mot_tzv_ucp
 				$this->pagination->generate_template_pagination($base_url, 'pagination', 'start', $total_tz, $limit, $start);
 
 				$this->template->assign_vars([
+					'MOT_TZV_DESTINATIONS'		=> $destinations,
 					'ICON_EDIT'					=> '<i class="icon acp-icon acp-icon-settings fa-cog fa-fw" title="' . $this->language->lang('EDIT') . '"></i>',
 					'ICON_EDIT_DISABLED'		=> '<i class="icon acp-icon acp-icon-disabled fa-cog fa-fw" title="' . $this->language->lang('EDIT') . '"></i>',
 					'ICON_DELETE'				=> '<i class="icon acp-icon acp-icon-delete fa-times-circle fa-fw" title="' . $this->language->lang('DELETE') . '"></i>',

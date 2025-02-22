@@ -1,37 +1,4 @@
-mot_tzv_index:
-    path: /mot_tzv/{link}
-    defaults: { _controller: mot.tzv.controller.mot_tzv_main:index, link: NULL }
-    requirements:
-        link: \+
+mot_tzv_main:
+    path: /mot_tzv
+    defaults: { _controller: mot.tzv.controller.mot_tzv_main:handle }
 
-mot_tzv_create:
-    path: /mot_tzv/create
-    defaults: { _controller: mot.tzv.controller.mot_tzv_main:create }
-
-mot_tzv_event:
-    path: /mot_tzv/event/{id}
-    defaults: { _controller: mot.tzv.controller.mot_tzv_main:event }
-
-mot_tzv_moderate:
-    path: /mot_tzv/moderate
-    defaults: { _controller: mot.tzv.controller.mot_tzv_main:moderate }
-
-mot_tzv_manage:
-    path: /mot_tzv/manage/{mode}/{id}
-    defaults: { _controller: mot.tzv.controller.mot_tzv_main:manage }
-
-mot_tzv_posting:
-    path: /mot_tzv/posting/{mode}/{id}/{post}
-    defaults: { _controller: mot.tzv.controller.mot_tzv_main:posting, post: NULL }
-
-mot_tzv_map:
-    path: /mot_tzv/map
-    defaults: { _controller: mot.tzv.controller.mot_tzv_main:map }
-
-mot_tzv_tzvlist:
-    path: /mot_tzv/tzvlist
-    defaults: { _controller: mot.tzv.controller.mot_tzv_main:tzvlist }
-
-mot_tzv_search:
-    path: /mot_tzv/search
-    defaults: { _controller: mot.tzv.controller.mot_tzv_main:search }

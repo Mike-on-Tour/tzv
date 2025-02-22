@@ -1,9 +1,9 @@
 <?php
 /**
 *
-* @package phpBB Extension [Tour destinations]
-* @copyright (c) 2014 - 2021 waldkatze
-* @copyright (c) 2022 - 2023 Mike-on-Tour
+* @package MoT Tour Destinations Database
+* ver 1.3.0
+* @copyright (c) 2022 - 2025 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
@@ -37,7 +37,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, [
 	// language pack author
 	'ACP_MOT_TZV_LANG_DESC'			=> 'Deutsch (Du)',
-	'ACP_MOT_TZV_LANG_EXT_VER' 		=> '1.2.0',
+	'ACP_MOT_TZV_LANG_EXT_VER' 		=> '1.3.0',
 	'ACP_MOT_TZV_LANG_AUTHOR' 		=> 'Mike-on-Tour',
 
 	// ACP modules
@@ -67,6 +67,14 @@ $lang = array_merge($lang, [
 	'ACP_MOT_TZV_DISABLE_MESSAGE'	=> 'Tourziele ist ausgeschaltet.',
 	'ACP_MOT_TZV_ADMIN_MESSAGE'		=> 'Administrator-Modus aktiv. Nur Administratoren können Tourziele sehen !',
 
+	// Mandatory fields setting
+	'ACP_MOT_TZV_FIELDS_TITLE'		=> 'Einstellung für Pflichtfelder',
+	'ACP_MOT_TZV_FIELDS_SELECT'		=> 'Auswahl der Pflichtfelder',
+	'ACP_MOT_TZV_FIELDS_EXPL'		=> 'Der Name des Tourzieles ist immer ein Pflichtfeld, hier kannst du weitere Eingabefelder auswählen, die als Pflichtfeld zählen und
+										dementsprechend bei Neueingabe oder Änderung eines Tourzieles immer ausgewählt/ausgefüllt werden müssen.<br>
+										Mehrfachauswahl durch Halten der „Strg“-Taste und Anklicken der gewünschten Feldnamen.<br>
+										Löschen einzelner Felder durch Halten der „Strg“-Taste und Anklicken des gewünschten Feldnamens.',
+
 	// Map settings
 	'ACP_MOT_TZV_MAPSETTING_TITLE'	=> 'Einstellungen für die Übersichtskarte',
 	'ACP_MOT_TZV_MAPSETTING_TEXT'	=> 'Einstellungen für das Kartenzentrum und die Vergrößerung beim Start.',
@@ -84,7 +92,8 @@ $lang = array_merge($lang, [
 
 	'ACP_MOT_TZV_GOOGLE_FUNCTIONS'	=> 'Einstellungen für Karten der Detailanzeige',
 	'ACP_MOT_TZV_MAPS_ENABLE'		=> 'Detailansicht Karte anzeigen',
-	'ACP_MOT_TZV_MAPS_ENABLE_EXPL'	=> 'Schaltet alle Kartenfunktionen ein / aus',
+	'ACP_MOT_TZV_MAPS_ENABLE_EXPL'	=> 'Aktiviert alle Kartenfunktionen der Detailanzeige. Wenn aktiviert, ist bei Neueingabe oder Änderung eines Tourzieles die Angabe der
+										Koordinaten Pflicht.',
 	'ACP_MOT_TZV_MAPS_EXPLAIN'		=> 'Detailansicht Karte muss aktiviert sein',
 	'ACP_MOT_TZV_KURVIGER_ENABLE'	=> 'GPS-Datenübergabe an www.kurviger.de',
 	'ACP_MOT_TZV_KURVIGER_EXPL'		=> 'Übergibt eingetragene GPS-Daten direkt an Motorradroutenplaner',

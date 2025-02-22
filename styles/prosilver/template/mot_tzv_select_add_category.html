@@ -1,5 +1,0 @@
-<select name="mot_tzv_category">
-	{% for cat in cat %}
-		<option value="{{ cat.CATEGORY_ID }}" {% if MOT_TZV_SELECT_CAT_ID == cat.CATEGORY_ID %} selected {% endif %}>{{ cat.CATEGORY_NAME }}</option>
-	{% endfor %}
-</select>

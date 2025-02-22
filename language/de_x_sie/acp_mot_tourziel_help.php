@@ -1,9 +1,9 @@
 <?php
 /**
 *
-* @package phpBB Extension [Tour destinations]
-* @copyright (c) 2014 - 2021 waldkatze
-* @copyright (c) 2022 - 2023 Mike-on-Tour
+* @package MoT Tour Destinations Database
+* ver 1.3.0
+* @copyright (c) 2022 - 2025 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 * @ acp language file (Deutsch / Sie)*
@@ -29,8 +29,13 @@ $lang = array_merge($lang, [
 									&bull;&nbsp;License <a href="http://opensource.org/licenses/gpl-license.php"> http://opensource.org/licenses/gpl-license.php</a> GNU Public License<br>',
 
 	'ACP_MOT_TZV_HISTORY'		=> 'Tourziele History',
-	'ACP_MOT_TZV_HUPDATE'		=> '&bull;&nbsp;2023 Version 1.2.0<br>
-									- Änderungen im Admin-Bereich (Toggle Control, Umbau Einstellungen zur Verbesserung der Aussagekraft der Hinweisboxen)
+	'ACP_MOT_TZV_HUPDATE'		=> '&bull;&nbsp;2025 Version 1.3.0<br>
+									- Komplettüberarbeitung mit Umstellung auf Tabs im Frontend<br>
+									- Umfangreiche Code-Verbesserungen<br>
+									- Vereinheitlichung der verschiedenen Darstellungen der Tourziele<br>
+									- Ändern der maximal möglichen Versionen (phpBB < 3.4.0@dev und PHP < 8.5.0@dev)<br>
+									&bull;&nbsp;2023 Version 1.2.0<br>
+									- Änderungen im Admin-Bereich (Toggle Control, Umbau Einstellungen zur Verbesserung der Aussagekraft der Hinweisboxen)<br>
 									- Ändern der minimal benötigten Versionen (phpBB 3.2.3 -> 3.3.1 und PHP 7.2.0 -> 7.4.0)<br>
 									&bull;&nbsp;2022 Version 1.1.0<br>
 									- Einbau eines Buttons, der zu einer Seite zum Suchen von Koordinaten anhand des Namens eines

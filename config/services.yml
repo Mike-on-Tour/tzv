@@ -10,21 +10,14 @@ services:
             - '@dbal.conn'
             - '@controller.helper'
             - '@language'
-            - '@notification_manager'
             - '@pagination'
-            - '@path_helper'
             - '@ext.manager'
             - '@request'
             - '@template'
             - '@user'
-            - '@mot.tzv.mot_tzv_events'
+            - '@mot.tzv.mot_tzv_functions'
             - '%core.root_path%'
             - '%core.php_ext%'
-            - '%mot.tzv.tables.tourziel%'
-            - '%mot.tzv.tables.tourziel_country%'
-            - '%mot.tzv.tables.tourziel_region%'
-            - '%mot.tzv.tables.tourziel_cats%'
-            - '%mot.tzv.tables.tourziel_wlan%'
 
     mot.tzv.controller.acp:
         class: mot\tzv\controller\mot_tzv_acp
@@ -36,6 +29,7 @@ services:
             - '@pagination'
             - '@request'
             - '@template'
+            - '@mot.tzv.mot_tzv_functions'
             - '%core.root_path%'
             - '%core.php_ext%'
             - '%mot.tzv.tables.tourziel%'
@@ -49,31 +43,24 @@ services:
         arguments:
             - '@auth'
             - '@config'
-            - '@dbal.conn'
-            - '@controller.helper'
             - '@language'
             - '@pagination'
             - '@ext.manager'
             - '@request'
             - '@template'
             - '@user'
-            - '@mot.tzv.mot_tzv_events'
+            - '@mot.tzv.mot_tzv_functions'
             - '%core.root_path%'
             - '%core.php_ext%'
-            - '%mot.tzv.tables.tourziel%'
-            - '%mot.tzv.tables.tourziel_country%'
-            - '%mot.tzv.tables.tourziel_region%'
-            - '%mot.tzv.tables.tourziel_cats%'
 
-    mot.tzv.mot_tzv_events:
-        class: mot\tzv\functions\mot_tzv_events
+    mot.tzv.mot_tzv_functions:
+        class: mot\tzv\includes\mot_tzv_functions
         arguments:
             - '@auth'
             - '@config'
             - '@dbal.conn'
             - '@language'
-            - '@path_helper'
-            - '@template'
+            - '@notification_manager'
             - '@user'
             - '%core.root_path%'
             - '%core.php_ext%'
@@ -88,13 +75,10 @@ services:
         arguments:
             - '@auth'
             - '@config'
-            - '@dbal.conn'
             - '@ext.manager'
             - '@controller.helper'
             - '@template'
-            - '@user'
-            - '@mot.tzv.mot_tzv_events'
-            - '%mot.tzv.tables.tourziel%'
+            - '@mot.tzv.mot_tzv_functions'
         tags:
             - { name: event.listener }
 

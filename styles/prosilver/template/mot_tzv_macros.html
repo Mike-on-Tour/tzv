@@ -1,0 +1,139 @@
+{#
+*
+* @package MoT Tour Destinations Database
+* ver 1.3.0
+* @copyright (c) 2022 - 2025 Mike-on-Tour
+* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+*
+#}
+
+{% macro select(name, options, multiple = null, size = null) -%}
+	<select id="{{ name }}" name="{{ name }}{{ multiple ? '[]' }}"{{
+		(size !== null ? ' size="' ~ size ~ '"') ~
+		(multiple ? ' multiple')
+	}}>
+		{% for opt in options %}
+			<option value="{{ opt.value }}"{{
+				(opt.bold ? ' class="sep"') ~
+				(opt.selected ? ' selected')
+			}}>{{ lang(opt.label) }}</option>
+		{% endfor %}
+	</select>
+{%- endmacro %}
+
+{% macro field(field_id, fields_arr) -%}
+	{% if field_id in fields_arr %}
+		{{ lang('MOT_TZV_LISTEN_MANDATORY') }}
+	{% endif %}
+{%- endmacro %}
+
+{% macro detail_view(detail_view_arr) -%}
+	<fieldset class="tzv-fields">
+		<dl>
+			<dt><label>{{ lang('MOT_TZV_LISTEN_NAME') ~ lang('COLON') }}</label></dt>
+			<dd>{{ detail_view_arr.name }}</dd>
+		</dl>
+
+		<dl>
+			<dt><label>{{ lang('MOT_TZV_LISTEN_CATEGORY') ~ lang('COLON') }}</label></dt>
+			<dd>{{ detail_view_arr.cat_name }}</dd>
+		</dl>
+
+		<dl>
+			<dt><label>{{ lang('MOT_TZV_LISTEN_LAND') ~ ' / ' ~ lang('MOT_TZV_LISTEN_REGION') ~ lang('COLON') }}</label></dt>
+			<dd>
+				{% if detail_view_arr.flag != '' %}<img src="{{ detail_view_arr.flag }}" title="{{ detail_view_arr.country_name }}">&nbsp;{% endif %}
+				{% if detail_view_arr.country_name != '' %}{{ detail_view_arr.country_name }}{% endif %}
+				{% if detail_view_arr.country_name != '' && detail_view_arr.region_name != '' %}&nbsp;/&nbsp;{% endif %}
+				{% if detail_view_arr.region_name != '' %}{{ detail_view_arr.region_name }}{% endif %}
+			</dd>
+		</dl>
+
+		<dl>
+			<dt><label>{{ lang('MOT_TZV_LISTEN_PLZ') ~ ' / ' ~ lang('MOT_TZV_LISTEN_ORT') ~ lang('COLON') }}</label></dt>
+			<dd>{{ detail_view_arr.postalcode }} {{ detail_view_arr.city }}</dd>
+		</dl>
+
+		<dl>
+			<dt><label>{{ lang('MOT_TZV_TOURZIEL_STRASSE_NR') ~ lang('COLON') }}</label></dt>
+			<dd>{{ detail_view_arr.street }}</dd>
+		</dl>
+
+		<dl>
+			<dt><label>{{ lang('MOT_TZV_LISTEN_TELEFON') ~ lang('COLON') }}</label></dt>
+			<dd>{{ detail_view_arr.telephone }}</dd>
+		</dl>
+
+		<dl>
+			<dt><label>{{ lang('MOT_TZV_LISTEN_EMAIL') ~ lang('COLON') }}</label></dt>
+			<dd>{{ detail_view_arr.email }}</dd>
+		</dl>
+
+		<dl>
+			<dt><label>{{ lang('MOT_TZV_LISTEN_HOMEPAGE') ~ lang('COLON') }}</label></dt>
+			<dd><a href="{{ detail_view_arr.homepage }}">{{ detail_view_arr.homepage }}</a></dd>
+		</dl>
+
+		<dl>
+			<dt><label>{{ lang('MOT_TZV_LISTEN_GPS') ~ lang('COLON') }}</label></dt>
+			<dd>{{ detail_view_arr.maps_lat }} / {{ detail_view_arr.maps_lon }}</dd>
+		</dl>
+
+		<dl>
+			<dt><label>{{ lang('MOT_TZV_LISTEN_WLAN') ~ lang('COLON') }}</label></dt>
+			<dd>{{ detail_view_arr.wlan_name }}</dd>
+		</dl>
+
+		<dl>
+			<dt><label>{{ lang('MOT_TZV_MESSAGE_INFO') ~ lang('COLON') }}</label></dt>
+			<dd>{{ detail_view_arr.message }}</dd>
+		</dl>
+
+		<dl>
+			<dt><label>{{ lang('MOT_TZV_DATE_ADD_EDIT') ~ lang('COLON') }}</label></dt>
+			<dd>{{ detail_view_arr.post_time }}</dd>
+		</dl>
+	</fieldset>
+{%- endmacro %}
+
+{% macro table_view(table_view_arr, ucp = false, icon_edit = null, icon_edit_disabled = null, icon_delete = null, icon_delete_disabled = null) -%}
+	<table class="table1 zebra-list">
+		<tbody>
+			<tr>
+				<th style="text-align:left;">{{ lang('MOT_TZV_LISTEN_NAME') }}</th>
+				<th style="text-align:left;">{{ lang('MOT_TZV_LISTEN_CATEGORY') }}</th>
+				<th style="text-align:left;">{{ lang('MOT_TZV_LISTEN_LAND') }} / {{ lang('MOT_TZV_LISTEN_REGION') }}</th>
+				<th style="text-align:left;">{{ lang('MOT_TZV_NEW_TIME') }}</th>
+				{% if ucp %}
+					<th style="text-align: center;">{{ lang('OPTIONS') }}</th>
+				{% else %}
+					<th style="text-align:left;">{{ lang('MOT_TZV_LISTEN_USER') }}</th>
+				{% endif %}
+			</tr>
+			{% for tzlist in table_view_arr %}
+				<tr>
+					<td class="indexlink" "text-align:left;"><a href="{{ tzlist.url }}" title="{{ tzlist.name }}">{{ tzlist.name }}</a></td>
+					<td style="text-align:absolute;">{{ tzlist.cat_name }}</td>
+					<td style="text-align:left;">
+						{% if tzlist.flag != '' %}<img src="{{ tzlist.flag }}" title="{{ tzlist.country_name }}">&nbsp;{% endif %}
+						{% if tzlist.country_name != '' %}{{ tzlist.country_name }}{% endif %}
+						{% if tzlist.country_name != '' && tzlist.region_name != '' %}&nbsp;/&nbsp;{% endif %}
+						{% if tzlist.region_name != '' %}{{ tzlist.region_name }}{% endif %}
+					</td>
+					<td style="text-align:left;">{{ tzlist.post_time }}</td>
+					{% if ucp %}
+						<td style="text-align: center; white-space: nowrap;">
+							{% if tzlist.U_EDIT != '' %}&nbsp;<a href="{{ tzlist.U_EDIT }}">{{ icon_edit }}</a>{% else %}{{ icon_edit_disabled }}{% endif %}{% if tzlist.U_DELETE != '' %}<a href="{{ tzlist.U_DELETE }}">{{ icon_delete }}</a>{% else %}{{ icon_delete_disabled }}{% endif %}
+						</td>
+					{% else %}
+						<td style="text-align:left;">{{ tzlist.username }}</td>
+					{% endif %}
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="5" style="text-align: center;">{{ lang('MOT_TZV_NO_ENTRIES') }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{%- endmacro %}

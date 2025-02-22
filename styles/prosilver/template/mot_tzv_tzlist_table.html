@@ -1,7 +1,18 @@
+{#
+*
+* @package MoT Tour Destinations Database
+* ver 1.3.0
+* @copyright (c) 2022 - 2025 Mike-on-Tour
+* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+*
+#}
+
+{% import '@mot_tzv/mot_tzv_macros.html' as forms %}
+
 <div class="action-bar bottom">
 	{% if pagination or MOT_TZV_TOTAL_POSTS %}
 		<div class="pagination">
-			{% if MOT_TZV_SEARCH_ACTIVE %}{{ lang('MOT_TZV_SEARCH_FOUND') }}{{ lang('COLON') }} {% endif %}{{ lang('MOT_TZV_POSTS_COUNT', MOT_TZV_TOTAL_POSTS) }}
+			{% if MOT_TZV_SEARCH_ACTIVE %}{{ lang('MOT_TZV_SEARCH_FOUND') ~ lang('COLON') }} {% endif %}{{ lang('MOT_TZV_POSTS_COUNT', MOT_TZV_TOTAL_POSTS) }}
 			{% if pagination %}
 				&bull; {% include 'pagination.html' %}
 			{% endif %}
@@ -11,82 +22,30 @@
 </div>
 
 {% if MOT_TZV_LONG_TABLE %}
-	{% for tzlist in tzlist %}
+	{% for tzlist in MOT_TZV_DEST_LIST %}
 		<ul class="topiclist forums">
 			<li class="row">
-				<dl><dt style="width: 99%; text-align: left; margin: 10px 10px 10px 10px;"><span style="font-size: 100%; line-height: 100%;">
-					<table style="width: 95%">
-						<tr>
-							<td width="60%">
-								<table>
-									<tr>
-										<td>{{ lang('MOT_TZV_LISTEN_ID') }}{{ lang('COLON') }}</td>
-										<td>&nbsp;{{ tzlist.LISTEN_ID }} <a href= "{{ tzlist.LISTEN_URL }}"><b>{{ lang('MOT_TZV_TOURZIEL_DETAIL_CLICK') }}<b></a></td>
-									</tr>
-									<tr>
-										<td>&nbsp;</td>
-										<td>&nbsp;</td>
-									</tr>
-									<tr>
-										<td>{{ lang('MOT_TZV_LISTEN_NAME') }}{{ lang('COLON') }}</td>
-										<td>&nbsp;<b>{{ tzlist.LISTEN_NAME }}</b></td>
-									</tr>
-									<tr>
-										<td>{{ lang('MOT_TZV_LISTEN_CATEGORY') }}{{ lang('COLON') }}</td>
-										<td>&nbsp;{{ tzlist.LISTEN_CATEGORY }}</td>
-									</tr>
-									<tr>
-										<td>{{ lang('MOT_TZV_LISTEN_LAND') }} / {{ lang('MOT_TZV_LISTEN_REGION') }}{{ lang('COLON') }}</td>
-										<td>&nbsp;<img src="{{ tzlist.COUNTRY_IMG }}" title="{{ tzlist.COUNTRY_NAME }}"> {{ tzlist.COUNTRY_NAME }} / {{ tzlist.LISTEN_REGION }}</td>
-									</tr>
-									<tr>
-										<td>{{ lang('MOT_TZV_LISTEN_PLZ') }} / {{ lang('MOT_TZV_LISTEN_ORT') }}{{ lang('COLON') }}</td>
-										<td>&nbsp;{{ tzlist.LISTEN_PLZ }} {{ tzlist.LISTEN_ORT }}</td>
-									</tr>
-									<tr>
-										<td>{{ lang('MOT_TZV_LISTEN_STRASSE') }}{{ lang('COLON') }}</td>
-										<td>&nbsp;{{ tzlist.LISTEN_STRASSE }}</td>
-									</tr>
-									<tr>
-										<td>{{ lang('MOT_TZV_LISTEN_TELEFON') }}{{ lang('COLON') }}</td>
-										<td>&nbsp;{{ tzlist.LISTEN_TELEFON }}</td>
-									</tr>
-									<tr>
-										<td>{{ lang('MOT_TZV_LISTEN_EMAIL') }}{{ lang('COLON') }}</td>
-										<td>&nbsp;<a href="mailto:{{ tzlist.LISTEN_EMAIL }}" class="postlink">{{ tzlist.LISTEN_EMAIL }}</a></td>
-									</tr>
-									<tr>
-										<td>{{ lang('MOT_TZV_LISTEN_HOMEPAGE') }}{{ lang('COLON') }}</td>
-										<td>&nbsp;<a href="{{ tzlist.LISTEN_HOMEPAGE }}" class="postlink">{{ tzlist.LISTEN_HOMEPAGE }}</a></td>	
-									</tr>
-									<tr>
-										<td>{{ lang('MOT_TZV_LISTEN_WLAN') }}{{ lang('COLON') }}</td>
-										<td>&nbsp;{{ tzlist.LISTEN_WLAN }}</td>
-									</tr>
-									<tr>
-									{% if MOT_TZV_MAPS_ENABLE %}
-										<tr>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-										</tr>
-										<tr>
-											<td>{{ lang('MOT_TZV_LISTEN_GPS') }}{{ lang('COLON') }}</td> 
-											<td>&nbsp;{{ tzlist.LISTEN_MAP_LAT }} / {{ tzlist.LISTEN_MAP_LON }}</td>
-										</tr>
-											<td colspan="2">{{ lang('MOT_TZV_DATE_ADD_EDIT') }}{{ lang('COLON') }} {{ tzlist.POST_DATE }}</td>
-										</tr>
-									{% endif %}
-								</table>
-							</td>
+				<div class="newest-box">
+					<div>
+						<fieldset class="tzv-fields">
+							<dl>
+								<dt><label>{{ lang('MOT_TZV_LISTEN_ID') ~ lang('COLON') }}</label></dt>
+								<dd>{{ tzlist.id }} <a href= "{{ tzlist.url }}"><b>{{ lang('MOT_TZV_TOURZIEL_DETAIL_CLICK') }}<b></a></dd>
+							</dl>
+						</fieldset>
+						<br>
 
-							<td width="15%" style="vertical-align: top;">
-								<span class="responsive-hide"><strong>{{ lang('MOT_TZV_LISTEN_USER') }}{{ lang('COLON') }}</strong><br><br>  {tzlist.POSTER_AVATAR}</span>
-								<br><br>
-								{{ tzlist.POSTER_AUTHOR }}
-							</td>
-						</tr>
-					</table>
-				</span></dt></dl>
+						{{ forms.detail_view(tzlist) }}
+					</div>
+
+					<div class="avatar-sub-box">
+						<strong>{{ lang('MOT_TZV_NEW_AUTHOR') }}</strong>
+						<br><br>
+						{{ tzlist.avatar }}
+						<br><br>
+						{{ tzlist.username }}
+					</div>
+				</div>
 
 				<div class="back2top">
 					<a href="#top" class="top" title="{{ lang('BACK_TO_TOP') }}">
@@ -95,30 +54,12 @@
 					</a>
 				</div>
 			</li>
+			<br>
 		</ul>
 	{% endfor %}
 {% else %}
 	{% if MOT_TZV_TOTAL_POSTS %}
-		<table class="table1 zebra-list">
-			<tbody>
-				<tr>
-					<th style="text-align:left;">{{ lang('MOT_TZV_LISTEN_NAME') }}</th>
-					<th style="text-align:left;">{{ lang('MOT_TZV_LISTEN_CATEGORY') }}</th>
-					<th style="text-align:left;">{{ lang('MOT_TZV_LISTEN_LAND') }} / {{ lang('MOT_TZV_LISTEN_REGION') }}</th>
-					<th style="text-align:left;">{{ lang('MOT_TZV_NEW_TIME') }}</th>
-					<th style="text-align:left;">{{ lang('MOT_TZV_LISTEN_USER') }}</th>
-				</tr>
-				{% for tzlist in tzlist %}
-					<tr>
-						<td class="indexlink" "text-align:left;"><a href="{{ tzlist.LISTEN_URL }}" title="{{ tzlist.LISTEN_NAME }}">{{ tzlist.LISTEN_NAME }}</a></td>
-						<td style="text-align:absolute;">{{ tzlist.LISTEN_CATEGORY }}</td>
-						<td style="text-align:left;"><img src="{{ tzlist.COUNTRY_IMG }}" title="{{ tzlist.COUNTRY_NAME }}"> {{ tzlist.COUNTRY_NAME }} / {{ tzlist.LISTEN_REGION }}</td>
-						<td style="text-align:left;">{{ tzlist.POST_DATE }}</td>
-						<td style="text-align:left;">{{ tzlist.POSTER_AUTHOR }}</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+		{{ forms.table_view(MOT_TZV_DEST_LIST) }}
 	{% endif %}
 {% endif %}
 
@@ -129,7 +70,7 @@
 	<div class="action-bar bottom">
 		{% if pagination or MOT_TZV_TOTAL_POSTS %}
 			<div class="pagination">
-				{% if MOT_TZV_SEARCH_ACTIVE %}{{ lang('MOT_TZV_SEARCH_FOUND') }}{{ lang('COLON') }} {% endif %}{{ lang('MOT_TZV_POSTS_COUNT', MOT_TZV_TOTAL_POSTS) }}
+				{% if MOT_TZV_SEARCH_ACTIVE %}{{ lang('MOT_TZV_SEARCH_FOUND') ~ lang('COLON') }} {% endif %}{{ lang('MOT_TZV_POSTS_COUNT', MOT_TZV_TOTAL_POSTS) }}
 				{% if pagination %}
 					&bull; {% include 'pagination.html' %}
 				{% endif %}

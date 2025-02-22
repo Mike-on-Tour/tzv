@@ -1,8 +1,9 @@
 <?php
 /**
 *
-* @package phpBB Extension [Tour destinations]
-* @copyright (c) 2022 Mike-on-Tour
+* @package MoT Tour Destinations Database
+* ver 1.3.0
+* @copyright (c) 2022 - 2025 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
@@ -127,8 +128,9 @@ class mot_tzv_new_tz extends \phpbb\notification\type\base
 	*/
 	public function get_url()
 	{
-		$url = $this->helper->route('mot_tzv_event', [
-			'id' => $this->get_data('tz_id'),
+		$url = $this->helper->route('mot_tzv_main', [
+			'tab'	=> 'detail',
+			'id'	=> $this->get_data('tz_id'),
 		]);
 		return $url;
 	}

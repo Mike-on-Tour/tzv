@@ -4,6 +4,32 @@ All changes to `Tour Destinations Database` will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.3.0] - 2025-02-20
+
+### Added
+-	A new setting to the ACP settings page to let the admin decide what input fields are mandatory
+-	Notifications to the edit and delete actions of the UCP
+-	A new HTML file to hold the template macros
+
+### Changed
+-	Maximum PHP version to less than 8.5.0@dev
+-	Mandatory input fields are marked with an asterisk in create or edit forms
+-	The permission descriptions
+-	The name of the frontend language file from `common.php` to `mot_tzv_common.php`
+-	The links to the different modules to tabs, thus decreasing the file size of the main controller
+-	Improved the hand-over of template variables by using the array handling capabilities of TWIG to display the item fields while creating, listing or editing destinations
+-	Transferred the notification handling into functions in `includes/mot_tzv_functions.php`
+-	The built-in link to the coordinate finding web tool to `webcoordinates.net` because this site offers a multilingual user interface
+-	Some code improvements
+-	Enhanced responsiveness on all frontend pages
+
+### Fixed
+
+### Removed
+-	Several now unused PHP and HTML files
+-	The seperate moderator page, moderators now find the destinations in descending time order in the destination list ("normal" users see them listed in ascending id order)
+  
+  
 ## [1.2.0] - 2023-12-06
 
 ### Added

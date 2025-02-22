@@ -1,8 +1,9 @@
 /**
 *
-* @package phpBB Extension [Tour destinations]
-* copyright (c) 2022 Mike-on-Tour
-* license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+* @package MoT Tour Destinations Database
+* ver 1.3.0
+* @copyright (c) 2022 - 2025 Mike-on-Tour
+* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
 
@@ -18,16 +19,16 @@
 *	@return	none
 */
 motTzv.addMarker = function(item) {
-	var markerOptions = {
+	let markerOptions = {
 		title:		item['name'],
 		clickable:	true,
 		draggable:	false,
 	}
-	var marker = new L.Marker([parseFloat(item['maps_lat']), parseFloat(item['maps_lon'])], markerOptions);
+	let marker = new L.Marker([parseFloat(item['maps_lat']), parseFloat(item['maps_lon'])], markerOptions);
 
 	marker.url = item['url'];
 	marker.on('click', function(){
-		var newTab = window.open(this.url, '_blank');
+		window.location = this.url;
 	});
 
 	marker.addTo(motTzv.markerLayer);
@@ -42,16 +43,16 @@ motTzv.addMarker = function(item) {
 */
 motTzv.addLayers = function(item) {
 	// Create the marker
-	var markerOptions = {
+	let markerOptions = {
 		title:		item['name'],
 		clickable:	true,
 		draggable:	false,
 	}
-	var marker = new L.Marker([parseFloat(item['maps_lat']), parseFloat(item['maps_lon'])], markerOptions);
+	let marker = new L.Marker([parseFloat(item['maps_lat']), parseFloat(item['maps_lon'])], markerOptions);
 
 	marker.url = item['url'];
 	marker.on('click', function(){
-		var newTab = window.open(this.url, '_blank');
+		window.location = this.url;
 	});
 
 	// Check whether an overlay with this name already exists and if not, create it and add it to the map
@@ -123,7 +124,7 @@ L.Control.geocoder().addTo(motTzv.map);
 
 // Call the create function at right click into the map with the coordinates the mouse points to at this moment
 motTzv.map.addEventListener('contextmenu', function(evt) {
-	window.location.replace(motTzv.jsAjaxCreate + '?lat=' + evt.latlng.lat + '&lng=' + evt.latlng.lng);
+	window.location.replace(motTzv.jsAjaxCreate + '&lat=' + evt.latlng.lat + '&lng=' + evt.latlng.lng);
 });
 
 })(jQuery); // Avoid conflicts with other libraries

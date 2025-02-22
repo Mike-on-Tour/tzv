@@ -1,0 +1,55 @@
+{#
+*
+* @package MoT Tour Destinations Database
+* ver 1.3.0
+* @copyright (c) 2022 - 2025 Mike-on-Tour
+* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+*
+#}
+
+{% import '@mot_tzv/mot_tzv_macros.html' as forms %}
+
+<ul class="topiclist forums" style="padding: 5px">
+	<li>
+		<div class="tourziel">
+			<h2>{{ lang('MOT_TZV_MAIN_VIEW_NEW') }}</h2>
+
+			{% if MOT_TZV_LONG_NEWEST %}
+				<ul class="topiclist forums">
+					<li class="row" style="padding: 0 1em;">
+						<div class="newest-box">
+							{% for newest in MOT_TZV_NEWEST_TZ %}
+								<div>
+									<fieldset class="tzv-fields">
+										<dl>
+											<dt><label>{{ lang('MOT_TZV_LISTEN_ID') ~ lang('COLON') }}</label></dt>
+											<dd>{{ newest.id }} <a href= "{{ newest.url }}"><b>{{ lang('MOT_TZV_TOURZIEL_DETAIL_CLICK') }}</b></a></dd>
+										</dl>
+									</fieldset>
+									<br>
+
+									{{ forms.detail_view(newest) }}
+								</div>
+
+								<div class="avatar-sub-box">
+									<strong>{{ lang('MOT_TZV_NEW_AUTHOR') }}</strong>
+									<br><br>
+									{{ newest.avatar }}
+									<br><br>
+									{{ newest.username }}
+								</div>
+							{% endfor %}
+						</div>
+					</li>
+				</ul>
+			{% else %}
+				{{ forms.table_view(MOT_TZV_NEWEST_TZ) }}
+			{% endif %}
+
+			<br><br>
+			<h2 >{{ lang('MOT_TZV_MAIN_VIEW') }}</h2>
+
+			{% include '@mot_tzv/mot_tzv_tzlist_table.html' %}
+		</div>
+	</li>
+</ul>

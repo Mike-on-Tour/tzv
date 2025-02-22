@@ -4,7 +4,7 @@
 
 {% if S_ADD_COUNTRY %}
 
-	<a href="{U_BACK}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_BACK}</a>
+	<a href="{{ U_BACK }}" style="float: {{ S_CONTENT_FLOW_END }};">&laquo; {{ lang('BACK') }}</a>
 
 	{% if S_EDIT_COUNTRY %}
 		<h2>{{ lang('ACP_MOT_TZV_COUNTRY_EDIT') }}</h2>
@@ -41,7 +41,7 @@
 {% elseif S_COUNTRY %}
 
 	<h2>{{ lang('ACP_MOT_TZV_COUNTRIES') }}</h2>
-	<div class="errorbox"> 
+	<div class="errorbox">
 		{{ lang('ACP_MOT_TZV_DELETE') }}
 	</div>
 

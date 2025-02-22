@@ -1,5 +1,0 @@
-<select name="mot_tzv_region">
-	{% for region in region %}
-		<option value="{{ region.REGION_ID }}" {% if MOT_TZV_SELECT_REGION_ID == region.REGION_ID %} selected {% endif %}>{{ region.REGION_NAME }}</option>
-	{% endfor %}
-</select>

@@ -1,0 +1,92 @@
+{#
+*
+* @package MoT Tour Destinations Database
+* ver 1.3.0
+* @copyright (c) 2022 - 2025 Mike-on-Tour
+* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+*
+#}
+
+{% import '@mot_tzv/mot_tzv_macros.html' as forms %}
+
+<ul class="topiclist forums" style="padding: 5px">
+	<li>
+		<div class="tourziel">
+			<h2>{{ lang('MOT_TZV_MAIN_SEARCH') }}</h2>
+
+			{% if MOT_TZV_TOTAL_TZ %}	{# Show this block only if there are any tour destinations #}
+				<form id="postform" method="post" action="{{ U_FORM_ACTION }}" enctype="multipart/form-data">
+					<div class="rules">
+						{{ lang('MOT_TZV_SEARCH_EXPLANATION') }}
+					</div>
+
+					<dl>
+						<dt><label for="name">{{ lang('MOT_TZV_SEARCH_TOURZIEL') ~ lang('COLON') }}</label></dt>
+						<dd><input type="text" id="name" name="name" size="30" value="{{ MOT_TZV_POST_NAME }}" class="inputbox autowidth"></dd>
+					</dl>
+
+					<dl>
+						<dt><label for="mot_tzv_country">{{ lang('MOT_TZV_SEARCH_COUNTRY') ~ lang('COLON') }}</label></dt>
+						<dd>{{ forms.select('mot_tzv_country', MOT_TZV_COUNTRY_ARR) }}</dd>
+					</dl>
+
+					<dl>
+						<dt><label for="mot_tzv_region">{{ lang('MOT_TZV_SEARCH_REGION') ~ lang('COLON') }}</label></dt>
+						<dd>{{ forms.select('mot_tzv_region', MOT_TZV_REGION_ARR) }}</dd>
+					</dl>
+
+					<dl>
+						<dt><label for="mot_tzv_category">{{ lang('MOT_TZV_SEARCH_CATEGORY') ~ lang('COLON') }}</label></dt>
+						<dd>{{ forms.select('mot_tzv_category', MOT_TZV_CATEGORY_ARR) }}</dd>
+					</dl>
+
+					<dl>
+						<dt><label for="ort">{{ lang('MOT_TZV_SEARCH_ORT') ~ lang('COLON') }}</label></dt>
+						<dd><input type="text" id="ort" name="ort" size="30" value="{{ MOT_TZV_POST_ORT }}" class="inputbox autowidth"></dd>
+					</dl>
+
+					<dl>
+						<dt></dt>
+						<dd><input class="button icon-button reply-icon" type="submit" name="submit" value="{{ lang('MOT_TZV_BUTTON_SEARCH') }}"></dd>
+					</dl>
+				</form>
+
+				<br>
+
+				{% include '@mot_tzv/mot_tzv_tzlist_table.html' %}
+
+				<br>
+
+				{% if MOT_TZV_ENABLE_SEARCH_MAP %}		{# Show map only if there are any search results #}
+{% if not INCLUDED_MOT_TZV_MAP_JS %}
+	{% INCLUDECSS '@mot_tzv/thirdparty/leaflet.css' %}
+	{% INCLUDECSS '@mot_tzv/thirdparty/MarkerCluster.css' %}
+	{% INCLUDECSS '@mot_tzv/thirdparty/MarkerCluster.Default.css' %}
+	{% INCLUDECSS '@mot_tzv/thirdparty/Control.Geocoder.css' %}
+	{% INCLUDECSS '@mot_tzv/mot_tzv_main.css' %}
+	{% INCLUDEJS '@mot_tzv/thirdparty/leaflet.js' %}
+	{% INCLUDEJS '@mot_tzv/thirdparty/leaflet.markercluster.js' %}
+	{% INCLUDEJS '@mot_tzv/thirdparty/leaflet.control.geocoder.js' %}
+	{% INCLUDEJS '@mot_tzv/mot_tzv_map.js' %}
+	{% set INCLUDED_MOT_TZV_MAP_JS = true %}
+{% endif %}
+
+					<div>&nbsp;</div>
+					<div class="mot_tzv_map" id="mot_tzv_map"></div>
+				{% endif %}
+			{% endif %}
+		</div>
+	</li>
+</ul>
+
+<script>
+	// Define own JS variables
+	motTzv.jsMapConfig = {{ MOT_TZV_MAPCONFIG }};
+	motTzv.jsTourziele = {{ MOT_TZV_TOURZIELE }};
+
+	motTzv.jsStreetDesc = "{{ lang('MOT_TZV_STREET_DESC')|e('js') }}";
+	motTzv.jsTopoDesc = "{{ lang('MOT_TZV_TOPO_DESC')|e('js') }}";
+	motTzv.jsSatDesc = "{{ lang('MOT_TZV_SAT_DESC')|e('js') }}";
+
+	motTzv.jsAjaxCreate = "{{ MOT_TZV_CREATE_LINK|e('js') }}";
+</script>

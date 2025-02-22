@@ -1,3 +1,12 @@
+{#
+*
+* @package MoT Tour Destinations Database
+* ver 1.3.0
+* @copyright (c) 2022 - 2025 Mike-on-Tour
+* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+*
+#}
+
 {% if MOT_TZV_ENABLE %}
 	{% if (MOT_TZV_ADMIN and U_ACP) or not MOT_TZV_ADMIN %}
 		{% if MOT_TZV_NEWS_ADD_ENABLE %}
@@ -17,14 +26,14 @@
 						</thead>
 
 						<tbody>
-							{% if MOT_TZV_NEWS_ADD_ENABLE %}
+							{% if MOT_TZV_LAST_DEST %}
 							<tr class="bg2">
-								<td class="indexlink" "text-align:left;"><a href="{{ U_MOT_TZV_NEW_EVENT }}" title="{{ lang('MOT_TZV_NEW_EVENT') }}">{{ MOT_TZV_NEW_EVENT }}</a></td>
-								<td style="text-align:absolute;"><img src={{ COUNTRY_IMG }} title="{{ COUNTRY_NAME }}"></td>
-								<td style="text-align:left;">{{ MOT_TZV_NEW_LAND }}</td>
-								<td style="text-align:left;">{{ MOT_TZV_NEW_REGION }}</td>
-								<td style="text-align:left;">{{ MOT_TZV_NEW_TIME }}</td>
-								<td style="text-align:left;">{{ MOT_TZV_NEWS_AUTHOR }}</td>
+								<td class="indexlink" "text-align:left;"><a href="{{ MOT_TZV_LAST_DEST.url }}" title="{{ lang('MOT_TZV_LAST_DEST.name') }}">{{ MOT_TZV_LAST_DEST.name }}</a></td>
+								<td style="text-align:absolute;"><img src="{{ MOT_TZV_LAST_DEST.flag }}" title="{{ MOT_TZV_LAST_DEST.country_name }}"></td>
+								<td style="text-align:left;">{{ MOT_TZV_LAST_DEST.country_name }}</td>
+								<td style="text-align:left;">{{ MOT_TZV_LAST_DEST.region_name }}</td>
+								<td style="text-align:left;">{{ MOT_TZV_LAST_DEST.post_time }}</td>
+								<td style="text-align:left;">{{ MOT_TZV_LAST_DEST.username }}</td>
 							</tr>
 							{% else %}
 								<tr class="bg1">
@@ -37,5 +46,5 @@
 			</div>
 
 		{% endif %}
-	{% endif %}	
+	{% endif %}
 {% endif %}

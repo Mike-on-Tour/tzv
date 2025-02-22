@@ -1,8 +1,9 @@
 <?php
 /**
 *
-* @package phpBB Extension [Tour destinations]
-* @copyright (c) 2022 Mike-on-Tour
+* @package MoT Tour Destinations Database
+* ver 1.3.0
+* @copyright (c) 2022 - 2025 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
@@ -25,7 +26,6 @@ $lang = array_merge($lang, [
 	'UCP_MOT_TZV_NAME'				=> 'Name',
 	'UCP_MOT_TZV_CATEGORY'			=> 'Kategorie',
 	'UCP_MOT_TZV_COUNTRY'			=> 'Land / Region',
-	'UCP_MOT_TZV_NO_ENTRIES'		=> 'Keine Einträge',
 	'EDIT'							=> 'Ändern',
 	'UCP_MOT_TZV_NOT_AUTHORISED'	=> 'Du bist zu dieser Operation nicht berechtigt',
 	'UCP_MOT_TZV_BACK_TO_UCP'		=> 'Zurück zum persönlichen Bereich',

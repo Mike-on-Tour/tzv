@@ -1,0 +1,47 @@
+{#
+*
+* @package MoT Tour Destinations Database
+* ver 1.3.0
+* @copyright (c) 2022 - 2025 Mike-on-Tour
+* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+*
+#}
+
+<ul class="topiclist forums" style="padding: 5px">
+	<li>
+		<div id="tourziel">
+			<h2 >{{ lang('MOT_TZV_TOURZIEL_MAIN') }}</h2>
+			<p>{{ MOT_TZV_TOURZIEL_NUMBER }}</p>
+
+			{% if MOT_TZV_COUNTRY_ENABLE %}
+				<p>{{ lang('MOT_TZV_COUNTRY_EINTRAG') }}{{ lang('COLON') }}&nbsp;
+					{% for flag in MOT_TZV_COUNTRY_FLAGS %}
+						<span style="text-align: center;"><img src="{{ flag.country_image }}" alt="{{ flag.country_name }}"  title="{{ flag.country_name }}"></span>
+					{% endfor %}
+				</p>
+			{% endif %}
+
+			{% if MOT_TZV_MAIN_IMAGE %}
+				<div class="image-box">
+					{% for image in MOT_TZV_IMAGES %}
+						{% if image not in ['.', '..'] %}<div class="main"><img class="image_main" src="{{ image }}"></div>{% endif %}
+					{% endfor %}
+				</div>
+			{% endif %}
+
+			{% if ACP_MOT_TZV_MAININFO %}
+				<p>{{ lang('MOT_TZV_NEWS_TITLE') }}&nbsp;&raquo;<br>{{ lang('MOT_TZV_MAINNEWS_INFO') }}</p>
+			{% endif %}
+
+			<div style="text-align:left;">
+				{% if MOT_TZV_SHOW_GOOGLE %}
+						<a href="http://www.google.com/permissions/geoguidelines.html" class="button icon-button reply-icon" target="_blank" rel=noopener>{{ lang('MOT_TZV_NUTZUNG_MAPS') }}</a><br><br>
+				{% endif %}
+
+				{% if MOT_TZV_SUPPORT_ENABLE %}
+					<a href="{{ MOT_TZV_SUPPORT_LINK }}" class="button icon-button reply-icon" title="{{ lang('MOT_TZV_MAIN_SUPPORT') }}">{{ lang('MOT_TZV_SUPPORT_FORUM') }}</a><br><br>
+				{% endif %}
+			</div>
+		</div>
+	</li>
+</ul>

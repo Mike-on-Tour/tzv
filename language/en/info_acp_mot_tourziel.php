@@ -1,9 +1,9 @@
 <?php
 /**
 *
-* @package phpBB Extension [Tour destinations]
-* @copyright (c) 2014 - 2021 waldkatze
-* @copyright (c) 2022 - 2023 Mike-on-Tour
+* @package MoT Tour Destinations Database
+* ver 1.3.0
+* @copyright (c) 2022 - 2025 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
@@ -37,7 +37,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, [
 	// language pack author
 	'ACP_MOT_TZV_LANG_DESC'			=> 'British English',
-	'ACP_MOT_TZV_LANG_EXT_VER' 		=> '1.2.0',
+	'ACP_MOT_TZV_LANG_EXT_VER' 		=> '1.3.0',
 	'ACP_MOT_TZV_LANG_AUTHOR' 		=> 'Mike-on-Tour',
 
 	// ACP modules
@@ -67,6 +67,14 @@ $lang = array_merge($lang, [
 	'ACP_MOT_TZV_DISABLE_MESSAGE'	=> 'Extension is disabled.',
 	'ACP_MOT_TZV_ADMIN_MESSAGE'		=> 'Administrator mode enabled, only administrators can see and use the extension!',
 
+	// Mandatory fields setting
+	'ACP_MOT_TZV_FIELDS_TITLE'		=> 'Settings for mandatory input fields',
+	'ACP_MOT_TZV_FIELDS_SELECT'		=> 'Select the mandatory fields',
+	'ACP_MOT_TZV_FIELDS_EXPL'		=> 'The destination`s name is always mandatory, here you can select additional input fields as mandatory which means that they must have a
+										selection or an input during creation or editing of a destination.<br>
+										You can do multiple selections by pressing the „Ctrl“ key while clicking the field name you want to select.<br>
+										You can unselect a field by pressing the „Ctrl“ key while you click on a selected field name.',
+
 	// Map settings
 	'ACP_MOT_TZV_MAPSETTING_TITLE'	=> 'Settings for the general map',
 	'ACP_MOT_TZV_MAPSETTING_TEXT'	=> 'Settings for initial map center and zoom.',
@@ -84,7 +92,8 @@ $lang = array_merge($lang, [
 
 	'ACP_MOT_TZV_GOOGLE_FUNCTIONS'	=> 'Settings for the maps of the detailed view',
 	'ACP_MOT_TZV_MAPS_ENABLE'		=> 'Enable detail map(s) with detailed view',
-	'ACP_MOT_TZV_MAPS_ENABLE_EXPL'	=> 'Switches ALL detail map function on or off',
+	'ACP_MOT_TZV_MAPS_ENABLE_EXPL'	=> 'Activates all map functions of the detailed view. If activated, the entry of coordinates is mandatory when creating a new destination or
+										editing an existing one.',
 	'ACP_MOT_TZV_MAPS_EXPLAIN'		=> 'Detail map(s) must be enabled as a prerequisite',
 	'ACP_MOT_TZV_KURVIGER_ENABLE'	=> 'Hand GPS data over to www.kurviger.de',
 	'ACP_MOT_TZV_KURVIGER_EXPL'		=> 'Hand tour destination`s GPS data over to route planner for motor cycles',

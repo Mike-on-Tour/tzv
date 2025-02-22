@@ -1,13 +1,26 @@
+{#
+*
+* @package MoT Tour Destinations Database
+* ver 1.3.0
+* @copyright (c) 2022 - 2025 Mike-on-Tour
+* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+*
+#}
+
+<br><br>
 <dl>
 	<dt style="width: 99%; text-align: center; margin: 10px 10px 10px 10px;">
 		<span style="font-size: 100%; line-height: 100%;">
 			<div style="text-align:center;">
 				<iframe width="{{ MOT_TZV_MAPS_WIDTH }}" height="{{ MOT_TZV_MAPS_HEIGHT }}"
-					src="https://maps.google.com/maps?q={{ MOT_TZV_EVENT_MAPS_LAT }},{{ MOT_TZV_EVENT_MAPS_LON }}&amp;num=1&amp;hl=de&amp;ie=UTF8&amp;t=m&amp;z={{ MOT_TZV_MAPS_ZOOM }}&amp;{{ MOT_TZV_MAPS_ZOOM }}={{ MOT_TZV_EVENT_MAPS_LAT }},{{ MOT_TZV_EVENT_MAPS_LON }}&amp;output=embed&amp;hl={{ lang('MOT_TZV_MAP_LANG') }}"></iframe>
+					src="https://maps.google.com/maps?q={{ MOT_TZV_DEST_DETAIL.maps_lat }},{{ MOT_TZV_DEST_DETAIL.maps_lon }}&amp;num=1&amp;hl=de&amp;ie=UTF8&amp;t=m&amp;z={{ MOT_TZV_MAPS_ZOOM }}&amp;{{ MOT_TZV_MAPS_ZOOM }}={{ MOT_TZV_DEST_DETAIL.maps_lat }},{{ MOT_TZV_DEST_DETAIL.maps_lon }}&amp;output=embed&amp;hl={{ lang('MOT_TZV_MAP_LANG') }}"
+					allowfullscreen
+				>
+				</iframe>
 				<br>
 
 				<div class="back2top"><a href="#wrap" class="top" title="{{ lang('BACK_TO_TOP') }}">{{ lang('BACK_TO_TOP') }}&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
 			</div>
 		</span>
 	</dt>
-</dl>   
+</dl>

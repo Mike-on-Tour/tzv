@@ -1,8 +1,9 @@
 /**
 *
-* @package phpBB Extension [Tour destinations]
-* copyright (c) 2022 Mike-on-Tour
-* license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+* @package MoT Tour Destinations Database
+* ver 1.3.0
+* @copyright (c) 2022 - 2025 Mike-on-Tour
+* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
 
@@ -55,22 +56,71 @@ $("#mot_tzv_add_form").submit(function() {
 		return (false);
 	}
 
+	// Check the country select field
+	if ($("#mot_tzv_country").val() == 0 && $.inArray(1, motTzv.jsMandatoryFiedsArr) !== -1) {
+		phpbb.alert(motTzv.jsError, motTzv.jsErrorCountry);
+		$("#mot_tzv_country").focus();
+		return (false);
+	}
+
+	// Check the region select field
+	if ($("#mot_tzv_region").val() == 0 && $.inArray(2, motTzv.jsMandatoryFiedsArr) !== -1) {
+		phpbb.alert(motTzv.jsError, motTzv.jsErrorRegion);
+		$("#mot_tzv_region").focus();
+		return (false);
+	}
+
+	// Check the category select field
+	if ($("#mot_tzv_category").val() == 0 && $.inArray(3, motTzv.jsMandatoryFiedsArr) !== -1) {
+		phpbb.alert(motTzv.jsError, motTzv.jsErrorCategory);
+		$("#mot_tzv_category").focus();
+		return (false);
+	}
+
 	// Check the postalcode input field
-	if ($("#mot_tzv_postalcode").val() == '') {
+	if ($("#mot_tzv_postalcode").val() == '' && $.inArray(4, motTzv.jsMandatoryFiedsArr) !== -1) {
 		phpbb.alert(motTzv.jsError, motTzv.jsErrorPostalcode);
 		$("#mot_tzv_postalcode").focus();
 		return (false);
 	}
 
 	// Check the city input field
-	if ($("#mot_tzv_city").val() == '') {
+	if ($("#mot_tzv_city").val() == '' && $.inArray(5, motTzv.jsMandatoryFiedsArr) !== -1) {
 		phpbb.alert(motTzv.jsError, motTzv.jsErrorCity);
 		$("#mot_tzv_city").focus();
 		return (false);
 	}
 
-	// Check for coordinates only if map is enabled
-	if (motTzv.jsCoordMandatory) {
+	// Check the street input field
+	if ($("#mot_tzv_street").val() == '' && $.inArray(6, motTzv.jsMandatoryFiedsArr) !== -1) {
+		phpbb.alert(motTzv.jsError, motTzv.jsErrorStreet);
+		$("#mot_tzv_street").focus();
+		return (false);
+	}
+
+	// Check the telephone input field
+	if ($("#mot_tzv_telephone").val() == '' && $.inArray(7, motTzv.jsMandatoryFiedsArr) !== -1) {
+		phpbb.alert(motTzv.jsError, motTzv.jsErrorTelephone);
+		$("#mot_tzv_telephone").focus();
+		return (false);
+	}
+
+	// Check the e-mail input field
+	if ($("#mot_tzv_city").val() == '' && $.inArray(8, motTzv.jsMandatoryFiedsArr) !== -1) {
+		phpbb.alert(motTzv.jsError, motTzv.jsErrorEmail);
+		$("#mot_tzv_city").focus();
+		return (false);
+	}
+
+	// Check the homepage input field
+	if ($("#mot_tzv_city").val() == '' && $.inArray(9, motTzv.jsMandatoryFiedsArr) !== -1) {
+		phpbb.alert(motTzv.jsError, motTzv.jsErrorHomepage);
+		$("#mot_tzv_city").focus();
+		return (false);
+	}
+
+	// Check for coordinates if map is enabled or coordinates are mandatory
+	if (motTzv.jsCoordMandatory || $.inArray(10, motTzv.jsMandatoryFiedsArr) !== -1) {
 		// Check the latidute input field
 		var latValue = $("#mot_tzv_maps_lat").val();
 		if (latValue == '' || latValue == '0') {
@@ -94,7 +144,6 @@ $("#mot_tzv_add_form").submit(function() {
 		$("#mot_tzv_message").focus();
 		return (false);
 	}
-
 });
 
 /*

@@ -1,9 +1,10 @@
 # phpBB extension Tour Destinations Database
 
-![Version: 1.2.0](https://img.shields.io/badge/Version-1.2.0-green)  
+![Version: 1.3.0](https://img.shields.io/badge/Version-1.3.0-green)  
   
-![phpBB >= 3.2.x Compatible](https://img.shields.io/badge/phpBB-%3E=%203.2.3%20Compatible-009BDF)
 ![phpBB 3.3.x Compatible](https://img.shields.io/badge/phpBB-3.3.x%20Compatible-009BDF)  
+
+![PHP >= 7.4.x, < 8.5.0](https://img.shields.io/badge/PHP->=7.4.0,%20<8.5.0-blueviolet)
 
 [![Build Status](https://github.com/Mike-on-Tour/tzv/workflows/Tests/badge.svg)](https://github.com/Mike-on-Tour/tzv/actions)
   
