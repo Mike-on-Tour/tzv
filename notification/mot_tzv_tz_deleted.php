@@ -1,8 +1,9 @@
 <?php
 /**
 *
-* @package phpBB Extension [Tour destinations]
-* @copyright (c) 2022 Mike-on-Tour
+* @package MoT Tour Destinations Database
+* ver 1.3.1
+* @copyright (c) 2022 - 2025 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
@@ -148,8 +149,8 @@ class mot_tzv_tz_deleted extends \phpbb\notification\type\base
 	public function get_email_template_variables()
 	{
 		$mail_vars = [
-			'CREATOR'		=> strip_tags(htmlspecialchars_decode($this->get_data('creator'), `ENT_COMPAT`)),
-			'TZ_NAME'		=> strip_tags(htmlspecialchars_decode($this->get_data('tz_name'), `ENT_COMPAT`)),
+			'CREATOR'		=> strip_tags(htmlspecialchars_decode($this->get_data('creator'), ENT_COMPAT)),
+			'TZ_NAME'		=> strip_tags(htmlspecialchars_decode($this->get_data('tz_name'), ENT_COMPAT)),
 		];
 		return $mail_vars;
 	}

@@ -2,11 +2,11 @@
 /**
 *
 * @package MoT Tour Destinations Database
-* ver 1.3.0
+* ver 1.3.1
 * @copyright (c) 2022 - 2025 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
-* @language file (Deutsch / Sie)
+* @language file [Deutsch / Sie)
 *
 */
 
@@ -87,10 +87,9 @@ $lang = array_merge($lang, [
 	],
 	'MOT_TZV_COUNTRY_EINTRAG'			=> 'Eingetragene Länder',
 	'MOT_TZV_NEWS_TITLE'				=> 'Neu in dieser Version',
-	'MOT_TZV_MAINNEWS_INFO'				=> '&bull;&nbsp;&nbsp;Komplettüberarbeitung mit Umstellung auf Tabs im Frontend<br>
-											&bull;&nbsp;&nbsp;Umfangreiche Code-Verbesserungen<br>
-											&bull;&nbsp;&nbsp;Vereinheitlichung der verschiedenen Darstellungen der Tourziele<br>
-											&bull;&nbsp;&nbsp;Ändern der maximal möglichen Versionen (phpBB < 3.4.0@dev und PHP < 8.5.0@dev)<br>',
+	'MOT_TZV_MAINNEWS_INFO'				=> '&bull;&nbsp;&nbsp;Überarbeitung des Codes im Eventlistener, um unnötige Datenbankzugriffe zu vermeiden, wenn die Anzahl der Tourziele oder das neueste Tourziel im Index nicht angezeigt werden<br>
+											&bull;&nbsp;&nbsp;Einen Fehler im JS-Code der Eingabemaske behoben, der den Text zum Tourziel unabhängig von der Einstellung immer zur Pflicht machte<br>
+											&bull;&nbsp;&nbsp;Ein Problem mit dem Pfad zu den Bilddateien auf der Startseite behoben<br>',
 	'MOT_TZV_NUTZUNG_MAPS'				=> 'Nutzungsbedingungen Google Maps',
 
 	// Detailansicht

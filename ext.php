@@ -2,7 +2,7 @@
 /**
 *
 * @package MoT Tour Destinations Database
-* ver 1.3.0
+* ver 1.3.1
 * @copyright (c) 2014-2021 waldkatze
 * @copyright (c) 2022 - 2025 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
@@ -16,7 +16,7 @@ class ext extends \phpbb\extension\base
 	protected $error_message = [];
 	protected $phpbb_min_ver = '3.3.1';
 	protected $phpbb_below_ver = '3.4.0@dev';
-	protected $php_min_ver = '7.4.0';
+	protected $php_min_ver = '7.4.33';
 	protected $php_below_ver = '8.5.0@dev';
 
 	public function is_enableable()

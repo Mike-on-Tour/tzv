@@ -2,7 +2,7 @@
 /**
 *
 * @package MoT Tour Destinations Database
-* ver 1.3.0
+* ver 1.3.1
 * @copyright (c) 2022 - 2025 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
@@ -53,7 +53,6 @@ class mot_tzv_listener implements EventSubscriberInterface
 			'core.permissions'			=> 'permissions',
 			'core.user_setup'			=> 'load_language_on_setup',
 			'core.page_header'			=> 'add_page_header_link',
-			'core.page_header_after'	=> 'tourziel_count',
 			'core.delete_user_before'	=> 'check_for_deleted_tourziel_creator',
 		];
 	}
@@ -89,14 +88,31 @@ class mot_tzv_listener implements EventSubscriberInterface
 	{
 		if ($this->auth->acl_get('u_mot_tzv_mainview'))
 		{
-			$row = $this->mot_tzv_functions->get_destinations(0, 1, 0, true);
-
-			if (!empty($row))
+			// To cut down DB queries we do the following only if "display latest destination on index page" is enabled
+			if ( (bool) $this->config['mot_tzv_news_add_enable'])
 			{
-				$row = $row[0];
-				$row['url'] = $this->helper->route('mot_tzv_main', [
-					'tab'	=> 'detail',
-					'id'	 => $row['id'],
+				$row = $this->mot_tzv_functions->get_destinations(0, 1, 0, true);
+
+				if (!empty($row))
+				{
+					$row = $row[0];
+					$row['url'] = $this->helper->route('mot_tzv_main', [
+						'tab'	=> 'detail',
+						'id'	 => $row['id'],
+					]);
+				}
+				$this->template->assign_vars([
+					'MOT_TZV_NEWS_ADD_ENABLE'	=> (bool) $this->config['mot_tzv_news_add_enable'],
+					'MOT_TZV_LAST_DEST'			=> $row,
+				]);
+			}
+
+			// To cut down DB queries we do the following query only if "display number of festinations on index page" is eabled
+			if ( (bool) $this->config['mot_tzv_stats_enable'])
+			{
+				$this->template->assign_vars([
+					'MOT_TZV_STATS_ENABLE'		=> (bool) $this->config['mot_tzv_stats_enable'],
+					'MOT_TZV_COUNT_TOURZIEL'	=> $this->mot_tzv_functions->get_total_count_destinations(),
 				]);
 			}
 
@@ -105,20 +121,6 @@ class mot_tzv_listener implements EventSubscriberInterface
 
 				'MOT_TZV_ENABLE'			=> $this->config['mot_tzv_enable'],
 				'MOT_TZV_ADMIN'				=> $this->config['mot_tzv_admin'],
-
-				'MOT_TZV_NEWS_ADD_ENABLE'	=> $this->config['mot_tzv_news_add_enable'],
-				'MOT_TZV_LAST_DEST'			=> $row,
-			]);
-		}
-	}
-
-	public function tourziel_count()
-	{
-		if ($this->auth->acl_get('u_mot_tzv_mainview'))
-		{
-			$this->template->assign_vars([
-				'MOT_TZV_STATS_ENABLE'		=> $this->config['mot_tzv_stats_enable'],
-				'MOT_TZV_COUNT_TOURZIEL'	=> $this->mot_tzv_functions->get_total_count_destinations(),
 			]);
 		}
 	}

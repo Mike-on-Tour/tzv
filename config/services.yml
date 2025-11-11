@@ -11,6 +11,7 @@ services:
             - '@controller.helper'
             - '@language'
             - '@pagination'
+            - '@path_helper'
             - '@ext.manager'
             - '@request'
             - '@template'

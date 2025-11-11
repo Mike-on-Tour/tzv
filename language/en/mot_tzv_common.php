@@ -2,7 +2,7 @@
 /**
 *
 * @package MoT Tour Destinations Database
-* ver 1.3.0
+* ver 1.3.1
 * @copyright (c) 2022 - 2025 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
@@ -87,10 +87,9 @@ $lang = array_merge($lang, [
 	],
 	'MOT_TZV_COUNTRY_EINTRAG'			=> 'Registered countries',
 	'MOT_TZV_NEWS_TITLE'				=> 'What is new in this version',
-	'MOT_TZV_MAINNEWS_INFO'				=> '&bull;&nbsp;&nbsp;Complete revision with transition to tabs in the frontend<br>
-											&bull;&nbsp;&nbsp;Substantial code improvements<br>
-											&bull;&nbsp;&nbsp;Unification of displaying the destinations<br>
-											&bull;&nbsp;&nbsp;Changing the maximum possible versions (phpBB < 3.4.0@dev und PHP < 8.5.0@dev)<br>',
+	'MOT_TZV_MAINNEWS_INFO'				=> '&bull;&nbsp;&nbsp;Improved the code within the event listener to cut down the number of SQL queries if displaying the total number of destinations and latest destination is disabled<br>
+											&bull;&nbsp;&nbsp;Fixed a bug within the input mask JS which declared the description text field as mandatory even if it wasn`t selected as such in the ACP<br>
+											&bull;&nbsp;&nbsp;Fixed a problem with the web path to the images in the summary tab<br>',
 	'MOT_TZV_NUTZUNG_MAPS'				=> 'Google Maps Terms of Use',
 
 	// Detailansicht

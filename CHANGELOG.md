@@ -4,6 +4,22 @@ All changes to `Tour Destinations Database` will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.3.1] - 2025-11-10
+
+### Added
+
+### Changed
+-	Improved the code within `event/mot_tzv_listener.php` to cut down the number of SQL queries if displaying the total number of destinations and latest destination on the index
+	is disabled
+
+### Fixed
+-	A problem with the web path to the images in the summary tab
+-	A bug within `styles/all/template/mot_tzv_add.js` which declared the description text field as mandatory even if it wasn't selected as such in the ACP
+-	Removed unnecessary backtick operator from the call of `htmlspecialchars_decode()` in the notification classes
+
+### Removed
+  
+  
 ## [1.3.0] - 2025-02-20
 
 ### Added

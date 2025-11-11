@@ -1,7 +1,7 @@
 /**
 *
 * @package MoT Tour Destinations Database
-* ver 1.3.0
+* ver 1.3.1
 * @copyright (c) 2022 - 2025 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
@@ -17,9 +17,9 @@
 * @return:	writes either the default value or - if it matches the pattern and is within the boundaries - the given value into the DOM element's value
 */
 $("#mot_tzv_maps_lat").blur(function() {
-	var elementValue = $(this).val();
+	let elementValue = $(this).val();
 	elementValue = elementValue.replace(/[,]/g, ".");	// replace a comma with a fullstop in case some European hit the key on the num pad
-	var result = elementValue.match(/-?\d{1,2}\.*\d*/);	// is this like (-)dd.d(ddd)?
+	let result = elementValue.match(/-?\d{1,2}\.*\d*/);	// is this like (-)dd.d(ddd)?
 	if ((result == null) || (result[0] < -90.0) || (result[0] > 90.0)) {
 		elementValue = 0;
 	} else {
@@ -34,9 +34,9 @@ $("#mot_tzv_maps_lat").blur(function() {
 * @return:	writes either the default value or - if it matches the pattern and is within the boundaries - the given value into the DOM element's value
 */
 $("#mot_tzv_maps_lon").blur(function() {
-	var elementValue = $(this).val();
+	let elementValue = $(this).val();
 	elementValue = elementValue.replace(/[,]/g, ".");	// replace a comma with a fullstop in case some European hit the key on the num pad
-	var result = elementValue.match(/-?\d{1,3}\.*\d*/);	// is this like (-)ddd.d(ddd)?
+	let result = elementValue.match(/-?\d{1,3}\.*\d*/);	// is this like (-)ddd.d(ddd)?
 	if ((result == null) || (result[0] < -180.0) || (result[0] > 180.0)) {
 		elementValue = 0;
 	} else {
@@ -122,7 +122,7 @@ $("#mot_tzv_add_form").submit(function() {
 	// Check for coordinates if map is enabled or coordinates are mandatory
 	if (motTzv.jsCoordMandatory || $.inArray(10, motTzv.jsMandatoryFiedsArr) !== -1) {
 		// Check the latidute input field
-		var latValue = $("#mot_tzv_maps_lat").val();
+		let latValue = $("#mot_tzv_maps_lat").val();
 		if (latValue == '' || latValue == '0') {
 			phpbb.alert(motTzv.jsError, motTzv.jsErrorLat);
 			$("#mot_tzv_maps_lat").focus();
@@ -130,7 +130,7 @@ $("#mot_tzv_add_form").submit(function() {
 		}
 
 		// Check the longitude input field
-		var lonValue = $("#mot_tzv_maps_lon").val();
+		let lonValue = $("#mot_tzv_maps_lon").val();
 		if (lonValue == '' || lonValue == '0') {
 			phpbb.alert(motTzv.jsError, motTzv.jsErrorLon);
 			$("#mot_tzv_maps_lon").focus();
@@ -139,7 +139,7 @@ $("#mot_tzv_add_form").submit(function() {
 	}
 
 	// Check the message input field
-	if ($("#mot_tzv_message").val() == '') {
+	if ($("#mot_tzv_message").val() == '' && $.inArray(12, motTzv.jsMandatoryFiedsArr) !== -1) {
 		phpbb.alert(motTzv.jsError, motTzv.jsErrorMessage);
 		$("#mot_tzv_message").focus();
 		return (false);

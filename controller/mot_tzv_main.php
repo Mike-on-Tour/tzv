@@ -2,7 +2,7 @@
 /**
 *
 * @package MoT Tour Destinations Database
-* ver 1.3.0
+* ver 1.3.1
 * @copyright (c) 2022 - 2025 Mike-on-Tour
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
@@ -30,6 +30,9 @@ class mot_tzv_main
 	/** @var \phpbb\pagination  */
 	protected $pagination;
 
+	/** @var \phpbb\path_helper  */
+	protected $path_helper;
+
 	/** @var \phpbb\extension\manager */
 	protected $phpbb_extension_manager;
 
@@ -55,7 +58,7 @@ class mot_tzv_main
 	 * {@inheritdoc
 	 */
 	public function __construct(\phpbb\auth\auth $auth, \phpbb\config\config $config, \phpbb\db\driver\driver_interface $db, \phpbb\controller\helper $helper,
-								\phpbb\language\language $language, \phpbb\pagination $pagination, \phpbb\extension\manager $phpbb_extension_manager,
+								\phpbb\language\language $language, \phpbb\pagination $pagination, \phpbb\path_helper $path_helper, \phpbb\extension\manager $phpbb_extension_manager,
 								\phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user,
 								\mot\tzv\includes\mot_tzv_functions $mot_tzv_functions, $root_path, $php_ext)
 	{
@@ -65,6 +68,7 @@ class mot_tzv_main
 		$this->helper = $helper;
 		$this->language = $language;
 		$this->pagination = $pagination;
+		$this->path_helper = $path_helper;
 		$this->phpbb_extension_manager 	= $phpbb_extension_manager;
 		$this->request = $request;
 		$this->template = $template;
@@ -116,13 +120,14 @@ class mot_tzv_main
 				if ($this->config['mot_tzv_main_image'])
 				{
 					$this->image_path = $this->root_path . 'ext/mot/tzv/images/';
+					$this->image_path_web = $this->path_helper->get_web_root_path() . 'ext/mot/tzv/images/';
 					$files = scandir($this->image_path);
 
 					foreach ($files as &$element)
 					{
 						if (is_file ($this->image_path . $element))
 						{
-							$element = $this->image_path . $element;
+							$element = $this->image_path_web . $element;
 						}
 					}
 				}
@@ -145,6 +150,10 @@ class mot_tzv_main
 				{
 					trigger_error($this->language->lang('MOT_TZV_TOURZIEL_NO_VIEW'));
 				}
+
+				// Define some variables
+				$newest_tz = [];
+				$destinations = [];
 
 				// Get total number of Tourziele
 				$total_tz = $this->mot_tzv_functions->get_total_count_destinations();

@@ -3,14 +3,14 @@
 	"type": "phpbb-extension",
 	"description": "Tour Destinations Database for motorcyclists, bikers and hikers",
 	"homepage": "https://www.mike-on-tour.com",
-	"version": "1.3.0",
-	"time": "2025-02-20 12:11:57",
+	"version": "1.3.1",
+	"time": "2025-11-10 12:11:57",
 	"license": "GPL-2.0-only",
 	"authors": [
         {
             "name": "Michael Vormwald (Mike-on-Tour)",
-            "email": "webmaster@mike-on-tour.de",
             "homepage": "https://www.mike-on-tour.com",
+            "email": "admin@mike-on-tour.com",
             "role": "Developer"
         },
 		{
@@ -20,7 +20,7 @@
 		}
 	],
 	"require": {
-		"php": ">=7.4.0,<8.5.0",
+		"php": ">=7.4.33,<8.5.0@dev",
         "phpbb/phpbb": ">=3.3.1,<3.4.0@dev",
         "composer/installers": "~1.0.0"
 	},
